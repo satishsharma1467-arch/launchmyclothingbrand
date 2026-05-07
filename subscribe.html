@@ -793,6 +793,15 @@ function getAdminPassword() {
 document.addEventListener('DOMContentLoaded', initWhatsApp);
 </script>
 
+<script>
+// FAQ Toggle
+function toggleFaq(el) {
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
+  if (!isOpen) el.classList.add('open');
+}
+</script>
+
 <!-- ══ RAZORPAY ONE-TIME PAYMENT INTEGRATION ══════════════
      Key: rzp_live_SG0orAX4pL66PR
      Type: One-time payment per month (no auto-debit)
