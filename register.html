@@ -219,7 +219,7 @@
       <span>Pattern Making &amp; Manufacturing</span>
     </a>
 
-    <ul class="nav-links">
+    <ul class="nav-links" id="main-nav">
       <li><a href="/launchmyclothingbrand/services.html">Services</a></li>
       <li><a href="/launchmyclothingbrand/library.html">Patterns</a></li>
       <li><a href="/launchmyclothingbrand/specsheets.html">Spec Sheets</a></li>
@@ -228,7 +228,12 @@
       <li><a href="/launchmyclothingbrand/contact.html">Contact</a></li>
       <li><a href="/launchmyclothingbrand/subscribe.html" class="nav-cta">Get Started</a></li>
     </ul>
+    <button class="nav-hamburger" onclick="openNav()" aria-label="Open Menu"><span></span><span></span><span></span></button>
   </nav>
+  <script>
+    function openNav() { document.getElementById('main-nav').classList.add('open'); }
+    function closeNav() { document.getElementById('main-nav').classList.remove('open'); }
+  </script>
 
   <div class="main">
 
@@ -269,7 +274,7 @@
         </div>
       </div>
       <p style="font-size:1.26rem;opacity:0.35;margin-top:1.5rem;line-height:1.7;">
-        All plans include a 7-day free trial. Cancel anytime. No hidden charges.
+        Cancel anytime. No hidden charges.
       </p>
     </div>
 
