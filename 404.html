@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script>
+    // GitHub Pages 404 redirect fix
+    // Redirects /page to /page.html automatically
+    var path = window.location.pathname;
+    var pages = ['services','library','manufacturers','specsheets','insights',
+                 'subscribe','login','register','contact','terms','privacy'];
+    
+    // Remove leading slash and .html if present
+    var page = path.replace(/^\/launchmyclothingbrand\/?/, '').replace(/\.html$/, '').replace(/\/$/, '');
+    
+    if (pages.indexOf(page) !== -1) {
+      window.location.replace('/launchmyclothingbrand/' + page + '.html');
+    } else {
+      window.location.replace('/launchmyclothingbrand/index.html');
+    }
+  </script>
+  <title>Redirecting...</title>
+</head>
+<body>Redirecting...</body>
+</html>
