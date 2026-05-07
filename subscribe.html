@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing | Launch My Clothing Brand</title>
+  <meta name="description" content="Choose your plan. Basic ₹499/mo, Brand Builder ₹999/mo, Pro Elite ₹1599/mo. Pattern downloads, manufacturer access, expert consultation." />
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --gold: #C8A951;
+      --gold-light: #E8C96A;
+      --cream: #F5F0E8;
+      --ink: #F5F0E8;
+      --ink-soft: #3D2E10;
+      --bg: #0E0B06;
+      --card-bg: #1C1609;
+      --border: rgba(200,169,81,0.2);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: #0E0B06;
+      color: var(--ink);
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999; opacity: 0.4;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.3rem 4rem;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      background: rgba(14,11,6,0.92);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.26rem; letter-spacing: 0.2em;
+      color: var(--gold); text-decoration: none; line-height: 1;
+    }
+
+    .nav-logo span {
+      display: block; font-family: 'DM Mono', monospace;
+      font-size: 1.26rem; letter-spacing: 0.18em;
+      color: var(--ink); opacity: 0.4; font-weight: 300;
+      margin-top: 0.1rem; text-transform: uppercase;
+    }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+
+    .nav-links a {
+      color: var(--cream); text-decoration: none;
+      font-size: 1.26rem; letter-spacing: 0.15em; text-transform: uppercase;
+      opacity: 0.6; transition: opacity 0.2s, color 0.2s;
+    }
+
+    .nav-links a:hover { opacity: 1; color: var(--gold); }
+
+    .nav-cta {
+      background: var(--gold) !important; color: var(--ink) !important;
+      padding: 0.6rem 1.4rem !important; opacity: 1 !important; font-weight: 500 !important;
+    }
+
+    .nav-cta:hover { background: var(--gold-light) !important; }
+
+    /* HERO */
+    .page-hero {
+      padding: 10rem 4rem 5rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+
+    .page-hero::after {
+      content: '₹';
+      position: absolute; right: 5%; top: 50%; transform: translateY(-50%);
+      font-family: 'Bebas Neue', sans-serif; font-size: 30vw;
+      color: rgba(200,169,81,0.03); pointer-events: none; line-height: 1;
+    }
+
+    .page-eyebrow {
+      font-size: 1.26rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.2rem;
+      display: flex; align-items: center; justify-content: center; gap: 0.9rem;
+    }
+
+    .page-eyebrow::before, .page-eyebrow::after {
+      content: ''; width: 2rem; height: 1px; background: var(--gold);
+    }
+
+    .page-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 5vw, 5rem); font-weight: 300;
+      line-height: 1.08; margin-bottom: 1.2rem;
+    }
+
+    .page-hero h1 em { font-style: italic; color: var(--gold); }
+
+    .page-hero p {
+      font-size: 1.26rem; opacity: 0.55; line-height: 1.85;
+      max-width: 52ch; margin: 0 auto; letter-spacing: 0.02em;
+    }
+
+    /* PRICING GRID */
+    .pricing-section { padding: 5rem 4rem 7rem; }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* PLAN CARD */
+    .plan-card {
+      background: #0E0B06;
+      padding: 3rem 2.5rem;
+      display: flex; flex-direction: column;
+      position: relative; overflow: hidden;
+      transition: background 0.3s;
+    }
+
+    .plan-card:hover { background: #130f07; }
+
+    .plan-card.popular {
+      background: var(--card-bg);
+      border: 1px solid rgba(200,169,81,0.4);
+      margin: -1px;
+      z-index: 1;
+    }
+
+    .plan-card.popular:hover { background: #090704; }
+
+    /* Popular badge */
+    .popular-badge {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      background: var(--gold); color: var(--ink);
+      font-size: 1.26rem; letter-spacing: 0.25em; text-transform: uppercase;
+      padding: 0.3rem 1.2rem; font-weight: 500;
+    }
+
+    .plan-num {
+      font-family: 'Bebas Neue', sans-serif; font-size: 4rem;
+      color: rgba(200,169,81,0.07); line-height: 1; margin-bottom: 1rem;
+    }
+
+    .plan-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem; font-weight: 400; margin-bottom: 0.3rem;
+    }
+
+    .plan-card.popular .plan-name { color: var(--gold); }
+
+    .plan-tagline {
+      font-size: 1.26rem; opacity: 0.45; margin-bottom: 2rem; letter-spacing: 0.05em;
+    }
+
+    /* Price */
+    .plan-price {
+      display: flex; align-items: flex-start; gap: 0.3rem;
+      margin-bottom: 2rem; padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .price-currency {
+      font-family: 'DM Mono', monospace; font-size: 1.26rem;
+      color: var(--gold); margin-top: 0.5rem; opacity: 0.8;
+    }
+
+    .price-amount {
+      font-family: 'Bebas Neue', sans-serif; font-size: 4rem;
+      color: var(--gold); line-height: 1;
+    }
+
+    .price-period {
+      font-size: 1.26rem; opacity: 0.45; letter-spacing: 0.1em;
+      margin-top: auto; padding-bottom: 0.4rem;
+    }
+
+    /* Features */
+    .plan-features {
+      display: flex; flex-direction: column; gap: 0.9rem;
+      flex: 1; margin-bottom: 2.5rem;
+    }
+
+    .plan-feature {
+      display: flex; align-items: flex-start; gap: 0.8rem;
+      font-size: 1.26rem; line-height: 1.6; opacity: 0.75;
+    }
+
+    .feature-check {
+      color: var(--gold); flex-shrink: 0; font-size: 1.26rem; margin-top: 0.05rem;
+    }
+
+    /* CTA button */
+    .plan-btn {
+      width: 100%;
+      padding: 1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 1.26rem; letter-spacing: 0.18em; text-transform: uppercase;
+      font-weight: 500; border: none; cursor: pointer;
+      text-decoration: none; display: block; text-align: center;
+      transition: all 0.25s;
+    }
+
+    .plan-btn-outline {
+      background: transparent;
+      border: 1px solid rgba(200,169,81,0.35);
+      color: var(--ink);
+    }
+
+    .plan-btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    .plan-btn-gold {
+      background: var(--gold); color: var(--ink);
+    }
+
+    .plan-btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    /* COMPARISON TABLE */
+    .compare-section {
+      padding: 0 4rem 7rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .compare-label {
+      font-size: 1.26rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 2rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+
+    .compare-label::before { content: ''; width: 1.8rem; height: 1px; background: var(--gold); }
+
+    .compare-table { width: 100%; border-collapse: collapse; }
+
+    .compare-table th {
+      padding: 1rem 1.5rem; font-size: 1.26rem; letter-spacing: 0.15em;
+      text-transform: uppercase; text-align: center; border-bottom: 1px solid var(--border);
+      background: var(--card-bg); font-weight: 400;
+    }
+
+    .compare-table th:first-child { text-align: left; color: var(--gold); opacity: 0.7; }
+    .compare-table th.popular-col { color: var(--gold); }
+
+    .compare-table td {
+      padding: 0.9rem 1.5rem; font-size: 1.08rem;
+      border-bottom: 1px solid rgba(200,169,81,0.07);
+      text-align: center; opacity: 0.7;
+    }
+
+    .compare-table td:first-child { text-align: left; opacity: 0.55; }
+    .compare-table tr:hover td { background: rgba(255,255,255,0.015); }
+
+    .check-yes { color: var(--gold); font-size: 0.96rem; }
+    .check-no { opacity: 0.2; }
+
+    /* FAQ */
+    .faq-section {
+      padding: 5rem 4rem 7rem;
+      background: var(--card-bg);
+      border-top: 1px solid var(--border);
+    }
+
+    .faq-inner { max-width: 720px; margin: 0 auto; }
+
+    .faq-label {
+      font-size: 1.26rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.8rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+
+    .faq-label::before { content: ''; width: 1.8rem; height: 1px; background: var(--gold); }
+
+    .faq-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem; font-weight: 300; margin-bottom: 3rem;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+    }
+
+    .faq-question {
+      padding: 1.4rem 0;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 1rem;
+      font-size: 1.26rem; line-height: 1.6; opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+
+    .faq-question:hover { opacity: 1; }
+
+    .faq-icon {
+      font-size: 1rem; color: var(--gold); flex-shrink: 0;
+      transition: transform 0.25s;
+    }
+
+    .faq-answer {
+      font-size: 1.26rem; line-height: 1.85; opacity: 0.55;
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.25s;
+    }
+
+    .faq-item.open .faq-answer { max-height: 200px; padding-bottom: 1.4rem; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-item.open .faq-question { opacity: 1; color: var(--gold); }
+
+    /* CTA */
+    .cta-band { background: var(--gold); padding: 6rem 4rem; text-align: center; }
+
+    .cta-band h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 4vw, 4rem); font-weight: 300;
+      color: var(--ink); margin-bottom: 1rem; line-height: 1.1;
+    }
+
+    .cta-band p {
+      font-size: 1.26rem; color: var(--ink-soft); opacity: 0.75;
+      max-width: 48ch; margin: 0 auto 2.5rem; line-height: 1.8;
+    }
+
+    .btn-dark {
+      background: var(--ink); color: var(--gold);
+      padding: 1rem 2.8rem; font-family: 'DM Mono', monospace;
+      font-size: 1.26rem; letter-spacing: 0.15em; text-transform: uppercase;
+      font-weight: 500; border: none; cursor: pointer; text-decoration: none;
+      display: inline-block; transition: background 0.25s, transform 0.2s;
+    }
+
+    .btn-dark:hover { background: #D4A843; transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer { background: #090704; border-top: 1px solid var(--border); padding: 5rem 4rem 3rem; }
+
+    .footer-grid {
+      display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 3rem; margin-bottom: 3.5rem;
+    }
+
+    .footer-brand h3 {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem;
+      letter-spacing: 0.12em; color: var(--gold); margin-bottom: 0.9rem; line-height: 1.1;
+    }
+
+    .footer-brand p { font-size: 1.08rem; opacity: 0.45; line-height: 1.85; max-width: 32ch; margin-bottom: 1.2rem; }
+    .footer-address { font-size: 1.26rem; opacity: 0.35; }
+
+    .footer-col h4 {
+      font-size: 1.26rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.2rem;
+    }
+
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .footer-col ul a {
+      font-size: 1.08rem; opacity: 0.42; text-decoration: none;
+      color: var(--ink); transition: opacity 0.2s, color 0.2s;
+    }
+
+    .footer-col ul a:hover { opacity: 0.9; color: var(--gold); }
+
+    .footer-email {
+      font-size: 1.26rem; color: var(--gold); opacity: 0.65;
+      text-decoration: none; display: block; margin-bottom: 0.8rem;
+    }
+
+    .footer-note { font-size: 1.26rem; opacity: 0.3; line-height: 1.6; margin-top: 0.5rem; }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border); padding-top: 2rem;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+
+    .footer-copy { font-size: 1.26rem; opacity: 0.28; }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .plan-card { opacity: 0; animation: fadeUp 0.7s ease forwards; }
+    .plan-card:nth-child(1) { animation-delay: 0.1s; }
+    .plan-card:nth-child(2) { animation-delay: 0.25s; }
+    .plan-card:nth-child(3) { animation-delay: 0.4s; }
+
+    /* Mobile */
+    @media (max-width: 960px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      .page-hero { padding: 7rem 1.5rem 3.5rem; }
+      .pricing-section { padding: 4rem 1.5rem 5rem; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .plan-card.popular { margin: 0; }
+      .compare-section { padding: 0 1.5rem 4rem; }
+      .compare-table { font-size: 1.26rem; }
+      .compare-table th, .compare-table td { padding: 0.7rem 0.8rem; }
+      .faq-section { padding: 4rem 1.5rem 5rem; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .cta-band { padding: 4rem 1.5rem; }
+    }
+
+    @media (max-width: 560px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .compare-table { display: none; } /* hide on tiny screens */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/index.html" class="nav-logo">
+      Launch My Clothing Brand
+      <span>Pattern Making &amp; Manufacturing</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/services.html">Services</a></li>
+      <li><a href="/library.html">Pattern Library</a></li>
+      <li><a href="/manufacturers.html">Manufacturers</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+      <li><a href="/login.html" class="nav-cta">Log In</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="page-eyebrow">Pricing Plans</div>
+    <h1>Unlock <em>Premium Features</em></h1>
+    <p>Take your clothing brand to the next level. Choose the plan that fits your stage — from startup to full-scale production.</p>
+  </div>
+
+  <!-- PRICING CARDS -->
+  <section class="pricing-section">
+    <div class="pricing-grid">
+
+      <!-- BASIC -->
+      <div class="plan-card">
+        <div class="plan-num">01</div>
+        <div class="plan-name">Basic</div>
+        <div class="plan-tagline">Perfect for getting started</div>
+        <div class="plan-price">
+          <div class="price-currency">₹</div>
+          <div class="price-amount">499</div>
+          <div class="price-period">/ month</div>
+        </div>
+        <div class="plan-features">
+          <div class="plan-feature"><span class="feature-check">✦</span>4 Pattern downloads per month</div>
+          <div class="plan-feature"><span class="feature-check">✦</span>Email support</div>
+          <div class="plan-feature"><span class="feature-check">✦</span>Pattern library access</div>
+        </div>
+        <a href="/register.html?plan=basic" class="plan-btn plan-btn-outline">Subscribe Now</a>
+      </div>
+
+      <!-- BRAND BUILDER (POPULAR) -->
+      <div class="plan-card popular">
+        <div class="popular-badge">Most Popular</div>
+        <div class="plan-num">02</div>
+        <div class="plan-name">Brand Builder</div>
+        <div class="plan-tagline">For growing clothing brands</div>
+        <div class="plan-price">
+          <div class="price-currency">₹</div>
+          <div class="price-amount">999</div>
+          <div class="price-period">/ month</div>
+        </div>
+        <div class="plan-features">
+          <div class="plan-feature"><span class="feature-check">✦</span>9 Pattern downloads per month</div>
+          <div class="plan-feature"><span class="feature-check">✦</span>Full manufacturer database</div>
+          <div class="plan-feature"><span class="feature-check">✦</span>Priority email support</div>
+          <div class="plan-feature"><span class="feature-check">✦</span>WhatsApp support</div>
+          <div class="plan-feature"><span class="feature-check">✦</span>Spec sheet access</div>
+          <div class="plan-feature"><span class="feature-check">✦</span>Early access to new patterns</div>
+        </div>
+        <a href="/register.html?plan=brand_builder" class="plan-btn plan-btn-gold">Subscribe Now</a>
+      </div>
+
+      <!-- PRO ELITE -->
+      <div class="plan-card">
+        <div class="plan-num">03</div>
+        <div class="plan-name">Pro Elite</div>
+        <div class="plan-tagline">For established brands &amp; agencies</div>
+        <div class="plan-price">
+          <div class="price-currency">₹</div>
+          <div class="price-amount">1599</div>
+          <div class="price-period">/ month</div>
+        </div>
+        <div class="plan-features">
+          <div class="plan-feature"><span class="feature-check">✦</span>15 Pattern downloads per month</div>
+          <div class="plan-feature"><span class="feature-check">✦</span>Complete manufacturer database</div>
+          <div class="plan-feature"><span class="feature-check">✦</span>Direct phone support</div>
+          <div class="plan-feature"><span class="feature-check">✦</span>Priority expert consultation</div>
+          <div class="plan-feature"><span class="feature-check">✦</span>Custom pattern requests</div>
+          <div class="plan-feature"><span class="feature-check">✦</span>Spec sheet access</div>
+        </div>
+        <a href="/register.html?plan=pro_elite" class="plan-btn plan-btn-outline">Subscribe Now</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- COMPARISON TABLE -->
+  <section class="compare-section">
+    <div class="compare-label">Plan Comparison</div>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Basic<br/><span style="font-size:0.7em;color:var(--gold);">₹499/mo</span></th>
+          <th class="popular-col">Brand Builder<br/><span style="font-size:0.7em;">₹999/mo</span></th>
+          <th>Pro Elite<br/><span style="font-size:0.7em;color:var(--gold);">₹1599/mo</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Pattern Downloads / Month</td>
+          <td>4</td>
+          <td style="color:var(--gold);">9</td>
+          <td>15</td>
+        </tr>
+        <tr>
+          <td>Pattern Library Access</td>
+          <td><span class="check-yes">✦</span></td>
+          <td><span class="check-yes">✦</span></td>
+          <td><span class="check-yes">✦</span></td>
+        </tr>
+        <tr>
+          <td>Manufacturer Database</td>
+          <td><span class="check-no">—</span></td>
+          <td><span class="check-yes">✦</span></td>
+          <td><span class="check-yes">✦</span></td>
+        </tr>
+        <tr>
+          <td>Manufacturer Contact Details</td>
+          <td><span class="check-no">—</span></td>
+          <td><span class="check-yes">✦</span></td>
+          <td><span class="check-yes">✦</span></td>
+        </tr>
+        <tr>
+          <td>Industry Insight Videos</td>
+          <td><span class="check-no">—</span></td>
+          <td><span class="check-yes">✦</span></td>
+          <td><span class="check-yes">✦</span></td>
+        </tr>
+        <tr>
+          <td>Email Support</td>
+          <td><span class="check-yes">✦</span></td>
+          <td><span class="check-yes">✦ Priority</span></td>
+          <td><span class="check-yes">✦ Priority</span></td>
+        </tr>
+        <tr>
+          <td>WhatsApp Support</td>
+          <td><span class="check-no">—</span></td>
+          <td><span class="check-yes">✦</span></td>
+          <td><span class="check-yes">✦</span></td>
+        </tr>
+        <tr>
+          <td>Phone Support</td>
+          <td><span class="check-no">—</span></td>
+          <td><span class="check-no">—</span></td>
+          <td><span class="check-yes">✦ Direct</span></td>
+        </tr>
+        <tr>
+          <td>Expert Consultation</td>
+          <td><span class="check-no">—</span></td>
+          <td><span class="check-no">—</span></td>
+          <td><span class="check-yes">✦ Priority</span></td>
+        </tr>
+        <tr>
+          <td>Spec Sheet Access</td>
+          <td><span class="check-no">—</span></td>
+          <td><span class="check-yes">✦</span></td>
+          <td><span class="check-yes">✦</span></td>
+        </tr>
+        <tr>
+          <td>Custom Pattern Requests</td>
+          <td><span class="check-no">—</span></td>
+          <td><span class="check-no">—</span></td>
+          <td><span class="check-yes">✦</span></td>
+        </tr>
+        <tr>
+          <td>Early Access to New Patterns</td>
+          <td><span class="check-no">—</span></td>
+          <td><span class="check-yes">✦</span></td>
+          <td><span class="check-yes">✦</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="faq-inner">
+      <div class="faq-label">Questions</div>
+      <div class="faq-title">Frequently Asked</div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">Can I cancel my subscription anytime? <span class="faq-icon">+</span></div>
+        <div class="faq-answer">Yes, you can cancel anytime. Your access continues until the end of your current billing period. No hidden fees or cancellation charges.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">Can I upgrade or downgrade my plan? <span class="faq-icon">+</span></div>
+        <div class="faq-answer">Yes. You can upgrade at any time and the new plan takes effect immediately. Downgrading takes effect at the next billing cycle.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">Do unused pattern downloads roll over? <span class="faq-icon">+</span></div>
+        <div class="faq-answer">Downloads reset each month and do not roll over. We recommend planning your downloads at the start of each month to make the most of your plan.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">What payment methods do you accept? <span class="faq-icon">+</span></div>
+        <div class="faq-answer">We accept UPI, credit/debit cards, net banking, and major digital wallets. All payments are processed securely.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">Are the manufacturer contact details verified? <span class="faq-icon">+</span></div>
+        <div class="faq-answer">Yes. Every manufacturer in our database has been personally verified by our team. We regularly update contact details and add new verified partners.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">What is a custom pattern request? (Pro Elite) <span class="faq-icon">+</span></div>
+        <div class="faq-answer">Pro Elite members can request patterns for specific garments that aren't in our library. Our team will create them and add them to your account within 5–7 business days.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-band">
+    <h2>Ready to Get Started?</h2>
+    <p>Join hundreds of clothing brands across India who use Launch My Clothing Brand to build faster and smarter.</p>
+    <a href="/register.html?plan=brand_builder" class="btn-dark">Start with Brand Builder →</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Launch My<br/>Clothing Brand</h3>
+        <p>Professional digital pattern making and manufacturer data services for clothing brands in India.</p>
+        <div class="footer-address">Bijwasan, Delhi — 110061</div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="/services.html">Pattern Making</a></li>
+          <li><a href="/library.html">Pattern Library</a></li>
+          <li><a href="/specsheets.html">Spec Sheets</a></li>
+          <li><a href="/insights.html">Industry Insights</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal &amp; Support</h4>
+        <ul>
+          <li><a href="/contact.html">Contact Us</a></li>
+          <li><a href="/terms.html">Terms of Service</a></li>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="mailto:hello.launchmyclothing@gmail.com" class="footer-email">
+          ✉ hello.launchmyclothing@gmail.com
+        </a>
+        <p class="footer-note">Phone support available for Pro Elite members.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Launch My Clothing Brand. All Rights Reserved.</div>
+      <div class="footer-copy">launchmyclothingbrand.com · Bijwasan, Delhi 110061</div>
+    </div>
+  </footer>
+
+<!-- ══ WHATSAPP CHAT BUBBLE ══════════════════════════════
+     Shows for subscribed users. Update WHATSAPP_NUMBER below.
+     Admin password changer: Ctrl+Shift+P
+════════════════════════════════════════════════════════ -->
+<div id="wa-bubble" style="display:none;position:fixed;bottom:2rem;right:2rem;z-index:900;flex-direction:column;align-items:flex-end;gap:0.8rem;">
+  <div id="wa-tooltip" style="display:none;background:#1C1609;border:1px solid rgba(200,169,81,0.3);padding:1rem 1.4rem;font-family:'DM Mono',monospace;font-size:1.08rem;color:#F5F0E8;max-width:240px;line-height:1.7;position:relative;">
+    <div style="font-size:1.26rem;letter-spacing:0.2em;text-transform:uppercase;color:#C8A951;margin-bottom:0.4rem;">WhatsApp Support</div>
+    Hi! Chat with us directly on WhatsApp for quick support.
+    <button onclick="document.getElementById('wa-tooltip').style.display='none'" style="position:absolute;top:0.5rem;right:0.7rem;background:none;border:none;color:#F5F0E8;opacity:0.4;cursor:pointer;font-size:0.96rem;">✕</button>
+  </div>
+  <a id="wa-link" href="#" target="_blank" rel="noopener"
+    style="width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.35);transition:transform 0.2s,box-shadow 0.2s;text-decoration:none;"
+    onmouseover="this.style.transform='scale(1.1)';document.getElementById('wa-tooltip').style.display='block'"
+    onmouseout="this.style.transform='scale(1)'">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+</div>
+
+<script>
+// ══ WHATSAPP CONFIG — UPDATE YOUR NUMBER HERE ══════════════
+const WHATSAPP_NUMBER = '919958168321'; // Format: country code + number, no + or spaces
+const WHATSAPP_MESSAGE = 'Hi! I need help with my clothing brand.';
+// ════════════════════════════════════════════════════════════
+
+// Show WhatsApp bubble for subscribed users
+// For now shows for all — when Supabase is connected it checks plan
+function initWhatsApp() {
+  const bubble = document.getElementById('wa-bubble');
+  const link = document.getElementById('wa-link');
+  const encodedMsg = encodeURIComponent(WHATSAPP_MESSAGE);
+  link.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMsg}`;
+
+  // Check if user has qualifying plan (brand_builder or pro_elite)
+  // When Supabase connected: check user.profile.plan
+  // For now: show bubble if user visited pricing page (demo behaviour)
+  const plan = localStorage.getItem('lmcb_current_plan');
+  if (plan === 'brand_builder' || plan === 'pro_elite') {
+    bubble.style.display = 'flex';
+  }
+  // DEMO: show for everyone on this page so you can preview it
+  bubble.style.display = 'flex';
+}
+
+// ══ ADMIN PASSWORD CHANGER ═════════════════════════════════
+// Press Ctrl+Shift+P to change admin password
+document.addEventListener('keydown', e => {
+  if (e.ctrlKey && e.shiftKey && e.key === 'P') {
+    e.preventDefault();
+    changeAdminPassword();
+  }
+});
+
+function changeAdminPassword() {
+  const current = prompt('Enter your CURRENT admin password:');
+  if (!current) return;
+
+  const stored = localStorage.getItem('lmcb_admin_pw') || 'admin123';
+  if (current !== stored) { alert('❌ Incorrect current password.'); return; }
+
+  const newPw = prompt('Enter NEW password (min 8 characters):');
+  if (!newPw || newPw.length < 8) { alert('❌ Password must be at least 8 characters.'); return; }
+
+  const confirmPw = prompt('Confirm NEW password:');
+  if (newPw !== confirmPw) { alert('❌ Passwords do not match.'); return; }
+
+  localStorage.setItem('lmcb_admin_pw', newPw);
+  alert('✅ Admin password updated successfully!\n\nNew password: ' + newPw + '\n\nSave this somewhere safe.');
+}
+
+// Override ADMIN_PASSWORD with stored one if changed
+function getAdminPassword() {
+  return localStorage.getItem('lmcb_admin_pw') || 'admin123';
+}
+
+document.addEventListener('DOMContentLoaded', initWhatsApp);
+</script>
+</body>
+</html>

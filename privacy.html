@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy | Launch My Clothing Brand</title>
+  <meta name="description" content="Privacy Policy for Launch My Clothing Brand. Learn how we collect, use, and protect your personal information." />
+  <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --gold: #C8A951; --gold-light: #E8C96A; --cream: #F5F0E8;
+      --ink: #F5F0E8; --bg: #0E0B06; --card-bg: #1C1609;
+      --border: rgba(200,169,81,0.2);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: #0E0B06; color: var(--ink);
+      font-family: 'DM Mono', monospace; font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999; opacity: 0.4;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.3rem 4rem;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      background: rgba(14,11,6,0.92); backdrop-filter: blur(14px);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.26rem;
+      letter-spacing: 0.2em; color: var(--gold); text-decoration: none; line-height: 1;
+    }
+
+    .nav-logo span {
+      display: block; font-family: 'DM Mono', monospace; font-size: 1.26rem;
+      letter-spacing: 0.18em; color: var(--ink); opacity: 0.4;
+      font-weight: 300; margin-top: 0.1rem; text-transform: uppercase;
+    }
+
+    .nav-back {
+      font-size: 1.26rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--ink); opacity: 0.5; text-decoration: none; transition: opacity 0.2s;
+    }
+
+    .nav-back:hover { opacity: 1; color: var(--gold); }
+
+    /* HERO */
+    .page-hero {
+      padding: 10rem 4rem 4rem;
+      border-bottom: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+
+    .page-hero::after {
+      content: 'PRIVACY';
+      position: absolute; right: -1rem; top: 50%; transform: translateY(-50%);
+      font-family: 'Bebas Neue', sans-serif; font-size: 15vw;
+      color: rgba(200,169,81,0.03); pointer-events: none; line-height: 1;
+      white-space: nowrap;
+    }
+
+    .page-eyebrow {
+      font-size: 1.26rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.2rem;
+      display: flex; align-items: center; gap: 0.9rem;
+    }
+
+    .page-eyebrow::before { content: ''; width: 2.5rem; height: 1px; background: var(--gold); }
+
+    .page-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 5vw, 5rem); font-weight: 300;
+      line-height: 1.08; margin-bottom: 1rem;
+    }
+
+    .page-hero h1 em { font-style: italic; color: var(--gold); }
+
+    .last-updated {
+      font-size: 1.26rem; opacity: 0.4; letter-spacing: 0.1em;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+
+    .last-updated::before { content: ''; width: 1rem; height: 1px; background: rgba(200,169,81,0.4); }
+
+    /* MAIN LAYOUT */
+    .content-wrap {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 0;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 4rem 8rem;
+    }
+
+    /* TOC */
+    .toc {
+      position: sticky; top: 5rem; align-self: start;
+      padding-right: 3rem; border-right: 1px solid var(--border);
+    }
+
+    .toc-label {
+      font-size: 1.26rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.7; margin-bottom: 1.2rem;
+    }
+
+    .toc-list { list-style: none; display: flex; flex-direction: column; gap: 0.3rem; }
+
+    .toc-list a {
+      font-size: 1.26rem; opacity: 0.4; text-decoration: none;
+      color: var(--ink); letter-spacing: 0.04em; line-height: 1.6;
+      transition: opacity 0.2s, color 0.2s; display: block; padding: 0.2rem 0;
+    }
+
+    .toc-list a:hover { opacity: 1; color: var(--gold); }
+
+    /* ARTICLE */
+    .privacy-article { padding-left: 4rem; }
+
+    .privacy-section {
+      margin-bottom: 3.5rem; padding-bottom: 3.5rem;
+      border-bottom: 1px solid rgba(200,169,81,0.08);
+    }
+
+    .privacy-section:last-child { border-bottom: none; margin-bottom: 0; }
+
+    .section-num {
+      font-family: 'Bebas Neue', sans-serif; font-size: 3rem;
+      color: rgba(200,169,81,0.1); line-height: 1; margin-bottom: -0.5rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 400;
+      margin-bottom: 1.2rem; line-height: 1.2;
+    }
+
+    .section-body {
+      font-size: 0.96rem; line-height: 2; opacity: 0.7;
+    }
+
+    .section-body ul {
+      list-style: none; margin-top: 1rem;
+      display: flex; flex-direction: column; gap: 0.6rem;
+    }
+
+    .section-body ul li {
+      display: flex; align-items: flex-start; gap: 0.8rem;
+    }
+
+    .section-body ul li::before { content: '→'; color: var(--gold); flex-shrink: 0; opacity: 0.8; }
+
+    /* Info cards */
+    .info-card-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: var(--border); margin-top: 1.5rem;
+    }
+
+    .info-card {
+      background: var(--card-bg); padding: 1.5rem 1.8rem;
+    }
+
+    .info-card-icon { font-size: 1.26rem; margin-bottom: 0.6rem; opacity: 0.6; }
+
+    .info-card-title {
+      font-size: 1.26rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.4rem; opacity: 0.8;
+    }
+
+    .info-card-text { font-size: 1.08rem; opacity: 0.6; line-height: 1.7; }
+
+    /* Highlight box */
+    .highlight-box {
+      background: rgba(200,169,81,0.06);
+      border-left: 3px solid var(--gold);
+      padding: 1.2rem 1.5rem;
+      margin-top: 1.2rem;
+      font-size: 1.26rem; line-height: 1.85; opacity: 0.8;
+    }
+
+    /* Rights grid */
+    .rights-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border); margin-top: 1.5rem;
+    }
+
+    .right-cell {
+      background: #0E0B06; padding: 1.4rem 1.6rem;
+      display: flex; flex-direction: column; gap: 0.4rem;
+    }
+
+    .right-icon { font-size: 1.08rem; opacity: 0.5; }
+
+    .right-title {
+      font-size: 1.26rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.8;
+    }
+
+    .right-desc { font-size: 1.26rem; opacity: 0.5; line-height: 1.6; }
+
+    /* Contact box */
+    .contact-box {
+      background: var(--card-bg); border: 1px solid var(--border);
+      padding: 2rem; margin-top: 1.5rem;
+      display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap;
+    }
+
+    .contact-box-icon { font-size: 1.26rem; opacity: 0.6; }
+
+    .contact-box-label {
+      font-size: 1.08rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.3rem; opacity: 0.8;
+    }
+
+    .contact-box a {
+      color: var(--gold); text-decoration: none; font-size: 1.26rem; transition: opacity 0.2s;
+    }
+
+    .contact-box a:hover { opacity: 0.7; }
+
+    /* Razorpay badge */
+    .payment-badge {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      border: 1px solid rgba(200,169,81,0.25); padding: 0.5rem 1rem;
+      margin-top: 1rem; font-size: 1.26rem; opacity: 0.65;
+    }
+
+    /* CTA */
+    .cta-band { background: var(--gold); padding: 5rem 4rem; text-align: center; }
+
+    .cta-band h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3.5rem); font-weight: 300;
+      color: var(--ink); margin-bottom: 1rem; line-height: 1.1;
+    }
+
+    .cta-band p { font-size: 1.26rem; color: var(--ink-soft); opacity: 0.7; max-width: 48ch; margin: 0 auto 2rem; line-height: 1.8; }
+
+    .btn-dark {
+      background: var(--ink); color: var(--gold);
+      padding: 0.9rem 2.5rem; font-family: 'DM Mono', monospace;
+      font-size: 1.26rem; letter-spacing: 0.15em; text-transform: uppercase;
+      font-weight: 500; border: none; cursor: pointer; text-decoration: none;
+      display: inline-block; transition: background 0.25s, transform 0.2s;
+    }
+
+    .btn-dark:hover { background: #D4A843; transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer { background: #090704; border-top: 1px solid var(--border); padding: 5rem 4rem 3rem; }
+
+    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3.5rem; }
+
+    .footer-brand h3 {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem;
+      letter-spacing: 0.12em; color: var(--gold); margin-bottom: 0.9rem; line-height: 1.1;
+    }
+
+    .footer-brand p { font-size: 1.08rem; opacity: 0.45; line-height: 1.85; max-width: 32ch; margin-bottom: 1.2rem; }
+    .footer-address { font-size: 1.26rem; opacity: 0.35; }
+
+    .footer-col h4 { font-size: 1.26rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .footer-col ul a {
+      font-size: 1.08rem; opacity: 0.42; text-decoration: none;
+      color: var(--ink); transition: opacity 0.2s, color 0.2s;
+    }
+
+    .footer-col ul a:hover { opacity: 0.9; color: var(--gold); }
+
+    .footer-email { font-size: 1.26rem; color: var(--gold); opacity: 0.65; text-decoration: none; display: block; margin-bottom: 0.8rem; }
+    .footer-note { font-size: 1.26rem; opacity: 0.3; line-height: 1.6; margin-top: 0.5rem; }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border); padding-top: 2rem;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+
+    .footer-copy { font-size: 1.26rem; opacity: 0.28; }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .page-hero > * { opacity: 0; animation: fadeUp 0.7s ease forwards; }
+    .page-hero > *:nth-child(1) { animation-delay: 0.05s; }
+    .page-hero > *:nth-child(2) { animation-delay: 0.2s; }
+    .page-hero > *:nth-child(3) { animation-delay: 0.35s; }
+
+    /* Mobile */
+    @media (max-width: 860px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .page-hero { padding: 7rem 1.5rem 3rem; }
+      .content-wrap { grid-template-columns: 1fr; padding: 3rem 1.5rem 5rem; }
+      .toc { display: none; }
+      .privacy-article { padding-left: 0; }
+      .info-card-grid { grid-template-columns: 1fr; }
+      .rights-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .cta-band { padding: 4rem 1.5rem; }
+    }
+
+    @media (max-width: 560px) {
+      .rights-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/index.html" class="nav-logo">
+      Launch My Clothing Brand
+      <span>Pattern Making &amp; Manufacturing</span>
+    </a>
+    <a href="/index.html" class="nav-back">← Home</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="page-eyebrow">Legal</div>
+    <h1>Privacy <em>Policy</em></h1>
+    <div class="last-updated">Last Updated: 7 May 2026</div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content-wrap">
+
+    <!-- TOC -->
+    <nav class="toc" aria-label="Table of contents">
+      <div class="toc-label">Contents</div>
+      <ul class="toc-list">
+        <li><a href="#p1">1. Information We Collect</a></li>
+        <li><a href="#p2">2. How We Use Your Information</a></li>
+        <li><a href="#p3">3. Information Sharing</a></li>
+        <li><a href="#p4">4. Data Security</a></li>
+        <li><a href="#p5">5. Your Rights</a></li>
+        <li><a href="#p6">6. Cookies</a></li>
+        <li><a href="#p7">7. Changes to Privacy Policy</a></li>
+        <li><a href="#p8">8. Contact Us</a></li>
+      </ul>
+    </nav>
+
+    <!-- ARTICLE -->
+    <article class="privacy-article">
+
+      <div class="privacy-section" id="p1">
+        <div class="section-num">01</div>
+        <h2 class="section-title">Information We Collect</h2>
+        <div class="section-body">
+          We collect information you provide directly to us when you register, subscribe, or use our services. This includes:
+          <ul>
+            <li>Name and email address — used to create and manage your account</li>
+            <li>Payment information — processed securely through Razorpay; we do not store your card details</li>
+            <li>Phone number — used for WhatsApp and phone support where applicable to your plan</li>
+            <li>Brand name — used to personalise your experience and understand your business context</li>
+            <li>Usage data and preferences — including pages visited, downloads accessed, and feature usage</li>
+          </ul>
+
+          <div class="info-card-grid">
+            <div class="info-card">
+              <div class="info-card-icon">👤</div>
+              <div class="info-card-title">Account Data</div>
+              <div class="info-card-text">Name, email, phone, brand name — provided by you at registration</div>
+            </div>
+            <div class="info-card">
+              <div class="info-card-icon">💳</div>
+              <div class="info-card-title">Payment Data</div>
+              <div class="info-card-text">Processed by Razorpay. We receive only payment confirmation, not card details</div>
+            </div>
+            <div class="info-card">
+              <div class="info-card-icon">📊</div>
+              <div class="info-card-title">Usage Data</div>
+              <div class="info-card-text">Pages viewed, downloads, session duration — used to improve our service</div>
+            </div>
+            <div class="info-card">
+              <div class="info-card-icon">🍪</div>
+              <div class="info-card-title">Cookie Data</div>
+              <div class="info-card-text">Session cookies and analytics cookies to maintain your login and understand usage</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="privacy-section" id="p2">
+        <div class="section-num">02</div>
+        <h2 class="section-title">How We Use Your Information</h2>
+        <div class="section-body">
+          We use the information we collect for the following purposes:
+          <ul>
+            <li>To provide and maintain our services — processing your subscription, granting access to premium content, and delivering pattern files and spec sheets</li>
+            <li>To process your subscriptions and payments — verifying transactions via Razorpay and managing your billing cycle</li>
+            <li>To send you updates and marketing communications — only with your explicit consent; you can opt out at any time</li>
+            <li>To improve our services and user experience — analysing usage patterns to enhance the platform</li>
+            <li>To provide customer support — responding to your queries via email, WhatsApp, or phone as per your plan</li>
+            <li>To protect against fraudulent or illegal activity — monitoring for unusual account activity</li>
+          </ul>
+          <div class="highlight-box">
+            We will never use your personal information for purposes beyond what is described in this policy without your explicit consent.
+          </div>
+        </div>
+      </div>
+
+      <div class="privacy-section" id="p3">
+        <div class="section-num">03</div>
+        <h2 class="section-title">Information Sharing</h2>
+        <div class="section-body">
+          We do not sell, trade, or rent your personal information to third parties. We may share your information only in the following limited circumstances:
+          <ul>
+            <li>Service providers who assist in our operations — such as Razorpay for payment processing and Supabase for secure data storage</li>
+            <li>Professional advisers and regulatory authorities — when required by law, court order, or to protect our legal rights</li>
+            <li>Business transfers — in the unlikely event of a merger, acquisition, or sale of assets, your data may be transferred as part of that transaction</li>
+          </ul>
+
+          <div class="payment-badge">
+            🔒 &nbsp; Payments are processed securely by Razorpay — PCI DSS compliant
+          </div>
+        </div>
+      </div>
+
+      <div class="privacy-section" id="p4">
+        <div class="section-num">04</div>
+        <h2 class="section-title">Data Security</h2>
+        <div class="section-body">
+          We implement appropriate technical and organisational measures to protect your personal information from unauthorised access, alteration, disclosure, or destruction. These measures include:
+          <ul>
+            <li>Encrypted storage of user data via Supabase with row-level security policies</li>
+            <li>HTTPS encryption for all data transmitted between your browser and our servers</li>
+            <li>Secure password hashing — your password is never stored in plain text</li>
+            <li>Payment data handled exclusively by Razorpay — we never store card numbers or CVVs</li>
+            <li>Regular review of our data collection and storage practices</li>
+          </ul>
+          <div class="highlight-box">
+            However, no method of transmission over the internet is 100% secure. While we strive to use commercially acceptable means to protect your personal information, we cannot guarantee its absolute security. Please use a strong, unique password for your account.
+          </div>
+        </div>
+      </div>
+
+      <div class="privacy-section" id="p5">
+        <div class="section-num">05</div>
+        <h2 class="section-title">Your Rights</h2>
+        <div class="section-body">
+          Under applicable Indian data protection laws, you have the following rights regarding your personal data:
+
+          <div class="rights-grid">
+            <div class="right-cell">
+              <div class="right-icon">👁</div>
+              <div class="right-title">Access</div>
+              <div class="right-desc">Request a copy of the personal data we hold about you</div>
+            </div>
+            <div class="right-cell">
+              <div class="right-icon">✏️</div>
+              <div class="right-title">Correct</div>
+              <div class="right-desc">Update or correct inaccurate data in your account</div>
+            </div>
+            <div class="right-cell">
+              <div class="right-icon">🗑</div>
+              <div class="right-title">Delete</div>
+              <div class="right-desc">Request deletion of your account and personal data</div>
+            </div>
+            <div class="right-cell">
+              <div class="right-icon">🚫</div>
+              <div class="right-title">Opt-Out</div>
+              <div class="right-desc">Unsubscribe from marketing emails at any time</div>
+            </div>
+            <div class="right-cell">
+              <div class="right-icon">📦</div>
+              <div class="right-title">Export</div>
+              <div class="right-desc">Download a copy of your data in a portable format</div>
+            </div>
+            <div class="right-cell">
+              <div class="right-icon">✉️</div>
+              <div class="right-title">Contact Us</div>
+              <div class="right-desc">Raise any privacy concern with us directly by email</div>
+            </div>
+          </div>
+
+          <p style="margin-top:1.2rem;">To exercise any of these rights, please email us at <a href="mailto:hello.launchmyclothing@gmail.com" style="color:var(--gold);text-decoration:none;">hello.launchmyclothing@gmail.com</a>. We will respond within 30 days.</p>
+        </div>
+      </div>
+
+      <div class="privacy-section" id="p6">
+        <div class="section-num">06</div>
+        <h2 class="section-title">Cookies</h2>
+        <div class="section-body">
+          We use cookies and similar tracking technologies to track activity on our service and hold certain information to improve and analyse our service. The types of cookies we use include:
+          <ul>
+            <li>Essential cookies — required for the website to function, including maintaining your login session</li>
+            <li>Analytics cookies — used to understand how visitors interact with our site (e.g. pages visited, time spent)</li>
+            <li>Preference cookies — used to remember your settings and preferences across visits</li>
+          </ul>
+          <div class="highlight-box">
+            You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, some parts of our service may not function correctly, including staying logged in.
+          </div>
+        </div>
+      </div>
+
+      <div class="privacy-section" id="p7">
+        <div class="section-num">07</div>
+        <h2 class="section-title">Changes to Privacy Policy</h2>
+        <div class="section-body">
+          We may update our Privacy Policy from time to time to reflect changes in our practices or applicable laws. We will notify you of any material changes by:
+          <ul>
+            <li>Posting the new Privacy Policy on this page with an updated "Last Updated" date</li>
+            <li>Sending an email notification to your registered email address at least 14 days before significant changes take effect</li>
+            <li>Displaying a prominent notice on our website when changes are made</li>
+          </ul>
+          We encourage you to review this Privacy Policy periodically to stay informed about how we protect your information. Continued use of our service after changes are posted constitutes your acceptance of the updated policy.
+        </div>
+      </div>
+
+      <div class="privacy-section" id="p8">
+        <div class="section-num">08</div>
+        <h2 class="section-title">Contact Us</h2>
+        <div class="section-body">
+          If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please get in touch:
+
+          <div class="contact-box">
+            <div class="contact-box-icon">✉</div>
+            <div>
+              <div class="contact-box-label">Email</div>
+              <a href="mailto:hello.launchmyclothing@gmail.com">hello.launchmyclothing@gmail.com</a>
+            </div>
+          </div>
+          <div class="contact-box" style="margin-top:0.8rem;">
+            <div class="contact-box-icon">📍</div>
+            <div>
+              <div class="contact-box-label">Address</div>
+              <span style="font-size:1.26rem;opacity:0.7;">Bijwasan, Delhi — 110061, India</span>
+            </div>
+          </div>
+          <p style="margin-top:1.2rem;font-size:1.08rem;opacity:0.5;line-height:1.8;">
+            We aim to respond to all privacy-related queries within 30 days of receipt.
+          </p>
+        </div>
+      </div>
+
+    </article>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-band">
+    <h2>Have Questions?</h2>
+    <p>We're happy to answer any questions about how we handle your data. Get in touch or explore our services.</p>
+    <a href="/contact.html" class="btn-dark">Contact Us →</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Launch My<br/>Clothing Brand</h3>
+        <p>Professional digital pattern making and manufacturer data services for clothing brands in India.</p>
+        <div class="footer-address">Bijwasan, Delhi — 110061</div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="/services.html">Pattern Making</a></li>
+          <li><a href="/library.html">Pattern Library</a></li>
+          <li><a href="/specsheets.html">Spec Sheets</a></li>
+          <li><a href="/insights.html">Industry Insights</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal &amp; Support</h4>
+        <ul>
+          <li><a href="/contact.html">Contact Us</a></li>
+          <li><a href="/terms.html">Terms of Service</a></li>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+          <li><a href="/subscribe.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="mailto:hello.launchmyclothing@gmail.com" class="footer-email">✉ hello.launchmyclothing@gmail.com</a>
+        <p class="footer-note">Follow us on social media for updates, tips, and industry insights.</p>
+        <p class="footer-note">Phone support available for Pro Elite members only.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Launch My Clothing Brand. All Rights Reserved.</div>
+      <div class="footer-copy">launchmyclothingbrand.com · Bijwasan, Delhi 110061</div>
+    </div>
+  </footer>
+
+<!-- WhatsApp Chat Bubble -->
+<div id="wa-bubble" style="display:none;position:fixed;bottom:2rem;right:2rem;z-index:900;flex-direction:column;align-items:flex-end;gap:0.8rem;">
+  <div id="wa-tooltip" style="display:none;background:#1C1609;border:1px solid rgba(200,169,81,0.3);padding:1rem 1.4rem;font-family:DM Mono,monospace;font-size:1.08rem;color:#F5F0E8;max-width:240px;line-height:1.7;position:relative;">
+    <div style="font-size:1.26rem;letter-spacing:0.2em;text-transform:uppercase;color:#C8A951;margin-bottom:0.4rem;">WhatsApp Support</div>
+    Chat with us directly for quick support.
+    <button onclick="document.getElementById('wa-tooltip').style.display='none'" style="position:absolute;top:0.5rem;right:0.7rem;background:none;border:none;color:#F5F0E8;opacity:0.4;cursor:pointer;">✕</button>
+  </div>
+  <a id="wa-link" href="#" target="_blank" rel="noopener" style="width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.35);transition:transform 0.2s;text-decoration:none;" onmouseover="this.style.transform='scale(1.1)';document.getElementById('wa-tooltip').style.display='block'" onmouseout="this.style.transform='scale(1)'">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</div>
+<script>
+const _WA_NUM="919958168321",_WA_MSG="Hi! I need help with my clothing brand.";
+function _initWA(){const b=document.getElementById("wa-bubble"),l=document.getElementById("wa-link");if(!b||!l)return;l.href="https://wa.me/"+_WA_NUM+"?text="+encodeURIComponent(_WA_MSG);const p=localStorage.getItem("lmcb_current_plan");if(p==="brand_builder"||p==="pro_elite"){b.style.display="flex";}else{b.style.display="none";}}
+function getAdminPassword(){return localStorage.getItem("lmcb_admin_pw")||"admin123";}
+function changeAdminPassword(){const c=prompt("Enter CURRENT admin password:");if(!c)return;if(c!==getAdminPassword()){alert("Incorrect password.");return;}const n=prompt("Enter NEW password (min 8 chars):");if(!n||n.length<8){alert("Min 8 characters required.");return;}const c2=prompt("Confirm new password:");if(n!==c2){alert("Passwords do not match.");return;}localStorage.setItem("lmcb_admin_pw",n);alert("Password updated! New password: "+n);}
+document.addEventListener("keydown",e=>{if(e.ctrlKey&&e.shiftKey&&e.key==="P"){e.preventDefault();changeAdminPassword();}});
+document.addEventListener("DOMContentLoaded",_initWA);
+<\/script>
+</body>
+</html>

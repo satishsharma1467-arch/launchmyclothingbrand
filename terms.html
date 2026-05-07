@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service | Launch My Clothing Brand</title>
+  <meta name="description" content="Terms of Service for Launch My Clothing Brand. Read our terms before using our pattern making and manufacturer connection services." />
+  <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --gold: #C8A951; --gold-light: #E8C96A; --cream: #F5F0E8;
+      --ink: #F5F0E8; --bg: #0E0B06; --card-bg: #1C1609;
+      --border: rgba(200,169,81,0.2);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: #0E0B06; color: var(--ink);
+      font-family: 'DM Mono', monospace; font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999; opacity: 0.4;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.3rem 4rem;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      background: rgba(14,11,6,0.92); backdrop-filter: blur(14px);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.26rem;
+      letter-spacing: 0.2em; color: var(--gold); text-decoration: none; line-height: 1;
+    }
+
+    .nav-logo span {
+      display: block; font-family: 'DM Mono', monospace; font-size: 1.26rem;
+      letter-spacing: 0.18em; color: var(--ink); opacity: 0.4;
+      font-weight: 300; margin-top: 0.1rem; text-transform: uppercase;
+    }
+
+    .nav-back {
+      font-size: 1.26rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--ink); opacity: 0.5; text-decoration: none; transition: opacity 0.2s;
+    }
+
+    .nav-back:hover { opacity: 1; color: var(--gold); }
+
+    /* HERO */
+    .page-hero {
+      padding: 10rem 4rem 4rem;
+      border-bottom: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+
+    .page-hero::after {
+      content: 'TERMS';
+      position: absolute; right: -1rem; top: 50%; transform: translateY(-50%);
+      font-family: 'Bebas Neue', sans-serif; font-size: 18vw;
+      color: rgba(200,169,81,0.03); pointer-events: none; line-height: 1;
+    }
+
+    .page-eyebrow {
+      font-size: 1.26rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.2rem;
+      display: flex; align-items: center; gap: 0.9rem;
+    }
+
+    .page-eyebrow::before { content: ''; width: 2.5rem; height: 1px; background: var(--gold); }
+
+    .page-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 5vw, 5rem); font-weight: 300;
+      line-height: 1.08; margin-bottom: 1rem;
+    }
+
+    .page-hero h1 em { font-style: italic; color: var(--gold); }
+
+    .last-updated {
+      font-size: 1.26rem; opacity: 0.4; letter-spacing: 0.1em;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+
+    .last-updated::before {
+      content: ''; width: 1rem; height: 1px; background: rgba(200,169,81,0.4);
+    }
+
+    /* MAIN LAYOUT */
+    .content-wrap {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 0;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 4rem 8rem;
+    }
+
+    /* SIDEBAR — sticky TOC */
+    .toc {
+      position: sticky;
+      top: 5rem;
+      align-self: start;
+      padding-right: 3rem;
+      border-right: 1px solid var(--border);
+    }
+
+    .toc-label {
+      font-size: 1.26rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.7; margin-bottom: 1.2rem;
+    }
+
+    .toc-list { list-style: none; display: flex; flex-direction: column; gap: 0.3rem; }
+
+    .toc-list a {
+      font-size: 1.26rem; opacity: 0.4; text-decoration: none;
+      color: var(--ink); letter-spacing: 0.04em; line-height: 1.6;
+      transition: opacity 0.2s, color 0.2s; display: block; padding: 0.2rem 0;
+    }
+
+    .toc-list a:hover { opacity: 1; color: var(--gold); }
+
+    /* ARTICLE */
+    .terms-article {
+      padding-left: 4rem;
+    }
+
+    .terms-section {
+      margin-bottom: 3.5rem;
+      padding-bottom: 3.5rem;
+      border-bottom: 1px solid rgba(200,169,81,0.08);
+    }
+
+    .terms-section:last-child { border-bottom: none; margin-bottom: 0; }
+
+    .section-num {
+      font-family: 'Bebas Neue', sans-serif; font-size: 3rem;
+      color: rgba(200,169,81,0.1); line-height: 1; margin-bottom: -0.5rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 400;
+      margin-bottom: 1.2rem; line-height: 1.2;
+    }
+
+    .section-body {
+      font-size: 0.96rem; line-height: 2; opacity: 0.7;
+    }
+
+    .section-body ul {
+      list-style: none; margin-top: 1rem; display: flex; flex-direction: column; gap: 0.6rem;
+    }
+
+    .section-body ul li {
+      display: flex; align-items: flex-start; gap: 0.8rem;
+      padding-left: 0;
+    }
+
+    .section-body ul li::before {
+      content: '→'; color: var(--gold); flex-shrink: 0; opacity: 0.8;
+    }
+
+    /* CONTACT BOX */
+    .contact-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      margin-top: 1.5rem;
+      display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap;
+    }
+
+    .contact-box-icon { font-size: 1.26rem; opacity: 0.6; }
+
+    .contact-box-text { flex: 1; }
+
+    .contact-box-label {
+      font-size: 1.08rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.3rem; opacity: 0.8;
+    }
+
+    .contact-box a {
+      color: var(--gold); text-decoration: none; font-size: 1.26rem;
+      transition: opacity 0.2s;
+    }
+
+    .contact-box a:hover { opacity: 0.7; }
+
+    /* HIGHLIGHT BOX */
+    .highlight-box {
+      background: rgba(200,169,81,0.06);
+      border-left: 3px solid var(--gold);
+      padding: 1.2rem 1.5rem;
+      margin-top: 1.2rem;
+      font-size: 1.26rem; line-height: 1.85; opacity: 0.8;
+    }
+
+    /* CTA */
+    .cta-band { background: var(--gold); padding: 5rem 4rem; text-align: center; }
+
+    .cta-band h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3.5rem); font-weight: 300;
+      color: var(--ink); margin-bottom: 1rem; line-height: 1.1;
+    }
+
+    .cta-band p { font-size: 1.26rem; color: var(--ink-soft); opacity: 0.7; max-width: 48ch; margin: 0 auto 2rem; line-height: 1.8; }
+
+    .btn-dark {
+      background: var(--ink); color: var(--gold);
+      padding: 0.9rem 2.5rem; font-family: 'DM Mono', monospace;
+      font-size: 1.26rem; letter-spacing: 0.15em; text-transform: uppercase;
+      font-weight: 500; border: none; cursor: pointer; text-decoration: none;
+      display: inline-block; transition: background 0.25s, transform 0.2s;
+    }
+
+    .btn-dark:hover { background: #D4A843; transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer { background: #090704; border-top: 1px solid var(--border); padding: 5rem 4rem 3rem; }
+
+    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3.5rem; }
+
+    .footer-brand h3 {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem;
+      letter-spacing: 0.12em; color: var(--gold); margin-bottom: 0.9rem; line-height: 1.1;
+    }
+
+    .footer-brand p { font-size: 1.08rem; opacity: 0.45; line-height: 1.85; max-width: 32ch; margin-bottom: 1.2rem; }
+    .footer-address { font-size: 1.26rem; opacity: 0.35; }
+
+    .footer-col h4 { font-size: 1.26rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .footer-col ul a {
+      font-size: 1.08rem; opacity: 0.42; text-decoration: none;
+      color: var(--ink); transition: opacity 0.2s, color 0.2s;
+    }
+
+    .footer-col ul a:hover { opacity: 0.9; color: var(--gold); }
+
+    .footer-email { font-size: 1.26rem; color: var(--gold); opacity: 0.65; text-decoration: none; display: block; margin-bottom: 0.8rem; }
+    .footer-note { font-size: 1.26rem; opacity: 0.3; line-height: 1.6; margin-top: 0.5rem; }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border); padding-top: 2rem;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+
+    .footer-copy { font-size: 1.26rem; opacity: 0.28; }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .page-hero > * { opacity: 0; animation: fadeUp 0.7s ease forwards; }
+    .page-hero > *:nth-child(1) { animation-delay: 0.05s; }
+    .page-hero > *:nth-child(2) { animation-delay: 0.2s; }
+    .page-hero > *:nth-child(3) { animation-delay: 0.35s; }
+
+    /* Mobile */
+    @media (max-width: 860px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .page-hero { padding: 7rem 1.5rem 3rem; }
+      .content-wrap { grid-template-columns: 1fr; padding: 3rem 1.5rem 5rem; }
+      .toc { display: none; }
+      .terms-article { padding-left: 0; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .cta-band { padding: 4rem 1.5rem; }
+    }
+
+    @media (max-width: 560px) { .footer-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/index.html" class="nav-logo">
+      Launch My Clothing Brand
+      <span>Pattern Making &amp; Manufacturing</span>
+    </a>
+    <a href="/index.html" class="nav-back">← Home</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="page-eyebrow">Legal</div>
+    <h1>Terms of <em>Service</em></h1>
+    <div class="last-updated">Last Updated: 7 May 2026</div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content-wrap">
+
+    <!-- SIDEBAR TOC -->
+    <nav class="toc" aria-label="Table of contents">
+      <div class="toc-label">Contents</div>
+      <ul class="toc-list">
+        <li><a href="#s1">1. Acceptance of Terms</a></li>
+        <li><a href="#s2">2. Services Provided</a></li>
+        <li><a href="#s3">3. Subscription Terms</a></li>
+        <li><a href="#s4">4. Intellectual Property</a></li>
+        <li><a href="#s5">5. User Responsibilities</a></li>
+        <li><a href="#s6">6. Limitation of Liability</a></li>
+        <li><a href="#s7">7. Modifications to Service</a></li>
+        <li><a href="#s8">8. Governing Law</a></li>
+        <li><a href="#s9">9. Contact Information</a></li>
+      </ul>
+    </nav>
+
+    <!-- ARTICLE -->
+    <article class="terms-article">
+
+      <div class="terms-section" id="s1">
+        <div class="section-num">01</div>
+        <h2 class="section-title">Acceptance of Terms</h2>
+        <div class="section-body">
+          By accessing and using Launch My Clothing Brand services, you accept and agree to be bound by the terms and provisions of this agreement. If you do not agree to these terms, please do not use our services.
+          <div class="highlight-box">
+            These Terms of Service constitute a legally binding agreement between you and Launch My Clothing Brand. Please read them carefully before subscribing or using any of our services.
+          </div>
+        </div>
+      </div>
+
+      <div class="terms-section" id="s2">
+        <div class="section-num">02</div>
+        <h2 class="section-title">Services Provided</h2>
+        <div class="section-body">
+          We provide the following services through a subscription-based model:
+          <ul>
+            <li>Digital pattern making services — converting sketches and photos into production-ready DXF and PDF files</li>
+            <li>Manufacturer connection services — access to our verified network of garment manufacturers across India</li>
+            <li>Pattern library access — downloadable production-ready pattern templates</li>
+            <li>Specification sheet access — industry-standard dummy measurements and spec templates</li>
+            <li>Industry insights — exclusive video tutorials and brand development content</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="terms-section" id="s3">
+        <div class="section-num">03</div>
+        <h2 class="section-title">Subscription Terms</h2>
+        <div class="section-body">
+          Our subscription plans are governed by the following terms:
+          <ul>
+            <li>Subscriptions are billed monthly as per your selected plan (Basic ₹499, Brand Builder ₹999, Pro Elite ₹1599)</li>
+            <li>You can cancel your subscription at any time — access continues until the end of the current billing period</li>
+            <li>Refunds are subject to our refund policy — contact us within 7 days of billing for refund consideration</li>
+            <li>Access to premium features is granted upon successful payment confirmation</li>
+            <li>Pattern download limits reset at the start of each billing cycle and do not roll over</li>
+            <li>We reserve the right to modify plan pricing with 30 days advance notice to subscribers</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="terms-section" id="s4">
+        <div class="section-num">04</div>
+        <h2 class="section-title">Intellectual Property</h2>
+        <div class="section-body">
+          All patterns, designs, and content provided through our service remain the intellectual property of Launch My Clothing Brand unless explicitly stated otherwise.
+          <div class="highlight-box">
+            Subscribers receive a non-exclusive, non-transferable license to use downloaded patterns for their own business purposes only. This license does not permit resale, redistribution, or sublicensing of pattern files to third parties.
+          </div>
+          You retain full ownership of any designs, sketches, or materials you submit to us for custom pattern making services. By submitting materials, you grant us a limited license to use them solely for the purpose of completing your order.
+        </div>
+      </div>
+
+      <div class="terms-section" id="s5">
+        <div class="section-num">05</div>
+        <h2 class="section-title">User Responsibilities</h2>
+        <div class="section-body">
+          As a user of our services, you agree to:
+          <ul>
+            <li>Maintain the confidentiality of your account credentials and not share your login with others</li>
+            <li>Use the service only for lawful purposes in accordance with applicable Indian laws and regulations</li>
+            <li>Not share downloaded patterns, spec sheets, or manufacturer contact details with non-subscribers</li>
+            <li>Provide accurate and truthful information during registration and throughout your use of the service</li>
+            <li>Not attempt to reverse engineer, copy, or reproduce our proprietary content or systems</li>
+            <li>Notify us immediately at hello.launchmyclothing@gmail.com if you suspect unauthorized use of your account</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="terms-section" id="s6">
+        <div class="section-num">06</div>
+        <h2 class="section-title">Limitation of Liability</h2>
+        <div class="section-body">
+          Launch My Clothing Brand shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use or inability to use the service. This includes but is not limited to:
+          <ul>
+            <li>Loss of profits, revenue, or business opportunities arising from use of our patterns or manufacturer connections</li>
+            <li>Production errors or quality issues arising from misapplication of downloaded pattern files</li>
+            <li>Disputes between you and manufacturers introduced through our network</li>
+            <li>Temporary unavailability of the service due to maintenance or technical issues</li>
+          </ul>
+          Our total liability to you for any claim shall not exceed the amount you paid us in the three months preceding the claim.
+        </div>
+      </div>
+
+      <div class="terms-section" id="s7">
+        <div class="section-num">07</div>
+        <h2 class="section-title">Modifications to Service</h2>
+        <div class="section-body">
+          We reserve the right to modify, update, or discontinue any aspect of the service at any time. We will endeavour to provide reasonable notice of significant changes where possible.
+          <ul>
+            <li>New features may be added or existing features modified without prior notice</li>
+            <li>We shall not be liable to you or any third party for any modification, suspension, or discontinuance of the service</li>
+            <li>Continued use of the service after changes constitutes acceptance of the updated terms</li>
+            <li>We will notify subscribers by email of any material changes to these Terms at least 14 days in advance</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="terms-section" id="s8">
+        <div class="section-num">08</div>
+        <h2 class="section-title">Governing Law</h2>
+        <div class="section-body">
+          These terms shall be governed by and construed in accordance with the laws of India. You submit to the exclusive jurisdiction of the courts located in Delhi for the resolution of any disputes arising from or related to these terms or your use of our services.
+          <div class="highlight-box">
+            Any dispute, controversy, or claim arising out of or relating to these Terms shall first be attempted to be resolved through good-faith negotiation. If unresolved within 30 days, the matter shall be referred to the courts of Delhi, India.
+          </div>
+        </div>
+      </div>
+
+      <div class="terms-section" id="s9">
+        <div class="section-num">09</div>
+        <h2 class="section-title">Contact Information</h2>
+        <div class="section-body">
+          For any questions, concerns, or disputes related to these Terms of Service, please contact us:
+          <div class="contact-box">
+            <div class="contact-box-icon">✉</div>
+            <div class="contact-box-text">
+              <div class="contact-box-label">Email</div>
+              <a href="mailto:hello.launchmyclothing@gmail.com">hello.launchmyclothing@gmail.com</a>
+            </div>
+          </div>
+          <div class="contact-box" style="margin-top:0.8rem;">
+            <div class="contact-box-icon">📍</div>
+            <div class="contact-box-text">
+              <div class="contact-box-label">Registered Address</div>
+              <span style="font-size:1.26rem;opacity:0.7;">Bijwasan, Delhi — 110061, India</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </article>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-band">
+    <h2>Ready to Subscribe?</h2>
+    <p>View our plans and get started with Launch My Clothing Brand today.</p>
+    <a href="/subscribe.html" class="btn-dark">View Pricing →</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Launch My<br/>Clothing Brand</h3>
+        <p>Professional digital pattern making and manufacturer data services for clothing brands in India.</p>
+        <div class="footer-address">Bijwasan, Delhi — 110061</div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="/services.html">Pattern Making</a></li>
+          <li><a href="/library.html">Pattern Library</a></li>
+          <li><a href="/specsheets.html">Spec Sheets</a></li>
+          <li><a href="/insights.html">Industry Insights</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal &amp; Support</h4>
+        <ul>
+          <li><a href="/contact.html">Contact Us</a></li>
+          <li><a href="/terms.html">Terms of Service</a></li>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+          <li><a href="/subscribe.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="mailto:hello.launchmyclothing@gmail.com" class="footer-email">✉ hello.launchmyclothing@gmail.com</a>
+        <p class="footer-note">Follow us on social media for updates, tips, and industry insights.</p>
+        <p class="footer-note">Phone support available for Pro Elite members only.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Launch My Clothing Brand. All Rights Reserved.</div>
+      <div class="footer-copy">launchmyclothingbrand.com · Bijwasan, Delhi 110061</div>
+    </div>
+  </footer>
+
+<!-- WhatsApp Chat Bubble -->
+<div id="wa-bubble" style="display:none;position:fixed;bottom:2rem;right:2rem;z-index:900;flex-direction:column;align-items:flex-end;gap:0.8rem;">
+  <div id="wa-tooltip" style="display:none;background:#1C1609;border:1px solid rgba(200,169,81,0.3);padding:1rem 1.4rem;font-family:DM Mono,monospace;font-size:1.08rem;color:#F5F0E8;max-width:240px;line-height:1.7;position:relative;">
+    <div style="font-size:1.26rem;letter-spacing:0.2em;text-transform:uppercase;color:#C8A951;margin-bottom:0.4rem;">WhatsApp Support</div>
+    Chat with us directly for quick support.
+    <button onclick="document.getElementById('wa-tooltip').style.display='none'" style="position:absolute;top:0.5rem;right:0.7rem;background:none;border:none;color:#F5F0E8;opacity:0.4;cursor:pointer;">✕</button>
+  </div>
+  <a id="wa-link" href="#" target="_blank" rel="noopener" style="width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.35);transition:transform 0.2s;text-decoration:none;" onmouseover="this.style.transform='scale(1.1)';document.getElementById('wa-tooltip').style.display='block'" onmouseout="this.style.transform='scale(1)'">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</div>
+<script>
+const _WA_NUM="919958168321",_WA_MSG="Hi! I need help with my clothing brand.";
+function _initWA(){const b=document.getElementById("wa-bubble"),l=document.getElementById("wa-link");if(!b||!l)return;l.href="https://wa.me/"+_WA_NUM+"?text="+encodeURIComponent(_WA_MSG);const p=localStorage.getItem("lmcb_current_plan");if(p==="brand_builder"||p==="pro_elite"){b.style.display="flex";}else{b.style.display="none";}}
+function getAdminPassword(){return localStorage.getItem("lmcb_admin_pw")||"admin123";}
+function changeAdminPassword(){const c=prompt("Enter CURRENT admin password:");if(!c)return;if(c!==getAdminPassword()){alert("Incorrect password.");return;}const n=prompt("Enter NEW password (min 8 chars):");if(!n||n.length<8){alert("Min 8 characters required.");return;}const c2=prompt("Confirm new password:");if(n!==c2){alert("Passwords do not match.");return;}localStorage.setItem("lmcb_admin_pw",n);alert("Password updated! New password: "+n);}
+document.addEventListener("keydown",e=>{if(e.ctrlKey&&e.shiftKey&&e.key==="P"){e.preventDefault();changeAdminPassword();}});
+document.addEventListener("DOMContentLoaded",_initWA);
+<\/script>
+</body>
+</html>

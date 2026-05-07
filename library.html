@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pattern Library | Launch My Clothing Brand</title>
+  <meta name="description" content="Access production-ready patterns. Download DXF and PDF files instantly. Premium subscription required. Basic T-shirts, hoodies, denim jeans and more." />
+  <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --gold: #C8A951;
+      --gold-light: #E8C96A;
+      --cream: #F5F0E8;
+      --ink: #F5F0E8;
+      --ink-soft: #3D2E10;
+      --bg: #0E0B06;
+      --card-bg: #1C1609;
+      --border: rgba(200,169,81,0.2);
+      --locked-bg: rgba(200,169,81,0.05);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: #0E0B06;
+      color: var(--ink);
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.3rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      background: rgba(14,11,6,0.92);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.26rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-decoration: none;
+      line-height: 1;
+    }
+
+    .nav-logo span {
+      display: block;
+      font-family: 'DM Mono', monospace;
+      font-size: 1.26rem;
+      letter-spacing: 0.18em;
+      color: var(--ink);
+      opacity: 0.4;
+      font-weight: 300;
+      margin-top: 0.1rem;
+      text-transform: uppercase;
+    }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+
+    .nav-links a {
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 1.26rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      transition: opacity 0.2s, color 0.2s;
+    }
+
+    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold); }
+
+    .nav-cta {
+      background: var(--gold) !important;
+      color: var(--ink) !important;
+      padding: 0.6rem 1.4rem !important;
+      opacity: 1 !important;
+      font-weight: 500 !important;
+    }
+
+    .nav-cta:hover { background: var(--gold-light) !important; }
+
+    /* PAGE HERO */
+    .page-hero {
+      padding: 10rem 4rem 5rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero::after {
+      content: 'LIB';
+      position: absolute;
+      right: -1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22vw;
+      color: rgba(200,169,81,0.03);
+      pointer-events: none;
+      line-height: 1;
+    }
+
+    .page-eyebrow {
+      font-size: 1.26rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+
+    .page-eyebrow::before { content: ''; width: 2.5rem; height: 1px; background: var(--gold); }
+
+    .page-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 5vw, 5rem);
+      font-weight: 300;
+      line-height: 1.08;
+      margin-bottom: 1.2rem;
+      max-width: 16ch;
+    }
+
+    .page-hero h1 em { font-style: italic; color: var(--gold); }
+
+    .page-hero p {
+      font-size: 1.26rem;
+      opacity: 0.55;
+      line-height: 1.85;
+      max-width: 52ch;
+      letter-spacing: 0.02em;
+      margin-bottom: 2rem;
+    }
+
+    /* LOCK BANNER */
+    .lock-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      background: rgba(200,169,81,0.08);
+      border: 1px solid rgba(200,169,81,0.3);
+      padding: 1.4rem 2rem;
+      flex-wrap: wrap;
+      max-width: 780px;
+    }
+
+    .lock-banner-left { display: flex; align-items: center; gap: 1rem; }
+    .lock-icon { font-size: 1.26rem; opacity: 0.7; }
+
+    .lock-banner-text h4 {
+      font-size: 1.26rem;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      margin-bottom: 0.25rem;
+    }
+
+    .lock-banner-text p { font-size: 1.26rem; opacity: 0.55; line-height: 1.6; }
+
+    .btn-gold {
+      background: var(--gold);
+      color: var(--ink);
+      padding: 0.75rem 1.8rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 1.08rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      white-space: nowrap;
+      transition: background 0.2s, transform 0.2s;
+      flex-shrink: 0;
+    }
+
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    /* STATS BAR */
+    .stats-bar {
+      display: flex;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--card-bg);
+    }
+
+    .stat-cell {
+      flex: 1;
+      padding: 1.8rem 2rem;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+
+    .stat-cell:last-child { border-right: none; }
+
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-label {
+      font-size: 1.26rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.45;
+    }
+
+    /* FILTER BAR */
+    .filter-bar {
+      padding: 2rem 4rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      background: var(--card-bg);
+    }
+
+    .filter-label {
+      font-size: 1.26rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+      margin-right: 0.5rem;
+    }
+
+    .filter-btn {
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--ink);
+      padding: 0.45rem 1.1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 1.26rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      opacity: 0.55;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--gold);
+      color: var(--ink);
+      border-color: var(--gold);
+      opacity: 1;
+    }
+
+    /* LIBRARY GRID */
+    .library-section { padding: 4rem 4rem 6rem; }
+
+    .section-label {
+      font-size: 1.26rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .section-label::before { content: ''; width: 1.8rem; height: 1px; background: var(--gold); }
+
+    .pattern-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+
+    /* PATTERN CARD */
+    .pattern-card {
+      background: #0E0B06;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pattern-card:hover { background: #130f07; }
+
+    .pattern-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transition: transform 0.35s;
+      transform-origin: left;
+    }
+
+    .pattern-card:hover::before { transform: scaleX(1); }
+
+    /* Preview area */
+    .pattern-preview {
+      aspect-ratio: 4/3;
+      background: var(--card-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pattern-preview-icon {
+      font-size: 3.5rem;
+      opacity: 0.18;
+    }
+
+    .pattern-preview-watermark {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    /* SVG pattern illustration */
+    .pattern-svg {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+      opacity: 0.12;
+    }
+
+    .pattern-lock-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(14,11,6,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .pattern-lock-icon {
+      font-size: 1.8rem;
+      opacity: 0.7;
+    }
+
+    .pattern-lock-text {
+      font-size: 1.08rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+    }
+
+    /* Card body */
+    .pattern-body {
+      padding: 1.8rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pattern-meta {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .meta-tag {
+      font-size: 1.26rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border: 1px solid var(--border);
+      color: var(--ink);
+      opacity: 0.55;
+    }
+
+    .meta-tag.format {
+      border-color: rgba(200,169,81,0.4);
+      color: var(--gold);
+      opacity: 0.9;
+    }
+
+    .pattern-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      line-height: 1.3;
+      margin-bottom: 0.7rem;
+    }
+
+    .pattern-desc {
+      font-size: 0.67rem;
+      line-height: 1.8;
+      opacity: 0.55;
+      flex: 1;
+      margin-bottom: 1.5rem;
+    }
+
+    /* File info row */
+    .pattern-file-info {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin-bottom: 1.2rem;
+    }
+
+    .file-info-cell {
+      background: var(--card-bg);
+      padding: 0.7rem 0.8rem;
+    }
+
+    .file-info-label {
+      font-size: 1.26rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.6;
+      margin-bottom: 0.2rem;
+    }
+
+    .file-info-val {
+      font-size: 1.26rem;
+      opacity: 0.8;
+    }
+
+    /* Download button — locked */
+    .pattern-download-locked {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      border: 1px solid rgba(200,169,81,0.2);
+      background: rgba(200,169,81,0.05);
+      padding: 0.75rem;
+      font-size: 1.26rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+      opacity: 0.5;
+      cursor: not-allowed;
+      user-select: none;
+    }
+
+    /* CTA */
+    .cta-band {
+      background: var(--gold);
+      padding: 6rem 4rem;
+      text-align: center;
+    }
+
+    .cta-band h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 4vw, 4.5rem);
+      font-weight: 300;
+      color: var(--ink);
+      margin-bottom: 1rem;
+      line-height: 1.1;
+    }
+
+    .cta-band p {
+      font-size: 1.26rem;
+      color: var(--ink-soft);
+      opacity: 0.75;
+      max-width: 50ch;
+      margin: 0 auto 2.5rem;
+      line-height: 1.8;
+    }
+
+    .btn-dark {
+      background: var(--ink);
+      color: var(--gold);
+      padding: 1rem 2.8rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 1.26rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.25s, transform 0.2s;
+    }
+
+    .btn-dark:hover { background: #D4A843; transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer {
+      background: #090704;
+      border-top: 1px solid var(--border);
+      padding: 5rem 4rem 3rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .footer-brand h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      margin-bottom: 0.9rem;
+      line-height: 1.1;
+    }
+
+    .footer-brand p { font-size: 1.08rem; opacity: 0.45; line-height: 1.85; max-width: 32ch; margin-bottom: 1.2rem; }
+    .footer-address { font-size: 1.26rem; opacity: 0.35; line-height: 1.6; }
+
+    .footer-col h4 {
+      font-size: 1.26rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .footer-col ul a {
+      font-size: 1.08rem;
+      opacity: 0.42;
+      text-decoration: none;
+      color: var(--ink);
+      transition: opacity 0.2s, color 0.2s;
+    }
+
+    .footer-col ul a:hover { opacity: 0.9; color: var(--gold); }
+
+    .footer-email {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 1.26rem;
+      color: var(--gold);
+      opacity: 0.65;
+      text-decoration: none;
+      margin-bottom: 0.8rem;
+      transition: opacity 0.2s;
+      word-break: break-all;
+      line-height: 1.5;
+    }
+
+    .footer-email:hover { opacity: 1; }
+    .footer-note { font-size: 1.26rem; opacity: 0.3; line-height: 1.6; margin-top: 0.5rem; }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-copy { font-size: 1.26rem; opacity: 0.28; letter-spacing: 0.05em; }
+
+    /* Admin FAB */
+    .admin-fab {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 46px;
+      height: 46px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 200;
+      font-size: 1rem;
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+
+    .admin-fab:hover { opacity: 1; }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .page-hero > * { opacity: 0; animation: fadeUp 0.7s ease forwards; }
+    .page-hero > *:nth-child(1) { animation-delay: 0.05s; }
+    .page-hero > *:nth-child(2) { animation-delay: 0.2s; }
+    .page-hero > *:nth-child(3) { animation-delay: 0.35s; }
+    .page-hero > *:nth-child(4) { animation-delay: 0.5s; }
+
+    /* MOBILE */
+    @media (max-width: 960px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      .page-hero { padding: 7rem 1.5rem 3.5rem; }
+      .filter-bar { padding: 1.5rem; }
+      .library-section { padding: 3rem 1.5rem 5rem; }
+      .pattern-grid { grid-template-columns: 1fr 1fr; }
+      .stats-bar { flex-wrap: wrap; }
+      .stat-cell { min-width: 50%; border-bottom: 1px solid var(--border); }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .cta-band { padding: 4rem 1.5rem; }
+      .lock-banner { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 560px) {
+      .pattern-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/index.html" class="nav-logo">
+      Launch My Clothing Brand
+      <span>Pattern Making &amp; Manufacturing</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/services.html">Pattern Making</a></li>
+      <li><a href="/library.html" class="active">Pattern Library</a></li>
+      <li><a href="/services.html">Consultation</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+      <li><a href="/subscribe.html" class="nav-cta">Get Started</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-eyebrow">Pattern Library</div>
+    <h1>Production-Ready <em>Patterns</em></h1>
+    <p>Access production-ready patterns to speed up your sampling process. Download DXF and PDF files instantly with a premium subscription.</p>
+    <div class="lock-banner">
+      <div class="lock-banner-left">
+        <div class="lock-icon">🔒</div>
+        <div class="lock-banner-text">
+          <h4>Subscription Required</h4>
+          <p>Subscribe to download pattern files and access manufacturer contact details.</p>
+        </div>
+      </div>
+      <a href="/subscribe.html" class="btn-gold">View Plans →</a>
+    </div>
+  </div>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat-cell">
+      <div class="stat-num" id="total-count">3</div>
+      <div class="stat-label">Patterns Available</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">DXF</div>
+      <div class="stat-label">Industry Standard Format</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">PDF</div>
+      <div class="stat-label">Print-Ready Files</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">🔒</div>
+      <div class="stat-label">Premium Download Access</div>
+    </div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <span class="filter-label">Filter:</span>
+    <button class="filter-btn active" onclick="filterPatterns('all', this)">All</button>
+    <button class="filter-btn" onclick="filterPatterns('DXF', this)">DXF</button>
+    <button class="filter-btn" onclick="filterPatterns('PDF', this)">PDF</button>
+    <button class="filter-btn" onclick="filterPatterns('ZIP', this)">ZIP / Bundle</button>
+  </div>
+
+  <!-- PATTERN LIBRARY -->
+  <section class="library-section">
+    <div class="section-label">All Patterns</div>
+    <!-- ══ ADMIN-EDITABLE PATTERN LIST ══
+         To add/edit patterns, press Ctrl+Shift+A
+         Password: admin123
+    ═══════════════════════════════════════ -->
+    <div class="pattern-grid" id="pattern-grid">
+
+      <div class="pattern-card">
+        <div class="pattern-preview">
+          <svg class="pattern-svg" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><path d="M10 20 L25 10 L40 18 L55 10 L70 20 L58 30 L58 70 L22 70 L22 30 Z" stroke="#C8A951" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="pattern-lock-overlay"><div class="pattern-lock-icon">🔒</div><div class="pattern-lock-text">Premium Only</div></div>
+        </div>
+        <div class="pattern-body">
+          <div class="pattern-meta"><span class="meta-tag format">📐 DXF</span><span class="meta-tag">Pattern Making</span></div>
+          <div class="pattern-name">Basic T-Shirt Pattern - DXF</div>
+          <div class="pattern-desc">Industry-standard digital pattern for basic crew neck t-shirt with grading from XS to XXL.</div>
+          <div class="pattern-file-info"><div class="file-info-cell"><div class="file-info-label">Format</div><div class="file-info-val">DXF</div></div><div class="file-info-cell"><div class="file-info-label">Size</div><div class="file-info-val">2.4 MB</div></div><div class="file-info-cell"><div class="file-info-label">Category</div><div class="file-info-val">Pattern Making</div></div></div>
+          <div class="pattern-download-locked">🔒 &nbsp; Locked — Subscribe to Download</div>
+        </div>
+      </div>
+
+      <div class="pattern-card">
+        <div class="pattern-preview">
+          <svg class="pattern-svg" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><path d="M12 22 L28 8 L40 16 L52 8 L68 22 L56 34 L56 70 L24 70 L24 34 Z" stroke="#C8A951" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M32 16 Q40 24 48 16" stroke="#C8A951" stroke-width="2" fill="none"/><rect x="34" y="22" width="12" height="8" rx="2" stroke="#C8A951" stroke-width="1.5" fill="none"/></svg>
+          <div class="pattern-lock-overlay"><div class="pattern-lock-icon">🔒</div><div class="pattern-lock-text">Premium Only</div></div>
+        </div>
+        <div class="pattern-body">
+          <div class="pattern-meta"><span class="meta-tag format">📦 ZIP</span><span class="meta-tag">Pattern Making</span></div>
+          <div class="pattern-name">Hoodie Pattern with Tech Pack</div>
+          <div class="pattern-desc">Complete hoodie pattern with measurement charts, fabric consumption guide, and technical specifications.</div>
+          <div class="pattern-file-info"><div class="file-info-cell"><div class="file-info-label">Format</div><div class="file-info-val">ZIP</div></div><div class="file-info-cell"><div class="file-info-label">Size</div><div class="file-info-val">5.8 MB</div></div><div class="file-info-cell"><div class="file-info-label">Category</div><div class="file-info-val">Pattern Making</div></div></div>
+          <div class="pattern-download-locked">🔒 &nbsp; Locked — Subscribe to Download</div>
+        </div>
+      </div>
+
+      <div class="pattern-card">
+        <div class="pattern-preview">
+          <svg class="pattern-svg" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><path d="M20 10 L60 10 L65 45 L48 72 L40 55 L32 72 L15 45 Z" stroke="#C8A951" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 10 L25 28 M60 10 L55 28" stroke="#C8A951" stroke-width="1.5" fill="none"/></svg>
+          <div class="pattern-lock-overlay"><div class="pattern-lock-icon">🔒</div><div class="pattern-lock-text">Premium Only</div></div>
+        </div>
+        <div class="pattern-body">
+          <div class="pattern-meta"><span class="meta-tag format">📄 PDF</span><span class="meta-tag">Pattern Making</span></div>
+          <div class="pattern-name">Denim Jeans Pattern - PDF</div>
+          <div class="pattern-desc">Professional denim jeans pattern with pocket details and construction notes.</div>
+          <div class="pattern-file-info"><div class="file-info-cell"><div class="file-info-label">Format</div><div class="file-info-val">PDF</div></div><div class="file-info-cell"><div class="file-info-label">Size</div><div class="file-info-val">3.2 MB</div></div><div class="file-info-cell"><div class="file-info-label">Category</div><div class="file-info-val">Pattern Making</div></div></div>
+          <div class="pattern-download-locked">🔒 &nbsp; Locked — Subscribe to Download</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-band">
+    <h2>Unlock the Full Library</h2>
+    <p>Get instant access to all patterns — DXF, PDF, and ZIP bundles — with a premium subscription. New patterns added regularly.</p>
+    <a href="/subscribe.html" class="btn-dark">View Plans →</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Launch My<br/>Clothing Brand</h3>
+        <p>Professional digital pattern making and manufacturer data services for clothing brands in India.</p>
+        <div class="footer-address">Bijwasan, Delhi — 110061</div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="/services.html">Pattern Making</a></li>
+          <li><a href="/library.html">Pattern Library</a></li>
+          <li><a href="/services.html">Expert Consultation</a></li>
+          <li><a href="/specsheets.html">Spec Sheets</a></li>
+          <li><a href="/insights.html">Industry Insights</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal &amp; Support</h4>
+        <ul>
+          <li><a href="/contact.html">Contact Us</a></li>
+          <li><a href="/terms.html">Terms of Service</a></li>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect With Us</h4>
+        <a href="mailto:hello.launchmyclothing@gmail.com" class="footer-email">
+          ✉ hello.launchmyclothing@gmail.com
+        </a>
+        <p class="footer-note">Follow us on social media for updates, tips, and industry insights.</p>
+        <p class="footer-note">Phone support available for premium members only.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Launch My Clothing Brand. All Rights Reserved.</div>
+      <div class="footer-copy">launchmyclothingbrand.com · Bijwasan, Delhi 110061</div>
+    </div>
+  </footer>
+
+  <!-- Admin FAB -->
+  <div class="admin-fab" onclick="openAdmin()" title="Admin Panel (Ctrl+Shift+A)">⚙️</div>
+
+  <!-- ADMIN PANEL -->
+  <div id="admin-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.88); z-index:9000; align-items:center; justify-content:center; padding:1rem;">
+    <div style="background:#1C1609; border:1px solid rgba(200,169,81,0.4); width:100%; max-width:780px; max-height:92vh; overflow-y:auto; padding:2.5rem; font-family:'DM Mono',monospace; color:#F5F0E8; position:relative;">
+
+      <!-- Login -->
+      <div id="admin-login">
+        <div style="font-size:1.26rem;letter-spacing:0.3em;text-transform:uppercase;color:#C8A951;margin-bottom:1rem;">Admin Access</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;margin-bottom:1.5rem;">Pattern Library Editor</div>
+        <input id="admin-pw" type="password" placeholder="Enter password"
+          style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(200,169,81,0.3);color:#F5F0E8;padding:0.85rem 1rem;font-family:'DM Mono',monospace;font-size:1rem;outline:none;margin-bottom:1rem;display:block;" />
+        <div id="admin-pw-error" style="color:#D4472A;font-size:1.26rem;margin-bottom:0.8rem;display:none;">Incorrect password.</div>
+        <button onclick="adminLogin()" style="background:#C8A951;color:#F5F0E8;border:none;padding:0.8rem 2rem;font-family:'DM Mono',monospace;font-size:1.26rem;letter-spacing:0.14em;text-transform:uppercase;font-weight:500;cursor:pointer;">Unlock →</button>
+        <button onclick="closeAdmin()" style="background:transparent;border:1px solid rgba(200,169,81,0.3);color:#F5F0E8;padding:0.8rem 2rem;font-family:'DM Mono',monospace;font-size:1.26rem;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;margin-left:0.8rem;opacity:0.6;">Cancel</button>
+      </div>
+
+      <!-- Editor -->
+      <div id="admin-editor" style="display:none;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:2rem;">
+          <div>
+            <div style="font-size:1.26rem;letter-spacing:0.3em;text-transform:uppercase;color:#C8A951;margin-bottom:0.4rem;">Admin Panel</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;">Pattern Library Editor</div>
+          </div>
+          <button onclick="closeAdmin()" style="background:transparent;border:none;color:#F5F0E8;font-size:1.26rem;cursor:pointer;opacity:0.5;">✕</button>
+        </div>
+
+        <!-- List -->
+        <div style="font-size:1.26rem;letter-spacing:0.22em;text-transform:uppercase;color:#C8A951;margin-bottom:0.8rem;">Current Patterns</div>
+        <div id="pattern-editor-list" style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.5rem;"></div>
+
+        <!-- Add -->
+        <div style="border-top:1px solid rgba(200,169,81,0.2);padding-top:1.5rem;margin-top:0.5rem;">
+          <div style="font-size:1.26rem;letter-spacing:0.22em;text-transform:uppercase;color:#C8A951;margin-bottom:1rem;">Add New Pattern</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;margin-bottom:0.7rem;">
+            <input id="new-pname" placeholder="Pattern Name *" style="background:rgba(255,255,255,0.05);border:1px solid rgba(200,169,81,0.25);color:#F5F0E8;padding:0.7rem 0.9rem;font-family:'DM Mono',monospace;font-size:1.26rem;outline:none;" />
+            <select id="new-pformat" style="background:#1C1609;border:1px solid rgba(200,169,81,0.25);color:#F5F0E8;padding:0.7rem 0.9rem;font-family:'DM Mono',monospace;font-size:1.26rem;outline:none;">
+              <option value="DXF">DXF</option>
+              <option value="PDF">PDF</option>
+              <option value="ZIP">ZIP</option>
+            </select>
+            <input id="new-psize" placeholder="File Size (e.g. 2.4 MB)" style="background:rgba(255,255,255,0.05);border:1px solid rgba(200,169,81,0.25);color:#F5F0E8;padding:0.7rem 0.9rem;font-family:'DM Mono',monospace;font-size:1.26rem;outline:none;" />
+            <input id="new-pcategory" placeholder="Category" value="Pattern Making" style="background:rgba(255,255,255,0.05);border:1px solid rgba(200,169,81,0.25);color:#F5F0E8;padding:0.7rem 0.9rem;font-family:'DM Mono',monospace;font-size:1.26rem;outline:none;" />
+          </div>
+          <textarea id="new-pdesc" placeholder="Description..." rows="3"
+            style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(200,169,81,0.25);color:#F5F0E8;padding:0.7rem 0.9rem;font-family:'DM Mono',monospace;font-size:1.26rem;outline:none;resize:vertical;margin-bottom:0.7rem;display:block;"></textarea>
+          <!-- Image upload for new pattern -->
+          <div style="margin-bottom:0.9rem;">
+            <div style="font-size:1.26rem;letter-spacing:0.2em;text-transform:uppercase;color:#C8A951;opacity:0.7;margin-bottom:0.4rem;">Pattern Image (optional — add now or later)</div>
+            <label style="display:inline-flex;align-items:center;gap:0.6rem;border:1px dashed rgba(200,169,81,0.3);padding:0.6rem 1rem;cursor:pointer;font-size:1.26rem;opacity:0.7;transition:opacity 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.7">
+              📷 Choose Image
+              <input type="file" id="new-pimage" accept="image/*" style="display:none;" onchange="previewNewImage(event)" />
+            </label>
+            <span id="new-pimage-name" style="font-size:1.26rem;opacity:0.4;margin-left:0.8rem;"></span>
+            <div id="new-pimage-preview" style="margin-top:0.6rem;display:none;">
+              <img id="new-pimage-thumb" style="height:80px;object-fit:cover;border:1px solid rgba(200,169,81,0.2);" />
+            </div>
+          </div>
+          <button onclick="addPattern()" style="background:#C8A951;color:#F5F0E8;border:none;padding:0.75rem 1.8rem;font-family:'DM Mono',monospace;font-size:1.26rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:500;cursor:pointer;">Add Pattern</button>
+        </div>
+
+        <!-- Actions -->
+        <div style="border-top:1px solid rgba(200,169,81,0.2);padding-top:1.5rem;margin-top:1.5rem;display:flex;gap:0.8rem;flex-wrap:wrap;">
+          <button onclick="applyPatterns()" style="background:#C8A951;color:#F5F0E8;border:none;padding:0.85rem 2rem;font-family:'DM Mono',monospace;font-size:1.26rem;letter-spacing:0.14em;text-transform:uppercase;font-weight:500;cursor:pointer;">Apply Changes</button>
+          <button onclick="resetPatterns()" style="background:transparent;border:1px solid rgba(200,169,81,0.3);color:#F5F0E8;padding:0.85rem 2rem;font-family:'DM Mono',monospace;font-size:1.26rem;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;opacity:0.6;">Reset to Default</button>
+          <button onclick="closeAdmin()" style="background:transparent;border:1px solid rgba(200,169,81,0.15);color:#F5F0E8;padding:0.85rem 2rem;font-family:'DM Mono',monospace;font-size:1.26rem;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;opacity:0.4;">Close</button>
+        </div>
+        <p style="font-size:1.26rem;opacity:0.3;margin-top:1rem;line-height:1.6;">Changes persist on this device. To make permanent updates for all visitors, share updated list with your developer.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SVG pattern icons (reused in cards) -->
+  <svg style="display:none">
+    <symbol id="icon-tshirt" viewBox="0 0 80 80">
+      <path d="M10 20 L25 10 L40 18 L55 10 L70 20 L58 30 L58 70 L22 70 L22 30 Z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="icon-hoodie" viewBox="0 0 80 80">
+      <path d="M12 22 L28 8 L40 16 L52 8 L68 22 L56 34 L56 70 L24 70 L24 34 Z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M32 16 Q40 24 48 16" stroke="currentColor" stroke-width="2" fill="none"/>
+      <rect x="34" y="22" width="12" height="8" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+    </symbol>
+    <symbol id="icon-jeans" viewBox="0 0 80 80">
+      <path d="M20 10 L60 10 L65 45 L48 72 L40 55 L32 72 L15 45 Z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M20 10 L25 28 M60 10 L55 28" stroke="currentColor" stroke-width="1.5" fill="none"/>
+    </symbol>
+  </svg>
+
+<script>
+const ADMIN_PASSWORD = 'admin123';
+
+const FORMAT_ICONS = { DXF: '📐', PDF: '📄', ZIP: '📦' };
+const GARMENT_ICONS = ['icon-tshirt', 'icon-hoodie', 'icon-jeans'];
+
+const DEFAULT_PATTERNS = [
+  {
+    name: 'Basic T-Shirt Pattern - DXF',
+    desc: 'Industry-standard digital pattern for basic crew neck t-shirt with grading from XS to XXL.',
+    format: 'DXF',
+    size: '2.4 MB',
+    category: 'Pattern Making',
+    icon: 'icon-tshirt'
+  },
+  {
+    name: 'Hoodie Pattern with Tech Pack',
+    desc: 'Complete hoodie pattern with measurement charts, fabric consumption guide, and technical specifications.',
+    format: 'ZIP',
+    size: '5.8 MB',
+    category: 'Pattern Making',
+    icon: 'icon-hoodie'
+  },
+  {
+    name: 'Denim Jeans Pattern - PDF',
+    desc: 'Professional denim jeans pattern with pocket details and construction notes.',
+    format: 'PDF',
+    size: '3.2 MB',
+    category: 'Pattern Making',
+    icon: 'icon-jeans'
+  }
+];
+
+let patterns = JSON.parse(localStorage.getItem('lmcb_patterns') || 'null') || JSON.parse(JSON.stringify(DEFAULT_PATTERNS));
+let activeFilter = 'all';
+
+
+function renderCards() {
+  const grid = document.getElementById('pattern-grid');
+  const saved = localStorage.getItem('lmcb_patterns');
+  const data = saved ? JSON.parse(saved) : DEFAULT_PATTERNS;
+  const filtered = activeFilter === 'all' ? data : data.filter(p => p.format === activeFilter);
+
+  document.getElementById('total-count').textContent = data.length + '+';
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div style="grid-column:1/-1;padding:4rem;text-align:center;opacity:0.4;font-size:0.75rem;">No patterns found for this format.</div>`;
+    return;
+  }
+
+  const FORMAT_ICONS = { DXF: '📐', PDF: '📄', ZIP: '📦' };
+  const iconList = ['icon-tshirt', 'icon-hoodie', 'icon-jeans'];
+  grid.innerHTML = filtered.map((p, i) => {
+    const iconId = p.icon || iconList[i % iconList.length];
+    const formatEmoji = FORMAT_ICONS[p.format] || '📁';
+    const previewContent = p.image
+      ? `<img src="${p.image}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.8) contrast(1.05);" />`
+      : `<svg class="pattern-svg" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><use href="#${iconId}" color="#C8A951"/></svg>
+         <div style="position:absolute;bottom:0.8rem;left:50%;transform:translateX(-50%);font-size:0.5rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(200,169,81,0.4);white-space:nowrap;">Image Coming Soon</div>`;
+    return `
+    <div class="pattern-card" data-format="${p.format}">
+      <div class="pattern-preview">
+        ${previewContent}
+        <div class="pattern-lock-overlay"><div class="pattern-lock-icon">🔒</div><div class="pattern-lock-text">Premium Only</div></div>
+      </div>
+      <div class="pattern-body">
+        <div class="pattern-meta">
+          <span class="meta-tag format">${formatEmoji} ${p.format}</span>
+          <span class="meta-tag">${p.category}</span>
+        </div>
+        <div class="pattern-name">${p.name}</div>
+        <div class="pattern-desc">${p.desc}</div>
+        <div class="pattern-file-info">
+          <div class="file-info-cell"><div class="file-info-label">Format</div><div class="file-info-val">${p.format}</div></div>
+          <div class="file-info-cell"><div class="file-info-label">Size</div><div class="file-info-val">${p.size}</div></div>
+          <div class="file-info-cell"><div class="file-info-label">Category</div><div class="file-info-val">${p.category}</div></div>
+        </div>
+        <div class="pattern-download-locked">🔒 &nbsp; Locked — Subscribe to Download</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filterPatterns(format, btn) {
+  activeFilter = format;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderCards();
+}
+
+// Admin
+function openAdmin() {
+  document.getElementById('admin-overlay').style.display = 'flex';
+  document.getElementById('admin-login').style.display = 'block';
+  document.getElementById('admin-editor').style.display = 'none';
+  document.getElementById('admin-pw').value = '';
+  document.getElementById('admin-pw-error').style.display = 'none';
+  setTimeout(() => document.getElementById('admin-pw').focus(), 100);
+}
+
+function closeAdmin() {
+  document.getElementById('admin-overlay').style.display = 'none';
+}
+
+function adminLogin() {
+  if (document.getElementById('admin-pw').value === ADMIN_PASSWORD) {
+    document.getElementById('admin-login').style.display = 'none';
+    document.getElementById('admin-editor').style.display = 'block';
+    renderEditorList();
+  } else {
+    document.getElementById('admin-pw-error').style.display = 'block';
+    document.getElementById('admin-pw').value = '';
+    document.getElementById('admin-pw').focus();
+  }
+}
+
+function renderEditorList() {
+  const container = document.getElementById('pattern-editor-list');
+  container.innerHTML = patterns.map((p, i) => `
+    <div style="display:flex;align-items:center;gap:0.8rem;padding:0.9rem 1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(200,169,81,0.12);">
+      <!-- Image thumbnail or placeholder -->
+      <div style="width:52px;height:52px;flex-shrink:0;background:#0E0B06;border:1px solid rgba(200,169,81,0.2);overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;">
+        ${p.image
+          ? `<img src="${p.image}" style="width:100%;height:100%;object-fit:cover;" />`
+          : `<span style="font-size:1.3rem;opacity:0.3;">${FORMAT_ICONS[p.format] || '📁'}</span>`}
+      </div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:0.96rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.name}</div>
+        <div style="font-size:1.26rem;opacity:0.45;margin-top:0.15rem;">${p.format} · ${p.size} · ${p.image ? '✓ Image set' : '⚠ No image yet'}</div>
+      </div>
+      <!-- Upload image button -->
+      <label title="Upload image for this pattern" style="background:transparent;border:1px solid rgba(200,169,81,0.3);color:#C8A951;padding:0.4rem 0.8rem;font-family:'DM Mono',monospace;font-size:1.26rem;cursor:pointer;white-space:nowrap;letter-spacing:0.1em;text-transform:uppercase;">
+        📷 Image
+        <input type="file" accept="image/*" style="display:none;" onchange="uploadImage(event, ${i})" />
+      </label>
+      <button onclick="editPattern(${i})" style="background:transparent;border:1px solid rgba(200,169,81,0.3);color:#C8A951;padding:0.4rem 0.8rem;font-family:'DM Mono',monospace;font-size:1.26rem;cursor:pointer;white-space:nowrap;letter-spacing:0.1em;text-transform:uppercase;">Edit</button>
+      <button onclick="removePattern(${i})" style="background:transparent;border:1px solid rgba(212,71,42,0.3);color:#D4472A;padding:0.4rem 0.7rem;font-family:'DM Mono',monospace;font-size:1.26rem;cursor:pointer;">✕</button>
+    </div>
+  `).join('');
+}
+
+// Handle image upload — converts to base64 and stores with pattern
+function uploadImage(event, index) {
+  const file = event.target.files[0];
+  if (!file) return;
+  if (file.size > 3 * 1024 * 1024) {
+    alert('Image is too large. Please use an image under 3MB for best performance.');
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    patterns[index].image = e.target.result;
+    renderEditorList();
+    // Show instant feedback
+    const msg = document.createElement('div');
+    msg.textContent = `✓ Image uploaded for "${patterns[index].name}" — click Apply to save.`;
+    msg.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#1C1609;border:1px solid rgba(200,169,81,0.4);color:#C8A951;padding:0.8rem 1.5rem;font-family:DM Mono,monospace;font-size:1.26rem;letter-spacing:0.08em;z-index:99999;white-space:nowrap;';
+    document.body.appendChild(msg);
+    setTimeout(() => msg.remove(), 3500);
+  };
+  reader.readAsDataURL(file);
+}
+
+function removePattern(i) {
+  if (!confirm(`Remove "${patterns[i].name}"?`)) return;
+  patterns.splice(i, 1);
+  renderEditorList();
+}
+
+function editPattern(i) {
+  const p = patterns[i];
+  const name = prompt('Name:', p.name); if (name === null) return;
+  const format = prompt('Format (DXF / PDF / ZIP):', p.format); if (format === null) return;
+  const size = prompt('File Size:', p.size); if (size === null) return;
+  const category = prompt('Category:', p.category); if (category === null) return;
+  const desc = prompt('Description:', p.desc); if (desc === null) return;
+  // Ask about image only if one is set
+  if (p.image && confirm('This pattern has an image. Remove it?')) {
+    patterns[i] = { ...p, name, format: format.toUpperCase(), size, category, desc, image: null };
+  } else {
+    patterns[i] = { ...p, name, format: format.toUpperCase(), size, category, desc };
+  }
+  renderEditorList();
+}
+
+let newPatternImageData = null;
+
+function previewNewImage(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  if (file.size > 3 * 1024 * 1024) { alert('Image too large. Please use under 3MB.'); return; }
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    newPatternImageData = e.target.result;
+    document.getElementById('new-pimage-name').textContent = file.name;
+    document.getElementById('new-pimage-thumb').src = e.target.result;
+    document.getElementById('new-pimage-preview').style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+}
+
+function addPattern() {
+  const name = document.getElementById('new-pname').value.trim();
+  const format = document.getElementById('new-pformat').value;
+  const size = document.getElementById('new-psize').value.trim() || 'N/A';
+  const category = document.getElementById('new-pcategory').value.trim() || 'Pattern Making';
+  const desc = document.getElementById('new-pdesc').value.trim();
+  if (!name) { alert('Please enter a pattern name.'); return; }
+  const icons = ['icon-tshirt', 'icon-hoodie', 'icon-jeans'];
+  patterns.push({ name, format, size, category, desc, icon: icons[patterns.length % 3], image: newPatternImageData || null });
+  // Reset fields
+  document.getElementById('new-pname').value = '';
+  document.getElementById('new-psize').value = '';
+  document.getElementById('new-pdesc').value = '';
+  document.getElementById('new-pimage').value = '';
+  document.getElementById('new-pimage-name').textContent = '';
+  document.getElementById('new-pimage-preview').style.display = 'none';
+  newPatternImageData = null;
+  renderEditorList();
+}
+
+function applyPatterns() {
+  localStorage.setItem('lmcb_patterns', JSON.stringify(patterns));
+  renderCards();
+  closeAdmin();
+  const msg = document.createElement('div');
+  msg.textContent = '✓ Pattern library updated';
+  msg.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#C8A951;color:#F5F0E8;padding:0.8rem 2rem;font-family:DM Mono,monospace;font-size:1.26rem;letter-spacing:0.12em;text-transform:uppercase;z-index:9999;font-weight:500;white-space:nowrap;';
+  document.body.appendChild(msg);
+  setTimeout(() => msg.remove(), 3000);
+}
+
+function resetPatterns() {
+  if (!confirm('Reset to original pattern list?')) return;
+  patterns = JSON.parse(JSON.stringify(DEFAULT_PATTERNS));
+  localStorage.removeItem('lmcb_patterns');
+  renderEditorList();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderCards();
+  document.getElementById('admin-pw').addEventListener('keydown', e => { if (e.key === 'Enter') adminLogin(); });
+  if (location.search.includes('admin')) openAdmin();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.ctrlKey && e.shiftKey && e.key === 'A') openAdmin();
+});
+</script>
+
+<!-- WhatsApp Chat Bubble -->
+<div id="wa-bubble" style="display:none;position:fixed;bottom:2rem;right:2rem;z-index:900;flex-direction:column;align-items:flex-end;gap:0.8rem;">
+  <div id="wa-tooltip" style="display:none;background:#1C1609;border:1px solid rgba(200,169,81,0.3);padding:1rem 1.4rem;font-family:DM Mono,monospace;font-size:1.08rem;color:#F5F0E8;max-width:240px;line-height:1.7;position:relative;">
+    <div style="font-size:1.26rem;letter-spacing:0.2em;text-transform:uppercase;color:#C8A951;margin-bottom:0.4rem;">WhatsApp Support</div>
+    Chat with us directly for quick support.
+    <button onclick="document.getElementById('wa-tooltip').style.display='none'" style="position:absolute;top:0.5rem;right:0.7rem;background:none;border:none;color:#F5F0E8;opacity:0.4;cursor:pointer;">✕</button>
+  </div>
+  <a id="wa-link" href="#" target="_blank" rel="noopener" style="width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.35);transition:transform 0.2s;text-decoration:none;" onmouseover="this.style.transform='scale(1.1)';document.getElementById('wa-tooltip').style.display='block'" onmouseout="this.style.transform='scale(1)'">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</div>
+<script>
+const _WA_NUM="919958168321",_WA_MSG="Hi! I need help with my clothing brand.";
+function _initWA(){const b=document.getElementById("wa-bubble"),l=document.getElementById("wa-link");if(!b||!l)return;l.href="https://wa.me/"+_WA_NUM+"?text="+encodeURIComponent(_WA_MSG);const p=localStorage.getItem("lmcb_current_plan");if(p==="brand_builder"||p==="pro_elite"){b.style.display="flex";}else{b.style.display="none";}}
+function getAdminPassword(){return localStorage.getItem("lmcb_admin_pw")||"admin123";}
+function changeAdminPassword(){const c=prompt("Enter CURRENT admin password:");if(!c)return;if(c!==getAdminPassword()){alert("Incorrect password.");return;}const n=prompt("Enter NEW password (min 8 chars):");if(!n||n.length<8){alert("Min 8 characters required.");return;}const c2=prompt("Confirm new password:");if(n!==c2){alert("Passwords do not match.");return;}localStorage.setItem("lmcb_admin_pw",n);alert("Password updated! New password: "+n);}
+document.addEventListener("keydown",e=>{if(e.ctrlKey&&e.shiftKey&&e.key==="P"){e.preventDefault();changeAdminPassword();}});
+document.addEventListener("DOMContentLoaded",_initWA);
+<\/script>
+</body>
+</html>

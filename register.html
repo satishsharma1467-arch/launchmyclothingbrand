@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Account | Launch My Clothing Brand</title>
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
+
+  <!-- Supabase CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/supabase-config.js"></script>
+
+  <style>
+    :root {
+      --gold: #C8A951; --gold-light: #E8C96A; --cream: #F5F0E8;
+      --ink: #F5F0E8; --ink-soft: #3D2E10; --bg: #0E0B06;
+      --card-bg: #1C1609; --border: rgba(200,169,81,0.2);
+      --error: #D4472A; --success: #4CAF50;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: #0E0B06; color: var(--ink);
+      font-family: 'DM Mono', monospace; font-weight: 300;
+      min-height: 100vh; display: flex; flex-direction: column;
+    }
+
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999; opacity: 0.4;
+    }
+
+    nav {
+      padding: 1.3rem 4rem;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      background: rgba(14,11,6,0.95);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.26rem;
+      letter-spacing: 0.2em; color: var(--gold); text-decoration: none; line-height: 1;
+    }
+
+    .nav-logo span {
+      display: block; font-family: 'DM Mono', monospace; font-size: 1.26rem;
+      letter-spacing: 0.18em; color: var(--ink); opacity: 0.4;
+      font-weight: 300; margin-top: 0.1rem; text-transform: uppercase;
+    }
+
+    .nav-back {
+      font-size: 1.26rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--ink); opacity: 0.5; text-decoration: none; transition: opacity 0.2s;
+    }
+
+    .nav-back:hover { opacity: 1; color: var(--gold); }
+
+    .main {
+      flex: 1; display: grid; grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - 70px);
+    }
+
+    /* LEFT */
+    .reg-left {
+      background: var(--card-bg); border-right: 1px solid var(--border);
+      padding: 5rem 4rem; display: flex; flex-direction: column;
+      justify-content: center; position: relative; overflow: hidden;
+    }
+
+    .reg-left::after {
+      content: 'JOIN'; position: absolute; right: -1rem; bottom: -1rem;
+      font-family: 'Bebas Neue', sans-serif; font-size: 14vw;
+      color: rgba(200,169,81,0.05); pointer-events: none; line-height: 1;
+    }
+
+    .left-eyebrow {
+      font-size: 1.26rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.2rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+
+    .left-eyebrow::before { content: ''; width: 2rem; height: 1px; background: var(--gold); }
+
+    .reg-left h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 3vw, 3.5rem); font-weight: 300;
+      line-height: 1.1; margin-bottom: 2rem;
+    }
+
+    .reg-left h2 em { font-style: italic; color: var(--gold); }
+
+    /* Plan selector on left */
+    .plan-pills { display: flex; flex-direction: column; gap: 0.8rem; }
+
+    .plan-pill {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 1.2rem; border: 1px solid var(--border);
+      cursor: pointer; transition: all 0.2s;
+      gap: 1rem;
+    }
+
+    .plan-pill:hover { border-color: rgba(200,169,81,0.5); }
+    .plan-pill.selected { border-color: var(--gold); background: rgba(200,169,81,0.07); }
+
+    .plan-pill-left { display: flex; align-items: center; gap: 0.8rem; }
+
+    .plan-pill-radio {
+      width: 14px; height: 14px; border: 1px solid rgba(200,169,81,0.4);
+      border-radius: 50%; flex-shrink: 0; position: relative;
+    }
+
+    .plan-pill.selected .plan-pill-radio::after {
+      content: ''; position: absolute; inset: 3px;
+      background: var(--gold); border-radius: 50%;
+    }
+
+    .plan-pill-name { font-size: 1.26rem; font-weight: 500; }
+    .plan-pill-desc { font-size: 1.26rem; opacity: 0.45; margin-top: 0.1rem; }
+    .plan-pill-price { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: var(--gold); }
+
+    /* RIGHT */
+    .reg-right {
+      padding: 4rem 4rem; display: flex; flex-direction: column;
+      justify-content: center; max-width: 520px; margin: 0 auto; width: 100%;
+    }
+
+    .form-eyebrow {
+      font-size: 1.26rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.8rem;
+    }
+
+    .form-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem; font-weight: 300; margin-bottom: 0.5rem; line-height: 1.1;
+    }
+
+    .form-subtitle { font-size: 1.26rem; opacity: 0.5; margin-bottom: 2rem; line-height: 1.7; }
+
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.1rem; }
+
+    .form-group label {
+      font-size: 1.26rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.6;
+    }
+
+    .form-group input, .form-group select {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      color: var(--ink); padding: 0.9rem 1rem;
+      font-family: 'DM Mono', monospace; font-size: 1.26rem;
+      outline: none; transition: border-color 0.2s; width: 100%;
+    }
+
+    .form-group input:focus, .form-group select:focus { border-color: var(--gold); }
+    .form-group input::placeholder { opacity: 0.3; }
+    .form-group input.error, .form-group select.error { border-color: var(--error); }
+    .form-group select option { background: #0E0B06; }
+
+    .field-error { font-size: 1.26rem; color: var(--error); display: none; margin-top: 0.2rem; }
+
+    .password-wrap { position: relative; }
+
+    .password-toggle {
+      position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer;
+      color: var(--ink); opacity: 0.4; font-size: 1.26rem; transition: opacity 0.2s;
+    }
+
+    .password-toggle:hover { opacity: 0.9; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+
+    .alert {
+      padding: 0.9rem 1rem; font-size: 1.08rem; line-height: 1.6;
+      margin-bottom: 1.2rem; display: none; border-left: 3px solid;
+    }
+
+    .alert-error { border-color: var(--error); background: rgba(212,71,42,0.08); color: #ff8060; }
+    .alert-success { border-color: var(--success); background: rgba(76,175,80,0.08); color: #80d880; }
+
+    .btn-submit {
+      width: 100%; background: var(--gold); color: var(--ink);
+      padding: 1rem; font-family: 'DM Mono', monospace;
+      font-size: 1.26rem; letter-spacing: 0.18em; text-transform: uppercase;
+      font-weight: 500; border: none; cursor: pointer;
+      transition: background 0.25s, transform 0.2s; margin-bottom: 1.2rem;
+    }
+
+    .btn-submit:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    .login-row { text-align: center; font-size: 1.26rem; opacity: 0.55; }
+    .login-row a { color: var(--gold); text-decoration: none; }
+
+    .terms-note {
+      font-size: 1.26rem; opacity: 0.35; text-align: center;
+      line-height: 1.7; margin-bottom: 1.2rem;
+    }
+
+    .terms-note a { color: var(--gold); opacity: 1; text-decoration: none; }
+
+    /* Mobile */
+    @media (max-width: 860px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .main { grid-template-columns: 1fr; }
+      .reg-left { display: none; }
+      .reg-right { padding: 3rem 1.5rem; max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/index.html" class="nav-logo">
+      Launch My Clothing Brand
+      <span>Pattern Making &amp; Manufacturing</span>
+    </a>
+    <a href="/login.html" class="nav-back">Already have an account? Log In</a>
+  </nav>
+
+  <div class="main">
+
+    <!-- LEFT — plan selector -->
+    <div class="reg-left">
+      <div class="left-eyebrow">Choose Your Plan</div>
+      <h2>Start Your <em>Brand Journey</em> Today</h2>
+      <div class="plan-pills">
+        <div class="plan-pill" id="pill-basic" onclick="selectPlan('basic')">
+          <div class="plan-pill-left">
+            <div class="plan-pill-radio"></div>
+            <div>
+              <div class="plan-pill-name">Basic</div>
+              <div class="plan-pill-desc">4 downloads · Email support · Pattern library</div>
+            </div>
+          </div>
+          <div class="plan-pill-price">₹499<span style="font-size:1.26rem;opacity:0.5;font-family:'DM Mono',monospace;">/mo</span></div>
+        </div>
+        <div class="plan-pill selected" id="pill-brand_builder" onclick="selectPlan('brand_builder')">
+          <div class="plan-pill-left">
+            <div class="plan-pill-radio"></div>
+            <div>
+              <div class="plan-pill-name">Brand Builder <span style="font-size:1.08rem;color:var(--gold);opacity:0.8;letter-spacing:0.1em;">★ POPULAR</span></div>
+              <div class="plan-pill-desc">9 downloads · Manufacturer DB · WhatsApp support</div>
+            </div>
+          </div>
+          <div class="plan-pill-price">₹999<span style="font-size:1.26rem;opacity:0.5;font-family:'DM Mono',monospace;">/mo</span></div>
+        </div>
+        <div class="plan-pill" id="pill-pro_elite" onclick="selectPlan('pro_elite')">
+          <div class="plan-pill-left">
+            <div class="plan-pill-radio"></div>
+            <div>
+              <div class="plan-pill-name">Pro Elite</div>
+              <div class="plan-pill-desc">15 downloads · Phone support · Spec sheets · Custom patterns</div>
+            </div>
+          </div>
+          <div class="plan-pill-price">₹1599<span style="font-size:1.26rem;opacity:0.5;font-family:'DM Mono',monospace;">/mo</span></div>
+        </div>
+      </div>
+      <p style="font-size:1.26rem;opacity:0.35;margin-top:1.5rem;line-height:1.7;">
+        All plans include a 7-day free trial. Cancel anytime. No hidden charges.
+      </p>
+    </div>
+
+    <!-- RIGHT — form -->
+    <div class="reg-right">
+      <div class="form-eyebrow">Create Account</div>
+      <div class="form-title">Join Us</div>
+      <div class="form-subtitle">Fill in your details to get started.</div>
+
+      <div class="alert alert-error" id="reg-error"></div>
+      <div class="alert alert-success" id="reg-success"></div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" id="fname" placeholder="Priya" />
+          <div class="field-error" id="fname-error">Required.</div>
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" id="lname" placeholder="Mehta" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" id="reg-email" placeholder="hello@yourbrand.com" autocomplete="email" />
+        <div class="field-error" id="reg-email-error">Enter a valid email.</div>
+      </div>
+
+      <div class="form-group">
+        <label>Phone / WhatsApp</label>
+        <input type="tel" id="phone" placeholder="+91 98765 43210" />
+      </div>
+
+      <div class="form-group">
+        <label>Brand Name (optional)</label>
+        <input type="text" id="brand" placeholder="Your clothing brand name" />
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <div class="password-wrap">
+          <input type="password" id="reg-password" placeholder="Min 8 characters" autocomplete="new-password" />
+          <button class="password-toggle" onclick="togglePwd('reg-password', this)" type="button">👁</button>
+        </div>
+        <div class="field-error" id="reg-pw-error">Min 8 characters required.</div>
+      </div>
+
+      <div class="form-group">
+        <label>Confirm Password</label>
+        <div class="password-wrap">
+          <input type="password" id="reg-password2" placeholder="Repeat password" autocomplete="new-password" />
+          <button class="password-toggle" onclick="togglePwd('reg-password2', this)" type="button">👁</button>
+        </div>
+        <div class="field-error" id="reg-pw2-error">Passwords do not match.</div>
+      </div>
+
+      <!-- Hidden plan field -->
+      <input type="hidden" id="selected-plan" value="brand_builder" />
+
+      <div class="terms-note">
+        By creating an account you agree to our
+        <a href="/terms.html">Terms of Service</a> and
+        <a href="/privacy.html">Privacy Policy</a>.
+      </div>
+
+      <button class="btn-submit" id="reg-btn" onclick="handleRegister()">Create Account →</button>
+
+      <div class="login-row">Already have an account? <a href="/login.html">Log In</a></div>
+    </div>
+  </div>
+
+<script>
+// ── PLAN SELECTION ────────────────────────────────────────
+const plans = ['basic', 'brand_builder', 'pro_elite'];
+
+function selectPlan(plan) {
+  plans.forEach(p => {
+    document.getElementById('pill-' + p)?.classList.remove('selected');
+  });
+  document.getElementById('pill-' + plan)?.classList.add('selected');
+  document.getElementById('selected-plan').value = plan;
+}
+
+// Read plan from URL param
+document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const urlPlan = params.get('plan');
+  if (urlPlan && plans.includes(urlPlan)) selectPlan(urlPlan);
+});
+
+// ── PASSWORD TOGGLE ───────────────────────────────────────
+function togglePwd(id, btn) {
+  const input = document.getElementById(id);
+  input.type = input.type === 'password' ? 'text' : 'password';
+  btn.textContent = input.type === 'password' ? '👁' : '🙈';
+}
+
+// ── ALERTS ───────────────────────────────────────────────
+function showAlert(id, msg, type) {
+  const el = document.getElementById(id);
+  el.textContent = msg; el.className = `alert alert-${type}`; el.style.display = 'block';
+}
+
+function hideAlerts() {
+  ['reg-error','reg-success'].forEach(id => document.getElementById(id).style.display = 'none');
+}
+
+// ── REGISTER ─────────────────────────────────────────────
+async function handleRegister() {
+  hideAlerts();
+  let valid = true;
+
+  const fname = document.getElementById('fname').value.trim();
+  const lname = document.getElementById('lname').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const brand = document.getElementById('brand').value.trim();
+  const pw = document.getElementById('reg-password').value;
+  const pw2 = document.getElementById('reg-password2').value;
+  const plan = document.getElementById('selected-plan').value;
+
+  // Validate
+  if (!fname) { document.getElementById('fname-error').style.display = 'block'; document.getElementById('fname').classList.add('error'); valid = false; }
+  else { document.getElementById('fname-error').style.display = 'none'; document.getElementById('fname').classList.remove('error'); }
+
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    document.getElementById('reg-email-error').style.display = 'block'; document.getElementById('reg-email').classList.add('error'); valid = false;
+  } else { document.getElementById('reg-email-error').style.display = 'none'; document.getElementById('reg-email').classList.remove('error'); }
+
+  if (!pw || pw.length < 8) {
+    document.getElementById('reg-pw-error').style.display = 'block'; document.getElementById('reg-password').classList.add('error'); valid = false;
+  } else { document.getElementById('reg-pw-error').style.display = 'none'; document.getElementById('reg-password').classList.remove('error'); }
+
+  if (pw !== pw2) {
+    document.getElementById('reg-pw2-error').style.display = 'block'; document.getElementById('reg-password2').classList.add('error'); valid = false;
+  } else { document.getElementById('reg-pw2-error').style.display = 'none'; document.getElementById('reg-password2').classList.remove('error'); }
+
+  if (!valid) return;
+
+  const btn = document.getElementById('reg-btn');
+  btn.disabled = true; btn.textContent = 'Creating account...';
+
+  try {
+    const sb = getSupabase();
+
+    if (!sb) {
+      // Supabase not configured yet — save to localStorage as fallback
+      const users = JSON.parse(localStorage.getItem('lmcb_users') || '[]');
+      if (users.find(u => u.email.toLowerCase() === email.toLowerCase())) {
+        showAlert('reg-error', 'An account with this email already exists. Please log in.', 'error');
+        btn.disabled = false; btn.textContent = 'Create Account →'; return;
+      }
+      users.push({
+        id: Date.now().toString(),
+        name: `${fname} ${lname}`.trim(),
+        email, phone, brand, plan,
+        password: btoa(pw),
+        registeredAt: new Date().toISOString(),
+        lastLogin: null, resetRequested: false
+      });
+      localStorage.setItem('lmcb_users', JSON.stringify(users));
+      localStorage.setItem('lmcb_current_plan', plan); // enables WhatsApp bubble for paid plans
+      showAlert('reg-success', `Account created! Welcome, ${fname}. Redirecting to login...`, 'success');
+      btn.textContent = '✓ Account Created';
+      setTimeout(() => window.location.href = '/login.html', 2000);
+      return;
+    }
+
+    // Supabase signup
+    const { data, error } = await signUp(email, pw, `${fname} ${lname}`.trim());
+
+    if (error) {
+      if (error.message.includes('already registered')) {
+        showAlert('reg-error', 'This email is already registered. Please log in.', 'error');
+      } else {
+        showAlert('reg-error', error.message, 'error');
+      }
+      btn.disabled = false; btn.textContent = 'Create Account →'; return;
+    }
+
+    // Update profile with extra data
+    if (data.user) {
+      await sb.from('profiles').update({
+        name: `${fname} ${lname}`.trim(),
+        plan, phone: phone || null, brand: brand || null
+      }).eq('id', data.user.id);
+    }
+
+    showAlert('reg-success',
+      `Welcome, ${fname}! 🎉 Please check your email to confirm your account, then log in.`,
+      'success'
+    );
+    btn.textContent = '✓ Account Created';
+
+  } catch (err) {
+    showAlert('reg-error', 'Something went wrong. Please try again.', 'error');
+    btn.disabled = false; btn.textContent = 'Create Account →';
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter') handleRegister();
+});
+</script>
+
+<!-- WhatsApp Chat Bubble -->
+<div id="wa-bubble" style="display:none;position:fixed;bottom:2rem;right:2rem;z-index:900;flex-direction:column;align-items:flex-end;gap:0.8rem;">
+  <div id="wa-tooltip" style="display:none;background:#1C1609;border:1px solid rgba(200,169,81,0.3);padding:1rem 1.4rem;font-family:DM Mono,monospace;font-size:1.08rem;color:#F5F0E8;max-width:240px;line-height:1.7;position:relative;">
+    <div style="font-size:1.26rem;letter-spacing:0.2em;text-transform:uppercase;color:#C8A951;margin-bottom:0.4rem;">WhatsApp Support</div>
+    Chat with us directly for quick support.
+    <button onclick="document.getElementById('wa-tooltip').style.display='none'" style="position:absolute;top:0.5rem;right:0.7rem;background:none;border:none;color:#F5F0E8;opacity:0.4;cursor:pointer;">✕</button>
+  </div>
+  <a id="wa-link" href="#" target="_blank" rel="noopener" style="width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.35);transition:transform 0.2s;text-decoration:none;" onmouseover="this.style.transform='scale(1.1)';document.getElementById('wa-tooltip').style.display='block'" onmouseout="this.style.transform='scale(1)'">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</div>
+<script>
+const _WA_NUM="919958168321",_WA_MSG="Hi! I need help with my clothing brand.";
+function _initWA(){const b=document.getElementById("wa-bubble"),l=document.getElementById("wa-link");if(!b||!l)return;l.href="https://wa.me/"+_WA_NUM+"?text="+encodeURIComponent(_WA_MSG);const p=localStorage.getItem("lmcb_current_plan");if(p==="brand_builder"||p==="pro_elite"){b.style.display="flex";}else{b.style.display="none";}}
+function getAdminPassword(){return localStorage.getItem("lmcb_admin_pw")||"admin123";}
+function changeAdminPassword(){const c=prompt("Enter CURRENT admin password:");if(!c)return;if(c!==getAdminPassword()){alert("Incorrect password.");return;}const n=prompt("Enter NEW password (min 8 chars):");if(!n||n.length<8){alert("Min 8 characters required.");return;}const c2=prompt("Confirm new password:");if(n!==c2){alert("Passwords do not match.");return;}localStorage.setItem("lmcb_admin_pw",n);alert("Password updated! New password: "+n);}
+document.addEventListener("keydown",e=>{if(e.ctrlKey&&e.shiftKey&&e.key==="P"){e.preventDefault();changeAdminPassword();}});
+document.addEventListener("DOMContentLoaded",_initWA);
+<\/script>
+</body>
+</html>

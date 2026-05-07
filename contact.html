@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | Launch My Clothing Brand</title>
+  <meta name="description" content="Get in touch with Launch My Clothing Brand. Email support, office address in Bijwasan Delhi, and business hours. We respond within 24 business hours." />
+  <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --gold: #C8A951; --gold-light: #E8C96A; --cream: #F5F0E8;
+      --ink: #F5F0E8; --ink-soft: #3D2E10; --bg: #0E0B06;
+      --card-bg: #1C1609; --border: rgba(200,169,81,0.2);
+      --error: #D4472A; --success: #4CAF50;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: #0E0B06; color: var(--ink);
+      font-family: 'DM Mono', monospace; font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999; opacity: 0.4;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.3rem 4rem;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      background: rgba(14,11,6,0.92); backdrop-filter: blur(14px);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.26rem;
+      letter-spacing: 0.2em; color: var(--gold); text-decoration: none; line-height: 1;
+    }
+
+    .nav-logo span {
+      display: block; font-family: 'DM Mono', monospace; font-size: 1.26rem;
+      letter-spacing: 0.18em; color: var(--ink); opacity: 0.4;
+      font-weight: 300; margin-top: 0.1rem; text-transform: uppercase;
+    }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+
+    .nav-links a {
+      color: var(--cream); text-decoration: none;
+      font-size: 1.26rem; letter-spacing: 0.15em; text-transform: uppercase;
+      opacity: 0.6; transition: opacity 0.2s, color 0.2s;
+    }
+
+    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold); }
+
+    .nav-cta {
+      background: var(--gold) !important; color: var(--ink) !important;
+      padding: 0.6rem 1.4rem !important; opacity: 1 !important; font-weight: 500 !important;
+    }
+
+    .nav-cta:hover { background: var(--gold-light) !important; }
+
+    /* PAGE HERO */
+    .page-hero {
+      padding: 10rem 4rem 5rem;
+      border-bottom: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+
+    .page-hero::after {
+      content: 'HELLO';
+      position: absolute; right: -1rem; top: 50%; transform: translateY(-50%);
+      font-family: 'Bebas Neue', sans-serif; font-size: 20vw;
+      color: rgba(200,169,81,0.03); pointer-events: none; line-height: 1;
+    }
+
+    .page-eyebrow {
+      font-size: 1.26rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.4rem;
+      display: flex; align-items: center; gap: 0.9rem;
+    }
+
+    .page-eyebrow::before { content: ''; width: 2.5rem; height: 1px; background: var(--gold); }
+
+    .page-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 5vw, 5rem); font-weight: 300;
+      line-height: 1.08; margin-bottom: 1.2rem; max-width: 16ch;
+    }
+
+    .page-hero h1 em { font-style: italic; color: var(--gold); }
+
+    .page-hero p {
+      font-size: 1.26rem; opacity: 0.55; line-height: 1.85;
+      max-width: 54ch; letter-spacing: 0.02em;
+    }
+
+    /* MAIN GRID */
+    .contact-main {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 1px;
+      background: var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* LEFT — contact info */
+    .contact-info {
+      background: var(--card-bg);
+      padding: 5rem 4rem;
+      display: flex; flex-direction: column; gap: 0;
+    }
+
+    .info-section-label {
+      font-size: 1.08rem; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.7; margin-bottom: 2.5rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+
+    .info-section-label::before { content: ''; width: 1.5rem; height: 1px; background: var(--gold); }
+
+    /* Contact card */
+    .contact-card {
+      padding: 2rem 0;
+      border-bottom: 1px solid rgba(200,169,81,0.1);
+      display: flex; gap: 1.5rem; align-items: flex-start;
+      transition: padding 0.2s;
+    }
+
+    .contact-card:last-child { border-bottom: none; }
+
+    .contact-card-icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.08rem; background: #0E0B06;
+    }
+
+    .contact-card-body { flex: 1; }
+
+    .contact-card-type {
+      font-size: 1.26rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.7; margin-bottom: 0.3rem;
+    }
+
+    .contact-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.26rem; font-weight: 400; margin-bottom: 0.4rem;
+    }
+
+    .contact-card-sub {
+      font-size: 1.26rem; opacity: 0.45; margin-bottom: 0.6rem; line-height: 1.6;
+    }
+
+    .contact-card-value {
+      font-size: 1.26rem; opacity: 0.8; line-height: 1.7;
+    }
+
+    .contact-card-value a {
+      color: var(--gold); text-decoration: none; transition: opacity 0.2s;
+    }
+
+    .contact-card-value a:hover { opacity: 0.7; }
+
+    /* Phone locked badge */
+    .phone-locked {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      border: 1px solid rgba(200,169,81,0.2);
+      padding: 0.4rem 0.9rem; font-size: 1.26rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      opacity: 0.5; margin-top: 0.3rem;
+    }
+
+    .phone-locked a {
+      color: var(--gold); text-decoration: none; margin-left: 0.3rem;
+      opacity: 1 !important; transition: opacity 0.2s;
+    }
+
+    .phone-locked a:hover { opacity: 0.7 !important; }
+
+    /* Hours grid */
+    .hours-grid {
+      display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.3rem;
+    }
+
+    .hours-row {
+      display: flex; justify-content: space-between;
+      font-size: 1.08rem; opacity: 0.7; padding-bottom: 0.4rem;
+      border-bottom: 1px solid rgba(200,169,81,0.06);
+    }
+
+    .hours-row:last-child { border-bottom: none; }
+
+    .hours-day { opacity: 0.6; }
+    .hours-time { color: var(--gold); opacity: 0.9; }
+    .hours-closed { opacity: 0.3; }
+
+    .response-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(200,169,81,0.07); border: 1px solid rgba(200,169,81,0.2);
+      padding: 0.5rem 1rem; font-size: 1.26rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--gold); opacity: 0.8;
+      margin-top: 1rem;
+    }
+
+    /* RIGHT — form */
+    .contact-form-wrap {
+      background: #0E0B06;
+      padding: 5rem 4rem;
+    }
+
+    .form-section-label {
+      font-size: 1.08rem; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.7; margin-bottom: 0.8rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+
+    .form-section-label::before { content: ''; width: 1.5rem; height: 1px; background: var(--gold); }
+
+    .form-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem; font-weight: 300; margin-bottom: 0.5rem; line-height: 1.1;
+    }
+
+    .form-sub { font-size: 1.26rem; opacity: 0.45; margin-bottom: 2.5rem; line-height: 1.7; }
+
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.1rem; }
+
+    .form-group label {
+      font-size: 1.26rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.6;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      color: var(--ink); padding: 0.9rem 1rem;
+      font-family: 'DM Mono', monospace; font-size: 1.26rem;
+      outline: none; transition: border-color 0.2s; width: 100%;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--gold); }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { opacity: 0.3; }
+
+    .form-group input.err,
+    .form-group select.err,
+    .form-group textarea.err { border-color: var(--error); }
+
+    .form-group select option { background: #0E0B06; }
+
+    .form-group textarea { resize: vertical; min-height: 130px; }
+
+    .field-err { font-size: 1.26rem; color: var(--error); display: none; margin-top: 0.2rem; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+
+    .alert {
+      padding: 0.9rem 1rem; font-size: 1.08rem; line-height: 1.6;
+      margin-bottom: 1.2rem; display: none; border-left: 3px solid;
+    }
+
+    .alert-error { border-color: var(--error); background: rgba(212,71,42,0.08); color: #ff8060; }
+    .alert-success { border-color: var(--success); background: rgba(76,175,80,0.08); color: #80d880; }
+
+    .btn-submit {
+      width: 100%; background: var(--gold); color: var(--ink);
+      padding: 1rem; font-family: 'DM Mono', monospace;
+      font-size: 1.26rem; letter-spacing: 0.18em; text-transform: uppercase;
+      font-weight: 500; border: none; cursor: pointer;
+      transition: background 0.25s, transform 0.2s; margin-top: 0.5rem;
+    }
+
+    .btn-submit:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    /* MAP PLACEHOLDER */
+    .map-section {
+      padding: 5rem 4rem;
+      background: var(--card-bg);
+      border-top: 1px solid var(--border);
+    }
+
+    .map-inner { max-width: 1100px; margin: 0 auto; }
+
+    .map-label {
+      font-size: 1.26rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.8rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+
+    .map-label::before { content: ''; width: 1.8rem; height: 1px; background: var(--gold); }
+
+    .map-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; font-weight: 300; margin-bottom: 2rem;
+    }
+
+    .map-embed {
+      width: 100%; height: 340px; border: 1px solid var(--border);
+      filter: saturate(0.3) contrast(1.1) brightness(0.7);
+      display: block;
+    }
+
+    .map-note {
+      font-size: 1.26rem; opacity: 0.35; margin-top: 0.8rem; line-height: 1.6;
+    }
+
+    /* FAQ STRIP */
+    .faq-strip {
+      padding: 5rem 4rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .faq-inner { max-width: 780px; }
+
+    .faq-label {
+      font-size: 1.26rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.8rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+
+    .faq-label::before { content: ''; width: 1.8rem; height: 1px; background: var(--gold); }
+
+    .faq-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; font-weight: 300; margin-bottom: 2rem;
+    }
+
+    .faq-item { border-bottom: 1px solid var(--border); cursor: pointer; }
+
+    .faq-question {
+      padding: 1.2rem 0;
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+      font-size: 0.96rem; line-height: 1.6; opacity: 0.75; transition: opacity 0.2s;
+    }
+
+    .faq-question:hover { opacity: 1; }
+    .faq-icon { font-size: 1rem; color: var(--gold); flex-shrink: 0; transition: transform 0.25s; }
+
+    .faq-answer {
+      font-size: 1.08rem; line-height: 1.85; opacity: 0.5;
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.25s;
+    }
+
+    .faq-item.open .faq-answer { max-height: 200px; padding-bottom: 1.2rem; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-item.open .faq-question { opacity: 1; color: var(--gold); }
+
+    /* CTA */
+    .cta-band { background: var(--gold); padding: 5rem 4rem; text-align: center; }
+
+    .cta-band h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 3.5vw, 3.8rem); font-weight: 300;
+      color: var(--ink); margin-bottom: 1rem; line-height: 1.1;
+    }
+
+    .cta-band p { font-size: 1.26rem; color: var(--ink-soft); opacity: 0.7; max-width: 48ch; margin: 0 auto 2rem; line-height: 1.8; }
+
+    .btn-dark {
+      background: var(--ink); color: var(--gold);
+      padding: 0.9rem 2.5rem; font-family: 'DM Mono', monospace;
+      font-size: 1.26rem; letter-spacing: 0.15em; text-transform: uppercase;
+      font-weight: 500; border: none; cursor: pointer; text-decoration: none;
+      display: inline-block; transition: background 0.25s, transform 0.2s;
+    }
+
+    .btn-dark:hover { background: #D4A843; transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer { background: #090704; border-top: 1px solid var(--border); padding: 5rem 4rem 3rem; }
+
+    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3.5rem; }
+
+    .footer-brand h3 {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem;
+      letter-spacing: 0.12em; color: var(--gold); margin-bottom: 0.9rem; line-height: 1.1;
+    }
+
+    .footer-brand p { font-size: 1.08rem; opacity: 0.45; line-height: 1.85; max-width: 32ch; margin-bottom: 1.2rem; }
+    .footer-address { font-size: 1.26rem; opacity: 0.35; }
+
+    .footer-col h4 { font-size: 1.26rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .footer-col ul a {
+      font-size: 1.08rem; opacity: 0.42; text-decoration: none;
+      color: var(--ink); transition: opacity 0.2s, color 0.2s;
+    }
+
+    .footer-col ul a:hover { opacity: 0.9; color: var(--gold); }
+
+    .footer-email { font-size: 1.26rem; color: var(--gold); opacity: 0.65; text-decoration: none; display: block; margin-bottom: 0.8rem; }
+    .footer-note { font-size: 1.26rem; opacity: 0.3; line-height: 1.6; margin-top: 0.5rem; }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border); padding-top: 2rem;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+
+    .footer-copy { font-size: 1.26rem; opacity: 0.28; }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .page-hero > * { opacity: 0; animation: fadeUp 0.7s ease forwards; }
+    .page-hero > *:nth-child(1) { animation-delay: 0.05s; }
+    .page-hero > *:nth-child(2) { animation-delay: 0.2s; }
+    .page-hero > *:nth-child(3) { animation-delay: 0.35s; }
+
+    /* Mobile */
+    @media (max-width: 960px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      .page-hero { padding: 7rem 1.5rem 3.5rem; }
+      .contact-main { grid-template-columns: 1fr; }
+      .contact-info { padding: 4rem 1.5rem; }
+      .contact-form-wrap { padding: 4rem 1.5rem; }
+      .map-section { padding: 4rem 1.5rem; }
+      .faq-strip { padding: 4rem 1.5rem; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .cta-band { padding: 4rem 1.5rem; }
+    }
+
+    @media (max-width: 560px) {
+      .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/index.html" class="nav-logo">
+      Launch My Clothing Brand
+      <span>Pattern Making &amp; Manufacturing</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/services.html">Services</a></li>
+      <li><a href="/library.html">Pattern Library</a></li>
+      <li><a href="/manufacturers.html">Manufacturers</a></li>
+      <li><a href="/contact.html" class="active">Contact</a></li>
+      <li><a href="/subscribe.html" class="nav-cta">Get Started</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="page-eyebrow">Get In Touch</div>
+    <h1>We're Here to <em>Help</em></h1>
+    <p>We're here to help with your pattern making and manufacturing needs. Reach out to us through any of the following channels and we'll get back to you within 24 business hours.</p>
+  </div>
+
+  <!-- MAIN GRID -->
+  <div class="contact-main">
+
+    <!-- LEFT — Contact Info -->
+    <div class="contact-info">
+      <div class="info-section-label">Contact Channels</div>
+
+      <!-- Email -->
+      <div class="contact-card">
+        <div class="contact-card-icon">✉</div>
+        <div class="contact-card-body">
+          <div class="contact-card-type">Email Support</div>
+          <div class="contact-card-title">Email Us</div>
+          <div class="contact-card-sub">For general inquiries and support</div>
+          <div class="contact-card-value">
+            <a href="mailto:hello.launchmyclothing@gmail.com">hello.launchmyclothing@gmail.com</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phone -->
+      <div class="contact-card">
+        <div class="contact-card-icon">📞</div>
+        <div class="contact-card-body">
+          <div class="contact-card-type">Phone Support</div>
+          <div class="contact-card-title">Call Us</div>
+          <div class="contact-card-sub">Available for premium members only</div>
+          <div class="contact-card-value">
+            <div class="phone-locked">
+              🔒 &nbsp; Subscribe to unlock phone support
+              <a href="/subscribe.html">→ View Plans</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WhatsApp -->
+      <div class="contact-card">
+        <div class="contact-card-icon">💬</div>
+        <div class="contact-card-body">
+          <div class="contact-card-type">WhatsApp Support</div>
+          <div class="contact-card-title">Message Us</div>
+          <div class="contact-card-sub">Available for Brand Builder &amp; Pro Elite members</div>
+          <div class="contact-card-value">
+            <div class="phone-locked">
+              🔒 &nbsp; Subscribe to unlock WhatsApp support
+              <a href="/subscribe.html">→ View Plans</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Address -->
+      <div class="contact-card">
+        <div class="contact-card-icon">📍</div>
+        <div class="contact-card-body">
+          <div class="contact-card-type">Office Address</div>
+          <div class="contact-card-title">Visit Us</div>
+          <div class="contact-card-sub">In-person visits by appointment only</div>
+          <div class="contact-card-value">
+            Launch My Clothing Brand<br/>
+            Bijwasan, Delhi — 110061<br/>
+            India
+          </div>
+        </div>
+      </div>
+
+      <!-- Hours -->
+      <div class="contact-card">
+        <div class="contact-card-icon">🕐</div>
+        <div class="contact-card-body">
+          <div class="contact-card-type">Business Hours</div>
+          <div class="contact-card-title">When We're Available</div>
+          <div class="hours-grid" style="margin-top:0.8rem;">
+            <div class="hours-row">
+              <span class="hours-day">Monday — Friday</span>
+              <span class="hours-time">10:00 AM – 6:00 PM IST</span>
+            </div>
+            <div class="hours-row">
+              <span class="hours-day">Saturday</span>
+              <span class="hours-time">10:00 AM – 2:00 PM IST</span>
+            </div>
+            <div class="hours-row">
+              <span class="hours-day">Sunday</span>
+              <span class="hours-closed">Closed</span>
+            </div>
+          </div>
+          <div class="response-badge">⚡ Response within 24 business hours</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT — Contact Form -->
+    <div class="contact-form-wrap">
+      <div class="form-section-label">Send a Message</div>
+      <div class="form-title">Drop Us a Line</div>
+      <div class="form-sub">Fill in the form below and we'll get back to you within 24 business hours.</div>
+
+      <div class="alert alert-error" id="form-error"></div>
+      <div class="alert alert-success" id="form-success"></div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name *</label>
+          <input type="text" id="c-fname" placeholder="Priya" />
+          <div class="field-err" id="c-fname-err">Required.</div>
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" id="c-lname" placeholder="Mehta" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Email Address *</label>
+        <input type="email" id="c-email" placeholder="hello@yourbrand.com" />
+        <div class="field-err" id="c-email-err">Enter a valid email.</div>
+      </div>
+
+      <div class="form-group">
+        <label>Phone / WhatsApp</label>
+        <input type="tel" id="c-phone" placeholder="+91 98765 43210" />
+      </div>
+
+      <div class="form-group">
+        <label>Subject *</label>
+        <select id="c-subject">
+          <option value="">Select a topic...</option>
+          <option value="Pattern Making Enquiry">Pattern Making Enquiry</option>
+          <option value="Manufacturer Connection">Manufacturer Connection</option>
+          <option value="Pattern Library">Pattern Library</option>
+          <option value="Spec Sheets">Spec Sheets</option>
+          <option value="Subscription / Billing">Subscription / Billing</option>
+          <option value="Technical Support">Technical Support</option>
+          <option value="Partnership / Collaboration">Partnership / Collaboration</option>
+          <option value="General Enquiry">General Enquiry</option>
+        </select>
+        <div class="field-err" id="c-subject-err">Please select a subject.</div>
+      </div>
+
+      <div class="form-group">
+        <label>Message *</label>
+        <textarea id="c-message" placeholder="Tell us about your project, garment category, quantities, and any specific requirements..."></textarea>
+        <div class="field-err" id="c-message-err">Please enter your message.</div>
+      </div>
+
+      <button class="btn-submit" id="contact-btn" onclick="handleContactForm()">Send Message →</button>
+    </div>
+  </div>
+
+  <!-- MAP -->
+  <section class="map-section">
+    <div class="map-inner">
+      <div class="map-label">Location</div>
+      <div class="map-title">Find Us in Delhi</div>
+      <iframe
+        class="map-embed"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3506.6270099099545!2d77.0507!3d28.5008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1b4a99999999%3A0x1234567890abcdef!2sBijwasan%2C%20New%20Delhi%2C%20Delhi%20110061!5e0!3m2!1sen!2sin!4v1234567890"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Launch My Clothing Brand Location — Bijwasan, Delhi">
+      </iframe>
+      <div class="map-note">📍 Bijwasan, Delhi — 110061 · In-person visits by appointment only</div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-strip">
+    <div class="faq-inner">
+      <div class="faq-label">Common Questions</div>
+      <div class="faq-title">Before You Write</div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">How quickly do you respond to enquiries? <span class="faq-icon">+</span></div>
+        <div class="faq-answer">We respond to all enquiries within 24 business hours Monday–Friday. Messages sent on weekends or after 6 PM IST will be responded to the next business day.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">How do I get a quote for custom pattern making? <span class="faq-icon">+</span></div>
+        <div class="faq-answer">Send us a message using the form above with details about your garment category, design complexity, and quantities needed. We'll send you a quote within 24 hours.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">Can I visit your office to discuss my project? <span class="faq-icon">+</span></div>
+        <div class="faq-answer">Yes, in-person consultations are available at our Bijwasan, Delhi office, but only by prior appointment. Please send us an email to schedule a visit.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">I have a subscription issue — who do I contact? <span class="faq-icon">+</span></div>
+        <div class="faq-answer">Select "Subscription / Billing" in the subject dropdown and describe your issue. We'll resolve billing and subscription queries within 12 business hours.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">Do you work with brands outside Delhi? <span class="faq-icon">+</span></div>
+        <div class="faq-answer">Yes! We serve brands across India. All pattern files are delivered digitally, and our manufacturer connections cover Delhi NCR. Remote consultations are available via email and WhatsApp (premium members).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-band">
+    <h2>Ready to Launch Your Brand?</h2>
+    <p>Explore our plans and get access to patterns, spec sheets, manufacturer connections, and expert consultation.</p>
+    <a href="/subscribe.html" class="btn-dark">View Pricing →</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Launch My<br/>Clothing Brand</h3>
+        <p>Professional digital pattern making and manufacturer data services for clothing brands in India.</p>
+        <div class="footer-address">Bijwasan, Delhi — 110061</div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="/services.html">Pattern Making</a></li>
+          <li><a href="/library.html">Pattern Library</a></li>
+          <li><a href="/specsheets.html">Spec Sheets</a></li>
+          <li><a href="/insights.html">Industry Insights</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal &amp; Support</h4>
+        <ul>
+          <li><a href="/contact.html">Contact Us</a></li>
+          <li><a href="/terms.html">Terms of Service</a></li>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+          <li><a href="/subscribe.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="mailto:hello.launchmyclothing@gmail.com" class="footer-email">✉ hello.launchmyclothing@gmail.com</a>
+        <p class="footer-note">Follow us on social media for updates, tips, and industry insights.</p>
+        <p class="footer-note">Phone support available for Pro Elite members only.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Launch My Clothing Brand. All Rights Reserved.</div>
+      <div class="footer-copy">launchmyclothingbrand.com · Bijwasan, Delhi 110061</div>
+    </div>
+  </footer>
+
+<script>
+// ── CONTACT FORM ──────────────────────────────────────────
+function handleContactForm() {
+  let valid = true;
+  const fields = [
+    { id: 'c-fname', errId: 'c-fname-err', check: v => v.trim().length > 0 },
+    { id: 'c-email', errId: 'c-email-err', check: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) },
+    { id: 'c-subject', errId: 'c-subject-err', check: v => v !== '' },
+    { id: 'c-message', errId: 'c-message-err', check: v => v.trim().length > 10 }
+  ];
+
+  document.getElementById('form-error').style.display = 'none';
+  document.getElementById('form-success').style.display = 'none';
+
+  fields.forEach(f => {
+    const el = document.getElementById(f.id);
+    const errEl = document.getElementById(f.errId);
+    if (!f.check(el.value)) {
+      el.classList.add('err'); errEl.style.display = 'block'; valid = false;
+    } else {
+      el.classList.remove('err'); errEl.style.display = 'none';
+    }
+  });
+
+  if (!valid) return;
+
+  const btn = document.getElementById('contact-btn');
+  btn.disabled = true; btn.textContent = 'Sending...';
+
+  // Save to localStorage so you can view messages
+  const fname = document.getElementById('c-fname').value.trim();
+  const lname = document.getElementById('c-lname').value.trim();
+  const email = document.getElementById('c-email').value.trim();
+  const phone = document.getElementById('c-phone').value.trim();
+  const subject = document.getElementById('c-subject').value;
+  const message = document.getElementById('c-message').value.trim();
+
+  const messages = JSON.parse(localStorage.getItem('lmcb_messages') || '[]');
+  messages.unshift({
+    id: Date.now(),
+    name: `${fname} ${lname}`.trim(),
+    email, phone, subject, message,
+    receivedAt: new Date().toISOString(),
+    read: false
+  });
+  localStorage.setItem('lmcb_messages', JSON.stringify(messages));
+
+  setTimeout(() => {
+    const successEl = document.getElementById('form-success');
+    successEl.textContent = `Thank you, ${fname}! Your message has been received. We'll get back to you within 24 business hours.`;
+    successEl.style.display = 'block';
+    btn.textContent = '✓ Message Sent';
+
+    // Reset form
+    ['c-fname','c-lname','c-email','c-phone','c-message'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('c-subject').value = '';
+    setTimeout(() => { btn.disabled = false; btn.textContent = 'Send Message →'; }, 4000);
+  }, 900);
+}
+
+// ── FAQ ───────────────────────────────────────────────────
+function toggleFaq(el) {
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
+  if (!isOpen) el.classList.add('open');
+}
+
+// ── ADMIN: view contact messages ──────────────────────────
+// Access via: Ctrl+Shift+A → password: admin123
+document.addEventListener('keydown', e => {
+  if (e.ctrlKey && e.shiftKey && e.key === 'A') showMessages();
+});
+
+function showMessages() {
+  const pw = prompt('Admin password:');
+  if (pw !== 'admin123') { alert('Incorrect password.'); return; }
+
+  const messages = JSON.parse(localStorage.getItem('lmcb_messages') || '[]');
+  if (messages.length === 0) { alert('No contact messages yet.'); return; }
+
+  const win = window.open('', '_blank', 'width=900,height=700,scrollbars=yes');
+  win.document.write(`
+    <!DOCTYPE html><html><head>
+    <title>Contact Messages — Admin</title>
+    <style>
+      body { background:#0E0B06; color:#F5F0E8; font-family:'DM Mono',monospace; font-size:13px; padding:2rem; }
+      h1 { font-family:serif; font-weight:300; color:#C8A951; margin-bottom:1.5rem; font-size:1.8rem; }
+      .msg { border:1px solid rgba(200,169,81,0.2); padding:1.5rem; margin-bottom:1rem; }
+      .msg-meta { font-size:11px; opacity:0.45; margin-bottom:0.8rem; }
+      .msg-subject { color:#C8A951; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.5rem; }
+      .msg-body { opacity:0.75; line-height:1.7; }
+      .msg-contact { font-size:11px; opacity:0.5; margin-top:0.6rem; }
+      .export-btn { background:#C8A951; color:#F5F0E8; border:none; padding:0.6rem 1.5rem; cursor:pointer; font-family:monospace; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:1.5rem; }
+    </style></head><body>
+    <h1>Contact Messages (${messages.length})</h1>
+    <button class="export-btn" onclick="exportMsgs()">⬇ Export CSV</button>
+    ${messages.map((m, i) => `
+      <div class="msg">
+        <div class="msg-meta">#${messages.length - i} · ${new Date(m.receivedAt).toLocaleString('en-IN')}</div>
+        <div class="msg-subject">${m.subject}</div>
+        <div style="font-size:14px;font-weight:500;margin-bottom:0.3rem;">${m.name}</div>
+        <div class="msg-body">${m.message.replace(/\n/g, '<br/>')}</div>
+        <div class="msg-contact">📧 ${m.email}${m.phone ? ' · 📞 ' + m.phone : ''}</div>
+      </div>
+    `).join('')}
+    <script>
+    function exportMsgs() {
+      const msgs = ${JSON.stringify(messages)};
+      const header = ['#','Name','Email','Phone','Subject','Message','Received'];
+      const rows = msgs.map((m,i) => [msgs.length-i, m.name, m.email, m.phone||'', m.subject, m.message.replace(/"/g,"'"), new Date(m.receivedAt).toLocaleString('en-IN')]);
+      const csv = [header,...rows].map(r => r.map(c => '"'+c+'"').join(',')).join('\\n');
+      const a = document.createElement('a');
+      a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+      a.download = 'lmcb_messages.csv';
+      a.click();
+    }
+    <\/script>
+    <!-- WhatsApp Chat Bubble -->
+<div id="wa-bubble" style="display:none;position:fixed;bottom:2rem;right:2rem;z-index:900;flex-direction:column;align-items:flex-end;gap:0.8rem;">
+  <div id="wa-tooltip" style="display:none;background:#1C1609;border:1px solid rgba(200,169,81,0.3);padding:1rem 1.4rem;font-family:DM Mono,monospace;font-size:1.08rem;color:#F5F0E8;max-width:240px;line-height:1.7;position:relative;">
+    <div style="font-size:1.26rem;letter-spacing:0.2em;text-transform:uppercase;color:#C8A951;margin-bottom:0.4rem;">WhatsApp Support</div>
+    Chat with us directly for quick support.
+    <button onclick="document.getElementById('wa-tooltip').style.display='none'" style="position:absolute;top:0.5rem;right:0.7rem;background:none;border:none;color:#F5F0E8;opacity:0.4;cursor:pointer;">✕</button>
+  </div>
+  <a id="wa-link" href="#" target="_blank" rel="noopener" style="width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.35);transition:transform 0.2s;text-decoration:none;" onmouseover="this.style.transform='scale(1.1)';document.getElementById('wa-tooltip').style.display='block'" onmouseout="this.style.transform='scale(1)'">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</div>
+<script>
+const _WA_NUM="919958168321",_WA_MSG="Hi! I need help with my clothing brand.";
+function _initWA(){const b=document.getElementById("wa-bubble"),l=document.getElementById("wa-link");if(!b||!l)return;l.href="https://wa.me/"+_WA_NUM+"?text="+encodeURIComponent(_WA_MSG);const p=localStorage.getItem("lmcb_current_plan");if(p==="brand_builder"||p==="pro_elite"){b.style.display="flex";}else{b.style.display="none";}}
+function getAdminPassword(){return localStorage.getItem("lmcb_admin_pw")||"admin123";}
+function changeAdminPassword(){const c=prompt("Enter CURRENT admin password:");if(!c)return;if(c!==getAdminPassword()){alert("Incorrect password.");return;}const n=prompt("Enter NEW password (min 8 chars):");if(!n||n.length<8){alert("Min 8 characters required.");return;}const c2=prompt("Confirm new password:");if(n!==c2){alert("Passwords do not match.");return;}localStorage.setItem("lmcb_admin_pw",n);alert("Password updated! New password: "+n);}
+document.addEventListener("keydown",e=>{if(e.ctrlKey&&e.shiftKey&&e.key==="P"){e.preventDefault();changeAdminPassword();}});
+document.addEventListener("DOMContentLoaded",_initWA);
+<\/script>
+</body></html>
+  `);
+}
+</script>
+
+</body>
+</html>
