@@ -61,22 +61,41 @@
       margin-top: 0.1rem; text-transform: uppercase;
     }
 
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+    .nav-links { display: flex; gap: 1.2rem; list-style: none; align-items: center; flex-wrap: nowrap; }
 
     .nav-links a {
       color: var(--cream); text-decoration: none;
-      font-size: 1.26rem; letter-spacing: 0.15em; text-transform: uppercase;
-      opacity: 0.6; transition: opacity 0.2s, color 0.2s;
+      font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+      opacity: 0.6; transition: opacity 0.2s, color 0.2s; white-space: nowrap;
     }
 
-    .nav-links a:hover { opacity: 1; color: var(--gold); }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold); }
 
     .nav-cta {
       background: var(--gold) !important; color: var(--ink) !important;
-      padding: 0.6rem 1.4rem !important; opacity: 1 !important; font-weight: 500 !important;
+      padding: 0.5rem 1rem !important; opacity: 1 !important; font-weight: 500 !important;
     }
 
     .nav-cta:hover { background: var(--gold-light) !important; }
+    
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px; cursor: pointer;
+      background: none; border: none; padding: 4px;
+    }
+    .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--gold); }
+    .nav-close { display: none; position: absolute; top: 1.5rem; right: 1.5rem;
+      background: none; border: none; color: var(--gold); font-size: 1.8rem; cursor: pointer; }
+
+    @media (max-width: 1100px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(14,11,6,0.98); flex-direction: column; justify-content: center;
+        align-items: center; gap: 2rem; z-index: 99; }
+      .nav-links.open { display: flex; }
+      .nav-links a { font-size: 1.1rem; letter-spacing: 0.2em; }
+      .nav-hamburger { display: flex; z-index: 200; }
+      .nav-close { display: block; }
+    }
 
     /* HERO */
     .page-hero {
@@ -425,6 +444,8 @@
       .compare-table { display: none; } /* hide on tiny screens */
     }
   </style>
+  <!-- Razorpay -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
 
@@ -471,7 +492,7 @@
           <div class="plan-feature"><span class="feature-check">✦</span>Email support</div>
           <div class="plan-feature"><span class="feature-check">✦</span>Pattern library access</div>
         </div>
-        <a href="/launchmyclothingbrand/register.html?plan=basic" class="plan-btn plan-btn-outline">Subscribe Now</a>
+        <button onclick="startPayment('basic')" class="plan-btn plan-btn-outline">Subscribe Now</button>
       </div>
 
       <!-- BRAND BUILDER (POPULAR) -->
@@ -493,7 +514,7 @@
           <div class="plan-feature"><span class="feature-check">✦</span>Spec sheet access</div>
           <div class="plan-feature"><span class="feature-check">✦</span>Early access to new patterns</div>
         </div>
-        <a href="/launchmyclothingbrand/register.html?plan=brand_builder" class="plan-btn plan-btn-gold">Subscribe Now</a>
+        <button onclick="startPayment('brand_builder')" class="plan-btn plan-btn-gold">Subscribe Now</button>
       </div>
 
       <!-- PRO ELITE -->
@@ -514,7 +535,7 @@
           <div class="plan-feature"><span class="feature-check">✦</span>Custom pattern requests</div>
           <div class="plan-feature"><span class="feature-check">✦</span>Spec sheet access</div>
         </div>
-        <a href="/launchmyclothingbrand/register.html?plan=pro_elite" class="plan-btn plan-btn-outline">Subscribe Now</a>
+        <button onclick="startPayment('pro_elite')" class="plan-btn plan-btn-outline">Subscribe Now</button>
       </div>
 
     </div>
@@ -651,7 +672,7 @@
   <div class="cta-band">
     <h2>Ready to Get Started?</h2>
     <p>Join hundreds of clothing brands across India who use Launch My Clothing Brand to build faster and smarter.</p>
-    <a href="/launchmyclothingbrand/register.html?plan=brand_builder" class="btn-dark">Start with Brand Builder →</a>
+    <button onclick="startPayment('brand_builder')" class="btn-dark">Start with Brand Builder →</button>
   </div>
 
   <!-- FOOTER -->
@@ -770,6 +791,91 @@ function getAdminPassword() {
 }
 
 document.addEventListener('DOMContentLoaded', initWhatsApp);
+</script>
+
+<!-- ══ RAZORPAY ONE-TIME PAYMENT INTEGRATION ══════════════
+     Key: rzp_live_SG0orAX4pL66PR
+     Type: One-time payment per month (no auto-debit)
+     Customer pays manually each month
+════════════════════════════════════════════════════════ -->
+<script>
+const RAZORPAY_KEY = 'rzp_live_SG0orAX4pL66PR';
+
+const PLANS = {
+  basic: {
+    name: 'Basic Plan',
+    amount: 49900,
+    description: '4 Pattern downloads · Email support · Pattern library access'
+  },
+  brand_builder: {
+    name: 'Brand Builder Plan',
+    amount: 99900,
+    description: '9 Pattern downloads · Manufacturer DB · WhatsApp support · Spec sheets'
+  },
+  pro_elite: {
+    name: 'Pro Elite Plan',
+    amount: 159900,
+    description: '15 Pattern downloads · Phone support · Custom patterns · All access'
+  }
+};
+
+function startPayment(planKey) {
+  const plan = PLANS[planKey];
+  if (!plan) return;
+
+  const users = JSON.parse(localStorage.getItem('lmcb_users') || '[]');
+  const currentUser = users.find(u => u.lastLogin) || {};
+
+  const options = {
+    key: RAZORPAY_KEY,
+    amount: plan.amount,
+    currency: 'INR',
+    name: 'Launch My Clothing Brand',
+    description: plan.description,
+    theme: { color: '#C8A951' },
+    prefill: {
+      name: currentUser.name || '',
+      email: currentUser.email || '',
+      contact: currentUser.phone || ''
+    },
+    notes: {
+      plan: planKey,
+      website: 'launchmyclothingbrand.com'
+    },
+    handler: function(response) {
+      localStorage.setItem('lmcb_current_plan', planKey);
+      localStorage.setItem('lmcb_payment_id', response.razorpay_payment_id);
+      localStorage.setItem('lmcb_plan_name', plan.name);
+      localStorage.setItem('lmcb_plan_started', new Date().toISOString());
+      showPaymentSuccess(plan.name, response.razorpay_payment_id);
+      setTimeout(() => { window.location.href = '/launchmyclothingbrand/index.html'; }, 3000);
+    },
+    modal: {
+      ondismiss: function() {
+        console.log('Payment cancelled');
+      }
+    }
+  };
+
+  const rzp = new Razorpay(options);
+  rzp.on('payment.failed', function(response) {
+    alert('Payment failed: ' + response.error.description + '\nPlease try again or contact us at hello.launchmyclothing@gmail.com');
+  });
+  rzp.open();
+}
+
+function showPaymentSuccess(planName, paymentId) {
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(14,11,6,0.95);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.5rem;font-family:DM Mono,monospace;color:#F5F0E8;text-align:center;padding:2rem;';
+  overlay.innerHTML = `
+    <div style="font-size:3.5rem;">✓</div>
+    <div style="font-family:Cormorant Garamond,serif;font-size:2.5rem;font-weight:300;color:#C8A951;">Payment Successful!</div>
+    <div style="font-size:1rem;opacity:0.75;">You now have access to <strong style="color:#C8A951;">${planName}</strong></div>
+    <div style="font-size:0.75rem;opacity:0.4;">Payment ID: ${paymentId}</div>
+    <div style="font-size:0.85rem;opacity:0.6;margin-top:0.5rem;">Redirecting to homepage in 3 seconds...</div>
+  `;
+  document.body.appendChild(overlay);
+}
 </script>
 </body>
 </html>
