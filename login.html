@@ -439,21 +439,26 @@
 
   <!-- NAV -->
   <nav>
-    <a href="/launchmyclothingbrand/index.html" class="nav-logo">
+    <a href="/index.html" class="nav-logo">
       Launch My Clothing Brand
       <span>Pattern Making &amp; Manufacturing</span>
     </a>
 
-    <ul class="nav-links">
-      <li><a href="/launchmyclothingbrand/services.html">Services</a></li>
-      <li><a href="/launchmyclothingbrand/library.html">Patterns</a></li>
-      <li><a href="/launchmyclothingbrand/specsheets.html">Spec Sheets</a></li>
-      <li><a href="/launchmyclothingbrand/insights.html">Insights</a></li>
-      <li><a href="/launchmyclothingbrand/manufacturers.html">Manufacturers</a></li>
-      <li><a href="/launchmyclothingbrand/contact.html">Contact</a></li>
-      <li><a href="/launchmyclothingbrand/subscribe.html" class="nav-cta">Get Started</a></li>
+    <ul class="nav-links" id="main-nav">
+      <li><a href="/services.html">Services</a></li>
+      <li><a href="/library.html">Patterns</a></li>
+      <li><a href="/specsheets.html">Spec Sheets</a></li>
+      <li><a href="/insights.html">Insights</a></li>
+      <li><a href="/manufacturers.html">Manufacturers</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+      <li><a href="/subscribe.html" class="nav-cta">Get Started</a></li>
     </ul>
+    <button class="nav-hamburger" onclick="openNav()" aria-label="Open Menu"><span></span><span></span><span></span></button>
   </nav>
+  <script>
+    function openNav() { document.getElementById('main-nav').classList.add('open'); }
+    function closeNav() { document.getElementById('main-nav').classList.remove('open'); }
+  </script>
 
   <!-- MAIN -->
   <div class="main">
@@ -507,7 +512,7 @@
         <div class="form-divider"><span>New here?</span></div>
 
         <div class="register-row">
-          Don't have an account? <a href="/launchmyclothingbrand/register.html">Create Account</a>
+          Don't have an account? <a href="/register.html">Create Account</a>
         </div>
       </div>
     </div>

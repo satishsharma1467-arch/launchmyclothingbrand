@@ -62,22 +62,41 @@
       margin-top: 0.1rem; text-transform: uppercase;
     }
 
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+    .nav-links { display: flex; gap: 1.2rem; list-style: none; align-items: center; flex-wrap: nowrap; }
 
     .nav-links a {
       color: var(--cream); text-decoration: none;
-      font-size: 1.26rem; letter-spacing: 0.15em; text-transform: uppercase;
-      opacity: 0.6; transition: opacity 0.2s, color 0.2s;
+      font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+      opacity: 0.6; transition: opacity 0.2s, color 0.2s; white-space: nowrap;
     }
 
     .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold); }
 
     .nav-cta {
       background: var(--gold) !important; color: var(--ink) !important;
-      padding: 0.6rem 1.4rem !important; opacity: 1 !important; font-weight: 500 !important;
+      padding: 0.5rem 1rem !important; opacity: 1 !important; font-weight: 500 !important;
     }
 
     .nav-cta:hover { background: var(--gold-light) !important; }
+    
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px; cursor: pointer;
+      background: none; border: none; padding: 4px;
+    }
+    .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--gold); }
+    .nav-close { display: none; position: absolute; top: 1.5rem; right: 1.5rem;
+      background: none; border: none; color: var(--gold); font-size: 1.8rem; cursor: pointer; }
+
+    @media (max-width: 1100px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(14,11,6,0.98); flex-direction: column; justify-content: center;
+        align-items: center; gap: 2rem; z-index: 99; }
+      .nav-links.open { display: flex; }
+      .nav-links a { font-size: 1.1rem; letter-spacing: 0.2em; }
+      .nav-hamburger { display: flex; z-index: 200; }
+      .nav-close { display: block; }
+    }
 
     /* PAGE HERO */
     .page-hero {
@@ -427,18 +446,18 @@
 
   <!-- NAV -->
   <nav>
-    <a href="/launchmyclothingbrand/index.html" class="nav-logo">
+    <a href="/index.html" class="nav-logo">
       Launch My Clothing Brand
       <span>Pattern Making &amp; Manufacturing</span>
     </a>
     <ul class="nav-links">
-      <li><a href="/launchmyclothingbrand/services.html">Services</a></li>
-      <li><a href="/launchmyclothingbrand/library.html">Patterns</a></li>
-      <li><a href="/launchmyclothingbrand/specsheets.html">Spec Sheets</a></li>
-      <li><a href="/launchmyclothingbrand/insights.html">Insights</a></li>
-      <li><a href="/launchmyclothingbrand/manufacturers.html">Manufacturers</a></li>
-      <li><a href="/launchmyclothingbrand/contact.html">Contact</a></li>
-      <li><a href="/launchmyclothingbrand/subscribe.html" class="nav-cta">Get Started</a></li>
+      <li><a href="/services.html">Services</a></li>
+      <li><a href="/library.html">Patterns</a></li>
+      <li><a href="/specsheets.html">Spec Sheets</a></li>
+      <li><a href="/insights.html">Insights</a></li>
+      <li><a href="/manufacturers.html">Manufacturers</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+      <li><a href="/subscribe.html" class="nav-cta">Get Started</a></li>
     </ul>
   </nav>
 
@@ -455,7 +474,7 @@
           <p>Video tutorials are available for Brand Builder and Pro Elite members.</p>
         </div>
       </div>
-      <a href="/launchmyclothingbrand/subscribe.html" class="btn-gold">Upgrade Now →</a>
+      <a href="/subscribe.html" class="btn-gold">Upgrade Now →</a>
     </div>
   </div>
 
@@ -502,7 +521,7 @@
   <div class="cta-band">
     <h2>Unlock All Videos</h2>
     <p>Get full access to our growing library of industry insights and brand development tutorials with a Brand Builder or Pro Elite subscription.</p>
-    <a href="/launchmyclothingbrand/subscribe.html" class="btn-dark">Upgrade Now →</a>
+    <a href="/subscribe.html" class="btn-dark">Upgrade Now →</a>
   </div>
 
   <!-- FOOTER -->
@@ -516,17 +535,17 @@
       <div class="footer-col">
         <h4>Services</h4>
         <ul>
-          <li><a href="/launchmyclothingbrand/services.html">Pattern Making</a></li>
-          <li><a href="/launchmyclothingbrand/library.html">Pattern Library</a></li>
-          <li><a href="/launchmyclothingbrand/insights.html">Industry Insights</a></li>
+          <li><a href="/services.html">Pattern Making</a></li>
+          <li><a href="/library.html">Pattern Library</a></li>
+          <li><a href="/insights.html">Industry Insights</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Legal &amp; Support</h4>
         <ul>
-          <li><a href="/launchmyclothingbrand/contact.html">Contact Us</a></li>
-          <li><a href="/launchmyclothingbrand/terms.html">Terms of Service</a></li>
-          <li><a href="/launchmyclothingbrand/privacy.html">Privacy Policy</a></li>
+          <li><a href="/contact.html">Contact Us</a></li>
+          <li><a href="/terms.html">Terms of Service</a></li>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
         </ul>
       </div>
       <div class="footer-col">
