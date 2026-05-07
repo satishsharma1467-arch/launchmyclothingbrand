@@ -508,7 +508,7 @@
   </footer>
 
 <!-- WhatsApp Chat Bubble -->
-<div id="wa-bubble" style="display:none;position:fixed;bottom:2rem;right:2rem;z-index:900;flex-direction:column;align-items:flex-end;gap:0.8rem;">
+<div id="wa-bubble" style="display:none!important;position:fixed;bottom:2rem;right:2rem;z-index:900;flex-direction:column;align-items:flex-end;gap:0.8rem;">
   <div id="wa-tooltip" style="display:none;background:#1C1609;border:1px solid rgba(200,169,81,0.3);padding:1rem 1.4rem;font-family:DM Mono,monospace;font-size:1.08rem;color:#F5F0E8;max-width:240px;line-height:1.7;position:relative;">
     <div style="font-size:1.26rem;letter-spacing:0.2em;text-transform:uppercase;color:#C8A951;margin-bottom:0.4rem;">WhatsApp Support</div>
     Chat with us directly for quick support.
@@ -520,7 +520,7 @@
 </div>
 <script>
 const _WA_NUM="918796158321",_WA_MSG="Hi! I need help with my clothing brand.";
-function _initWA(){const b=document.getElementById("wa-bubble"),l=document.getElementById("wa-link");if(!b||!l)return;l.href="https://wa.me/"+_WA_NUM+"?text="+encodeURIComponent(_WA_MSG);const p=localStorage.getItem("lmcb_current_plan");if(p==="brand_builder"||p==="pro_elite"){b.style.display="flex";}else{b.style.display="none";}}
+function _initWA(){const b=document.getElementById("wa-bubble"),l=document.getElementById("wa-link");if(!b||!l)return;l.href="https://wa.me/"+_WA_NUM+"?text="+encodeURIComponent(_WA_MSG);const p=localStorage.getItem("lmcb_current_plan");const paid=["brand_builder","pro_elite"];if(p&&paid.indexOf(p)!==-1){b.style.removeProperty("display");b.style.display="flex";}else{b.style.cssText+="display:none!important";}}
 function getAdminPassword(){return localStorage.getItem("lmcb_admin_pw")||"admin123";}
 function changeAdminPassword(){const c=prompt("Enter CURRENT admin password:");if(!c)return;if(c!==getAdminPassword()){alert("Incorrect password.");return;}const n=prompt("Enter NEW password (min 8 chars):");if(!n||n.length<8){alert("Min 8 characters required.");return;}const c2=prompt("Confirm new password:");if(n!==c2){alert("Passwords do not match.");return;}localStorage.setItem("lmcb_admin_pw",n);alert("Password updated! New password: "+n);}
 document.addEventListener("keydown",e=>{if(e.ctrlKey&&e.shiftKey&&e.key==="P"){e.preventDefault();changeAdminPassword();}});
