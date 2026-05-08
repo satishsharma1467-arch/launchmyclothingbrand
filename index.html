@@ -402,7 +402,7 @@
       max-width: 1100px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 1px;
       background: var(--border);
     }
@@ -739,7 +739,7 @@
       
       /* GRIDS — all single column on mobile */
       .mfr-grid { grid-template-columns: 1fr !important; gap: 1px !important; }
-      .services-grid { grid-template-columns: 1fr !important; }
+      .services-grid { grid-template-columns: 1fr 1fr !important; }
       .spec-grid { grid-template-columns: 1fr !important; }
       .pattern-grid { grid-template-columns: 1fr !important; }
       .video-grid { grid-template-columns: 1fr !important; }
@@ -843,6 +843,94 @@
     }
     /* ═══════════════════════════════════════════════════ */
 
+
+    /* ═══ MOBILE COLOR & CONTRAST FIX ══════════════════ */
+    @media (max-width: 768px) {
+      
+      /* Fix card backgrounds explicitly */
+      .mfr-card { background: #1C1609 !important; border-bottom: 1px solid rgba(200,169,81,0.15) !important; }
+      .mfr-card:nth-child(odd) { background: #1C1609 !important; }
+      .mfr-card:nth-child(even) { background: #130f07 !important; }
+      
+      /* Fix manufacturer text colors */
+      .mfr-name { color: #F5F0E8 !important; font-size: 1.2rem !important; }
+      .mfr-location { color: rgba(245,240,232,0.55) !important; }
+      .mfr-spec { color: #C8A951 !important; }
+      .mfr-spec-label { color: rgba(200,169,81,0.7) !important; }
+      .mfr-desc { color: rgba(245,240,232,0.65) !important; }
+      .mfr-moq-val { color: #C8A951 !important; }
+      .mfr-moq-label { color: rgba(245,240,232,0.45) !important; }
+      .mfr-contact-locked { color: rgba(245,240,232,0.5) !important; background: rgba(200,169,81,0.05) !important; }
+      .mfr-index { color: rgba(200,169,81,0.1) !important; }
+      
+      /* Fix video cards */
+      .video-card { background: #1C1609 !important; }
+      .video-title { color: #F5F0E8 !important; }
+      .video-desc { color: rgba(245,240,232,0.6) !important; }
+      .video-cat-pill { background: #C8A951 !important; color: #1A1208 !important; }
+      .video-tag { color: rgba(245,240,232,0.55) !important; }
+      .video-tag.cat { color: #C8A951 !important; }
+      .video-locked-btn { color: rgba(245,240,232,0.5) !important; }
+      .video-thumb-placeholder { background: #0E0B06 !important; }
+      
+      /* Fix spec sheet cards */
+      .spec-card { background: #1C1609 !important; }
+      .spec-name { color: #F5F0E8 !important; }
+      .spec-desc { color: rgba(245,240,232,0.6) !important; }
+      .spec-category-pill { background: #C8A951 !important; color: #1A1208 !important; }
+      .spec-meta-cell { background: #0E0B06 !important; }
+      .spec-meta-label { color: #C8A951 !important; }
+      .spec-meta-val { color: rgba(245,240,232,0.8) !important; }
+      .spec-download-locked { color: rgba(245,240,232,0.5) !important; }
+      .spec-preview-placeholder { background: #0E0B06 !important; }
+      
+      /* Fix pattern cards */
+      .pattern-card { background: #1C1609 !important; }
+      .pattern-name { color: #F5F0E8 !important; }
+      .pattern-desc { color: rgba(245,240,232,0.6) !important; }
+      .meta-tag { color: rgba(245,240,232,0.55) !important; }
+      .meta-tag.format { color: #C8A951 !important; }
+      .file-info-cell { background: #0E0B06 !important; }
+      .file-info-label { color: #C8A951 !important; }
+      .file-info-val { color: rgba(245,240,232,0.8) !important; }
+      .pattern-download-locked { color: rgba(245,240,232,0.5) !important; }
+      
+      /* Fix section labels and headings */
+      .section-label { color: #C8A951 !important; }
+      h2 { color: #F5F0E8 !important; }
+      h2 em { color: #C8A951 !important; }
+      h3 { color: #F5F0E8 !important; }
+      
+      /* Fix body background */
+      body { background: #0E0B06 !important; color: #F5F0E8 !important; }
+      
+      /* Fix page hero background */
+      .page-hero { background: #0E0B06 !important; }
+      
+      /* Fix stats bar */
+      .stats-bar { background: #1C1609 !important; }
+      .stat-num { color: #C8A951 !important; }
+      .stat-label { color: rgba(245,240,232,0.45) !important; }
+      
+      /* Fix mfr grid background */
+      .mfr-grid { background: rgba(200,169,81,0.1) !important; }
+      
+      /* Fix lock overlay */
+      .mfr-card-top { display: flex !important; justify-content: space-between !important; margin-bottom: 1rem !important; }
+      
+      /* Fix service cards */
+      .service-card { background: #0E0B06 !important; }
+      .service-card h3 { color: #F5F0E8 !important; }
+      .service-card p { color: rgba(245,240,232,0.6) !important; }
+      .service-bullet { color: rgba(245,240,232,0.75) !important; }
+      
+      /* Ensure proper spacing between cards */
+      .mfr-card { margin-bottom: 0 !important; padding: 1.5rem 1.2rem !important; }
+      .video-card { margin-bottom: 1px !important; }
+      .spec-card { margin-bottom: 1px !important; }
+    }
+    /* ════════════════════════════════════════════════════ */
+
   </style>
 </head>
 <body>
@@ -911,6 +999,7 @@
       <span class="ticker-item">Grading Included</span>
       <span class="ticker-item">Manufacturer Connect</span>
       <span class="ticker-item">Pattern Library</span>
+      <span class="ticker-item">Spec Sheets</span>
       <span class="ticker-item">Brand Startup Consultation</span>
       <span class="ticker-item">Pan-India Coverage</span>
       <span class="ticker-item">Delhi NCR Based</span>
@@ -920,6 +1009,7 @@
       <span class="ticker-item">Grading Included</span>
       <span class="ticker-item">Manufacturer Connect</span>
       <span class="ticker-item">Pattern Library</span>
+      <span class="ticker-item">Spec Sheets</span>
       <span class="ticker-item">Brand Startup Consultation</span>
       <span class="ticker-item">Pan-India Coverage</span>
       <span class="ticker-item">Delhi NCR Based</span>
@@ -972,14 +1062,14 @@
 
       <div class="service-card">
         <div class="service-num">01</div>
-        <div class="service-icon">📐</div>
-        <h3>CAD Pattern Making</h3>
-        <p>Turn your sketches or photos into industry-standard digital patterns. We specialize in converting visual ideas into DXF &amp; PDF files using advanced CAD making software.</p>
+        <div class="service-icon">🎬</div>
+        <h3><a href="/insights.html" style="color:inherit;text-decoration:none;">Industry Insights</a></h3>
+        <p>Exclusive video tutorials on industry trends, brand development strategies, and expert tips to grow your clothing brand successfully.</p>
         <div class="service-bullets">
-          <div class="service-bullet">From Photos / Sketches</div>
-          <div class="service-bullet">DXF &amp; PDF Output</div>
-          <div class="service-bullet">Grading Included</div>
-          <div class="service-bullet">Fabric Consumption</div>
+          <div class="service-bullet">Expert Video Tutorials</div>
+          <div class="service-bullet">Industry Trends</div>
+          <div class="service-bullet">Brand Development Tips</div>
+          <div class="service-bullet">Brand Builder &amp; Pro Elite</div>
         </div>
       </div>
 
@@ -1006,6 +1096,19 @@
           <div class="service-bullet">Quality Assurance</div>
           <div class="service-bullet">Flexible MOQs</div>
           <div class="service-bullet">Direct Contact Access</div>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <div class="service-icon">📋</div>
+        <h3><a href="/specsheets.html" style="color:inherit;text-decoration:none;">Spec Sheets</a></h3>
+        <p>Access professionally crafted specification sheets for Kids, Womens and Mens garment categories. Industry-proven dummy measurements used by top brands.</p>
+        <div class="service-bullets">
+          <div class="service-bullet">Kids 6M to 8Y Measurements</div>
+          <div class="service-bullet">Womens XS to XXL</div>
+          <div class="service-bullet">Mens Standard Sizes</div>
+          <div class="service-bullet">Production Ready PDF</div>
         </div>
       </div>
 
@@ -1066,6 +1169,7 @@
         <ul>
           <li><a href="/services.html">Pattern Making</a></li>
           <li><a href="/library.html">Pattern Library</a></li>
+          <li><a href="/specsheets.html">Spec Sheets</a></li>
           <li><a href="/services.html">Expert Consultation</a></li>
           <li><a href="/specsheets.html">Spec Sheets</a></li>
           <li><a href="/insights.html">Industry Insights</a></li>
