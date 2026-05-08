@@ -1166,7 +1166,7 @@ function getMergedSpecs() {
 }
 
 let specs = getMergedSpecs();
-// Fix localStorage if it only had 2 - update to 3
+// Always fix localStorage to include all 3 defaults
 localStorage.setItem('lmcb_specs', JSON.stringify(specs));
 let activeFilter = 'All';
 
@@ -1239,6 +1239,9 @@ function adminLogin() {
   if (document.getElementById('admin-pw').value === ADMIN_PASSWORD) {
     document.getElementById('admin-login').style.display = 'none';
     document.getElementById('admin-editor').style.display = 'block';
+    // Always refresh specs to include all 3 defaults before showing editor
+    specs = getMergedSpecs();
+    localStorage.setItem('lmcb_specs', JSON.stringify(specs));
     renderEditorList();
   } else {
     document.getElementById('admin-pw-error').style.display = 'block';
