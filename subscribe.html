@@ -872,6 +872,73 @@
   </style>
   <!-- Razorpay -->
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<!-- Supabase SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// ── SUPABASE CONFIG ──────────────────────────────────
+const SUPABASE_URL = 'https://tldbjsqhjqapdwmfeuwq.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ';
+const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// ── USER FUNCTIONS ───────────────────────────────────
+async function sbRegisterUser(user) {
+  const { data, error } = await _sb.from('users').insert([{
+    name: user.name,
+    email: user.email,
+    phone: user.phone || '',
+    brand: user.brand || '',
+    plan: user.plan || 'free',
+    password_hash: user.password,
+    created_at: new Date().toISOString()
+  }]);
+  return { data, error };
+}
+
+async function sbLoginUser(email, password) {
+  const { data, error } = await _sb.from('users')
+    .select('*').eq('email', email).eq('password_hash', password).single();
+  if (data) {
+    await _sb.from('users').update({ last_login: new Date().toISOString() }).eq('email', email);
+  }
+  return { data, error };
+}
+
+async function sbUpdatePlan(email, plan, planName, paymentId, amount) {
+  const { data, error } = await _sb.from('users').update({
+    plan: plan,
+    plan_name: planName,
+    payment_id: paymentId,
+    plan_amount: amount,
+    plan_started: new Date().toISOString()
+  }).eq('email', email);
+  return { data, error };
+}
+
+async function sbSaveMessage(msg) {
+  const { data, error } = await _sb.from('messages').insert([{
+    name: msg.name,
+    email: msg.email,
+    phone: msg.phone || '',
+    subject: msg.subject || '',
+    message: msg.message,
+    received_at: new Date().toISOString()
+  }]);
+  return { data, error };
+}
+
+// ── FILE UPLOAD ──────────────────────────────────────
+async function sbUploadFile(file, folder) {
+  const ext = file.name.split('.').pop();
+  const fname = folder + '/' + Date.now() + '_' + file.name.replace(/\s/g,'_');
+  const { data, error } = await _sb.storage.from('files').upload(fname, file, {
+    cacheControl: '3600', upsert: true
+  });
+  if (error) return null;
+  const { data: urlData } = _sb.storage.from('files').getPublicUrl(fname);
+  return urlData.publicUrl;
+}
+</script>
 </head>
 <body>
 
@@ -1400,5 +1467,19 @@ function showPaymentSuccess(planName, paymentId) {
     })();
   </script>
 
+
+<script>
+// Open admin via URL: add ?admin to any page URL
+// Change password via URL: add ?password to any page URL
+document.addEventListener('DOMContentLoaded', function() {
+  var params = new URLSearchParams(window.location.search);
+  if (params.has('admin') && typeof openAdmin === 'function') {
+    openAdmin();
+  }
+  if (params.has('password') && typeof changeAdminPassword === 'function') {
+    setTimeout(changeAdminPassword, 500);
+  }
+});
+</script>
 </body>
 </html>
