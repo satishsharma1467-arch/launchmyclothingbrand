@@ -593,6 +593,214 @@
     }
     /* ═══════════════════════════════════════════════════ */
 
+
+    /* ═══ MOBILE COLOR & CONTRAST FIX ══════════════════ */
+    @media (max-width: 768px) {
+      
+      /* Fix card backgrounds explicitly */
+      .mfr-card { background: #1C1609 !important; border-bottom: 1px solid rgba(200,169,81,0.15) !important; }
+      .mfr-card:nth-child(odd) { background: #1C1609 !important; }
+      .mfr-card:nth-child(even) { background: #130f07 !important; }
+      
+      /* Fix manufacturer text colors */
+      .mfr-name { color: #F5F0E8 !important; font-size: 1.2rem !important; }
+      .mfr-location { color: rgba(245,240,232,0.55) !important; }
+      .mfr-spec { color: #C8A951 !important; }
+      .mfr-spec-label { color: rgba(200,169,81,0.7) !important; }
+      .mfr-desc { color: rgba(245,240,232,0.65) !important; }
+      .mfr-moq-val { color: #C8A951 !important; }
+      .mfr-moq-label { color: rgba(245,240,232,0.45) !important; }
+      .mfr-contact-locked { color: rgba(245,240,232,0.5) !important; background: rgba(200,169,81,0.05) !important; }
+      .mfr-index { color: rgba(200,169,81,0.1) !important; }
+      
+      /* Fix video cards */
+      .video-card { background: #1C1609 !important; }
+      .video-title { color: #F5F0E8 !important; }
+      .video-desc { color: rgba(245,240,232,0.6) !important; }
+      .video-cat-pill { background: #C8A951 !important; color: #1A1208 !important; }
+      .video-tag { color: rgba(245,240,232,0.55) !important; }
+      .video-tag.cat { color: #C8A951 !important; }
+      .video-locked-btn { color: rgba(245,240,232,0.5) !important; }
+      .video-thumb-placeholder { background: #0E0B06 !important; }
+      
+      /* Fix spec sheet cards */
+      .spec-card { background: #1C1609 !important; }
+      .spec-name { color: #F5F0E8 !important; }
+      .spec-desc { color: rgba(245,240,232,0.6) !important; }
+      .spec-category-pill { background: #C8A951 !important; color: #1A1208 !important; }
+      .spec-meta-cell { background: #0E0B06 !important; }
+      .spec-meta-label { color: #C8A951 !important; }
+      .spec-meta-val { color: rgba(245,240,232,0.8) !important; }
+      .spec-download-locked { color: rgba(245,240,232,0.5) !important; }
+      .spec-preview-placeholder { background: #0E0B06 !important; }
+      
+      /* Fix pattern cards */
+      .pattern-card { background: #1C1609 !important; }
+      .pattern-name { color: #F5F0E8 !important; }
+      .pattern-desc { color: rgba(245,240,232,0.6) !important; }
+      .meta-tag { color: rgba(245,240,232,0.55) !important; }
+      .meta-tag.format { color: #C8A951 !important; }
+      .file-info-cell { background: #0E0B06 !important; }
+      .file-info-label { color: #C8A951 !important; }
+      .file-info-val { color: rgba(245,240,232,0.8) !important; }
+      .pattern-download-locked { color: rgba(245,240,232,0.5) !important; }
+      
+      /* Fix section labels and headings */
+      .section-label { color: #C8A951 !important; }
+      h2 { color: #F5F0E8 !important; }
+      h2 em { color: #C8A951 !important; }
+      h3 { color: #F5F0E8 !important; }
+      
+      /* Fix body background */
+      body { background: #0E0B06 !important; color: #F5F0E8 !important; }
+      
+      /* Fix page hero background */
+      .page-hero { background: #0E0B06 !important; }
+      
+      /* Fix stats bar */
+      .stats-bar { background: #1C1609 !important; }
+      .stat-num { color: #C8A951 !important; }
+      .stat-label { color: rgba(245,240,232,0.45) !important; }
+      
+      /* Fix mfr grid background */
+      .mfr-grid { background: rgba(200,169,81,0.1) !important; }
+      
+      /* Fix lock overlay */
+      .mfr-card-top { display: flex !important; justify-content: space-between !important; margin-bottom: 1rem !important; }
+      
+      /* Fix service cards */
+      .service-card { background: #0E0B06 !important; }
+      .service-card h3 { color: #F5F0E8 !important; }
+      .service-card p { color: rgba(245,240,232,0.6) !important; }
+      .service-bullet { color: rgba(245,240,232,0.75) !important; }
+      
+      /* Ensure proper spacing between cards */
+      .mfr-card { margin-bottom: 0 !important; padding: 1.5rem 1.2rem !important; }
+      .video-card { margin-bottom: 1px !important; }
+      .spec-card { margin-bottom: 1px !important; }
+    }
+    /* ════════════════════════════════════════════════════ */
+
+
+    /* ═══ MOBILE NAV FIX ════════════════════════════════ */
+    @media (max-width: 1100px) {
+      .nav-hamburger { display: flex !important; }
+      
+      #main-nav {
+        display: none !important;
+        position: fixed !important;
+        top: 0 !important; left: 0 !important;
+        right: 0 !important; bottom: 0 !important;
+        background: #0E0B06 !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 1.8rem !important;
+        z-index: 999 !important;
+        padding: 2rem !important;
+        border: none !important;
+      }
+      
+      #main-nav.open { display: flex !important; }
+      
+      #main-nav li { list-style: none !important; }
+      
+      #main-nav a {
+        color: #F5F0E8 !important;
+        font-size: 1rem !important;
+        letter-spacing: 0.15em !important;
+        opacity: 0.8 !important;
+        text-decoration: none !important;
+        display: block !important;
+        padding: 0.5rem 1rem !important;
+        border-bottom: 1px solid rgba(200,169,81,0.1) !important;
+        width: 100% !important;
+        text-align: center !important;
+      }
+      
+      #main-nav a:hover { color: #C8A951 !important; opacity: 1 !important; }
+      
+      #main-nav .nav-cta {
+        background: #C8A951 !important;
+        color: #1A1208 !important;
+        opacity: 1 !important;
+        padding: 0.7rem 2rem !important;
+        border: none !important;
+        margin-top: 0.5rem !important;
+      }
+      
+      .nav-close {
+        display: block !important;
+        position: absolute !important;
+        top: 1.5rem !important;
+        right: 1.5rem !important;
+        background: none !important;
+        border: none !important;
+        color: #C8A951 !important;
+        font-size: 1.5rem !important;
+        cursor: pointer !important;
+        z-index: 1000 !important;
+      }
+    }
+    /* ════════════════════════════════════════════════════ */
+
+
+    /* ═══ MOBILE BOTTOM NAV BAR ══════════════════════════ */
+    .mobile-bottom-nav {
+      display: none;
+    }
+    
+    @media (max-width: 768px) {
+      /* Add padding to body so content not hidden behind bottom nav */
+      body { padding-bottom: 70px !important; }
+      
+      .mobile-bottom-nav {
+        display: flex !important;
+        position: fixed !important;
+        bottom: 0 !important; left: 0 !important; right: 0 !important;
+        height: 62px !important;
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200,169,81,0.25) !important;
+        z-index: 500 !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        padding: 0 !important;
+      }
+      
+      .mobile-bottom-nav a {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 3px !important;
+        text-decoration: none !important;
+        color: #F5F0E8 !important;
+        opacity: 0.5 !important;
+        font-family: 'DM Mono', monospace !important;
+        font-size: 0.52rem !important;
+        letter-spacing: 0.08em !important;
+        text-transform: uppercase !important;
+        padding: 8px 4px !important;
+        flex: 1 !important;
+        text-align: center !important;
+        transition: opacity 0.2s, color 0.2s !important;
+      }
+      
+      .mobile-bottom-nav a:hover,
+      .mobile-bottom-nav a.active {
+        opacity: 1 !important;
+        color: #C8A951 !important;
+      }
+      
+      .mobile-bottom-nav .nav-icon {
+        font-size: 1.2rem !important;
+        line-height: 1 !important;
+      }
+      
+      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
+      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
+    }
+    /* ════════════════════════════════════════════════════ */
+
   </style>
 </head>
 <body>
@@ -603,7 +811,7 @@
       Launch My Clothing Brand
       <span>Pattern Making &amp; Manufacturing</span>
     </a>
-    <ul class="nav-links">
+    <ul class="nav-links" id="main-nav">
       <li><a href="/services.html">Services</a></li>
       <li><a href="/library.html">Patterns</a></li>
       <li><a href="/specsheets.html">Spec Sheets</a></li>
@@ -1034,5 +1242,56 @@ function changeAdminPassword(){const c=prompt("Enter CURRENT admin password:");i
 document.addEventListener("keydown",e=>{if(e.ctrlKey&&e.shiftKey&&e.key==="P"){e.preventDefault();changeAdminPassword();}});
 document.addEventListener("DOMContentLoaded",_initWA);
 <\/script>
+
+  <!-- MOBILE BOTTOM NAVIGATION -->
+  <nav class="mobile-bottom-nav">
+    <a href="/index.html" id="bn-home">
+      <span class="nav-icon">🏠</span>
+      <span>Home</span>
+    </a>
+    <a href="/services.html" id="bn-services">
+      <span class="nav-icon">📐</span>
+      <span>Services</span>
+    </a>
+    <a href="/manufacturers.html" id="bn-mfr">
+      <span class="nav-icon">🏭</span>
+      <span>Factories</span>
+    </a>
+    <a href="/specsheets.html" id="bn-spec">
+      <span class="nav-icon">📋</span>
+      <span>Spec</span>
+    </a>
+    <a href="/insights.html" id="bn-insights">
+      <span class="nav-icon">🎬</span>
+      <span>Insights</span>
+    </a>
+    <a href="/subscribe.html" id="bn-pricing">
+      <span class="nav-icon">⭐</span>
+      <span>Plans</span>
+    </a>
+  </nav>
+  <script>
+    // Highlight active bottom nav item
+    (function() {
+      var path = window.location.pathname;
+      var map = {
+        'index': 'bn-home',
+        'services': 'bn-services', 
+        'manufacturers': 'bn-mfr',
+        'specsheets': 'bn-spec',
+        'insights': 'bn-insights',
+        'subscribe': 'bn-pricing',
+        'library': 'bn-services',
+        'contact': 'bn-home',
+      };
+      var page = path.replace(/.*\//, '').replace('.html', '') || 'index';
+      var activeId = map[page];
+      if (activeId) {
+        var el = document.getElementById(activeId);
+        if (el) el.classList.add('active');
+      }
+    })();
+  </script>
+
 </body>
 </html>
