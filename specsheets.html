@@ -1088,7 +1088,7 @@ async function sbUploadFile(file, folder) {
 
           <!-- Image upload -->
           <div style="margin-bottom:0.9rem;">
-            <div style="font-size:1.26rem;letter-spacing:0.2em;text-transform:uppercase;color:#C8A951;opacity:0.7;margin-bottom:0.4rem;">Preview Image (optional — add now or later)</div>
+            <div style="font-size:1.26rem;letter-spacing:0.2em;text-transform:uppercase;color:#C8A951;opacity:0.7;margin-bottom:0.4rem;">Preview Image (optional)</div>
             <label style="display:inline-flex;align-items:center;gap:0.6rem;border:1px dashed rgba(200,169,81,0.3);padding:0.6rem 1rem;cursor:pointer;font-size:1.26rem;opacity:0.7;">
               📷 Choose Image
               <input type="file" id="new-simage" accept="image/*" style="display:none;" onchange="previewNewSpecImage(event)" />
@@ -1098,7 +1098,19 @@ async function sbUploadFile(file, folder) {
               <img id="new-simage-thumb" style="height:70px;object-fit:cover;border:1px solid rgba(200,169,81,0.2);" />
             </div>
           </div>
-          <button onclick="addSpec()" style="background:#C8A951;color:#F5F0E8;border:none;padding:0.75rem 1.8rem;font-family:'DM Mono',monospace;font-size:1.26rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:500;cursor:pointer;">Add Spec Sheet</button>
+          <!-- File attachment -->
+          <div style="margin-bottom:0.9rem;">
+            <div style="font-size:1.26rem;letter-spacing:0.2em;text-transform:uppercase;color:#C8A951;margin-bottom:0.4rem;">📎 Attach Spec Sheet File (PDF) *</div>
+            <div style="font-size:0.75rem;opacity:0.5;margin-bottom:0.6rem;">This file will be available for paid subscribers to download</div>
+            <label style="display:inline-flex;align-items:center;gap:0.6rem;border:1px dashed rgba(200,169,81,0.5);padding:0.7rem 1.2rem;cursor:pointer;font-size:1.26rem;background:rgba(200,169,81,0.05);">
+              📁 Choose Spec Sheet File
+              <input type="file" id="new-sfile" accept=".pdf,.dxf,.zip,.xlsx" style="display:none;" onchange="handleSpecFile(event)" />
+            </label>
+            <span id="new-sfile-name" style="font-size:1.26rem;opacity:0.5;margin-left:0.8rem;"></span>
+            <div id="new-sfile-uploading" style="font-size:0.78rem;color:#C8A951;margin-top:0.4rem;display:none;">⏳ Uploading to Supabase Storage...</div>
+            <div id="new-sfile-done" style="font-size:0.78rem;color:#4CAF50;margin-top:0.4rem;display:none;">✅ File ready for download</div>
+          </div>
+          <button onclick="addSpec()" style="background:#C8A951;color:#1A1208;border:none;padding:0.75rem 1.8rem;font-family:'DM Mono',monospace;font-size:1.26rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:500;cursor:pointer;">Add Spec Sheet →</button>
         </div>
 
         <!-- Actions -->
@@ -1277,6 +1289,7 @@ function editSpec(i) {
 }
 
 let newSpecImageData = null;
+let newSpecFileUrl = null;
 
 function previewNewSpecImage(event) {
   const file = event.target.files[0];
@@ -1292,6 +1305,34 @@ function previewNewSpecImage(event) {
   reader.readAsDataURL(file);
 }
 
+async function handleSpecFile(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  document.getElementById('new-sfile-name').textContent = file.name;
+  document.getElementById('new-sfile-uploading').style.display = 'block';
+  document.getElementById('new-sfile-done').style.display = 'none';
+  try {
+    const { createClient } = supabase;
+    const _sb = createClient(
+      'https://tldbjsqhjqapdwmfeuwq.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ'
+    );
+    const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+    const path = 'specsheets/' + Date.now() + '_' + safeName;
+    const { data, error } = await _sb.storage.from('files').upload(path, file, { cacheControl: '3600', upsert: true });
+    if (error) throw error;
+    const { data: urlData } = _sb.storage.from('files').getPublicUrl(path);
+    newSpecFileUrl = urlData.publicUrl;
+    document.getElementById('new-sfile-uploading').style.display = 'none';
+    document.getElementById('new-sfile-done').style.display = 'block';
+    document.getElementById('new-sfile-done').textContent = '✅ ' + file.name + ' ready for download';
+  } catch(e) {
+    document.getElementById('new-sfile-uploading').style.display = 'none';
+    document.getElementById('new-sfile-name').textContent = '❌ Upload failed: ' + e.message;
+    newSpecFileUrl = null;
+  }
+}
+
 function addSpec() {
   const name = document.getElementById('new-sname').value.trim();
   const category = document.getElementById('new-scategory').value;
@@ -1299,13 +1340,19 @@ function addSpec() {
   const size = document.getElementById('new-ssize').value.trim() || 'N/A';
   const subtitle = document.getElementById('new-sdesc').value.trim();
   if (!name) { alert('Please enter a spec sheet name.'); return; }
-  specs.push({ name, category, format, size, subtitle, image: newSpecImageData || null });
+  if (!newSpecFileUrl) {
+    if (!confirm('No file attached. Add spec sheet without a download file?')) return;
+  }
+  specs.push({ name, category, format, size, subtitle, image: newSpecImageData || null, fileUrl: newSpecFileUrl || null });
   // Reset
   document.getElementById('new-sname').value = '';
   document.getElementById('new-ssize').value = '';
   document.getElementById('new-sdesc').value = '';
   document.getElementById('new-simage').value = '';
   document.getElementById('new-simage-name').textContent = '';
+  document.getElementById('new-sfile').value = '';
+  document.getElementById('new-sfile-name').textContent = '';
+  document.getElementById('new-sfile-done').style.display = 'none';
   document.getElementById('new-simage-preview').style.display = 'none';
   newSpecImageData = null;
   renderEditorList();
