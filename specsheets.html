@@ -1156,13 +1156,17 @@ const DEFAULT_SPECS = [
   }
 ];
 
-// Always merge defaults with any admin-added specs
+// ALWAYS start from DEFAULT_SPECS — localStorage only stores extra additions
 function getMergedSpecs() {
-  const saved = JSON.parse(localStorage.getItem('lmcb_specs') || 'null');
-  if (!saved) return JSON.parse(JSON.stringify(DEFAULT_SPECS));
-  // Keep all 3 defaults + any extra admin-added ones
-  const adminAdded = saved.filter(s => !DEFAULT_SPECS.find(d => d.name === s.name));
-  return [...DEFAULT_SPECS, ...adminAdded];
+  const extraStr = localStorage.getItem('lmcb_specs_extra');
+  const extra = extraStr ? JSON.parse(extraStr) : [];
+  return [...JSON.parse(JSON.stringify(DEFAULT_SPECS)), ...extra];
+}
+
+function saveExtraSpecs(allSpecs) {
+  // Only save non-default specs to localStorage
+  const extra = allSpecs.filter(s => !DEFAULT_SPECS.find(d => d.name === s.name));
+  localStorage.setItem('lmcb_specs_extra', JSON.stringify(extra));
 }
 
 let specs = getMergedSpecs();
@@ -1241,7 +1245,6 @@ function adminLogin() {
     document.getElementById('admin-editor').style.display = 'block';
     // Always refresh specs to include all 3 defaults before showing editor
     specs = getMergedSpecs();
-    localStorage.setItem('lmcb_specs', JSON.stringify(specs));
     renderEditorList();
   } else {
     document.getElementById('admin-pw-error').style.display = 'block';
@@ -1380,11 +1383,8 @@ function addSpec() {
 }
 
 function applySpecs() {
-  // Always save all 3 defaults + any admin additions
-  const adminAdded = specs.filter(s => !DEFAULT_SPECS.find(d => d.name === s.name));
-  const allSpecs = [...DEFAULT_SPECS, ...adminAdded];
-  localStorage.setItem('lmcb_specs', JSON.stringify(allSpecs));
-  specs = allSpecs;
+  saveExtraSpecs(specs);
+  specs = getMergedSpecs();
   renderCards();
   closeAdmin();
   const msg = document.createElement('div');
@@ -1396,8 +1396,9 @@ function applySpecs() {
 
 function resetSpecs() {
   if (!confirm('Reset to original spec sheet list?')) return;
-  specs = JSON.parse(JSON.stringify(DEFAULT_SPECS));
+  localStorage.removeItem('lmcb_specs_extra');
   localStorage.removeItem('lmcb_specs');
+  specs = getMergedSpecs();
   renderEditorList();
 }
 
