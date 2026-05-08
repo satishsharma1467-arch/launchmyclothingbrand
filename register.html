@@ -9,8 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
 
   <!-- Supabase CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="/supabase-config.js"></script>
 
   <style>
     :root {
@@ -848,65 +846,39 @@ async function handleRegister() {
   btn.disabled = true; btn.textContent = 'Creating account...';
 
   try {
-    const sb = getSupabase();
+    const name = `${fname} ${lname}`.trim();
 
-    if (!sb) {
-      // Supabase not configured yet — save to localStorage as fallback
-      const users = JSON.parse(localStorage.getItem('lmcb_users') || '[]');
-      if (users.find(u => u.email.toLowerCase() === email.toLowerCase())) {
-        showAlert('reg-error', 'An account with this email already exists. Please log in.', 'error');
-        btn.disabled = false; btn.textContent = 'Create Account →'; return;
-      }
-      users.push({
-        id: Date.now().toString(),
-        name: `${fname} ${lname}`.trim(),
-        email, phone, brand, plan,
-        password: btoa(pw),
-        registeredAt: new Date().toISOString(),
-        lastLogin: null, resetRequested: false
-      });
-      localStorage.setItem('lmcb_users', JSON.stringify(users));
-      localStorage.setItem('lmcb_current_plan', plan);
-      
-      // Save to Supabase
-      try {
-        await sbRegisterUser({ name, email, phone, brand, plan, password });
-        console.log('User saved to Supabase');
-      } catch(e) { console.log('Supabase save failed, using localStorage', e); }
-      showAlert('reg-success', `Account created! Welcome, ${fname}. Redirecting to login...`, 'success');
-      btn.textContent = '✓ Account Created';
-      setTimeout(() => window.location.href = '/login.html', 2000);
-      return;
-    }
-
-    // Supabase signup
-    const { data, error } = await signUp(email, pw, `${fname} ${lname}`.trim());
-
-    if (error) {
-      if (error.message.includes('already registered')) {
-        showAlert('reg-error', 'This email is already registered. Please log in.', 'error');
-      } else {
-        showAlert('reg-error', error.message, 'error');
-      }
+    // Step 1: Save to localStorage
+    const users = JSON.parse(localStorage.getItem('lmcb_users') || '[]');
+    if (users.find(u => u.email.toLowerCase() === email.toLowerCase())) {
+      showAlert('reg-error', 'This email is already registered. Please log in.', 'error');
       btn.disabled = false; btn.textContent = 'Create Account →'; return;
     }
+    const newUser = {
+      id: Date.now().toString(),
+      name, email, phone, brand, plan,
+      password: btoa(pw),
+      registeredAt: new Date().toISOString(),
+      lastLogin: new Date().toISOString(),
+      resetRequested: false
+    };
+    users.push(newUser);
+    localStorage.setItem('lmcb_users', JSON.stringify(users));
+    localStorage.setItem('lmcb_current_plan', plan);
 
-    // Update profile with extra data
-    if (data.user) {
-      await sb.from('profiles').update({
-        name: `${fname} ${lname}`.trim(),
-        plan, phone: phone || null, brand: brand || null
-      }).eq('id', data.user.id);
-    }
+    // Step 2: Save to Supabase
+    try {
+      await sbRegisterUser({ name, email, phone, brand, plan, password: btoa(pw) });
+    } catch(e) { console.log('Supabase save failed, using localStorage only', e); }
 
-    showAlert('reg-success',
-      `Welcome, ${fname}! 🎉 Please check your email to confirm your account, then log in.`,
-      'success'
-    );
+    // Step 3: Success
+    showAlert('reg-success', `Account created! Welcome, ${fname}! Redirecting to login...`, 'success');
     btn.textContent = '✓ Account Created';
+    setTimeout(() => window.location.href = '/login.html', 2000);
 
   } catch (err) {
-    showAlert('reg-error', 'Something went wrong. Please try again.', 'error');
+    console.error('Registration error:', err);
+    showAlert('reg-error', 'Something went wrong: ' + err.message, 'error');
     btn.disabled = false; btn.textContent = 'Create Account →';
   }
 }
