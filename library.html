@@ -1020,6 +1020,23 @@
     }
     /* ════════════════════════════════════════════════════ */
 
+
+    .pattern-download-btn {
+      display: block;
+      background: var(--gold);
+      color: var(--ink);
+      text-align: center;
+      padding: 0.8rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s;
+      margin-top: 0.8rem;
+      font-family: 'DM Mono', monospace;
+    }
+    .pattern-download-btn:hover { background: var(--gold-light); }
   </style>
 
 <!-- Supabase SDK -->
@@ -1173,7 +1190,12 @@ async function sbUploadFile(file, folder) {
           <div class="pattern-name">Basic T-Shirt Pattern - DXF</div>
           <div class="pattern-desc">Industry-standard digital pattern for basic crew neck t-shirt with grading from XS to XXL.</div>
           <div class="pattern-file-info"><div class="file-info-cell"><div class="file-info-label">Format</div><div class="file-info-val">DXF</div></div><div class="file-info-cell"><div class="file-info-label">Size</div><div class="file-info-val">2.4 MB</div></div><div class="file-info-cell"><div class="file-info-label">Category</div><div class="file-info-val">Pattern Making</div></div></div>
-          <div class="pattern-download-locked">🔒 &nbsp; Locked — Subscribe to Download</div>
+          ${isPaid && p.fileUrl ? 
+          `<a class="pattern-download-btn" href="${p.fileUrl}" download target="_blank">⬇ &nbsp; Download Pattern</a>` : 
+          p.fileUrl ? 
+          `<div class="pattern-download-locked">🔒 &nbsp; Subscribe to Download</div>` :
+          `<div class="pattern-download-locked">🔒 &nbsp; File Coming Soon</div>`
+        }
         </div>
       </div>
 
@@ -1187,7 +1209,12 @@ async function sbUploadFile(file, folder) {
           <div class="pattern-name">Hoodie Pattern with Tech Pack</div>
           <div class="pattern-desc">Complete hoodie pattern with measurement charts, fabric consumption guide, and technical specifications.</div>
           <div class="pattern-file-info"><div class="file-info-cell"><div class="file-info-label">Format</div><div class="file-info-val">ZIP</div></div><div class="file-info-cell"><div class="file-info-label">Size</div><div class="file-info-val">5.8 MB</div></div><div class="file-info-cell"><div class="file-info-label">Category</div><div class="file-info-val">Pattern Making</div></div></div>
-          <div class="pattern-download-locked">🔒 &nbsp; Locked — Subscribe to Download</div>
+          ${isPaid && p.fileUrl ? 
+          `<a class="pattern-download-btn" href="${p.fileUrl}" download target="_blank">⬇ &nbsp; Download Pattern</a>` : 
+          p.fileUrl ? 
+          `<div class="pattern-download-locked">🔒 &nbsp; Subscribe to Download</div>` :
+          `<div class="pattern-download-locked">🔒 &nbsp; File Coming Soon</div>`
+        }
         </div>
       </div>
 
@@ -1201,7 +1228,12 @@ async function sbUploadFile(file, folder) {
           <div class="pattern-name">Denim Jeans Pattern - PDF</div>
           <div class="pattern-desc">Professional denim jeans pattern with pocket details and construction notes.</div>
           <div class="pattern-file-info"><div class="file-info-cell"><div class="file-info-label">Format</div><div class="file-info-val">PDF</div></div><div class="file-info-cell"><div class="file-info-label">Size</div><div class="file-info-val">3.2 MB</div></div><div class="file-info-cell"><div class="file-info-label">Category</div><div class="file-info-val">Pattern Making</div></div></div>
-          <div class="pattern-download-locked">🔒 &nbsp; Locked — Subscribe to Download</div>
+          ${isPaid && p.fileUrl ? 
+          `<a class="pattern-download-btn" href="${p.fileUrl}" download target="_blank">⬇ &nbsp; Download Pattern</a>` : 
+          p.fileUrl ? 
+          `<div class="pattern-download-locked">🔒 &nbsp; Subscribe to Download</div>` :
+          `<div class="pattern-download-locked">🔒 &nbsp; File Coming Soon</div>`
+        }
         </div>
       </div>
 
@@ -1386,6 +1418,8 @@ function renderCards() {
   const grid = document.getElementById('pattern-grid');
   const saved = localStorage.getItem('lmcb_patterns');
   const data = saved ? JSON.parse(saved) : DEFAULT_PATTERNS;
+  const plan = localStorage.getItem('lmcb_current_plan');
+  const isPaid = plan === 'brand_builder' || plan === 'pro_elite';
   const filtered = activeFilter === 'all' ? data : data.filter(p => p.format === activeFilter);
 
   document.getElementById('total-count').textContent = data.length + '+';
@@ -1422,7 +1456,12 @@ function renderCards() {
           <div class="file-info-cell"><div class="file-info-label">Size</div><div class="file-info-val">${p.size}</div></div>
           <div class="file-info-cell"><div class="file-info-label">Category</div><div class="file-info-val">${p.category}</div></div>
         </div>
-        <div class="pattern-download-locked">🔒 &nbsp; Locked — Subscribe to Download</div>
+        ${isPaid && p.fileUrl ? 
+          `<a class="pattern-download-btn" href="${p.fileUrl}" download target="_blank">⬇ &nbsp; Download Pattern</a>` : 
+          p.fileUrl ? 
+          `<div class="pattern-download-locked">🔒 &nbsp; Subscribe to Download</div>` :
+          `<div class="pattern-download-locked">🔒 &nbsp; File Coming Soon</div>`
+        }
       </div>
     </div>`;
   }).join('');

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>File Upload — LMCB Admin</title>
+<meta name="robots" content="noindex,nofollow"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0E0B06;color:#F5F0E8;font-family:'Courier New',monospace;padding:2rem;min-height:100vh}
+h1{color:#C8A951;font-size:1.5rem;margin-bottom:0.3rem}
+.sub{color:#aaa;font-size:0.8rem;margin-bottom:2rem}
+.login-box{background:#1C1609;border:1px solid rgba(200,169,81,0.3);padding:2rem;max-width:400px;margin:3rem auto;text-align:center}
+.login-box h2{color:#C8A951;margin-bottom:1.5rem;font-size:1rem;letter-spacing:0.2em;text-transform:uppercase}
+input[type=password],input[type=text]{width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(200,169,81,0.3);color:#F5F0E8;padding:0.8rem 1rem;font-family:'Courier New',monospace;font-size:0.9rem;outline:none;margin-bottom:1rem;display:block}
+input[type=password]:focus,input[type=text]:focus{border-color:#C8A951}
+.btn{background:#C8A951;color:#1A1208;border:none;padding:0.9rem 2rem;font-family:'Courier New',monospace;font-size:0.85rem;font-weight:bold;cursor:pointer;letter-spacing:0.1em;text-transform:uppercase;width:100%}
+.btn:hover{background:#E8C96A}
+.btn:disabled{opacity:0.5;cursor:not-allowed}
+.btn-outline{background:transparent;border:1px solid rgba(200,169,81,0.3);color:#C8A951;padding:0.7rem 1.5rem;font-family:'Courier New',monospace;font-size:0.8rem;cursor:pointer;letter-spacing:0.1em;text-transform:uppercase}
+.btn-outline:hover{background:#C8A951;color:#1A1208}
+.panel{display:none}
+.section{background:#1C1609;border:1px solid rgba(200,169,81,0.2);padding:1.5rem;margin-bottom:1.5rem;border-radius:4px}
+.section h2{color:#C8A951;font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:1.2rem}
+.form-group{margin-bottom:1rem}
+label{display:block;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;opacity:0.55;margin-bottom:0.4rem}
+input[type=file]{width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(200,169,81,0.3);color:#F5F0E8;padding:0.6rem;font-family:'Courier New',monospace;font-size:0.8rem}
+select{width:100%;background:#0E0B06;border:1px solid rgba(200,169,81,0.3);color:#F5F0E8;padding:0.8rem;font-family:'Courier New',monospace;font-size:0.85rem;outline:none;margin-bottom:1rem}
+.progress{background:#333;border-radius:4px;height:8px;margin:1rem 0;overflow:hidden;display:none}
+.progress-fill{background:#C8A951;height:100%;border-radius:4px;transition:width 0.3s;width:0%}
+.status{font-size:0.78rem;padding:0.8rem;border-radius:4px;margin-top:0.8rem;display:none}
+.status.success{background:rgba(76,175,80,0.15);border:1px solid rgba(76,175,80,0.3);color:#4CAF50}
+.status.error{background:rgba(244,67,54,0.15);border:1px solid rgba(244,67,54,0.3);color:#f44336}
+.file-list{margin-top:1rem}
+.file-item{display:flex;justify-content:space-between;align-items:center;padding:0.6rem 0.8rem;background:rgba(255,255,255,0.03);border-radius:3px;margin-bottom:0.4rem;font-size:0.75rem}
+.file-item a{color:#C8A951;text-decoration:none;font-size:0.7rem}
+.file-item a:hover{text-decoration:underline}
+.copy-btn{background:transparent;border:1px solid rgba(200,169,81,0.3);color:#C8A951;padding:0.2rem 0.6rem;font-size:0.6rem;cursor:pointer;font-family:'Courier New',monospace}
+.tabs{display:flex;gap:0;margin-bottom:1.5rem;border-bottom:1px solid rgba(200,169,81,0.2)}
+.tab{padding:0.7rem 1.2rem;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;opacity:0.45;border-bottom:2px solid transparent;transition:all 0.2s}
+.tab.active{opacity:1;color:#C8A951;border-bottom-color:#C8A951}
+.tab-content{display:none}
+.tab-content.active{display:block}
+</style>
+</head>
+<body>
+
+<h1>📎 LMCB File Manager</h1>
+<div class="sub">Upload patterns, spec sheets and images to Supabase Storage</div>
+
+<!-- LOGIN -->
+<div id="loginBox" class="login-box">
+  <h2>Admin Access</h2>
+  <input type="password" id="pw" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')login()"/>
+  <div id="pwErr" style="color:#f44336;font-size:0.75rem;margin-bottom:0.8rem;display:none">Wrong password</div>
+  <button class="btn" onclick="login()">Unlock →</button>
+</div>
+
+<!-- PANEL -->
+<div id="panel" class="panel">
+
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('upload')">📤 Upload File</div>
+    <div class="tab" onclick="switchTab('files')">📁 Uploaded Files</div>
+    <div class="tab" onclick="switchTab('password')">🔐 Change Password</div>
+  </div>
+
+  <!-- UPLOAD TAB -->
+  <div id="tab-upload" class="tab-content active">
+
+    <div class="section">
+      <h2>Upload New File</h2>
+
+      <div class="form-group">
+        <label>File Category</label>
+        <select id="category">
+          <option value="patterns">Pattern Library (DXF/PDF/ZIP)</option>
+          <option value="specsheets">Spec Sheets (PDF)</option>
+          <option value="images">Images (JPG/PNG)</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Select File</label>
+        <input type="file" id="fileInput" accept=".pdf,.dxf,.zip,.jpg,.jpeg,.png,.xlsx,.docx"/>
+      </div>
+
+      <div class="form-group">
+        <label>File Description (optional)</label>
+        <input type="text" id="fileDesc" placeholder="e.g. Basic T-Shirt Pattern XS-XXL"/>
+      </div>
+
+      <div class="progress" id="progress">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <button class="btn" id="uploadBtn" onclick="uploadFile()">Upload to Supabase →</button>
+
+      <div class="status" id="status"></div>
+    </div>
+
+    <div class="section">
+      <h2>How to use uploaded files</h2>
+      <div style="font-size:0.78rem;line-height:1.8;opacity:0.7;">
+        1. Upload your file here<br/>
+        2. Copy the file URL that appears<br/>
+        3. Go to your pattern/spec sheet admin panel<br/>
+        4. Paste the URL in the "File URL" field<br/>
+        5. Customers can download directly from that URL
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FILES TAB -->
+  <div id="tab-files" class="tab-content">
+    <div class="section">
+      <h2>Uploaded Files</h2>
+      <div style="display:flex;gap:0.8rem;margin-bottom:1rem;flex-wrap:wrap">
+        <button class="btn-outline" onclick="loadFiles('patterns')">Patterns</button>
+        <button class="btn-outline" onclick="loadFiles('specsheets')">Spec Sheets</button>
+        <button class="btn-outline" onclick="loadFiles('images')">Images</button>
+        <button class="btn-outline" onclick="loadFiles('')">All Files</button>
+      </div>
+      <div id="fileList"><div style="opacity:0.4;font-size:0.8rem">Click a category above to load files</div></div>
+    </div>
+  </div>
+
+
+  <!-- PASSWORD TAB -->
+  <div id="tab-password" class="tab-content">
+    <div class="section">
+      <h2>Change Admin Password</h2>
+      <div class="form-group">
+        <label>Current Password</label>
+        <input type="password" id="old-pw" placeholder="Enter current password"/>
+      </div>
+      <div class="form-group">
+        <label>New Password</label>
+        <input type="password" id="new-pw" placeholder="Enter new password (min 8 characters)"/>
+      </div>
+      <div class="form-group">
+        <label>Confirm New Password</label>
+        <input type="password" id="new-pw2" placeholder="Confirm new password"/>
+      </div>
+      <div id="pw-status" style="font-size:0.78rem;padding:0.8rem;border-radius:4px;margin-bottom:1rem;display:none;"></div>
+      <button class="btn" onclick="changePassword()">Update Password →</button>
+    </div>
+    <div class="section">
+      <h2>Password Tips</h2>
+      <div style="font-size:0.78rem;line-height:1.8;opacity:0.7;">
+        • Use at least 8 characters<br/>
+        • Mix letters, numbers and symbols<br/>
+        • Example: LMCB@2025#Admin<br/>
+        • Save your new password somewhere safe!<br/>
+        • Default password is: admin123
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = 'https://tldbjsqhjqapdwmfeuwq.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ';
+const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+function getAdminPw() { return localStorage.getItem('lmcb_admin_pw') || 'admin123'; }
+
+function login() {
+  const pw = document.getElementById('pw').value;
+  if (pw !== getAdminPw()) {
+    document.getElementById('pwErr').style.display = 'block';
+    document.getElementById('pw').value = '';
+    return;
+  }
+  document.getElementById('loginBox').style.display = 'none';
+  document.getElementById('panel').style.display = 'block';
+}
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', ['upload','files','password'][i] === tab));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+}
+
+function changePassword() {
+  const oldPw = document.getElementById('old-pw').value;
+  const newPw = document.getElementById('new-pw').value;
+  const newPw2 = document.getElementById('new-pw2').value;
+  const status = document.getElementById('pw-status');
+
+  status.style.display = 'block';
+
+  if (oldPw !== getAdminPw()) {
+    status.style.background = 'rgba(244,67,54,0.15)';
+    status.style.border = '1px solid rgba(244,67,54,0.3)';
+    status.style.color = '#f44336';
+    status.textContent = '❌ Current password is incorrect';
+    return;
+  }
+  if (newPw.length < 8) {
+    status.style.background = 'rgba(244,67,54,0.15)';
+    status.style.border = '1px solid rgba(244,67,54,0.3)';
+    status.style.color = '#f44336';
+    status.textContent = '❌ New password must be at least 8 characters';
+    return;
+  }
+  if (newPw !== newPw2) {
+    status.style.background = 'rgba(244,67,54,0.15)';
+    status.style.border = '1px solid rgba(244,67,54,0.3)';
+    status.style.color = '#f44336';
+    status.textContent = '❌ Passwords do not match';
+    return;
+  }
+
+  localStorage.setItem('lmcb_admin_pw', newPw);
+  status.style.background = 'rgba(76,175,80,0.15)';
+  status.style.border = '1px solid rgba(76,175,80,0.3)';
+  status.style.color = '#4CAF50';
+  status.textContent = '✅ Password changed successfully! Save it somewhere safe.';
+  document.getElementById('old-pw').value = '';
+  document.getElementById('new-pw').value = '';
+  document.getElementById('new-pw2').value = '';
+}
+
+function showStatus(msg, type) {
+  const el = document.getElementById('status');
+  el.textContent = msg;
+  el.className = 'status ' + type;
+  el.style.display = 'block';
+}
+
+async function uploadFile() {
+  const fileInput = document.getElementById('fileInput');
+  const category = document.getElementById('category').value;
+  const desc = document.getElementById('fileDesc').value;
+  const file = fileInput.files[0];
+
+  if (!file) { showStatus('Please select a file first', 'error'); return; }
+
+  const btn = document.getElementById('uploadBtn');
+  btn.disabled = true;
+  btn.textContent = 'Uploading...';
+
+  const progress = document.getElementById('progress');
+  const progressFill = document.getElementById('progressFill');
+  progress.style.display = 'block';
+  progressFill.style.width = '30%';
+
+  try {
+    const ext = file.name.split('.').pop().toLowerCase();
+    const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+    const path = category + '/' + Date.now() + '_' + safeName;
+
+    progressFill.style.width = '60%';
+
+    const { data, error } = await _sb.storage.from('files').upload(path, file, {
+      cacheControl: '3600',
+      upsert: true,
+      contentType: file.type
+    });
+
+    if (error) throw error;
+
+    progressFill.style.width = '100%';
+
+    const { data: urlData } = _sb.storage.from('files').getPublicUrl(path);
+    const publicUrl = urlData.publicUrl;
+
+    showStatus('✅ File uploaded successfully!', 'success');
+
+    // Show the URL for copying
+    document.getElementById('status').innerHTML = `
+      <div style="margin-bottom:0.5rem">✅ File uploaded successfully!</div>
+      <div style="font-size:0.7rem;opacity:0.7;margin-bottom:0.5rem">File URL (copy this):</div>
+      <div style="background:#000;padding:0.5rem;border-radius:3px;font-size:0.65rem;word-break:break-all;margin-bottom:0.5rem">${publicUrl}</div>
+      <button class="btn-outline" onclick="navigator.clipboard.writeText('${publicUrl}').then(()=>alert('URL copied!'))">📋 Copy URL</button>
+    `;
+
+  } catch(e) {
+    showStatus('❌ Upload failed: ' + e.message, 'error');
+    console.error(e);
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Upload to Supabase →';
+}
+
+async function loadFiles(folder) {
+  const list = document.getElementById('fileList');
+  list.innerHTML = '<div style="opacity:0.4;font-size:0.8rem">Loading...</div>';
+
+  try {
+    const path = folder || '';
+    const { data, error } = await _sb.storage.from('files').list(path, {
+      limit: 100, sortBy: { column: 'created_at', order: 'desc' }
+    });
+
+    if (error) throw error;
+    if (!data || !data.length) {
+      list.innerHTML = '<div style="opacity:0.4;font-size:0.8rem">No files uploaded yet in this category.</div>';
+      return;
+    }
+
+    list.innerHTML = data.map(f => {
+      if (!f.name || f.name === '.emptyFolderPlaceholder') return '';
+      const filePath = folder ? folder + '/' + f.name : f.name;
+      const { data: urlData } = _sb.storage.from('files').getPublicUrl(filePath);
+      const url = urlData.publicUrl;
+      const size = f.metadata?.size ? (f.metadata.size / 1024).toFixed(1) + ' KB' : '';
+      return `
+        <div class="file-item">
+          <div>
+            <div style="font-weight:bold">${f.name}</div>
+            <div style="opacity:0.4;font-size:0.65rem">${size}</div>
+          </div>
+          <div style="display:flex;gap:0.5rem;align-items:center">
+            <a href="${url}" target="_blank">View</a>
+            <button class="copy-btn" onclick="navigator.clipboard.writeText('${url}').then(()=>alert('URL copied!'))">Copy URL</button>
+          </div>
+        </div>`;
+    }).join('');
+
+  } catch(e) {
+    list.innerHTML = '<div style="color:#f44336;font-size:0.8rem">Error loading files: ' + e.message + '</div>';
+  }
+}
+
+document.getElementById('pw').addEventListener('keydown', e => { if(e.key==='Enter') login(); });
+</script>
+</body>
+</html>
