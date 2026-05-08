@@ -1193,8 +1193,20 @@ function startPayment(planKey) {
   const plan = PLANS[planKey];
   if (!plan) return;
 
+  // Check if user is logged in first
   const users = JSON.parse(localStorage.getItem('lmcb_users') || '[]');
-  const currentUser = users.find(u => u.lastLogin) || {};
+  const currentUser = users.find(u => u.lastLogin);
+  
+  // If not logged in - redirect to register with plan pre-selected
+  if (!currentUser) {
+    const confirmed = confirm('You need to create an account before subscribing.\n\nClick OK to go to the registration page.');
+    if (confirmed) {
+      window.location.href = '/register.html?plan=' + planKey;
+    }
+    return;
+  }
+  
+  const user = currentUser || {};
 
   const options = {
     key: RAZORPAY_KEY,
