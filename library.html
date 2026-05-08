@@ -1337,7 +1337,7 @@ async function sbUploadFile(file, folder) {
             style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(200,169,81,0.25);color:#F5F0E8;padding:0.7rem 0.9rem;font-family:'DM Mono',monospace;font-size:1.26rem;outline:none;resize:vertical;margin-bottom:0.7rem;display:block;"></textarea>
           <!-- Image upload for new pattern -->
           <div style="margin-bottom:0.9rem;">
-            <div style="font-size:1.26rem;letter-spacing:0.2em;text-transform:uppercase;color:#C8A951;opacity:0.7;margin-bottom:0.4rem;">Pattern Image (optional — add now or later)</div>
+            <div style="font-size:1.26rem;letter-spacing:0.2em;text-transform:uppercase;color:#C8A951;opacity:0.7;margin-bottom:0.4rem;">Pattern Image (optional)</div>
             <label style="display:inline-flex;align-items:center;gap:0.6rem;border:1px dashed rgba(200,169,81,0.3);padding:0.6rem 1rem;cursor:pointer;font-size:1.26rem;opacity:0.7;transition:opacity 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.7">
               📷 Choose Image
               <input type="file" id="new-pimage" accept="image/*" style="display:none;" onchange="previewNewImage(event)" />
@@ -1347,7 +1347,19 @@ async function sbUploadFile(file, folder) {
               <img id="new-pimage-thumb" style="height:80px;object-fit:cover;border:1px solid rgba(200,169,81,0.2);" />
             </div>
           </div>
-          <button onclick="addPattern()" style="background:#C8A951;color:#F5F0E8;border:none;padding:0.75rem 1.8rem;font-family:'DM Mono',monospace;font-size:1.26rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:500;cursor:pointer;">Add Pattern</button>
+          <!-- File attachment for download -->
+          <div style="margin-bottom:0.9rem;">
+            <div style="font-size:1.26rem;letter-spacing:0.2em;text-transform:uppercase;color:#C8A951;margin-bottom:0.4rem;">📎 Attach Pattern File (PDF / DXF / ZIP) *</div>
+            <div style="font-size:0.75rem;opacity:0.5;margin-bottom:0.6rem;">This file will be available for paid subscribers to download</div>
+            <label style="display:inline-flex;align-items:center;gap:0.6rem;border:1px dashed rgba(200,169,81,0.5);padding:0.7rem 1.2rem;cursor:pointer;font-size:1.26rem;background:rgba(200,169,81,0.05);transition:all 0.2s;" onmouseover="this.style.background='rgba(200,169,81,0.1)'" onmouseout="this.style.background='rgba(200,169,81,0.05)'">
+              📁 Choose Pattern File
+              <input type="file" id="new-pfile" accept=".pdf,.dxf,.zip,.xlsx,.docx" style="display:none;" onchange="handlePatternFile(event)" />
+            </label>
+            <span id="new-pfile-name" style="font-size:1.26rem;opacity:0.5;margin-left:0.8rem;"></span>
+            <div id="new-pfile-uploading" style="font-size:0.78rem;color:#C8A951;margin-top:0.4rem;display:none;">⏳ Uploading to Supabase Storage...</div>
+            <div id="new-pfile-done" style="font-size:0.78rem;color:#4CAF50;margin-top:0.4rem;display:none;">✅ File ready for download</div>
+          </div>
+          <button onclick="addPattern()" style="background:#C8A951;color:#1A1208;border:none;padding:0.75rem 1.8rem;font-family:'DM Mono',monospace;font-size:1.26rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:500;cursor:pointer;">Add Pattern →</button>
         </div>
 
         <!-- Actions -->
@@ -1585,6 +1597,49 @@ function previewNewImage(event) {
   reader.readAsDataURL(file);
 }
 
+// Handle pattern file upload to Supabase
+let newPatternFileUrl = null;
+
+async function handlePatternFile(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  
+  document.getElementById('new-pfile-name').textContent = file.name;
+  document.getElementById('new-pfile-uploading').style.display = 'block';
+  document.getElementById('new-pfile-done').style.display = 'none';
+  
+  try {
+    // Upload to Supabase Storage
+    const { createClient } = supabase;
+    const _sb = createClient(
+      'https://tldbjsqhjqapdwmfeuwq.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ'
+    );
+    
+    const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+    const path = 'patterns/' + Date.now() + '_' + safeName;
+    
+    const { data, error } = await _sb.storage.from('files').upload(path, file, {
+      cacheControl: '3600', upsert: true
+    });
+    
+    if (error) throw error;
+    
+    const { data: urlData } = _sb.storage.from('files').getPublicUrl(path);
+    newPatternFileUrl = urlData.publicUrl;
+    
+    document.getElementById('new-pfile-uploading').style.display = 'none';
+    document.getElementById('new-pfile-done').style.display = 'block';
+    document.getElementById('new-pfile-done').textContent = '✅ ' + file.name + ' ready for download';
+    
+  } catch(e) {
+    document.getElementById('new-pfile-uploading').style.display = 'none';
+    document.getElementById('new-pfile-name').textContent = '❌ Upload failed: ' + e.message;
+    newPatternFileUrl = null;
+    console.error('File upload error:', e);
+  }
+}
+
 function addPattern() {
   const name = document.getElementById('new-pname').value.trim();
   const format = document.getElementById('new-pformat').value;
@@ -1592,8 +1647,16 @@ function addPattern() {
   const category = document.getElementById('new-pcategory').value.trim() || 'Pattern Making';
   const desc = document.getElementById('new-pdesc').value.trim();
   if (!name) { alert('Please enter a pattern name.'); return; }
+  if (!newPatternFileUrl) { 
+    if (!confirm('No file attached. Add pattern without a download file?')) return;
+  }
   const icons = ['icon-tshirt', 'icon-hoodie', 'icon-jeans'];
-  patterns.push({ name, format, size, category, desc, icon: icons[patterns.length % 3], image: newPatternImageData || null });
+  patterns.push({ 
+    name, format, size, category, desc, 
+    icon: icons[patterns.length % 3], 
+    image: newPatternImageData || null,
+    fileUrl: newPatternFileUrl || null
+  });
   // Reset fields
   document.getElementById('new-pname').value = '';
   document.getElementById('new-psize').value = '';
@@ -1601,7 +1664,11 @@ function addPattern() {
   document.getElementById('new-pimage').value = '';
   document.getElementById('new-pimage-name').textContent = '';
   document.getElementById('new-pimage-preview').style.display = 'none';
+  document.getElementById('new-pfile').value = '';
+  document.getElementById('new-pfile-name').textContent = '';
+  document.getElementById('new-pfile-done').style.display = 'none';
   newPatternImageData = null;
+  newPatternFileUrl = null;
   renderEditorList();
 }
 
