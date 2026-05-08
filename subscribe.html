@@ -804,11 +804,112 @@
     }
     /* ════════════════════════════════════════════════════ */
 
+
+    /* ═══ LOGIN GATE ════════════════════════════════════ */
+    #login-gate {
+      position: fixed; inset: 0;
+      background: #0E0B06;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    
+    .gate-box {
+      background: #1C1609;
+      border: 1px solid rgba(200,169,81,0.4);
+      padding: 3rem 2.5rem;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+    }
+    
+    .gate-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    
+    .gate-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; font-weight: 300;
+      color: #C8A951; margin-bottom: 0.5rem;
+    }
+    
+    .gate-sub {
+      font-size: 0.78rem; opacity: 0.55;
+      line-height: 1.7; margin-bottom: 2rem;
+    }
+    
+    .gate-btns { display: flex; flex-direction: column; gap: 0.8rem; }
+    
+    .gate-btn-primary {
+      background: #C8A951; color: #1A1208;
+      padding: 1rem; font-family: 'DM Mono', monospace;
+      font-size: 0.78rem; letter-spacing: 0.15em;
+      text-transform: uppercase; font-weight: 500;
+      border: none; cursor: pointer; text-decoration: none;
+      display: block; transition: background 0.2s;
+    }
+    
+    .gate-btn-primary:hover { background: #E8C96A; }
+    
+    .gate-btn-outline {
+      border: 1px solid rgba(200,169,81,0.35);
+      color: #F5F0E8; padding: 1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem; letter-spacing: 0.15em;
+      text-transform: uppercase; background: transparent;
+      cursor: pointer; text-decoration: none;
+      display: block; transition: all 0.2s;
+    }
+    
+    .gate-btn-outline:hover { border-color: #C8A951; color: #C8A951; }
+    
+    .gate-note {
+      font-size: 0.65rem; opacity: 0.35;
+      margin-top: 1.5rem; line-height: 1.6;
+    }
+    /* ════════════════════════════════════════════════════ */
+
   </style>
   <!-- Razorpay -->
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
+
+  <!-- ══ LOGIN GATE — shows if not logged in ══════════ -->
+  <div id="login-gate" style="display:none;">
+    <div class="gate-box">
+      <div class="gate-icon">🔐</div>
+      <div class="gate-title">Members Only</div>
+      <div class="gate-sub">
+        You need a free account to subscribe and access our services.<br/>
+        It only takes 1 minute to create.
+      </div>
+      <div class="gate-btns">
+        <a href="/register.html" class="gate-btn-primary">Create Free Account →</a>
+        <a href="/login.html" class="gate-btn-outline">Already have an account? Log In</a>
+      </div>
+      <div class="gate-note">
+        Creating an account is free and only requires your name and email.<br/>
+        You choose your plan after signing up.
+      </div>
+    </div>
+  </div>
+
+<script>
+// ── LOGIN GATE — check on page load ──────────────────
+(function() {
+  const users = JSON.parse(localStorage.getItem('lmcb_users') || '[]');
+  const loggedIn = users.some(u => u.lastLogin);
+  
+  if (!loggedIn) {
+    // Show gate — hide pricing page content
+    document.getElementById('login-gate').style.display = 'flex';
+    // Blur background content
+    document.body.style.overflow = 'hidden';
+  }
+})();
+</script>
+
 
   <!-- NAV -->
   <nav>
@@ -1193,19 +1294,9 @@ function startPayment(planKey) {
   const plan = PLANS[planKey];
   if (!plan) return;
 
-  // Check if user is logged in first
+  // User must be logged in (gate handles this)
   const users = JSON.parse(localStorage.getItem('lmcb_users') || '[]');
   const currentUser = users.find(u => u.lastLogin);
-  
-  // If not logged in - redirect to register with plan pre-selected
-  if (!currentUser) {
-    const confirmed = confirm('You need to create an account before subscribing.\n\nClick OK to go to the registration page.');
-    if (confirmed) {
-      window.location.href = '/register.html?plan=' + planKey;
-    }
-    return;
-  }
-  
   const user = currentUser || {};
 
   const options = {
