@@ -1145,18 +1145,36 @@ const DEFAULT_SPECS = [
     format: 'PDF',
     size: 'N/A',
     image: null
+  },
+  {
+    name: "Men's Standard Body Measurement (S to XXL)",
+    subtitle: 'Industry Standard Mens Dummy Measurement for Casual and Formal Wear Production',
+    category: 'Mens',
+    format: 'PDF',
+    size: 'N/A',
+    image: null
   }
 ];
 
-let specs = JSON.parse(localStorage.getItem('lmcb_specs') || 'null') || JSON.parse(JSON.stringify(DEFAULT_SPECS));
+// Always merge defaults with any admin-added specs
+function getMergedSpecs() {
+  const saved = JSON.parse(localStorage.getItem('lmcb_specs') || 'null');
+  if (!saved) return JSON.parse(JSON.stringify(DEFAULT_SPECS));
+  // Keep all 3 defaults + any extra admin-added ones
+  const adminAdded = saved.filter(s => !DEFAULT_SPECS.find(d => d.name === s.name));
+  return [...DEFAULT_SPECS, ...adminAdded];
+}
+
+let specs = getMergedSpecs();
+// Fix localStorage if it only had 2 - update to 3
+localStorage.setItem('lmcb_specs', JSON.stringify(specs));
 let activeFilter = 'All';
 
 
 // Always show default specs - localStorage only overrides if admin changed them
 function renderCards() {
   const grid = document.getElementById('spec-grid');
-  const saved = localStorage.getItem('lmcb_specs');
-  const data = saved ? JSON.parse(saved) : DEFAULT_SPECS;
+  const data = getMergedSpecs();
   const plan = localStorage.getItem('lmcb_current_plan');
   const isPaid = plan === 'brand_builder' || plan === 'pro_elite';
   const filtered = activeFilter === 'All' ? data : data.filter(s => s.category === activeFilter);
@@ -1359,12 +1377,16 @@ function addSpec() {
 }
 
 function applySpecs() {
-  localStorage.setItem('lmcb_specs', JSON.stringify(specs));
+  // Always save all 3 defaults + any admin additions
+  const adminAdded = specs.filter(s => !DEFAULT_SPECS.find(d => d.name === s.name));
+  const allSpecs = [...DEFAULT_SPECS, ...adminAdded];
+  localStorage.setItem('lmcb_specs', JSON.stringify(allSpecs));
+  specs = allSpecs;
   renderCards();
   closeAdmin();
   const msg = document.createElement('div');
   msg.textContent = '✓ Spec sheets updated successfully';
-  msg.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#C8A951;color:#F5F0E8;padding:0.8rem 2rem;font-family:DM Mono,monospace;font-size:1.26rem;letter-spacing:0.12em;text-transform:uppercase;z-index:9999;font-weight:500;white-space:nowrap;';
+  msg.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#C8A951;color:#1A1208;padding:0.8rem 2rem;font-family:DM Mono,monospace;font-size:1.26rem;letter-spacing:0.12em;text-transform:uppercase;z-index:9999;font-weight:500;white-space:nowrap;';
   document.body.appendChild(msg);
   setTimeout(() => msg.remove(), 3000);
 }
