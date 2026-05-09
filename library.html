@@ -1193,8 +1193,7 @@ async function sbUploadFile(file, folder) {
           <div class="pattern-name">Basic T-Shirt Pattern - DXF</div>
           <div class="pattern-desc">Industry-standard digital pattern for basic crew neck t-shirt with grading from XS to XXL.</div>
           <div class="pattern-file-info"><div class="file-info-cell"><div class="file-info-label">Format</div><div class="file-info-val">DXF</div></div><div class="file-info-cell"><div class="file-info-label">Size</div><div class="file-info-val">2.4 MB</div></div><div class="file-info-cell"><div class="file-info-label">Category</div><div class="file-info-val">Pattern Making</div></div></div>
-          ${isPaid && p.fileUrl ? 
-          `<a class="pattern-download-btn" href="${p.fileUrl}" download target="_blank">â¬ &nbsp; Download Pattern</a>` : 
+          <div class="pattern-download-locked">🔒 &nbsp; Locked — Subscribe to Download</div>" download target="_blank">â¬ &nbsp; Download Pattern</a>` : 
           p.fileUrl ? 
           `<div class="pattern-download-locked">ð &nbsp; Subscribe to Download</div>` :
           `<div class="pattern-download-locked">ð &nbsp; File Coming Soon</div>`
@@ -1212,8 +1211,7 @@ async function sbUploadFile(file, folder) {
           <div class="pattern-name">Hoodie Pattern with Tech Pack</div>
           <div class="pattern-desc">Complete hoodie pattern with measurement charts, fabric consumption guide, and technical specifications.</div>
           <div class="pattern-file-info"><div class="file-info-cell"><div class="file-info-label">Format</div><div class="file-info-val">ZIP</div></div><div class="file-info-cell"><div class="file-info-label">Size</div><div class="file-info-val">5.8 MB</div></div><div class="file-info-cell"><div class="file-info-label">Category</div><div class="file-info-val">Pattern Making</div></div></div>
-          ${isPaid && p.fileUrl ? 
-          `<a class="pattern-download-btn" href="${p.fileUrl}" download target="_blank">â¬ &nbsp; Download Pattern</a>` : 
+          <div class="pattern-download-locked">🔒 &nbsp; Locked — Subscribe to Download</div>" download target="_blank">â¬ &nbsp; Download Pattern</a>` : 
           p.fileUrl ? 
           `<div class="pattern-download-locked">ð &nbsp; Subscribe to Download</div>` :
           `<div class="pattern-download-locked">ð &nbsp; File Coming Soon</div>`
@@ -1231,8 +1229,7 @@ async function sbUploadFile(file, folder) {
           <div class="pattern-name">Denim Jeans Pattern - PDF</div>
           <div class="pattern-desc">Professional denim jeans pattern with pocket details and construction notes.</div>
           <div class="pattern-file-info"><div class="file-info-cell"><div class="file-info-label">Format</div><div class="file-info-val">PDF</div></div><div class="file-info-cell"><div class="file-info-label">Size</div><div class="file-info-val">3.2 MB</div></div><div class="file-info-cell"><div class="file-info-label">Category</div><div class="file-info-val">Pattern Making</div></div></div>
-          ${isPaid && p.fileUrl ? 
-          `<a class="pattern-download-btn" href="${p.fileUrl}" download target="_blank">â¬ &nbsp; Download Pattern</a>` : 
+          <div class="pattern-download-locked">🔒 &nbsp; Locked — Subscribe to Download</div>" download target="_blank">â¬ &nbsp; Download Pattern</a>` : 
           p.fileUrl ? 
           `<div class="pattern-download-locked">ð &nbsp; Subscribe to Download</div>` :
           `<div class="pattern-download-locked">ð &nbsp; File Coming Soon</div>`
@@ -1497,8 +1494,7 @@ function renderCards() {
           <div class="file-info-cell"><div class="file-info-label">Size</div><div class="file-info-val">${p.size}</div></div>
           <div class="file-info-cell"><div class="file-info-label">Category</div><div class="file-info-val">${p.category}</div></div>
         </div>
-        ${isPaid && p.fileUrl ? 
-          `<a class="pattern-download-btn" href="${p.fileUrl}" download target="_blank">â¬ &nbsp; Download Pattern</a>` : 
+        <div class="pattern-download-locked">🔒 &nbsp; Locked — Subscribe to Download</div>" download target="_blank">â¬ &nbsp; Download Pattern</a>` : 
           p.fileUrl ? 
           `<div class="pattern-download-locked">ð &nbsp; Subscribe to Download</div>` :
           `<div class="pattern-download-locked">ð &nbsp; File Coming Soon</div>`
@@ -1839,23 +1835,9 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
   <!-- SUPABASE AUTO-LOAD -->
-  <script>
-  (async function() {
-    try {
-      var _sb = supabase.createClient(
-        'https://tldbjsqhjqapdwmfeuwq.supabase.co',
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ'
-      );
-      var r = await _sb.from('site_settings').select('*').eq('id', 'main').single();
-      if (r.data) {
-        var d = r.data;
-        var keys = ['lmcb_patterns_all','lmcb_specs_v2','lmcb_ex','lmcb_ds','lmcb_manufacturers','lmcb_videos','lmcb_brands','lmcb_admin_pw'];
-        var updated = false;
-        keys.forEach(function(k) { if (d[k] && localStorage.getItem(k) !== d[k]) { localStorage.setItem(k, d[k]); updated = true; } });
-        if (updated) { console.log('Data updated from Supabase'); }
-      }
-    } catch(e) { console.log('Supabase auto-load:', e.message); }
-  })();
-  <\/script>
+  
+<script>
+(async function(){try{var _sb=supabase.createClient('https://tldbjsqhjqapdwmfeuwq.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ');var r=await _sb.from('site_settings').select('*').eq('id','main').single();if(r.data){var d=r.data;['lmcb_patterns_all','lmcb_specs_v2','lmcb_ex','lmcb_ds','lmcb_manufacturers','lmcb_admin_pw'].forEach(function(k){if(d[k])localStorage.setItem(k,d[k]);});}}catch(e){}})();
+</script>
 </body>
 </html>
