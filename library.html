@@ -1422,14 +1422,40 @@ const DEFAULT_PATTERNS = [
   }
 ];
 
-let patterns = JSON.parse(localStorage.getItem('lmcb_patterns') || 'null') || JSON.parse(JSON.stringify(DEFAULT_PATTERNS));
+// Always merge defaults with any admin additions
+function getMergedPatterns() {
+  const allSaved = localStorage.getItem('lmcb_patterns_all');
+  if (allSaved) {
+    const parsed = JSON.parse(allSaved);
+    const names = parsed.map(p => p.name);
+    const missing = DEFAULT_PATTERNS.filter(d => !names.includes(d.name));
+    return [...parsed, ...missing];
+  }
+  return JSON.parse(JSON.stringify(DEFAULT_PATTERNS));
+}
+
+function saveAllPatterns() {
+  localStorage.setItem('lmcb_patterns_all', JSON.stringify(patterns));
+}
+
+function showPatternMsg(text) {
+  const existing = document.getElementById('pattern-msg');
+  if (existing) existing.remove();
+  const msg = document.createElement('div');
+  msg.id = 'pattern-msg';
+  msg.textContent = text;
+  msg.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#1C1609;border:1px solid rgba(200,169,81,0.4);color:#C8A951;padding:0.8rem 1.5rem;font-family:DM Mono,monospace;font-size:1rem;z-index:99999;white-space:nowrap;';
+  document.body.appendChild(msg);
+  setTimeout(() => msg.remove(), 3500);
+}
+
+let patterns = getMergedPatterns();
 let activeFilter = 'all';
 
 
 function renderCards() {
   const grid = document.getElementById('pattern-grid');
-  const saved = localStorage.getItem('lmcb_patterns');
-  const data = saved ? JSON.parse(saved) : DEFAULT_PATTERNS;
+  const data = getMergedPatterns();
   const plan = localStorage.getItem('lmcb_current_plan');
   const isPaid = plan === 'brand_builder' || plan === 'pro_elite';
   const filtered = activeFilter === 'all' ? data : data.filter(p => p.format === activeFilter);
@@ -1504,6 +1530,7 @@ function adminLogin() {
   if (document.getElementById('admin-pw').value === ADMIN_PASSWORD) {
     document.getElementById('admin-login').style.display = 'none';
     document.getElementById('admin-editor').style.display = 'block';
+    patterns = getMergedPatterns();
     renderEditorList();
   } else {
     document.getElementById('admin-pw-error').style.display = 'block';
@@ -1515,24 +1542,24 @@ function adminLogin() {
 function renderEditorList() {
   const container = document.getElementById('pattern-editor-list');
   container.innerHTML = patterns.map((p, i) => `
-    <div style="display:flex;align-items:center;gap:0.8rem;padding:0.9rem 1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(200,169,81,0.12);">
-      <!-- Image thumbnail or placeholder -->
+    <div style="display:flex;align-items:center;gap:0.8rem;padding:0.9rem 1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(200,169,81,0.12);margin-bottom:0.4rem;">
       <div style="width:52px;height:52px;flex-shrink:0;background:#0E0B06;border:1px solid rgba(200,169,81,0.2);overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;">
-        ${p.image
-          ? `<img src="${p.image}" style="width:100%;height:100%;object-fit:cover;" />`
-          : `<span style="font-size:1.3rem;opacity:0.3;">${FORMAT_ICONS[p.format] || '📁'}</span>`}
+        ${p.image ? `<img src="${p.image}" style="width:100%;height:100%;object-fit:cover;" />` : `<span style="font-size:1.3rem;opacity:0.3;">${FORMAT_ICONS[p.format] || '📁'}</span>`}
       </div>
       <div style="flex:1;min-width:0;">
-        <div style="font-size:0.96rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.name}</div>
-        <div style="font-size:1.26rem;opacity:0.45;margin-top:0.15rem;">${p.format} · ${p.size} · ${p.image ? '✓ Image set' : '⚠ No image yet'}</div>
+        <div style="font-size:0.9rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.name}</div>
+        <div style="font-size:0.72rem;opacity:0.45;margin-top:0.15rem;">${p.format} · ${p.size} · ${p.fileUrl ? '✅ File attached' : '⚠ No file'} · ${p.image ? '✓ Image' : 'No image'}</div>
       </div>
-      <!-- Upload image button -->
-      <label title="Upload image for this pattern" style="background:transparent;border:1px solid rgba(200,169,81,0.3);color:#C8A951;padding:0.4rem 0.8rem;font-family:'DM Mono',monospace;font-size:1.26rem;cursor:pointer;white-space:nowrap;letter-spacing:0.1em;text-transform:uppercase;">
-        📷 Image
-        <input type="file" accept="image/*" style="display:none;" onchange="uploadImage(event, ${i})" />
+      <label title="Attach pattern file" style="background:rgba(200,169,81,0.1);border:1px solid rgba(200,169,81,0.4);color:#C8A951;padding:0.4rem 0.7rem;font-family:'DM Mono',monospace;font-size:0.72rem;cursor:pointer;white-space:nowrap;letter-spacing:0.08em;text-transform:uppercase;">
+        📎 File
+        <input type="file" accept=".pdf,.dxf,.zip,.xlsx" style="display:none;" onchange="uploadPatternFileForExisting(event,${i})" />
       </label>
-      <button onclick="editPattern(${i})" style="background:transparent;border:1px solid rgba(200,169,81,0.3);color:#C8A951;padding:0.4rem 0.8rem;font-family:'DM Mono',monospace;font-size:1.26rem;cursor:pointer;white-space:nowrap;letter-spacing:0.1em;text-transform:uppercase;">Edit</button>
-      <button onclick="removePattern(${i})" style="background:transparent;border:1px solid rgba(212,71,42,0.3);color:#D4472A;padding:0.4rem 0.7rem;font-family:'DM Mono',monospace;font-size:1.26rem;cursor:pointer;">✕</button>
+      <label title="Upload image" style="background:transparent;border:1px solid rgba(200,169,81,0.3);color:#C8A951;padding:0.4rem 0.7rem;font-family:'DM Mono',monospace;font-size:0.72rem;cursor:pointer;white-space:nowrap;letter-spacing:0.1em;text-transform:uppercase;">
+        📷
+        <input type="file" accept="image/*" style="display:none;" onchange="uploadImage(event,${i})" />
+      </label>
+      <button onclick="editPattern(${i})" style="background:transparent;border:1px solid rgba(200,169,81,0.3);color:#C8A951;padding:0.4rem 0.7rem;font-family:'DM Mono',monospace;font-size:0.72rem;cursor:pointer;white-space:nowrap;letter-spacing:0.08em;text-transform:uppercase;">Edit</button>
+      <button onclick="removePattern(${i})" style="background:transparent;border:1px solid rgba(212,71,42,0.3);color:#D4472A;padding:0.4rem 0.6rem;font-family:'DM Mono',monospace;font-size:0.72rem;cursor:pointer;">✕</button>
     </div>
   `).join('');
 }
@@ -1548,21 +1575,44 @@ function uploadImage(event, index) {
   const reader = new FileReader();
   reader.onload = function(e) {
     patterns[index].image = e.target.result;
+    saveAllPatterns();
     renderEditorList();
-    // Show instant feedback
-    const msg = document.createElement('div');
-    msg.textContent = `✓ Image uploaded for "${patterns[index].name}" — click Apply to save.`;
-    msg.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#1C1609;border:1px solid rgba(200,169,81,0.4);color:#C8A951;padding:0.8rem 1.5rem;font-family:DM Mono,monospace;font-size:1.26rem;letter-spacing:0.08em;z-index:99999;white-space:nowrap;';
-    document.body.appendChild(msg);
-    setTimeout(() => msg.remove(), 3500);
+    showPatternMsg('✓ Image uploaded and saved!');
   };
   reader.readAsDataURL(file);
+}
+
+async function uploadPatternFileForExisting(event, index) {
+  const file = event.target.files[0];
+  if (!file) return;
+  showPatternMsg('Uploading file to Supabase...');
+  try {
+    const { createClient } = supabase;
+    const _sb = createClient(
+      'https://tldbjsqhjqapdwmfeuwq.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ'
+    );
+    const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+    const path = 'patterns/' + Date.now() + '_' + safeName;
+    const { data, error } = await _sb.storage.from('files').upload(path, file, { cacheControl: '3600', upsert: true });
+    if (error) throw error;
+    const { data: urlData } = _sb.storage.from('files').getPublicUrl(path);
+    patterns[index].fileUrl = urlData.publicUrl;
+    saveAllPatterns();
+    renderEditorList();
+    renderCards();
+    showPatternMsg('File attached — ' + file.name);
+  } catch(e) {
+    showPatternMsg('Upload failed: ' + e.message);
+  }
 }
 
 function removePattern(i) {
   if (!confirm(`Remove "${patterns[i].name}"?`)) return;
   patterns.splice(i, 1);
+  saveAllPatterns();
   renderEditorList();
+  renderCards();
 }
 
 function editPattern(i) {
@@ -1578,7 +1628,9 @@ function editPattern(i) {
   } else {
     patterns[i] = { ...p, name, format: format.toUpperCase(), size, category, desc };
   }
+  saveAllPatterns();
   renderEditorList();
+  renderCards();
 }
 
 let newPatternImageData = null;
@@ -1673,21 +1725,20 @@ function addPattern() {
 }
 
 function applyPatterns() {
-  localStorage.setItem('lmcb_patterns', JSON.stringify(patterns));
+  saveAllPatterns();
+  patterns = getMergedPatterns();
   renderCards();
   closeAdmin();
-  const msg = document.createElement('div');
-  msg.textContent = '✓ Pattern library updated';
-  msg.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#C8A951;color:#F5F0E8;padding:0.8rem 2rem;font-family:DM Mono,monospace;font-size:1.26rem;letter-spacing:0.12em;text-transform:uppercase;z-index:9999;font-weight:500;white-space:nowrap;';
-  document.body.appendChild(msg);
-  setTimeout(() => msg.remove(), 3000);
+  showPatternMsg('✓ Pattern library updated!');
 }
 
 function resetPatterns() {
   if (!confirm('Reset to original pattern list?')) return;
-  patterns = JSON.parse(JSON.stringify(DEFAULT_PATTERNS));
+  localStorage.removeItem('lmcb_patterns_all');
   localStorage.removeItem('lmcb_patterns');
+  patterns = getMergedPatterns();
   renderEditorList();
+  renderCards();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
