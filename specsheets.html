@@ -475,26 +475,30 @@ async function attachFileToSpec(event, index) {
   } catch(e) { showMsg('❌ Upload failed: ' + e.message); }
 }
 
-function attachImageToSpec(event, index) {
+async function attachImageToSpec(event, index) {
   var file = event.target.files[0];
   if (!file) return;
-  var reader = new FileReader();
-  reader.onload = function(e) {
+  showMsg('⏳ Uploading image...');
+  try {
+    var _sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    var path = 'images/' + Date.now() + '_' + file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+    var result = await _sb.storage.from('files').upload(path, file, { upsert: true });
+    if (result.error) throw result.error;
+    var url = _sb.storage.from('files').getPublicUrl(path).data.publicUrl;
     var specs = getAllSpecs();
     var s = specs[index];
     if (s.id) {
       var state = getDefaultState();
-      state[s.id] = Object.assign({}, state[s.id] || {}, { image: e.target.result });
+      state[s.id] = Object.assign({}, state[s.id] || {}, { image: url });
       saveDefaultState(state);
     } else {
       var extras = getExtras();
-      extras[index - DEFAULTS.length].image = e.target.result;
+      extras[index - DEFAULTS.length].image = url;
       saveExtras(extras);
     }
     renderEditorList(); renderCards();
-    showMsg('✅ Image added!');
-  };
-  reader.readAsDataURL(file);
+    showMsg('✅ Image uploaded!');
+  } catch(e) { showMsg('❌ Image upload failed: ' + e.message); }
 }
 
 function removeSpecItem(index) {
@@ -527,17 +531,22 @@ function editSpecItem(index) {
 // ── ADD NEW ────────────────────────────────────────────
 var newImg = null, newFileUrl = null;
 
-function previewNewImage(event) {
+async function previewNewImage(event) {
   var file = event.target.files[0];
   if (!file) return;
-  var reader = new FileReader();
-  reader.onload = function(e) {
-    newImg = e.target.result;
+  showMsg('⏳ Uploading image...');
+  try {
+    var _sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    var path = 'images/' + Date.now() + '_' + file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+    var result = await _sb.storage.from('files').upload(path, file, { upsert: true });
+    if (result.error) throw result.error;
+    var url = _sb.storage.from('files').getPublicUrl(path).data.publicUrl;
+    newImg = url;
     document.getElementById('new-simage-name').textContent = file.name;
-    document.getElementById('new-simage-thumb').src = e.target.result;
+    document.getElementById('new-simage-thumb').src = url;
     document.getElementById('new-simage-preview').style.display = 'block';
-  };
-  reader.readAsDataURL(file);
+    showMsg('✅ Image uploaded!');
+  } catch(e) { showMsg('❌ Image upload failed: ' + e.message); }
 }
 
 async function handleNewFile(event) {
