@@ -64,6 +64,7 @@
     .file-info-label { font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); opacity: 0.6; margin-bottom: 0.2rem; }
     .file-info-val { font-size: 0.72rem; }
     .pattern-download-locked { text-align: center; padding: 0.75rem; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.35; border: 1px solid var(--border); }
+    button.pattern-download-btn { border: none; cursor: pointer; width: 100%; }
     .pattern-download-btn { display: block; background: var(--gold); color: var(--ink); text-align: center; padding: 0.8rem; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; text-decoration: none; transition: background 0.2s; font-family: 'DM Mono', monospace; }
     .pattern-download-btn:hover { background: var(--gold-light); }
     .cta-band { background: var(--gold); padding: 5rem 4rem; text-align: center; }
@@ -128,19 +129,6 @@
   </style>
 </head>
 <body>
-
-  <!-- LOGIN GATE -->
-  <div id="login-gate" style="display:none;position:fixed;inset:0;background:#0E0B06;z-index:9999;align-items:center;justify-content:center;padding:2rem;">
-    <div style="background:#1C1609;border:1px solid rgba(200,169,81,0.4);padding:3rem 2.5rem;max-width:420px;width:100%;text-align:center;">
-      <div style="font-size:2rem;margin-bottom:1rem;">🔐</div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:#C8A951;margin-bottom:0.5rem;">Members Only</div>
-      <div style="font-size:0.78rem;opacity:0.55;line-height:1.7;margin-bottom:2rem;">You need an account to access the Pattern Library.<br/>Create a free account to get started.</div>
-      <div style="display:flex;flex-direction:column;gap:0.8rem;">
-        <a href="/register.html" style="background:#C8A951;color:#1A1208;padding:1rem;font-family:'DM Mono',monospace;font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:500;text-decoration:none;display:block;">Create Free Account →</a>
-        <a href="/login.html" style="border:1px solid rgba(200,169,81,0.35);color:#F5F0E8;padding:1rem;font-family:'DM Mono',monospace;font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;display:block;">Already have an account? Log In</a>
-      </div>
-    </div>
-  </div>
 
   <nav>
     <a href="/index.html" class="nav-logo">Launch My Clothing Brand<span>Pattern Making & Manufacturing</span></a>
@@ -354,9 +342,9 @@ function renderCards() {
     var preview = p.image
       ? '<img src="'+p.image+'" alt="'+p.name+'" style="width:100%;height:100%;object-fit:cover;" />'
       : '<svg class="pattern-svg" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><path d="M10 20 L25 10 L40 18 L55 10 L70 20 L58 30 L58 70 L22 70 L22 30 Z" stroke="#C8A951" stroke-width="2" fill="none" stroke-linecap="round"/></svg><div style="position:absolute;bottom:0.8rem;left:50%;transform:translateX(-50%);font-size:0.5rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(200,169,81,0.4);white-space:nowrap;">Image Coming Soon</div>';
-    var dlBtn = isPaid && p.fileUrl
-      ? '<a class="pattern-download-btn" href="'+p.fileUrl+'" download target="_blank">⬇ Download Pattern</a>'
-      : '<div class="pattern-download-locked">🔒 Locked — Subscribe to Download</div>';
+    var dlBtn = p.fileUrl
+      ? '<button class="pattern-download-btn" onclick="showDownloadModal(\'' + p.fileUrl + '\')">⬇ Download Pattern</button>'
+      : '<button class="pattern-download-btn" onclick="showDownloadModal(null)">⬇ Download Pattern</button>';
     return '<div class="pattern-card" data-format="'+p.format+'"><div class="pattern-preview">'+preview+'<div class="pattern-lock-overlay"><div class="pattern-lock-icon">🔒</div><div class="pattern-lock-text">Premium Only</div></div></div><div class="pattern-body"><div class="pattern-meta"><span class="meta-tag format">'+formatEmoji+' '+p.format+'</span><span class="meta-tag">'+p.category+'</span></div><div class="pattern-name">'+p.name+'</div><div class="pattern-desc">'+p.desc+'</div><div class="pattern-file-info"><div class="file-info-cell"><div class="file-info-label">Format</div><div class="file-info-val">'+p.format+'</div></div><div class="file-info-cell"><div class="file-info-label">Size</div><div class="file-info-val">'+p.size+'</div></div><div class="file-info-cell"><div class="file-info-label">Category</div><div class="file-info-val">'+p.category+'</div></div></div>'+dlBtn+'</div></div>';
   }).join('');
 }
@@ -534,6 +522,33 @@ function showMsg(text) {
   document.body.appendChild(m); setTimeout(function(){m.remove();},3000);
 }
 
+
+function showDownloadModal(fileUrl) {
+  var users = JSON.parse(localStorage.getItem('lmcb_users') || '[]');
+  var isLoggedIn = users.some(function(u) { return u.lastLogin; });
+  var plan = localStorage.getItem('lmcb_current_plan');
+  var isPaid = isLoggedIn && (plan === 'brand_builder' || plan === 'pro_elite');
+  var modal = document.getElementById('download-modal');
+  var msg = document.getElementById('modal-msg');
+  var btns = document.getElementById('modal-btns');
+  var title = document.getElementById('modal-title');
+
+  if (!isLoggedIn) {
+    title.textContent = 'Login Required';
+    msg.textContent = 'You need to create a free account to download pattern files.';
+    btns.innerHTML = '<a href="/register.html" style="background:#C8A951;color:#1A1208;padding:0.9rem;font-family:DM Mono,monospace;font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:500;text-decoration:none;display:block;">Create Free Account →</a><a href="/login.html" style="border:1px solid rgba(200,169,81,0.35);color:#F5F0E8;padding:0.9rem;font-family:DM Mono,monospace;font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;display:block;">Already have an account? Log In</a>';
+  } else if (!isPaid) {
+    title.textContent = 'Subscription Required';
+    msg.textContent = 'Pattern downloads are available for Brand Builder and Pro Elite subscribers only.';
+    btns.innerHTML = '<a href="/subscribe.html" style="background:#C8A951;color:#1A1208;padding:0.9rem;font-family:DM Mono,monospace;font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:500;text-decoration:none;display:block;">View Plans →</a><button onclick="document.getElementById('download-modal').style.display='none'" style="border:1px solid rgba(200,169,81,0.35);color:#F5F0E8;padding:0.9rem;font-family:DM Mono,monospace;font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;background:transparent;cursor:pointer;width:100%;">Maybe Later</button>';
+  } else if (fileUrl) {
+    // Paid user - download directly
+    window.open(fileUrl, '_blank');
+    return;
+  }
+  modal.style.display = 'flex';
+}
+
 // WhatsApp
 var _WA_NUM='918796158321',_WA_MSG='Hi! I need help with my clothing brand.';
 function _initWA(){var b=document.getElementById('wa-bubble'),l=document.getElementById('wa-link');if(!b||!l)return;l.href='https://wa.me/'+_WA_NUM+'?text='+encodeURIComponent(_WA_MSG);var p=localStorage.getItem('lmcb_current_plan');if(p==='brand_builder'||p==='pro_elite'){b.style.display='flex';b.style.visibility='visible';}else{b.style.display='none';b.style.visibility='hidden';}}
@@ -541,12 +556,6 @@ function _initWA(){var b=document.getElementById('wa-bubble'),l=document.getElem
 // Init
 document.addEventListener('DOMContentLoaded', async function() {
   // Check login
-  var users = JSON.parse(localStorage.getItem('lmcb_users') || '[]');
-  var isLoggedIn = users.some(function(u) { return u.lastLogin; });
-  if (!isLoggedIn) {
-    document.getElementById('login-gate').style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-  }
   await loadFromSB();
   renderCards();
   document.getElementById('admin-pw').addEventListener('keydown', function(e) { if(e.key==='Enter') adminLogin(); });
