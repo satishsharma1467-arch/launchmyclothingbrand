@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+/<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -1017,7 +1017,7 @@
 
     <!-- ══ ADMIN-EDITABLE MANUFACTURER LIST ══
          To add/edit manufacturers, press Ctrl+Shift+A on this page.
-         Password: admin123
+         Password: SATISH@1467
     ═══════════════════════════════════════ -->
     <div class="mfr-grid" id="mfr-grid">
       <div class="mfr-card"><div class="mfr-card-top"><div class="mfr-name">SAROSE CLOTHING</div><div class="mfr-index">01</div></div><div class="mfr-location">📍 Gurgaon, Haryana</div><div class="mfr-spec-label">Specialization</div><div class="mfr-spec">Womens, Mens and Kids Wear</div><div class="mfr-desc">State-of-the-art facility with 15+ machines. Specializing in premium cotton and polyester blends. Offer sampling service as well. MOQ range from 50-100 per style.</div><div class="mfr-footer"><div class="mfr-moq"><div class="mfr-moq-label">Minimum Order</div><div class="mfr-moq-val">50–100</div></div><div class="mfr-contact-locked">Locked — Subscribe to Unlock</div></div></div>
@@ -1087,7 +1087,7 @@
 
   <!-- ══════════════════════════════════════════════
        ADMIN MANUFACTURER EDITOR
-       Password: admin123  (change ADMIN_PASSWORD below)
+       Password: SATISH@1467  (change ADMIN_PASSWORD below)
        Open: Ctrl+Shift+A  or  ?admin in URL  or  ⚙️ button
   ══════════════════════════════════════════════ -->
   <div id="admin-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.88); z-index:9000; align-items:center; justify-content:center; padding:1rem;">
@@ -1144,7 +1144,7 @@
 
 <script>
 // ── CHANGE PASSWORD HERE ─────────────────────────────────
-const ADMIN_PASSWORD = 'admin123';
+const ADMIN_PASSWORD = 'SATISH@1467';
 
 // ── DEFAULT MANUFACTURERS ────────────────────────────────
 const DEFAULT_MANUFACTURERS = [
@@ -1377,7 +1377,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <script>
 const _WA_NUM="918796158321",_WA_MSG="Hi! I need help with my clothing brand.";
 function _initWA(){const b=document.getElementById("wa-bubble"),l=document.getElementById("wa-link");if(!b||!l)return;l.href="https://wa.me/"+_WA_NUM+"?text="+encodeURIComponent(_WA_MSG);const p=localStorage.getItem("lmcb_current_plan");const paid=["brand_builder","pro_elite"];if(p&&paid.indexOf(p)!==-1){b.style.display="flex";b.style.visibility="visible";b.style.pointerEvents="auto";}else{b.style.display="none";b.style.visibility="hidden";b.style.pointerEvents="none";}}
-function getAdminPassword(){return localStorage.getItem("lmcb_admin_pw")||"admin123";}
+function getAdminPassword(){return localStorage.getItem("lmcb_admin_pw")||"SATISH@1467";}
 function changeAdminPassword(){const c=prompt("Enter CURRENT admin password:");if(!c)return;if(c!==getAdminPassword()){alert("Incorrect password.");return;}const n=prompt("Enter NEW password (min 8 chars):");if(!n||n.length<8){alert("Min 8 characters required.");return;}const c2=prompt("Confirm new password:");if(n!==c2){alert("Passwords do not match.");return;}localStorage.setItem("lmcb_admin_pw",n);alert("Password updated! New password: "+n);}
 
 document.addEventListener("DOMContentLoaded",_initWA);
