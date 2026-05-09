@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Admin Data — LMCB</title>
@@ -131,36 +128,11 @@ tr:hover td{background:rgba(255,255,255,0.02)}
 </div>
 
 <script>
-const SUPABASE_URL = 'https://tldbjsqhjqapdwmfeuwq.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ';
-
 function getAdminPw() { return localStorage.getItem('lmcb_admin_pw') || 'admin123'; }
+function getUsers() { return JSON.parse(localStorage.getItem('lmcb_users') || '[]'); }
+function getMessages() { return JSON.parse(localStorage.getItem('lmcb_messages') || '[]'); }
 
-async function getUsers() {
-  try {
-    const r = await fetch(SUPABASE_URL + '/rest/v1/users?order=created_at.desc', {
-      headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
-    });
-    const data = await r.json();
-    return Array.isArray(data) ? data : [];
-  } catch(e) {
-    return JSON.parse(localStorage.getItem('lmcb_users') || '[]');
-  }
-}
-
-async function getMessages() {
-  try {
-    const r = await fetch(SUPABASE_URL + '/rest/v1/messages?order=received_at.desc', {
-      headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
-    });
-    const data = await r.json();
-    return Array.isArray(data) ? data : [];
-  } catch(e) {
-    return JSON.parse(localStorage.getItem('lmcb_messages') || '[]');
-  }
-}
-
-async function login() {
+function login() {
   const pw = document.getElementById('pw').value;
   if (pw !== getAdminPw()) {
     document.getElementById('pwErr').style.display = 'block';
@@ -169,12 +141,9 @@ async function login() {
   }
   document.getElementById('loginBox').style.display = 'none';
   document.getElementById('panel').style.display = 'block';
-  document.getElementById('log').innerHTML = '<span class="dim">Loading data from Supabase...</span>';
-  const users = await getUsers();
-  const messages = await getMessages();
-  renderTable(users);
-  renderMessages(messages);
-  updateStats(users);
+  renderTable(getUsers());
+  renderMessages();
+  updateStats();
 }
 
 function formatDate(iso) {
@@ -192,8 +161,8 @@ function planBadge(plan) {
   return `<span class="badge ${cls}">${label}</span>`;
 }
 
-function updateStats(users) {
-  users = users || [];
+function updateStats() {
+  const users = getUsers();
   const today = new Date().toISOString().split('T')[0];
   const paid = users.filter(u => u.plan && u.plan !== 'free');
   const revenue = users.reduce((sum, u) => sum + (u.planAmount || 0), 0);
@@ -204,7 +173,6 @@ function updateStats(users) {
 }
 
 function renderTable(users) {
-  users = users || [];
   const tbody = document.getElementById('tbody');
   const empty = document.getElementById('empty');
   document.getElementById('user-count').textContent = users.length + ' users';
@@ -225,8 +193,8 @@ function renderTable(users) {
     </tr>`).join('');
 }
 
-function renderMessages(msgs) {
-  msgs = msgs || [];
+function renderMessages() {
+  const msgs = getMessages();
   const tbody = document.getElementById('msg-tbody');
   const empty = document.getElementById('msg-empty');
   if (!msgs.length) { tbody.innerHTML = ''; empty.style.display = 'block'; return; }
@@ -289,20 +257,6 @@ function exportCSV() {
 }
 
 document.getElementById('pw').addEventListener('keydown', e => { if(e.key==='Enter') login(); });
-</script>
-
-<script>
-// Open admin via URL: add ?admin to any page URL
-// Change password via URL: add ?password to any page URL
-document.addEventListener('DOMContentLoaded', function() {
-  var params = new URLSearchParams(window.location.search);
-  if (params.has('admin') && typeof openAdmin === 'function') {
-    openAdmin();
-  }
-  if (params.has('password') && typeof changeAdminPassword === 'function') {
-    setTimeout(changeAdminPassword, 500);
-  }
-});
 </script>
 </body>
 </html>
