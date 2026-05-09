@@ -327,7 +327,9 @@ var activeFilter = 'all';
 function renderCards() {
   var patterns = getAllPatterns();
   var plan = localStorage.getItem('lmcb_current_plan');
-  var isPaid = plan === 'brand_builder' || plan === 'pro_elite';
+  var users = JSON.parse(localStorage.getItem('lmcb_users') || '[]');
+  var isLoggedIn = users.some(function(u) { return u.lastLogin; });
+  var isPaid = isLoggedIn && (plan === 'brand_builder' || plan === 'pro_elite');
   var filtered = activeFilter === 'all' ? patterns : patterns.filter(function(p) { return p.format === activeFilter; });
   document.getElementById('total-count').textContent = patterns.length + '+';
   var grid = document.getElementById('pattern-grid');
