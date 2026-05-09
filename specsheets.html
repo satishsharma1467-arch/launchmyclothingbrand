@@ -1172,9 +1172,11 @@ function getMergedSpecs() {
 }
 
 function saveExtraSpecs(allSpecs) {
-  // Only save non-default specs to localStorage
-  const extra = allSpecs.filter(s => !DEFAULT_SPECS.find(d => d.name === s.name));
-  localStorage.setItem('lmcb_specs_extra', JSON.stringify(extra));
+  localStorage.setItem('lmcb_specs_all', JSON.stringify(allSpecs));
+}
+
+function saveAllSpecs() {
+  localStorage.setItem('lmcb_specs_all', JSON.stringify(specs));
 }
 
 let specs = getMergedSpecs();
@@ -1323,11 +1325,6 @@ async function uploadSpecFileForExisting(event, index) {
   } catch(e) {
     showMsg('❌ Upload failed: ' + e.message);
   }
-}
-
-function saveAllSpecs() {
-  // Save everything — both defaults (with their edits) and extras
-  localStorage.setItem('lmcb_specs_all', JSON.stringify(specs));
 }
 
 function removeSpec(i) {
