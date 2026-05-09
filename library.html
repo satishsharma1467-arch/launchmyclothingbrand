@@ -1846,7 +1846,7 @@ function getAdminPassword(){return localStorage.getItem("lmcb_admin_pw")||"SATIS
 function changeAdminPassword(){const c=prompt("Enter CURRENT admin password:");if(!c)return;if(c!==getAdminPassword()){alert("Incorrect password.");return;}const n=prompt("Enter NEW password (min 8 chars):");if(!n||n.length<8){alert("Min 8 characters required.");return;}const c2=prompt("Confirm new password:");if(n!==c2){alert("Passwords do not match.");return;}localStorage.setItem("lmcb_admin_pw",n);alert("Password updated! New password: "+n);}
 
 document.addEventListener("DOMContentLoaded",_initWA);
-<\/script>
+</script>
 
   <!-- MOBILE BOTTOM NAVIGATION -->
   <nav class="mobile-bottom-nav">
@@ -1932,7 +1932,6 @@ document.addEventListener('DOMContentLoaded', function() {
     } catch(e) { console.log('Supabase auto-load:', e.message); }
   })();
   <\/script>
-<!-- cache bust 1778324161572 -->
 </body>
 </html>
-</script></body></html>
+</body></html>
