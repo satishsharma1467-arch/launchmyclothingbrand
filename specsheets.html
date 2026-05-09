@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Spec Sheets | Launch My Clothing Brand</title>
@@ -794,23 +797,6 @@
     }
     /* ════════════════════════════════════════════════════ */
 
-
-    .spec-download-btn {
-      display: block;
-      background: var(--gold);
-      color: var(--ink);
-      text-align: center;
-      padding: 0.8rem;
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      font-weight: 500;
-      text-decoration: none;
-      transition: background 0.2s;
-      margin-top: 0.8rem;
-      font-family: 'DM Mono', monospace;
-    }
-    .spec-download-btn:hover { background: var(--gold-light); }
   </style>
 
 <!-- Supabase SDK -->
@@ -964,12 +950,7 @@ async function sbUploadFile(file, folder) {
           <div class="spec-name">Kids Dummy Standard Measurement (6M to 8Y)</div>
           <div class="spec-desc">Standard Industry Proven Dummy Measurement of Kids Used in Multiple Brands</div>
           <div class="spec-meta"><div class="spec-meta-cell"><div class="spec-meta-label">Category</div><div class="spec-meta-val">Kids</div></div><div class="spec-meta-cell"><div class="spec-meta-label">Format</div><div class="spec-meta-val">PDF</div></div></div>
-          ${isPaid && s.fileUrl ? 
-            `<a class="spec-download-btn" href="${s.fileUrl}" download target="_blank">⬇ &nbsp; Download Spec Sheet</a>` :
-            s.fileUrl ?
-            `<div class="spec-download-locked">🔒 &nbsp; Subscribe to Download</div>` :
-            `<div class="spec-download-locked">🔒 &nbsp; File Coming Soon</div>`
-          }
+          <div class="spec-download-locked">🔒 &nbsp; Premium Only — Subscribe to Download</div>
         </div>
       </div>
 
@@ -984,12 +965,7 @@ async function sbUploadFile(file, folder) {
           <div class="spec-name">Women's Dummy Measurement (XS to XXL)</div>
           <div class="spec-desc">Industry Proven Detailed Dummy Measurement of Womens to Cater All Designs</div>
           <div class="spec-meta"><div class="spec-meta-cell"><div class="spec-meta-label">Category</div><div class="spec-meta-val">Womens</div></div><div class="spec-meta-cell"><div class="spec-meta-label">Format</div><div class="spec-meta-val">PDF</div></div></div>
-          ${isPaid && s.fileUrl ? 
-            `<a class="spec-download-btn" href="${s.fileUrl}" download target="_blank">⬇ &nbsp; Download Spec Sheet</a>` :
-            s.fileUrl ?
-            `<div class="spec-download-locked">🔒 &nbsp; Subscribe to Download</div>` :
-            `<div class="spec-download-locked">🔒 &nbsp; File Coming Soon</div>`
-          }
+          <div class="spec-download-locked">🔒 &nbsp; Premium Only — Subscribe to Download</div>
         </div>
       </div>
 
@@ -1088,7 +1064,7 @@ async function sbUploadFile(file, folder) {
 
           <!-- Image upload -->
           <div style="margin-bottom:0.9rem;">
-            <div style="font-size:1.26rem;letter-spacing:0.2em;text-transform:uppercase;color:#C8A951;opacity:0.7;margin-bottom:0.4rem;">Preview Image (optional)</div>
+            <div style="font-size:1.26rem;letter-spacing:0.2em;text-transform:uppercase;color:#C8A951;opacity:0.7;margin-bottom:0.4rem;">Preview Image (optional — add now or later)</div>
             <label style="display:inline-flex;align-items:center;gap:0.6rem;border:1px dashed rgba(200,169,81,0.3);padding:0.6rem 1rem;cursor:pointer;font-size:1.26rem;opacity:0.7;">
               📷 Choose Image
               <input type="file" id="new-simage" accept="image/*" style="display:none;" onchange="previewNewSpecImage(event)" />
@@ -1098,19 +1074,7 @@ async function sbUploadFile(file, folder) {
               <img id="new-simage-thumb" style="height:70px;object-fit:cover;border:1px solid rgba(200,169,81,0.2);" />
             </div>
           </div>
-          <!-- File attachment -->
-          <div style="margin-bottom:0.9rem;">
-            <div style="font-size:1.26rem;letter-spacing:0.2em;text-transform:uppercase;color:#C8A951;margin-bottom:0.4rem;">📎 Attach Spec Sheet File (PDF) *</div>
-            <div style="font-size:0.75rem;opacity:0.5;margin-bottom:0.6rem;">This file will be available for paid subscribers to download</div>
-            <label style="display:inline-flex;align-items:center;gap:0.6rem;border:1px dashed rgba(200,169,81,0.5);padding:0.7rem 1.2rem;cursor:pointer;font-size:1.26rem;background:rgba(200,169,81,0.05);">
-              📁 Choose Spec Sheet File
-              <input type="file" id="new-sfile" accept=".pdf,.dxf,.zip,.xlsx" style="display:none;" onchange="handleSpecFile(event)" />
-            </label>
-            <span id="new-sfile-name" style="font-size:1.26rem;opacity:0.5;margin-left:0.8rem;"></span>
-            <div id="new-sfile-uploading" style="font-size:0.78rem;color:#C8A951;margin-top:0.4rem;display:none;">⏳ Uploading to Supabase Storage...</div>
-            <div id="new-sfile-done" style="font-size:0.78rem;color:#4CAF50;margin-top:0.4rem;display:none;">✅ File ready for download</div>
-          </div>
-          <button onclick="addSpec()" style="background:#C8A951;color:#1A1208;border:none;padding:0.75rem 1.8rem;font-family:'DM Mono',monospace;font-size:1.26rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:500;cursor:pointer;">Add Spec Sheet →</button>
+          <button onclick="addSpec()" style="background:#C8A951;color:#F5F0E8;border:none;padding:0.75rem 1.8rem;font-family:'DM Mono',monospace;font-size:1.26rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:500;cursor:pointer;">Add Spec Sheet</button>
         </div>
 
         <!-- Actions -->
@@ -1125,72 +1089,70 @@ async function sbUploadFile(file, folder) {
   </div>
 
 <script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-const ADMIN_PASSWORD = localStorage.getItem('lmcb_admin_pw') || 'admin123';
-
-const DEFAULT_SPECS = [
-  { name: 'Kids Dummy Standard Measurement (6M to 8Y)', subtitle: 'Standard Industry Proven Dummy Measurement of Kids Used in Multiple Brands', category: 'Kids', format: 'PDF', size: 'N/A', image: null, fileUrl: null },
-  { name: "Women's Dummy Measurement (XS to XXL)", subtitle: 'Industry Proven Detailed Dummy Measurement of Womens to Cater All Designs', category: 'Womens', format: 'PDF', size: 'N/A', image: null, fileUrl: null },
-  { name: "Men's Standard Body Measurement (S to XXL)", subtitle: 'Industry Standard Mens Dummy Measurement for Casual and Formal Wear Production', category: 'Mens', format: 'PDF', size: 'N/A', image: null, fileUrl: null }
-];
+const ADMIN_PASSWORD = 'admin123';
 
 const CAT_ICONS = { Kids: '🧒', Mens: '👔', Womens: '👗' };
 
-// Simple: always load defaults + any extras saved by admin
-function getSpecs() {
-  try {
-    const saved = JSON.parse(localStorage.getItem('lmcb_specs_v2') || 'null');
-    if (saved && saved.length >= 3) return saved;
-  } catch(e) {}
-  return JSON.parse(JSON.stringify(DEFAULT_SPECS));
-}
+const DEFAULT_SPECS = [
+  {
+    name: 'Kids Dummy Standard Measurement (6M to 8Y)',
+    subtitle: 'Standard Industry Proven Dummy Measurement of Kids Used in Multiple Brands',
+    category: 'Kids',
+    format: 'PDF',
+    size: 'N/A',
+    image: null
+  },
+  {
+    name: "Women's Dummy Measurement (XS to XXL)",
+    subtitle: 'Industry Proven Detailed Dummy Measurement of Womens to Cater All Designs',
+    category: 'Womens',
+    format: 'PDF',
+    size: 'N/A',
+    image: null
+  }
+];
 
-function saveSpecs() {
-  localStorage.setItem('lmcb_specs_v2', JSON.stringify(specs));
-}
-
-let specs = getSpecs();
+let specs = JSON.parse(localStorage.getItem('lmcb_specs') || 'null') || JSON.parse(JSON.stringify(DEFAULT_SPECS));
 let activeFilter = 'All';
 
-// ── RENDER CARDS ──────────────────────────────────────
+
+// Always show default specs - localStorage only overrides if admin changed them
 function renderCards() {
   const grid = document.getElementById('spec-grid');
-  const plan = localStorage.getItem('lmcb_current_plan');
-  const isPaid = plan === 'brand_builder' || plan === 'pro_elite';
-  const filtered = activeFilter === 'All' ? specs : specs.filter(s => s.category === activeFilter);
+  const saved = localStorage.getItem('lmcb_specs');
+  const data = saved ? JSON.parse(saved) : DEFAULT_SPECS;
+  const filtered = activeFilter === 'All' ? data : data.filter(s => s.category === activeFilter);
 
-  document.getElementById('total-count').textContent = specs.length + '+';
+  document.getElementById('total-count').textContent = data.length + '+';
   document.getElementById('section-label-text').textContent = activeFilter === 'All' ? 'All Spec Sheets' : activeFilter + ' Spec Sheets';
 
-  if (!filtered.length) { grid.innerHTML = '<div class="spec-empty">No spec sheets in this category.</div>'; return; }
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div class="spec-empty">No spec sheets in this category yet.</div>`;
+    return;
+  }
 
+  const CAT_ICONS = { Kids: '🧒', Mens: '👔', Womens: '👗' };
   grid.innerHTML = filtered.map((s, i) => {
-    const icon = CAT_ICONS[s.category] || '📄';
-    const preview = s.image
+    const catIcon = CAT_ICONS[s.category] || '📄';
+    const previewContent = s.image
       ? `<img src="${s.image}" alt="${s.name}" />`
-      : `<div class="spec-preview-placeholder"><div class="spec-preview-icon">${icon}</div><div class="spec-preview-coming">Image Coming Soon</div></div>`;
-
-    const dlBtn = isPaid && s.fileUrl
-      ? `<a class="spec-download-btn" href="${s.fileUrl}" download target="_blank">⬇ &nbsp; Download Spec Sheet</a>`
-      : `<div class="spec-download-locked">🔒 &nbsp; Premium Only — Subscribe to Download</div>`;
-
+      : `<div class="spec-preview-placeholder"><div class="spec-preview-icon">${catIcon}</div><div class="spec-preview-coming">Image Coming Soon</div></div>`;
     return `
     <div class="spec-card">
       <div class="spec-preview">
-        ${preview}
+        ${previewContent}
         <div class="spec-category-pill">${s.category}</div>
         <div class="spec-lock-overlay"><div class="spec-lock-icon">🔒</div><div class="spec-lock-text">Premium Only</div></div>
       </div>
       <div class="spec-body">
-        <div class="spec-index">0${i+1}</div>
+        <div class="spec-index">0${i + 1}</div>
         <div class="spec-name">${s.name}</div>
         <div class="spec-desc">${s.subtitle || s.desc || ''}</div>
         <div class="spec-meta">
           <div class="spec-meta-cell"><div class="spec-meta-label">Category</div><div class="spec-meta-val">${s.category}</div></div>
           <div class="spec-meta-cell"><div class="spec-meta-label">Format</div><div class="spec-meta-val">${s.format}</div></div>
         </div>
-        ${dlBtn}
+        <div class="spec-download-locked">🔒 &nbsp; Premium Only — Subscribe to Download</div>
       </div>
     </div>`;
   }).join('');
@@ -1203,7 +1165,7 @@ function filterSpecs(cat, btn) {
   renderCards();
 }
 
-// ── ADMIN ──────────────────────────────────────────────
+// Admin
 function openAdmin() {
   document.getElementById('admin-overlay').style.display = 'flex';
   document.getElementById('admin-login').style.display = 'block';
@@ -1218,12 +1180,9 @@ function closeAdmin() {
 }
 
 function adminLogin() {
-  const pw = document.getElementById('admin-pw').value;
-  const correct = localStorage.getItem('lmcb_admin_pw') || 'admin123';
-  if (pw === correct) {
+  if (document.getElementById('admin-pw').value === ADMIN_PASSWORD) {
     document.getElementById('admin-login').style.display = 'none';
     document.getElementById('admin-editor').style.display = 'block';
-    specs = getSpecs();
     renderEditorList();
   } else {
     document.getElementById('admin-pw-error').style.display = 'block';
@@ -1232,96 +1191,71 @@ function adminLogin() {
   }
 }
 
-// ── EDITOR LIST ────────────────────────────────────────
 function renderEditorList() {
   const container = document.getElementById('spec-editor-list');
   container.innerHTML = specs.map((s, i) => `
-    <div style="display:flex;align-items:center;gap:0.8rem;padding:0.9rem 1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(200,169,81,0.12);margin-bottom:0.4rem;">
+    <div style="display:flex;align-items:center;gap:0.8rem;padding:0.9rem 1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(200,169,81,0.12);">
       <div style="width:52px;height:52px;flex-shrink:0;background:#0E0B06;border:1px solid rgba(200,169,81,0.2);overflow:hidden;display:flex;align-items:center;justify-content:center;">
         ${s.image ? `<img src="${s.image}" style="width:100%;height:100%;object-fit:cover;" />` : `<span style="font-size:1.4rem;opacity:0.3;">${CAT_ICONS[s.category] || '📄'}</span>`}
       </div>
       <div style="flex:1;min-width:0;">
-        <div style="font-size:0.9rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${s.name}</div>
-        <div style="font-size:0.72rem;opacity:0.45;margin-top:0.15rem;">${s.category} · ${s.format} · ${s.fileUrl ? '✅ File attached' : '⚠ No file'}</div>
+        <div style="font-size:1.26rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${s.name}</div>
+        <div style="font-size:1.26rem;opacity:0.45;margin-top:0.15rem;">${s.category} · ${s.format} · ${s.image ? '✓ Image set' : '⚠ No image'}</div>
       </div>
-      <label style="background:rgba(200,169,81,0.1);border:1px solid rgba(200,169,81,0.4);color:#C8A951;padding:0.4rem 0.7rem;font-family:'DM Mono',monospace;font-size:0.72rem;cursor:pointer;white-space:nowrap;text-transform:uppercase;letter-spacing:0.08em;">
-        📎 File
-        <input type="file" accept=".pdf,.dxf,.zip,.xlsx" style="display:none;" onchange="attachFile(event,${i})" />
-      </label>
-      <label style="background:transparent;border:1px solid rgba(200,169,81,0.3);color:#C8A951;padding:0.4rem 0.7rem;font-family:'DM Mono',monospace;font-size:0.72rem;cursor:pointer;text-transform:uppercase;letter-spacing:0.1em;">
+      <label title="Upload image" style="background:transparent;border:1px solid rgba(200,169,81,0.3);color:#C8A951;padding:0.4rem 0.7rem;font-family:'DM Mono',monospace;font-size:1.26rem;cursor:pointer;white-space:nowrap;letter-spacing:0.1em;text-transform:uppercase;">
         📷
-        <input type="file" accept="image/*" style="display:none;" onchange="attachImage(event,${i})" />
+        <input type="file" accept="image/*" style="display:none;" onchange="uploadSpecImage(event,${i})" />
       </label>
-      <button onclick="editSpec(${i})" style="background:transparent;border:1px solid rgba(200,169,81,0.3);color:#C8A951;padding:0.4rem 0.7rem;font-family:'DM Mono',monospace;font-size:0.72rem;cursor:pointer;text-transform:uppercase;letter-spacing:0.08em;">Edit</button>
-      <button onclick="removeSpec(${i})" style="background:transparent;border:1px solid rgba(212,71,42,0.3);color:#D4472A;padding:0.4rem 0.6rem;font-family:'DM Mono',monospace;font-size:0.72rem;cursor:pointer;">✕</button>
+      <button onclick="editSpec(${i})" style="background:transparent;border:1px solid rgba(200,169,81,0.3);color:#C8A951;padding:0.4rem 0.7rem;font-family:'DM Mono',monospace;font-size:1.26rem;cursor:pointer;white-space:nowrap;letter-spacing:0.08em;text-transform:uppercase;">Edit</button>
+      <button onclick="removeSpec(${i})" style="background:transparent;border:1px solid rgba(212,71,42,0.3);color:#D4472A;padding:0.4rem 0.6rem;font-family:'DM Mono',monospace;font-size:1.26rem;cursor:pointer;">✕</button>
     </div>
   `).join('');
 }
 
-// ── FILE ATTACHMENT ────────────────────────────────────
-async function attachFile(event, index) {
+function uploadSpecImage(event, index) {
   const file = event.target.files[0];
   if (!file) return;
-  showMsg('⏳ Uploading ' + file.name + '...');
-  try {
-    const _sb = supabase.createClient(
-      'https://tldbjsqhjqapdwmfeuwq.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ'
-    );
-    const path = 'specsheets/' + Date.now() + '_' + file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
-    const { error } = await _sb.storage.from('files').upload(path, file, { upsert: true });
-    if (error) throw error;
-    const { data: urlData } = _sb.storage.from('files').getPublicUrl(path);
-    specs[index].fileUrl = urlData.publicUrl;
-    saveSpecs();
-    renderEditorList();
-    renderCards();
-    showMsg('✅ File attached to ' + specs[index].name);
-  } catch(e) { showMsg('❌ Upload failed: ' + e.message); }
-}
-
-function attachImage(event, index) {
-  const file = event.target.files[0];
-  if (!file) return;
-  if (file.size > 3*1024*1024) { alert('Image too large. Use under 3MB.'); return; }
+  if (file.size > 3 * 1024 * 1024) { alert('Image too large. Please use under 3MB.'); return; }
   const reader = new FileReader();
   reader.onload = function(e) {
     specs[index].image = e.target.result;
-    saveSpecs();
     renderEditorList();
-    renderCards();
-    showMsg('✅ Image added to ' + specs[index].name);
+    const msg = document.createElement('div');
+    msg.textContent = `✓ Image uploaded — click Apply to save.`;
+    msg.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#1C1609;border:1px solid rgba(200,169,81,0.4);color:#C8A951;padding:0.8rem 1.5rem;font-family:DM Mono,monospace;font-size:1.26rem;z-index:99999;white-space:nowrap;';
+    document.body.appendChild(msg);
+    setTimeout(() => msg.remove(), 3500);
   };
   reader.readAsDataURL(file);
 }
 
 function removeSpec(i) {
-  if (!confirm('Remove "' + specs[i].name + '"?')) return;
+  if (!confirm(`Remove "${specs[i].name}"?`)) return;
   specs.splice(i, 1);
-  saveSpecs();
   renderEditorList();
-  renderCards();
 }
 
 function editSpec(i) {
   const s = specs[i];
   const name = prompt('Name:', s.name); if (name === null) return;
-  const category = prompt('Category (Kids/Mens/Womens):', s.category); if (category === null) return;
-  const subtitle = prompt('Description:', s.subtitle || ''); if (subtitle === null) return;
-  const format = prompt('Format (PDF/DXF/ZIP):', s.format); if (format === null) return;
-  specs[i] = { ...s, name, category, subtitle, format };
-  saveSpecs();
+  const category = prompt('Category (Kids / Mens / Womens):', s.category); if (category === null) return;
+  const subtitle = prompt('Description / Subtitle:', s.subtitle || s.desc || ''); if (subtitle === null) return;
+  const format = prompt('Format:', s.format); if (format === null) return;
+  const size = prompt('File size:', s.size); if (size === null) return;
+  if (s.image && confirm('Remove the current image?')) {
+    specs[i] = { ...s, name, category, subtitle, format, size, image: null };
+  } else {
+    specs[i] = { ...s, name, category, subtitle, format, size };
+  }
   renderEditorList();
-  renderCards();
 }
 
-// ── ADD NEW SPEC ───────────────────────────────────────
 let newSpecImageData = null;
-let newSpecFileUrl = null;
 
 function previewNewSpecImage(event) {
   const file = event.target.files[0];
   if (!file) return;
+  if (file.size > 3 * 1024 * 1024) { alert('Image too large. Please use under 3MB.'); return; }
   const reader = new FileReader();
   reader.onload = function(e) {
     newSpecImageData = e.target.result;
@@ -1332,85 +1266,44 @@ function previewNewSpecImage(event) {
   reader.readAsDataURL(file);
 }
 
-async function handleSpecFile(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  document.getElementById('new-sfile-name').textContent = file.name;
-  document.getElementById('new-sfile-uploading').style.display = 'block';
-  document.getElementById('new-sfile-done').style.display = 'none';
-  try {
-    const _sb = supabase.createClient(
-      'https://tldbjsqhjqapdwmfeuwq.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ'
-    );
-    const path = 'specsheets/' + Date.now() + '_' + file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
-    const { error } = await _sb.storage.from('files').upload(path, file, { upsert: true });
-    if (error) throw error;
-    const { data: urlData } = _sb.storage.from('files').getPublicUrl(path);
-    newSpecFileUrl = urlData.publicUrl;
-    document.getElementById('new-sfile-uploading').style.display = 'none';
-    document.getElementById('new-sfile-done').style.display = 'block';
-    document.getElementById('new-sfile-done').textContent = '✅ ' + file.name + ' ready';
-  } catch(e) {
-    document.getElementById('new-sfile-uploading').style.display = 'none';
-    document.getElementById('new-sfile-name').textContent = '❌ Upload failed: ' + e.message;
-    newSpecFileUrl = null;
-  }
-}
-
 function addSpec() {
   const name = document.getElementById('new-sname').value.trim();
-  if (!name) { alert('Please enter a spec sheet name.'); return; }
   const category = document.getElementById('new-scategory').value;
   const format = document.getElementById('new-sformat').value.trim() || 'PDF';
+  const size = document.getElementById('new-ssize').value.trim() || 'N/A';
   const subtitle = document.getElementById('new-sdesc').value.trim();
-  specs.push({ name, category, format, size: 'N/A', subtitle, image: newSpecImageData || null, fileUrl: newSpecFileUrl || null });
-  saveSpecs();
-  // Reset form
-  ['new-sname','new-ssize','new-sdesc'].forEach(id => document.getElementById(id).value = '');
+  if (!name) { alert('Please enter a spec sheet name.'); return; }
+  specs.push({ name, category, format, size, subtitle, image: newSpecImageData || null });
+  // Reset
+  document.getElementById('new-sname').value = '';
+  document.getElementById('new-ssize').value = '';
+  document.getElementById('new-sdesc').value = '';
   document.getElementById('new-simage').value = '';
   document.getElementById('new-simage-name').textContent = '';
   document.getElementById('new-simage-preview').style.display = 'none';
-  document.getElementById('new-sfile').value = '';
-  document.getElementById('new-sfile-name').textContent = '';
-  document.getElementById('new-sfile-done').style.display = 'none';
-  newSpecImageData = null; newSpecFileUrl = null;
+  newSpecImageData = null;
   renderEditorList();
 }
 
 function applySpecs() {
-  saveSpecs();
+  localStorage.setItem('lmcb_specs', JSON.stringify(specs));
   renderCards();
   closeAdmin();
-  showMsg('✓ Spec sheets updated!');
+  const msg = document.createElement('div');
+  msg.textContent = '✓ Spec sheets updated successfully';
+  msg.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#C8A951;color:#F5F0E8;padding:0.8rem 2rem;font-family:DM Mono,monospace;font-size:1.26rem;letter-spacing:0.12em;text-transform:uppercase;z-index:9999;font-weight:500;white-space:nowrap;';
+  document.body.appendChild(msg);
+  setTimeout(() => msg.remove(), 3000);
 }
 
 function resetSpecs() {
-  if (!confirm('Reset to original 3 spec sheets?')) return;
-  localStorage.removeItem('lmcb_specs_v2');
-  specs = getSpecs();
+  if (!confirm('Reset to original spec sheet list?')) return;
+  specs = JSON.parse(JSON.stringify(DEFAULT_SPECS));
+  localStorage.removeItem('lmcb_specs');
   renderEditorList();
-  renderCards();
-}
-
-function showMsg(text) {
-  const existing = document.getElementById('admin-msg');
-  if (existing) existing.remove();
-  const msg = document.createElement('div');
-  msg.id = 'admin-msg';
-  msg.textContent = text;
-  msg.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#1C1609;border:1px solid rgba(200,169,81,0.4);color:#C8A951;padding:0.8rem 1.5rem;font-family:DM Mono,monospace;font-size:1rem;z-index:99999;white-space:nowrap;border-radius:3px;';
-  document.body.appendChild(msg);
-  setTimeout(() => msg.remove(), 3500);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  renderCards();
-  document.getElementById('admin-pw').addEventListener('keydown', e => { if (e.key === 'Enter') adminLogin(); });
-  const params = new URLSearchParams(window.location.search);
-  if (params.has('admin')) openAdmin();
-});
-</script>
   renderCards();
   document.getElementById('admin-pw').addEventListener('keydown', e => { if (e.key === 'Enter') adminLogin(); });
   if (location.search.includes('admin')) openAdmin();
