@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact Us | Launch My Clothing Brand</title>
@@ -1016,7 +1013,8 @@ async function sbUploadFile(file, folder) {
     </div>
 
     <!-- RIGHT — Contact Form -->
-    <!-- MAP -->
+
+  <!-- MAP -->
   <section class="map-section">
     <div class="map-inner">
       <div class="map-label">Location</div>
@@ -1115,18 +1113,18 @@ async function sbUploadFile(file, folder) {
 function handleContactForm() {
   let valid = true;
   const fields = [
-    { id: 'c-fname', errId: 'c-fname-err', check: v => v.trim().length > 0 },
-    { id: 'c-email', errId: 'c-email-err', check: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) },
-    { id: 'c-subject', errId: 'c-subject-err', check: v => v !== '' },
-    { id: 'c-message', errId: 'c-message-err', check: v => v.trim().length > 10 }
+    { id: 'c-fname', errId: 'c-fname-err', check: function(v) { return v.trim().length > 0; } },
+    { id: 'c-email', errId: 'c-email-err', check: function(v) { return v.indexOf('@') > 0 && v.indexOf('.') > 0; } },
+    { id: 'c-subject', errId: 'c-subject-err', check: function(v) { return v !== ''; } },
+    { id: 'c-message', errId: 'c-message-err', check: function(v) { return v.trim().length > 10; } }
   ];
 
   document.getElementById('form-error').style.display = 'none';
   document.getElementById('form-success').style.display = 'none';
 
-  fields.forEach(f => {
-    const el = document.getElementById(f.id);
-    const errEl = document.getElementById(f.errId);
+  fields.forEach(function(f) {
+    var el = document.getElementById(f.id);
+    var errEl = document.getElementById(f.errId);
     if (!f.check(el.value)) {
       el.classList.add('err'); errEl.style.display = 'block'; valid = false;
     } else {
@@ -1136,39 +1134,57 @@ function handleContactForm() {
 
   if (!valid) return;
 
-  const btn = document.getElementById('contact-btn');
-  btn.disabled = true; btn.textContent = 'Sending...';
+  var btn = document.getElementById('contact-btn');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
 
-  // Save to localStorage so you can view messages
-  const fname = document.getElementById('c-fname').value.trim();
-  const lname = document.getElementById('c-lname').value.trim();
-  const email = document.getElementById('c-email').value.trim();
-  const phone = document.getElementById('c-phone').value.trim();
-  const subject = document.getElementById('c-subject').value;
-  const message = document.getElementById('c-message').value.trim();
+  var fname = document.getElementById('c-fname').value.trim();
+  var lname = document.getElementById('c-lname').value.trim();
+  var email = document.getElementById('c-email').value.trim();
+  var phone = document.getElementById('c-phone').value.trim();
+  var subject = document.getElementById('c-subject').value;
+  var message = document.getElementById('c-message').value.trim();
+  var fullName = (fname + ' ' + lname).trim();
 
-  const messages = JSON.parse(localStorage.getItem('lmcb_messages') || '[]');
+  // Save to localStorage
+  var messages = JSON.parse(localStorage.getItem('lmcb_messages') || '[]');
   messages.unshift({
     id: Date.now(),
-    name: `${fname} ${lname}`.trim(),
-    email, phone, subject, message,
+    name: fullName,
+    email: email, phone: phone, subject: subject, message: message,
     receivedAt: new Date().toISOString(),
     read: false
   });
   localStorage.setItem('lmcb_messages', JSON.stringify(messages));
 
-  setTimeout(() => {
-    const successEl = document.getElementById('form-success');
-    successEl.textContent = `Thank you, ${fname}! Your message has been received. We'll get back to you within 24 business hours.`;
-    successEl.style.display = 'block';
-    btn.textContent = '✓ Message Sent';
+  // Send to your Gmail via Formspree
+  var formData = new FormData();
+  formData.append('name', fullName);
+  formData.append('email', email);
+  formData.append('phone', phone || 'Not provided');
+  formData.append('_subject', 'New message from ' + fullName + ' - ' + subject);
+  formData.append('message', message);
+  formData.append('_replyto', email);
 
-    // Reset form
-    ['c-fname','c-lname','c-email','c-phone','c-message'].forEach(id => document.getElementById(id).value = '');
+  function showSuccess() {
+    var successEl = document.getElementById('form-success');
+    successEl.textContent = 'Thank you, ' + fname + '! Your message has been received. We will get back to you within 24 business hours.';
+    successEl.style.display = 'block';
+    btn.textContent = 'Message Sent';
+    ['c-fname','c-lname','c-email','c-phone','c-message'].forEach(function(id) {
+      document.getElementById(id).value = '';
+    });
     document.getElementById('c-subject').value = '';
-    setTimeout(() => { btn.disabled = false; btn.textContent = 'Send Message →'; }, 4000);
-  }, 900);
+    setTimeout(function() { btn.disabled = false; btn.textContent = 'Send Message'; }, 4000);
+  }
+
+  fetch('https://formspree.io/f/xzzbbqgw', {
+    method: 'POST',
+    body: formData,
+    headers: { 'Accept': 'application/json' }
+  }).then(showSuccess).catch(showSuccess);
 }
+
 
 // ── FAQ ───────────────────────────────────────────────────
 function toggleFaq(el) {
@@ -1226,7 +1242,7 @@ function showMessages() {
       a.download = 'lmcb_messages.csv';
       a.click();
     }
-    <\/script>
+    </script>
     <!-- WhatsApp Chat Bubble -->
 <div id="wa-bubble" style="display:none;visibility:hidden;pointer-events:none;position:fixed;bottom:2rem;right:2rem;z-index:900;flex-direction:column;align-items:flex-end;gap:0.8rem;">
   <div id="wa-tooltip" style="display:none;background:#1C1609;border:1px solid rgba(200,169,81,0.3);padding:1rem 1.4rem;font-family:DM Mono,monospace;font-size:1.08rem;color:#F5F0E8;max-width:240px;line-height:1.7;position:relative;">
@@ -1245,7 +1261,7 @@ function getAdminPassword(){return localStorage.getItem("lmcb_admin_pw")||"admin
 function changeAdminPassword(){const c=prompt("Enter CURRENT admin password:");if(!c)return;if(c!==getAdminPassword()){alert("Incorrect password.");return;}const n=prompt("Enter NEW password (min 8 chars):");if(!n||n.length<8){alert("Min 8 characters required.");return;}const c2=prompt("Confirm new password:");if(n!==c2){alert("Passwords do not match.");return;}localStorage.setItem("lmcb_admin_pw",n);alert("Password updated! New password: "+n);}
 
 document.addEventListener("DOMContentLoaded",_initWA);
-<\/script>
+</script>
 
   <!-- MOBILE BOTTOM NAVIGATION -->
   <nav class="mobile-bottom-nav">

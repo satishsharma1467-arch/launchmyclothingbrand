@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Create Account | Launch My Clothing Brand</title>
@@ -12,8 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
 
   <!-- Supabase CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="/supabase-config.js"></script>
 
   <style>
     :root {
@@ -575,72 +570,7 @@
 
   </style>
 
-<!-- Supabase SDK -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-// ── SUPABASE CONFIG ──────────────────────────────────
-const SUPABASE_URL = 'https://tldbjsqhjqapdwmfeuwq.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ';
-const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// ── USER FUNCTIONS ───────────────────────────────────
-async function sbRegisterUser(user) {
-  const { data, error } = await _sb.from('users').insert([{
-    name: user.name,
-    email: user.email,
-    phone: user.phone || '',
-    brand: user.brand || '',
-    plan: user.plan || 'free',
-    password_hash: user.password,
-    created_at: new Date().toISOString()
-  }]);
-  return { data, error };
-}
-
-async function sbLoginUser(email, password) {
-  const { data, error } = await _sb.from('users')
-    .select('*').eq('email', email).eq('password_hash', password).single();
-  if (data) {
-    await _sb.from('users').update({ last_login: new Date().toISOString() }).eq('email', email);
-  }
-  return { data, error };
-}
-
-async function sbUpdatePlan(email, plan, planName, paymentId, amount) {
-  const { data, error } = await _sb.from('users').update({
-    plan: plan,
-    plan_name: planName,
-    payment_id: paymentId,
-    plan_amount: amount,
-    plan_started: new Date().toISOString()
-  }).eq('email', email);
-  return { data, error };
-}
-
-async function sbSaveMessage(msg) {
-  const { data, error } = await _sb.from('messages').insert([{
-    name: msg.name,
-    email: msg.email,
-    phone: msg.phone || '',
-    subject: msg.subject || '',
-    message: msg.message,
-    received_at: new Date().toISOString()
-  }]);
-  return { data, error };
-}
-
-// ── FILE UPLOAD ──────────────────────────────────────
-async function sbUploadFile(file, folder) {
-  const ext = file.name.split('.').pop();
-  const fname = folder + '/' + Date.now() + '_' + file.name.replace(/\s/g,'_');
-  const { data, error } = await _sb.storage.from('files').upload(fname, file, {
-    cacheControl: '3600', upsert: true
-  });
-  if (error) return null;
-  const { data: urlData } = _sb.storage.from('files').getPublicUrl(fname);
-  return urlData.publicUrl;
-}
-</script>
 </head>
 <body>
 
@@ -816,10 +746,7 @@ function hideAlerts() {
 }
 
 // ── REGISTER ─────────────────────────────────────────────
-async function handleRegister() {
-  hideAlerts();
-  let valid = true;
-
+function handleRegister() {
   const fname = document.getElementById('fname').value.trim();
   const lname = document.getElementById('lname').value.trim();
   const email = document.getElementById('reg-email').value.trim();
@@ -829,89 +756,60 @@ async function handleRegister() {
   const pw2 = document.getElementById('reg-password2').value;
   const plan = document.getElementById('selected-plan').value;
 
+  let valid = true;
+
   // Validate
-  if (!fname) { document.getElementById('fname-error').style.display = 'block'; document.getElementById('fname').classList.add('error'); valid = false; }
-  else { document.getElementById('fname-error').style.display = 'none'; document.getElementById('fname').classList.remove('error'); }
+  if (!fname) { document.getElementById('fname-error').style.display='block'; valid=false; }
+  else { document.getElementById('fname-error').style.display='none'; }
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    document.getElementById('reg-email-error').style.display = 'block'; document.getElementById('reg-email').classList.add('error'); valid = false;
-  } else { document.getElementById('reg-email-error').style.display = 'none'; document.getElementById('reg-email').classList.remove('error'); }
+    document.getElementById('reg-email-error').style.display='block'; valid=false;
+  } else { document.getElementById('reg-email-error').style.display='none'; }
 
-  if (!pw || pw.length < 8) {
-    document.getElementById('reg-pw-error').style.display = 'block'; document.getElementById('reg-password').classList.add('error'); valid = false;
-  } else { document.getElementById('reg-pw-error').style.display = 'none'; document.getElementById('reg-password').classList.remove('error'); }
+  if (!pw || pw.length < 6) {
+    document.getElementById('reg-pw-error').style.display='block'; valid=false;
+  } else { document.getElementById('reg-pw-error').style.display='none'; }
 
   if (pw !== pw2) {
-    document.getElementById('reg-pw2-error').style.display = 'block'; document.getElementById('reg-password2').classList.add('error'); valid = false;
-  } else { document.getElementById('reg-pw2-error').style.display = 'none'; document.getElementById('reg-password2').classList.remove('error'); }
+    document.getElementById('reg-pw2-error').style.display='block'; valid=false;
+  } else { document.getElementById('reg-pw2-error').style.display='none'; }
 
   if (!valid) return;
 
   const btn = document.getElementById('reg-btn');
-  btn.disabled = true; btn.textContent = 'Creating account...';
+  btn.disabled = true;
+  btn.textContent = 'Creating account...';
 
-  try {
-    const sb = getSupabase();
-
-    if (!sb) {
-      // Supabase not configured yet — save to localStorage as fallback
-      const users = JSON.parse(localStorage.getItem('lmcb_users') || '[]');
-      if (users.find(u => u.email.toLowerCase() === email.toLowerCase())) {
-        showAlert('reg-error', 'An account with this email already exists. Please log in.', 'error');
-        btn.disabled = false; btn.textContent = 'Create Account →'; return;
-      }
-      users.push({
-        id: Date.now().toString(),
-        name: `${fname} ${lname}`.trim(),
-        email, phone, brand, plan,
-        password: btoa(pw),
-        registeredAt: new Date().toISOString(),
-        lastLogin: null, resetRequested: false
-      });
-      localStorage.setItem('lmcb_users', JSON.stringify(users));
-      localStorage.setItem('lmcb_current_plan', plan);
-      
-      // Save to Supabase
-      try {
-        await sbRegisterUser({ name, email, phone, brand, plan, password });
-        console.log('User saved to Supabase');
-      } catch(e) { console.log('Supabase save failed, using localStorage', e); }
-      showAlert('reg-success', `Account created! Welcome, ${fname}. Redirecting to login...`, 'success');
-      btn.textContent = '✓ Account Created';
-      setTimeout(() => window.location.href = '/login.html', 2000);
-      return;
-    }
-
-    // Supabase signup
-    const { data, error } = await signUp(email, pw, `${fname} ${lname}`.trim());
-
-    if (error) {
-      if (error.message.includes('already registered')) {
-        showAlert('reg-error', 'This email is already registered. Please log in.', 'error');
-      } else {
-        showAlert('reg-error', error.message, 'error');
-      }
-      btn.disabled = false; btn.textContent = 'Create Account →'; return;
-    }
-
-    // Update profile with extra data
-    if (data.user) {
-      await sb.from('profiles').update({
-        name: `${fname} ${lname}`.trim(),
-        plan, phone: phone || null, brand: brand || null
-      }).eq('id', data.user.id);
-    }
-
-    showAlert('reg-success',
-      `Welcome, ${fname}! 🎉 Please check your email to confirm your account, then log in.`,
-      'success'
-    );
-    btn.textContent = '✓ Account Created';
-
-  } catch (err) {
-    showAlert('reg-error', 'Something went wrong. Please try again.', 'error');
-    btn.disabled = false; btn.textContent = 'Create Account →';
+  // Check if email already exists
+  const users = JSON.parse(localStorage.getItem('lmcb_users') || '[]');
+  if (users.find(u => u.email.toLowerCase() === email.toLowerCase())) {
+    showAlert('reg-error', 'This email is already registered. Please log in.', 'error');
+    btn.disabled = false;
+    btn.textContent = 'Create Account →';
+    return;
   }
+
+  // Create user
+  const newUser = {
+    id: Date.now().toString(),
+    name: (fname + ' ' + lname).trim(),
+    email: email,
+    phone: phone,
+    brand: brand,
+    plan: plan,
+    password: btoa(pw),
+    registeredAt: new Date().toISOString(),
+    lastLogin: new Date().toISOString(),
+    resetRequested: false
+  };
+
+  users.push(newUser);
+  localStorage.setItem('lmcb_users', JSON.stringify(users));
+  localStorage.setItem('lmcb_current_plan', plan);
+
+  showAlert('reg-success', 'Account created! Welcome, ' + fname + '! Redirecting to login...', 'success');
+  btn.textContent = '✓ Account Created';
+  setTimeout(function() { window.location.href = '/login.html'; }, 2000);
 }
 
 document.addEventListener('keydown', e => {
@@ -937,7 +835,7 @@ function getAdminPassword(){return localStorage.getItem("lmcb_admin_pw")||"admin
 function changeAdminPassword(){const c=prompt("Enter CURRENT admin password:");if(!c)return;if(c!==getAdminPassword()){alert("Incorrect password.");return;}const n=prompt("Enter NEW password (min 8 chars):");if(!n||n.length<8){alert("Min 8 characters required.");return;}const c2=prompt("Confirm new password:");if(n!==c2){alert("Passwords do not match.");return;}localStorage.setItem("lmcb_admin_pw",n);alert("Password updated! New password: "+n);}
 
 document.addEventListener("DOMContentLoaded",_initWA);
-<\/script>
+</script>
 
   <!-- MOBILE BOTTOM NAVIGATION -->
   <nav class="mobile-bottom-nav">
