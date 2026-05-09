@@ -1125,102 +1125,72 @@ async function sbUploadFile(file, folder) {
   </div>
 
 <script>
-const ADMIN_PASSWORD = 'admin123';
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const ADMIN_PASSWORD = localStorage.getItem('lmcb_admin_pw') || 'admin123';
+
+const DEFAULT_SPECS = [
+  { name: 'Kids Dummy Standard Measurement (6M to 8Y)', subtitle: 'Standard Industry Proven Dummy Measurement of Kids Used in Multiple Brands', category: 'Kids', format: 'PDF', size: 'N/A', image: null, fileUrl: null },
+  { name: "Women's Dummy Measurement (XS to XXL)", subtitle: 'Industry Proven Detailed Dummy Measurement of Womens to Cater All Designs', category: 'Womens', format: 'PDF', size: 'N/A', image: null, fileUrl: null },
+  { name: "Men's Standard Body Measurement (S to XXL)", subtitle: 'Industry Standard Mens Dummy Measurement for Casual and Formal Wear Production', category: 'Mens', format: 'PDF', size: 'N/A', image: null, fileUrl: null }
+];
 
 const CAT_ICONS = { Kids: '🧒', Mens: '👔', Womens: '👗' };
 
-const DEFAULT_SPECS = [
-  {
-    name: 'Kids Dummy Standard Measurement (6M to 8Y)',
-    subtitle: 'Standard Industry Proven Dummy Measurement of Kids Used in Multiple Brands',
-    category: 'Kids',
-    format: 'PDF',
-    size: 'N/A',
-    image: null
-  },
-  {
-    name: "Women's Dummy Measurement (XS to XXL)",
-    subtitle: 'Industry Proven Detailed Dummy Measurement of Womens to Cater All Designs',
-    category: 'Womens',
-    format: 'PDF',
-    size: 'N/A',
-    image: null
-  },
-  {
-    name: "Men's Standard Body Measurement (S to XXL)",
-    subtitle: 'Industry Standard Mens Dummy Measurement for Casual and Formal Wear Production',
-    category: 'Mens',
-    format: 'PDF',
-    size: 'N/A',
-    image: null
-  }
-];
-
-// ALWAYS start from DEFAULT_SPECS — localStorage only stores extra additions
-function getMergedSpecs() {
-  // Check if we have a full saved version (includes edits to defaults)
-  const allSaved = localStorage.getItem('lmcb_specs_all');
-  if (allSaved) {
-    const parsed = JSON.parse(allSaved);
-    // Make sure all 3 defaults are still present (add any missing)
-    const names = parsed.map(s => s.name);
-    const missing = DEFAULT_SPECS.filter(d => !names.includes(d.name));
-    return [...parsed, ...missing];
-  }
-  // First time — use defaults
+// Simple: always load defaults + any extras saved by admin
+function getSpecs() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('lmcb_specs_v2') || 'null');
+    if (saved && saved.length >= 3) return saved;
+  } catch(e) {}
   return JSON.parse(JSON.stringify(DEFAULT_SPECS));
 }
 
-function saveExtraSpecs(allSpecs) {
-  // Only save non-default specs to localStorage
-  const extra = allSpecs.filter(s => !DEFAULT_SPECS.find(d => d.name === s.name));
-  localStorage.setItem('lmcb_specs_extra', JSON.stringify(extra));
+function saveSpecs() {
+  localStorage.setItem('lmcb_specs_v2', JSON.stringify(specs));
 }
 
-let specs = getMergedSpecs();
-// Always fix localStorage to include all 3 defaults
-localStorage.setItem('lmcb_specs', JSON.stringify(specs));
+let specs = getSpecs();
 let activeFilter = 'All';
 
-
-// Always show default specs - localStorage only overrides if admin changed them
+// ── RENDER CARDS ──────────────────────────────────────
 function renderCards() {
   const grid = document.getElementById('spec-grid');
-  const data = getMergedSpecs();
   const plan = localStorage.getItem('lmcb_current_plan');
   const isPaid = plan === 'brand_builder' || plan === 'pro_elite';
-  const filtered = activeFilter === 'All' ? data : data.filter(s => s.category === activeFilter);
+  const filtered = activeFilter === 'All' ? specs : specs.filter(s => s.category === activeFilter);
 
-  document.getElementById('total-count').textContent = data.length + '+';
+  document.getElementById('total-count').textContent = specs.length + '+';
   document.getElementById('section-label-text').textContent = activeFilter === 'All' ? 'All Spec Sheets' : activeFilter + ' Spec Sheets';
 
-  if (filtered.length === 0) {
-    grid.innerHTML = `<div class="spec-empty">No spec sheets in this category yet.</div>`;
-    return;
-  }
+  if (!filtered.length) { grid.innerHTML = '<div class="spec-empty">No spec sheets in this category.</div>'; return; }
 
-  const CAT_ICONS = { Kids: '🧒', Mens: '👔', Womens: '👗' };
   grid.innerHTML = filtered.map((s, i) => {
-    const catIcon = CAT_ICONS[s.category] || '📄';
-    const previewContent = s.image
+    const icon = CAT_ICONS[s.category] || '📄';
+    const preview = s.image
       ? `<img src="${s.image}" alt="${s.name}" />`
-      : `<div class="spec-preview-placeholder"><div class="spec-preview-icon">${catIcon}</div><div class="spec-preview-coming">Image Coming Soon</div></div>`;
+      : `<div class="spec-preview-placeholder"><div class="spec-preview-icon">${icon}</div><div class="spec-preview-coming">Image Coming Soon</div></div>`;
+
+    const dlBtn = isPaid && s.fileUrl
+      ? `<a class="spec-download-btn" href="${s.fileUrl}" download target="_blank">⬇ &nbsp; Download Spec Sheet</a>`
+      : `<div class="spec-download-locked">🔒 &nbsp; Premium Only — Subscribe to Download</div>`;
+
     return `
     <div class="spec-card">
       <div class="spec-preview">
-        ${previewContent}
+        ${preview}
         <div class="spec-category-pill">${s.category}</div>
         <div class="spec-lock-overlay"><div class="spec-lock-icon">🔒</div><div class="spec-lock-text">Premium Only</div></div>
       </div>
       <div class="spec-body">
-        <div class="spec-index">0${i + 1}</div>
+        <div class="spec-index">0${i+1}</div>
         <div class="spec-name">${s.name}</div>
         <div class="spec-desc">${s.subtitle || s.desc || ''}</div>
         <div class="spec-meta">
           <div class="spec-meta-cell"><div class="spec-meta-label">Category</div><div class="spec-meta-val">${s.category}</div></div>
           <div class="spec-meta-cell"><div class="spec-meta-label">Format</div><div class="spec-meta-val">${s.format}</div></div>
         </div>
-        <div class="spec-download-locked">🔒 &nbsp; Premium Only — Subscribe to Download</div>
+        ${dlBtn}
       </div>
     </div>`;
   }).join('');
@@ -1233,7 +1203,7 @@ function filterSpecs(cat, btn) {
   renderCards();
 }
 
-// Admin
+// ── ADMIN ──────────────────────────────────────────────
 function openAdmin() {
   document.getElementById('admin-overlay').style.display = 'flex';
   document.getElementById('admin-login').style.display = 'block';
@@ -1248,11 +1218,12 @@ function closeAdmin() {
 }
 
 function adminLogin() {
-  if (document.getElementById('admin-pw').value === ADMIN_PASSWORD) {
+  const pw = document.getElementById('admin-pw').value;
+  const correct = localStorage.getItem('lmcb_admin_pw') || 'admin123';
+  if (pw === correct) {
     document.getElementById('admin-login').style.display = 'none';
     document.getElementById('admin-editor').style.display = 'block';
-    // Always refresh specs to include all 3 defaults before showing editor
-    specs = getMergedSpecs();
+    specs = getSpecs();
     renderEditorList();
   } else {
     document.getElementById('admin-pw-error').style.display = 'block';
@@ -1261,6 +1232,7 @@ function adminLogin() {
   }
 }
 
+// ── EDITOR LIST ────────────────────────────────────────
 function renderEditorList() {
   const container = document.getElementById('spec-editor-list');
   container.innerHTML = specs.map((s, i) => `
@@ -1269,71 +1241,64 @@ function renderEditorList() {
         ${s.image ? `<img src="${s.image}" style="width:100%;height:100%;object-fit:cover;" />` : `<span style="font-size:1.4rem;opacity:0.3;">${CAT_ICONS[s.category] || '📄'}</span>`}
       </div>
       <div style="flex:1;min-width:0;">
-        <div style="font-size:1rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${s.name}</div>
-        <div style="font-size:0.75rem;opacity:0.45;margin-top:0.15rem;">${s.category} · ${s.format} · ${s.fileUrl ? '✅ File attached' : '⚠ No file'} · ${s.image ? '✓ Image' : 'No image'}</div>
+        <div style="font-size:0.9rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${s.name}</div>
+        <div style="font-size:0.72rem;opacity:0.45;margin-top:0.15rem;">${s.category} · ${s.format} · ${s.fileUrl ? '✅ File attached' : '⚠ No file'}</div>
       </div>
-      <label title="Attach PDF/DXF/ZIP file" style="background:rgba(200,169,81,0.1);border:1px solid rgba(200,169,81,0.4);color:#C8A951;padding:0.4rem 0.7rem;font-family:'DM Mono',monospace;font-size:0.75rem;cursor:pointer;white-space:nowrap;letter-spacing:0.08em;text-transform:uppercase;">
+      <label style="background:rgba(200,169,81,0.1);border:1px solid rgba(200,169,81,0.4);color:#C8A951;padding:0.4rem 0.7rem;font-family:'DM Mono',monospace;font-size:0.72rem;cursor:pointer;white-space:nowrap;text-transform:uppercase;letter-spacing:0.08em;">
         📎 File
-        <input type="file" accept=".pdf,.dxf,.zip,.xlsx" style="display:none;" onchange="uploadSpecFileForExisting(event,${i})" />
+        <input type="file" accept=".pdf,.dxf,.zip,.xlsx" style="display:none;" onchange="attachFile(event,${i})" />
       </label>
-      <label title="Upload image" style="background:transparent;border:1px solid rgba(200,169,81,0.3);color:#C8A951;padding:0.4rem 0.7rem;font-family:'DM Mono',monospace;font-size:0.75rem;cursor:pointer;white-space:nowrap;letter-spacing:0.1em;text-transform:uppercase;">
+      <label style="background:transparent;border:1px solid rgba(200,169,81,0.3);color:#C8A951;padding:0.4rem 0.7rem;font-family:'DM Mono',monospace;font-size:0.72rem;cursor:pointer;text-transform:uppercase;letter-spacing:0.1em;">
         📷
-        <input type="file" accept="image/*" style="display:none;" onchange="uploadSpecImage(event,${i})" />
+        <input type="file" accept="image/*" style="display:none;" onchange="attachImage(event,${i})" />
       </label>
-      <button onclick="editSpec(${i})" style="background:transparent;border:1px solid rgba(200,169,81,0.3);color:#C8A951;padding:0.4rem 0.7rem;font-family:'DM Mono',monospace;font-size:0.75rem;cursor:pointer;white-space:nowrap;letter-spacing:0.08em;text-transform:uppercase;">Edit</button>
-      <button onclick="removeSpec(${i})" style="background:transparent;border:1px solid rgba(212,71,42,0.3);color:#D4472A;padding:0.4rem 0.6rem;font-family:'DM Mono',monospace;font-size:0.75rem;cursor:pointer;">✕</button>
+      <button onclick="editSpec(${i})" style="background:transparent;border:1px solid rgba(200,169,81,0.3);color:#C8A951;padding:0.4rem 0.7rem;font-family:'DM Mono',monospace;font-size:0.72rem;cursor:pointer;text-transform:uppercase;letter-spacing:0.08em;">Edit</button>
+      <button onclick="removeSpec(${i})" style="background:transparent;border:1px solid rgba(212,71,42,0.3);color:#D4472A;padding:0.4rem 0.6rem;font-family:'DM Mono',monospace;font-size:0.72rem;cursor:pointer;">✕</button>
     </div>
   `).join('');
 }
 
-function uploadSpecImage(event, index) {
+// ── FILE ATTACHMENT ────────────────────────────────────
+async function attachFile(event, index) {
   const file = event.target.files[0];
   if (!file) return;
-  if (file.size > 3 * 1024 * 1024) { alert('Image too large. Please use under 3MB.'); return; }
+  showMsg('⏳ Uploading ' + file.name + '...');
+  try {
+    const _sb = supabase.createClient(
+      'https://tldbjsqhjqapdwmfeuwq.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ'
+    );
+    const path = 'specsheets/' + Date.now() + '_' + file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+    const { error } = await _sb.storage.from('files').upload(path, file, { upsert: true });
+    if (error) throw error;
+    const { data: urlData } = _sb.storage.from('files').getPublicUrl(path);
+    specs[index].fileUrl = urlData.publicUrl;
+    saveSpecs();
+    renderEditorList();
+    renderCards();
+    showMsg('✅ File attached to ' + specs[index].name);
+  } catch(e) { showMsg('❌ Upload failed: ' + e.message); }
+}
+
+function attachImage(event, index) {
+  const file = event.target.files[0];
+  if (!file) return;
+  if (file.size > 3*1024*1024) { alert('Image too large. Use under 3MB.'); return; }
   const reader = new FileReader();
   reader.onload = function(e) {
     specs[index].image = e.target.result;
-    saveAllSpecs();
+    saveSpecs();
     renderEditorList();
-    showMsg('✓ Image uploaded and saved!');
+    renderCards();
+    showMsg('✅ Image added to ' + specs[index].name);
   };
   reader.readAsDataURL(file);
 }
 
-async function uploadSpecFileForExisting(event, index) {
-  const file = event.target.files[0];
-  if (!file) return;
-  showMsg('⏳ Uploading file to Supabase...');
-  try {
-    const { createClient } = supabase;
-    const _sb = createClient(
-      'https://tldbjsqhjqapdwmfeuwq.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ'
-    );
-    const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
-    const path = 'specsheets/' + Date.now() + '_' + safeName;
-    const { data, error } = await _sb.storage.from('files').upload(path, file, { cacheControl: '3600', upsert: true });
-    if (error) throw error;
-    const { data: urlData } = _sb.storage.from('files').getPublicUrl(path);
-    specs[index].fileUrl = urlData.publicUrl;
-    saveAllSpecs();
-    renderEditorList();
-    renderCards();
-    showMsg('✅ File attached — ' + file.name);
-  } catch(e) {
-    showMsg('❌ Upload failed: ' + e.message);
-  }
-}
-
-function saveAllSpecs() {
-  // Save everything — both defaults (with their edits) and extras
-  localStorage.setItem('lmcb_specs_all', JSON.stringify(specs));
-}
-
 function removeSpec(i) {
-  if (!confirm(`Remove "${specs[i].name}"?`)) return;
+  if (!confirm('Remove "' + specs[i].name + '"?')) return;
   specs.splice(i, 1);
-  saveAllSpecs();
+  saveSpecs();
   renderEditorList();
   renderCards();
 }
@@ -1341,37 +1306,22 @@ function removeSpec(i) {
 function editSpec(i) {
   const s = specs[i];
   const name = prompt('Name:', s.name); if (name === null) return;
-  const category = prompt('Category (Kids / Mens / Womens):', s.category); if (category === null) return;
-  const subtitle = prompt('Description:', s.subtitle || s.desc || ''); if (subtitle === null) return;
+  const category = prompt('Category (Kids/Mens/Womens):', s.category); if (category === null) return;
+  const subtitle = prompt('Description:', s.subtitle || ''); if (subtitle === null) return;
   const format = prompt('Format (PDF/DXF/ZIP):', s.format); if (format === null) return;
-  if (s.image && confirm('Remove the current image?')) {
-    specs[i] = { ...s, name, category, subtitle, format, image: null };
-  } else {
-    specs[i] = { ...s, name, category, subtitle, format };
-  }
-  saveAllSpecs();
+  specs[i] = { ...s, name, category, subtitle, format };
+  saveSpecs();
   renderEditorList();
   renderCards();
 }
 
-function showMsg(text) {
-  const existing = document.getElementById('admin-msg');
-  if (existing) existing.remove();
-  const msg = document.createElement('div');
-  msg.id = 'admin-msg';
-  msg.textContent = text;
-  msg.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#1C1609;border:1px solid rgba(200,169,81,0.4);color:#C8A951;padding:0.8rem 1.5rem;font-family:DM Mono,monospace;font-size:1.1rem;z-index:99999;white-space:nowrap;';
-  document.body.appendChild(msg);
-  setTimeout(() => msg.remove(), 3500);
-}
-
+// ── ADD NEW SPEC ───────────────────────────────────────
 let newSpecImageData = null;
 let newSpecFileUrl = null;
 
 function previewNewSpecImage(event) {
   const file = event.target.files[0];
   if (!file) return;
-  if (file.size > 3 * 1024 * 1024) { alert('Image too large. Please use under 3MB.'); return; }
   const reader = new FileReader();
   reader.onload = function(e) {
     newSpecImageData = e.target.result;
@@ -1389,20 +1339,18 @@ async function handleSpecFile(event) {
   document.getElementById('new-sfile-uploading').style.display = 'block';
   document.getElementById('new-sfile-done').style.display = 'none';
   try {
-    const { createClient } = supabase;
-    const _sb = createClient(
+    const _sb = supabase.createClient(
       'https://tldbjsqhjqapdwmfeuwq.supabase.co',
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ'
     );
-    const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
-    const path = 'specsheets/' + Date.now() + '_' + safeName;
-    const { data, error } = await _sb.storage.from('files').upload(path, file, { cacheControl: '3600', upsert: true });
+    const path = 'specsheets/' + Date.now() + '_' + file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+    const { error } = await _sb.storage.from('files').upload(path, file, { upsert: true });
     if (error) throw error;
     const { data: urlData } = _sb.storage.from('files').getPublicUrl(path);
     newSpecFileUrl = urlData.publicUrl;
     document.getElementById('new-sfile-uploading').style.display = 'none';
     document.getElementById('new-sfile-done').style.display = 'block';
-    document.getElementById('new-sfile-done').textContent = '✅ ' + file.name + ' ready for download';
+    document.getElementById('new-sfile-done').textContent = '✅ ' + file.name + ' ready';
   } catch(e) {
     document.getElementById('new-sfile-uploading').style.display = 'none';
     document.getElementById('new-sfile-name').textContent = '❌ Upload failed: ' + e.message;
@@ -1412,54 +1360,57 @@ async function handleSpecFile(event) {
 
 function addSpec() {
   const name = document.getElementById('new-sname').value.trim();
+  if (!name) { alert('Please enter a spec sheet name.'); return; }
   const category = document.getElementById('new-scategory').value;
   const format = document.getElementById('new-sformat').value.trim() || 'PDF';
-  const size = document.getElementById('new-ssize').value.trim() || 'N/A';
   const subtitle = document.getElementById('new-sdesc').value.trim();
-  if (!name) { alert('Please enter a spec sheet name.'); return; }
-  if (!newSpecFileUrl) {
-    if (!confirm('No file attached. Add spec sheet without a download file?')) return;
-  }
-  specs.push({ name, category, format, size, subtitle, image: newSpecImageData || null, fileUrl: newSpecFileUrl || null });
-  // Reset
-  document.getElementById('new-sname').value = '';
-  document.getElementById('new-ssize').value = '';
-  document.getElementById('new-sdesc').value = '';
+  specs.push({ name, category, format, size: 'N/A', subtitle, image: newSpecImageData || null, fileUrl: newSpecFileUrl || null });
+  saveSpecs();
+  // Reset form
+  ['new-sname','new-ssize','new-sdesc'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('new-simage').value = '';
   document.getElementById('new-simage-name').textContent = '';
+  document.getElementById('new-simage-preview').style.display = 'none';
   document.getElementById('new-sfile').value = '';
   document.getElementById('new-sfile-name').textContent = '';
   document.getElementById('new-sfile-done').style.display = 'none';
-  document.getElementById('new-simage-preview').style.display = 'none';
-  newSpecImageData = null;
+  newSpecImageData = null; newSpecFileUrl = null;
   renderEditorList();
 }
 
 function applySpecs() {
-  saveAllSpecs();
-  specs = getMergedSpecs();
+  saveSpecs();
   renderCards();
   closeAdmin();
-  showMsg('✓ Spec sheets updated successfully');
-}
-  renderCards();
-  closeAdmin();
-  const msg = document.createElement('div');
-  msg.textContent = '✓ Spec sheets updated successfully';
-  msg.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#C8A951;color:#1A1208;padding:0.8rem 2rem;font-family:DM Mono,monospace;font-size:1.26rem;letter-spacing:0.12em;text-transform:uppercase;z-index:9999;font-weight:500;white-space:nowrap;';
-  document.body.appendChild(msg);
-  setTimeout(() => msg.remove(), 3000);
+  showMsg('✓ Spec sheets updated!');
 }
 
 function resetSpecs() {
-  if (!confirm('Reset to original spec sheet list?')) return;
-  localStorage.removeItem('lmcb_specs_extra');
-  localStorage.removeItem('lmcb_specs');
-  specs = getMergedSpecs();
+  if (!confirm('Reset to original 3 spec sheets?')) return;
+  localStorage.removeItem('lmcb_specs_v2');
+  specs = getSpecs();
   renderEditorList();
+  renderCards();
+}
+
+function showMsg(text) {
+  const existing = document.getElementById('admin-msg');
+  if (existing) existing.remove();
+  const msg = document.createElement('div');
+  msg.id = 'admin-msg';
+  msg.textContent = text;
+  msg.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#1C1609;border:1px solid rgba(200,169,81,0.4);color:#C8A951;padding:0.8rem 1.5rem;font-family:DM Mono,monospace;font-size:1rem;z-index:99999;white-space:nowrap;border-radius:3px;';
+  document.body.appendChild(msg);
+  setTimeout(() => msg.remove(), 3500);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  renderCards();
+  document.getElementById('admin-pw').addEventListener('keydown', e => { if (e.key === 'Enter') adminLogin(); });
+  const params = new URLSearchParams(window.location.search);
+  if (params.has('admin')) openAdmin();
+});
+</script>
   renderCards();
   document.getElementById('admin-pw').addEventListener('keydown', e => { if (e.key === 'Enter') adminLogin(); });
   if (location.search.includes('admin')) openAdmin();
