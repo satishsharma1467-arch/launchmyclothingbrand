@@ -393,7 +393,9 @@ var activeFilter = 'All';
 function renderCards() {
   var specs = getAllSpecs();
   var plan = localStorage.getItem('lmcb_current_plan');
-  var isPaid = plan === 'brand_builder' || plan === 'pro_elite';
+  var users = JSON.parse(localStorage.getItem('lmcb_users') || '[]');
+  var isLoggedIn = users.some(function(u) { return u.lastLogin; });
+  var isPaid = isLoggedIn && (plan === 'brand_builder' || plan === 'pro_elite');
   var filtered = activeFilter === 'All' ? specs : specs.filter(function(s) { return s.category === activeFilter; });
   document.getElementById('total-count').textContent = specs.length + '+';
   document.getElementById('section-label-text').textContent = activeFilter === 'All' ? 'All Spec Sheets' : activeFilter + ' Spec Sheets';
