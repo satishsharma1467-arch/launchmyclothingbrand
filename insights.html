@@ -106,19 +106,6 @@
 </head>
 <body>
 
-  <!-- LOGIN GATE -->
-  <div id="login-gate" style="display:none;position:fixed;inset:0;background:#0E0B06;z-index:9999;align-items:center;justify-content:center;padding:2rem;">
-    <div style="background:#1C1609;border:1px solid rgba(200,169,81,0.4);padding:3rem 2.5rem;max-width:420px;width:100%;text-align:center;">
-      <div style="font-size:2rem;margin-bottom:1rem;">🔐</div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:#C8A951;margin-bottom:0.5rem;">Members Only</div>
-      <div style="font-size:0.78rem;opacity:0.55;line-height:1.7;margin-bottom:2rem;">You need an account to access Industry Insights.<br/>Create a free account to get started.</div>
-      <div style="display:flex;flex-direction:column;gap:0.8rem;">
-        <a href="/register.html" style="background:#C8A951;color:#1A1208;padding:1rem;font-family:'DM Mono',monospace;font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:500;text-decoration:none;display:block;">Create Free Account →</a>
-        <a href="/login.html" style="border:1px solid rgba(200,169,81,0.35);color:#F5F0E8;padding:1rem;font-family:'DM Mono',monospace;font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;display:block;">Already have an account? Log In</a>
-      </div>
-    </div>
-  </div>
-
   <nav>
     <a href="/index.html" class="nav-logo">Launch My Clothing Brand<span>Pattern Making & Manufacturing</span></a>
     <ul class="nav-links" id="main-nav">
@@ -344,9 +331,6 @@ function showMsg(text){
 function _initWA(){ var b=document.getElementById('wa-bubble'),l=document.getElementById('wa-link'); if(!b||!l) return; l.href='https://wa.me/918796158321?text='+encodeURIComponent('Hi! I need help with my clothing brand.'); var p=localStorage.getItem('lmcb_current_plan'); if(p==='brand_builder'||p==='pro_elite'){ b.style.display='flex'; b.style.visibility='visible'; }else{ b.style.display='none'; b.style.visibility='hidden'; } }
 
 document.addEventListener('DOMContentLoaded',async function(){
-  var users=JSON.parse(localStorage.getItem('lmcb_users')||'[]');
-  var isLoggedIn=users.some(function(u){return u.lastLogin;});
-  if(!isLoggedIn){document.getElementById('login-gate').style.display='flex';document.body.style.overflow='hidden';}
   await loadFromSB();
   renderCards();
   document.getElementById('admin-pw').addEventListener('keydown',function(e){ if(e.key==='Enter') adminLogin(); });
