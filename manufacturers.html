@@ -257,14 +257,17 @@ async function loadFromSB(){
 }
 
 var plan = localStorage.getItem('lmcb_current_plan');
-var isPaid = plan==='brand_builder'||plan==='pro_elite';
+var users = JSON.parse(localStorage.getItem('lmcb_users') || '[]');
+var isLoggedIn = users.some(function(u) { return u.lastLogin; });
+var isPaid = isLoggedIn && (plan==='brand_builder'||plan==='pro_elite');
 
 function renderCards(){
   var mfrs=getMfrs();
   var grid=document.getElementById('mfr-grid');
   document.getElementById('total-count').textContent=mfrs.length;
   plan=localStorage.getItem('lmcb_current_plan');
-  isPaid=plan==='brand_builder'||plan==='pro_elite';
+  var us=JSON.parse(localStorage.getItem('lmcb_users')||'[]');
+  isPaid=us.some(function(u){return u.lastLogin;})&&(plan==='brand_builder'||plan==='pro_elite');
   if(!mfrs.length){ grid.innerHTML='<div class="mfr-empty">No manufacturers added yet.</div>'; return; }
   grid.innerHTML=mfrs.map(function(m,i){
     var tags=(m.spec||'').split(',').filter(Boolean).map(function(t){ return '<span class="mfr-tag">'+t.trim()+'</span>'; }).join('');
