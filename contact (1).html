@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Get in touch with Launch My Clothing Brand. Email support, WhatsApp, office address in Bijwasan Delhi.">
+<meta name="robots" content="index, follow">
+<title>Contact Us | Launch My Clothing Brand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<style>
+:root{--bg:#0d1117;--bg2:#161b22;--bg3:#21262d;--border:#30363d;--gold:#d4a843;--gold2:#f0c96a;--text:#e6edf3;--muted:#8b949e;--green:#3fb950;--red:#f85149;--radius:8px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;min-height:100vh;padding-bottom:80px;}
+a{color:var(--gold);text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+/* NAV */
+nav{background:rgba(13,17,23,.97);border-bottom:1px solid var(--border);padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(8px);}
+.nav-logo{font-size:1rem;font-weight:600;color:var(--text);display:flex;flex-direction:column;line-height:1.2;text-decoration:none;}
+.nav-logo span{font-size:.7rem;font-weight:400;color:var(--muted);}
+.nav-links{display:flex;gap:1.5rem;list-style:none;align-items:center;}
+.nav-links a{color:var(--muted);font-size:.85rem;transition:color .2s;text-decoration:none;}
+.nav-links a:hover{color:var(--text);}
+.nav-cta{background:var(--gold);color:#000 !important;padding:.4rem 1rem;border-radius:var(--radius);font-weight:500;font-size:.8rem;}
+.nav-cta:hover{background:var(--gold2) !important;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:all .3s;}
+.mob-menu{display:none;position:fixed;top:57px;left:0;right:0;background:var(--bg2);border-bottom:1px solid var(--border);z-index:99;padding:1rem 1.5rem;flex-direction:column;gap:.75rem;}
+.mob-menu.open{display:flex;}
+.mob-menu a{color:var(--muted);font-size:.9rem;padding:.5rem 0;border-bottom:1px solid var(--border);text-decoration:none;}
+.mob-menu a:last-child{border:none;}
+@media(max-width:768px){.nav-links{display:none;}.hamburger{display:flex;}}
+
+/* HERO */
+.hero{text-align:center;padding:3rem 1.5rem 2.5rem;}
+.hero-tag{display:inline-block;background:rgba(212,168,67,.12);border:1px solid rgba(212,168,67,.25);color:var(--gold);font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .9rem;border-radius:20px;margin-bottom:1rem;}
+.hero h1{font-size:2rem;font-weight:700;margin-bottom:.6rem;}
+.hero h1 em{color:var(--gold);font-style:italic;}
+.hero p{color:var(--muted);font-size:.9rem;max-width:500px;margin:0 auto;line-height:1.6;}
+
+/* MAIN LAYOUT */
+.main{max-width:1000px;margin:0 auto;padding:2rem 1.5rem;display:grid;grid-template-columns:1fr 1.4fr;gap:2rem;align-items:start;}
+@media(max-width:768px){.main{grid-template-columns:1fr;}}
+
+/* CONTACT CHANNELS */
+.channels{display:flex;flex-direction:column;gap:1rem;}
+.channel-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1.25rem;transition:border-color .2s;}
+.channel-card:hover{border-color:rgba(212,168,67,.25);}
+.ch-header{display:flex;align-items:center;gap:.75rem;margin-bottom:.6rem;}
+.ch-icon{font-size:1.4rem;flex-shrink:0;}
+.ch-title{font-size:.88rem;font-weight:600;color:var(--text);}
+.ch-sub{font-size:.75rem;color:var(--muted);}
+.ch-body{font-size:.82rem;color:var(--muted);line-height:1.6;}
+.ch-body a{color:var(--gold);font-weight:500;}
+.ch-body .locked-note{color:var(--muted);font-size:.78rem;display:flex;align-items:center;gap:.4rem;}
+.ch-action{margin-top:.75rem;}
+.btn-channel{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem 1rem;border-radius:var(--radius);font-size:.78rem;font-weight:600;border:none;cursor:pointer;text-decoration:none;transition:all .2s;}
+.btn-wa{background:rgba(37,211,102,.12);border:1px solid rgba(37,211,102,.25);color:#25d366;}
+.btn-wa:hover{background:rgba(37,211,102,.2);text-decoration:none;}
+.btn-email{background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.2);color:var(--gold);}
+.btn-email:hover{background:rgba(212,168,67,.18);text-decoration:none;}
+.btn-maps{background:var(--bg3);border:1px solid var(--border);color:var(--muted);}
+.btn-maps:hover{border-color:var(--gold);color:var(--gold);text-decoration:none;}
+.hours-grid{display:grid;grid-template-columns:1fr 1fr;gap:.4rem;margin-top:.5rem;}
+.hours-row{font-size:.78rem;display:flex;justify-content:space-between;padding:.3rem 0;border-bottom:1px solid rgba(48,54,61,.5);}
+.hours-row:last-child{border:none;}
+.hours-day{color:var(--muted);}
+.hours-time{color:var(--text);font-weight:500;}
+.hours-time.closed{color:var(--red);}
+
+/* CONTACT FORM */
+.form-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:2rem;}
+.form-title{font-size:1.1rem;font-weight:700;margin-bottom:.3rem;}
+.form-sub{font-size:.82rem;color:var(--muted);margin-bottom:1.5rem;}
+.field{margin-bottom:1rem;}
+.field label{display:block;font-size:.75rem;font-weight:500;color:var(--muted);margin-bottom:.4rem;letter-spacing:.02em;}
+.field input,.field select,.field textarea{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:.65rem .9rem;color:var(--text);font-size:.88rem;outline:none;transition:border-color .2s;font-family:inherit;}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold);}
+.field input.err,.field select.err,.field textarea.err{border-color:var(--red);}
+.field textarea{resize:vertical;min-height:110px;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+@media(max-width:500px){.field-row{grid-template-columns:1fr;}}
+.btn-submit{width:100%;background:var(--gold);color:#000;border:none;padding:.8rem;border-radius:var(--radius);font-size:.9rem;font-weight:600;cursor:pointer;transition:all .2s;margin-top:.25rem;}
+.btn-submit:hover:not(:disabled){background:var(--gold2);}
+.btn-submit:disabled{opacity:.6;cursor:not-allowed;}
+.alert{border-radius:var(--radius);padding:.75rem 1rem;margin-bottom:1rem;font-size:.83rem;display:none;}
+.alert.show{display:block;}
+.alert.success{background:rgba(63,185,80,.1);border:1px solid rgba(63,185,80,.3);color:var(--green);}
+.alert.error{background:rgba(248,81,73,.1);border:1px solid rgba(248,81,73,.3);color:var(--red);}
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(0,0,0,.3);border-top-color:#000;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:6px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* MAP */
+.map-section{max-width:1000px;margin:0 auto 2rem;padding:0 1.5rem;}
+.map-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.map-header{padding:1rem 1.25rem;border-bottom:1px solid var(--border);}
+.map-header h3{font-size:.9rem;font-weight:600;}
+.map-header p{font-size:.78rem;color:var(--muted);margin-top:2px;}
+.map-card iframe{width:100%;height:280px;border:none;display:block;filter:brightness(.85) contrast(1.1);}
+
+/* FAQ */
+.faq-section{max-width:1000px;margin:0 auto 2rem;padding:0 1.5rem;}
+.faq-title{font-size:1.1rem;font-weight:700;margin-bottom:1rem;}
+.faq-item{border-bottom:1px solid var(--border);}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:.9rem 0;cursor:pointer;font-size:.88rem;font-weight:500;gap:1rem;}
+.faq-toggle{color:var(--gold);font-size:1.1rem;flex-shrink:0;transition:transform .25s;}
+.faq-item.open .faq-toggle{transform:rotate(45deg);}
+.faq-a{font-size:.82rem;color:var(--muted);line-height:1.7;max-height:0;overflow:hidden;transition:max-height .3s,padding .3s;}
+.faq-item.open .faq-a{max-height:200px;padding-bottom:.9rem;}
+
+/* CTA */
+.cta-section{text-align:center;padding:3rem 2rem;border-top:1px solid var(--border);}
+.cta-section h2{font-size:1.4rem;font-weight:700;margin-bottom:.5rem;}
+.cta-section p{color:var(--muted);font-size:.85rem;margin-bottom:1.5rem;}
+.btn-cta{display:inline-block;background:var(--gold);color:#000;padding:.75rem 2rem;border-radius:var(--radius);font-weight:600;font-size:.88rem;text-decoration:none;}
+.btn-cta:hover{background:var(--gold2);}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:2.5rem 2rem;}
+.footer-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;}
+@media(max-width:768px){.footer-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.footer-grid{grid-template-columns:1fr;}}
+.footer-brand h3{font-size:1rem;font-weight:700;margin-bottom:.3rem;}
+.footer-brand p{font-size:.78rem;color:var(--muted);line-height:1.6;margin-bottom:.5rem;}
+.footer-brand .addr{font-size:.75rem;color:var(--muted);}
+.footer-col h4{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.75rem;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem;}
+.footer-col ul li a{font-size:.8rem;color:var(--muted);text-decoration:none;transition:color .2s;}
+.footer-col ul li a:hover{color:var(--gold);}
+.footer-bottom{max-width:1000px;margin:1.5rem auto 0;padding-top:1.25rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;}
+.footer-bottom p{font-size:.75rem;color:var(--muted);}
+
+/* MOBILE BOTTOM NAV */
+.mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);padding:.4rem .5rem;z-index:90;}
+.mob-nav-inner{display:flex;justify-content:space-around;}
+.mob-nav a{display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--muted);font-size:.58rem;text-decoration:none;padding:.25rem .5rem;}
+.mob-nav a:hover{color:var(--gold);}
+@media(max-width:768px){.mob-nav{display:block;}}
+
+/* WA float */
+.wa-float{position:fixed;bottom:5rem;right:1rem;z-index:200;}
+@media(max-width:768px){.wa-float{bottom:4.5rem;}}
+.wa-float a{background:#25d366;color:#fff;padding:.55rem 1rem;border-radius:24px;font-size:.78rem;font-weight:600;display:flex;align-items:center;gap:.4rem;box-shadow:0 4px 16px rgba(0,0,0,.4);text-decoration:none;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/index.html" class="nav-logo">Launch My Clothing Brand <span>Pattern Making & Manufacturing</span></a>
+  <ul class="nav-links">
+    <li><a href="/services.html">Services</a></li>
+    <li><a href="/library.html">Patterns</a></li>
+    <li><a href="/specsheets.html">Spec Sheets</a></li>
+    <li><a href="/insights.html">Insights</a></li>
+    <li><a href="/manufacturers.html">Manufacturers</a></li>
+    <li><a href="/contact.html" style="color:var(--text)">Contact</a></li>
+    <li><a href="/subscribe.html" class="nav-cta">Get Started</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="/services.html">Services</a>
+  <a href="/library.html">Patterns</a>
+  <a href="/specsheets.html">Spec Sheets</a>
+  <a href="/insights.html">Insights</a>
+  <a href="/manufacturers.html">Manufacturers</a>
+  <a href="/contact.html">Contact</a>
+  <a href="/subscribe.html" style="color:var(--gold);font-weight:600;">Get Started →</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Get In Touch</div>
+  <h1>We're Here to <em>Help</em></h1>
+  <p>Reach out through any channel below. We respond to all enquiries within 24 business hours.</p>
+</div>
+
+<!-- MAIN GRID -->
+<div class="main">
+
+  <!-- LEFT: channels -->
+  <div class="channels">
+
+    <div class="channel-card">
+      <div class="ch-header">
+        <div class="ch-icon">✉</div>
+        <div><div class="ch-title">Email Support</div><div class="ch-sub">For general enquiries and support</div></div>
+      </div>
+      <div class="ch-body">
+        <a href="mailto:hello.launchmyclothing@gmail.com">hello.launchmyclothing@gmail.com</a>
+        <p style="margin-top:.4rem;font-size:.78rem;">We reply within 24 business hours.</p>
+      </div>
+      <div class="ch-action">
+        <a href="mailto:hello.launchmyclothing@gmail.com" class="btn-channel btn-email">✉ Send Email</a>
+      </div>
+    </div>
+
+    <div class="channel-card">
+      <div class="ch-header">
+        <div class="ch-icon">💬</div>
+        <div><div class="ch-title">WhatsApp Support</div><div class="ch-sub">Quick replies for all visitors</div></div>
+      </div>
+      <div class="ch-body">
+        Chat directly with us on WhatsApp for the fastest response. Available for all visitors.
+      </div>
+      <div class="ch-action">
+        <a href="https://wa.me/918796158321?text=Hi%2C+I+have+a+question+about+your+services" target="_blank" class="btn-channel btn-wa">💬 Chat on WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="channel-card">
+      <div class="ch-header">
+        <div class="ch-icon">📞</div>
+        <div><div class="ch-title">Phone Support</div><div class="ch-sub">Available for Pro Elite members</div></div>
+      </div>
+      <div class="ch-body">
+        <span class="locked-note">🔒 Direct phone support is available for Pro Elite subscribers. <a href="/subscribe.html" style="margin-left:.3rem;">Upgrade →</a></span>
+      </div>
+    </div>
+
+    <div class="channel-card">
+      <div class="ch-header">
+        <div class="ch-icon">📍</div>
+        <div><div class="ch-title">Office Address</div><div class="ch-sub">In-person visits by appointment only</div></div>
+      </div>
+      <div class="ch-body">
+        Launch My Clothing Brand<br>
+        Bijwasan, Delhi — 110061<br>
+        India
+      </div>
+      <div class="ch-action">
+        <a href="https://maps.google.com/?q=Bijwasan,Delhi,110061" target="_blank" class="btn-channel btn-maps">📍 Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="channel-card">
+      <div class="ch-header">
+        <div class="ch-icon">🕐</div>
+        <div><div class="ch-title">Business Hours</div><div class="ch-sub">When we're available</div></div>
+      </div>
+      <div class="ch-body">
+        <div style="display:flex;flex-direction:column;gap:.3rem;margin-top:.25rem;">
+          <div class="hours-row"><span class="hours-day">Monday — Friday</span><span class="hours-time">10:00 AM – 6:00 PM IST</span></div>
+          <div class="hours-row"><span class="hours-day">Saturday</span><span class="hours-time">10:00 AM – 2:00 PM IST</span></div>
+          <div class="hours-row"><span class="hours-day">Sunday</span><span class="hours-time closed">Closed</span></div>
+        </div>
+        <p style="margin-top:.6rem;font-size:.75rem;color:var(--gold)">⚡ Response within 24 business hours</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RIGHT: contact form -->
+  <div class="form-card">
+    <div class="form-title">Send Us a Message</div>
+    <div class="form-sub">Fill in the form and we'll get back to you within 24 hours.</div>
+
+    <div class="alert" id="formAlert"></div>
+
+    <div class="field-row">
+      <div class="field">
+        <label>First Name *</label>
+        <input type="text" id="fName" placeholder="Rahul">
+      </div>
+      <div class="field">
+        <label>Last Name</label>
+        <input type="text" id="lName" placeholder="Sharma">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Email Address *</label>
+      <input type="email" id="fEmail" placeholder="you@example.com">
+    </div>
+
+    <div class="field">
+      <label>Phone / WhatsApp</label>
+      <input type="tel" id="fPhone" placeholder="9876543210">
+    </div>
+
+    <div class="field">
+      <label>Subject *</label>
+      <select id="fSubject">
+        <option value="">— Select a subject —</option>
+        <option>Pattern Making Enquiry</option>
+        <option>Custom CAD Request</option>
+        <option>Manufacturer Connection</option>
+        <option>Subscription / Billing</option>
+        <option>Spec Sheet Query</option>
+        <option>Brand Consultation</option>
+        <option>General Question</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Message *</label>
+      <textarea id="fMessage" placeholder="Tell us what you need help with..."></textarea>
+    </div>
+
+    <button class="btn-submit" id="submitBtn" onclick="submitForm()">Send Message →</button>
+  </div>
+
+</div>
+
+<!-- MAP -->
+<div class="map-section">
+  <div class="map-card">
+    <div class="map-header">
+      <h3>📍 Find Us in Delhi</h3>
+      <p>Bijwasan, Delhi — 110061 · In-person visits by appointment only</p>
+    </div>
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3506.6270099099545!2d77.0507!3d28.5008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1b4ac4836a77%3A0x5f9c9c9c9c9c9c9c!2sBijwasan%2C%20New%20Delhi%2C%20Delhi%20110061!5e0!3m2!1sen!2sin!4v1700000000000"
+      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="faq-section">
+  <div class="faq-title">Common Questions</div>
+
+  <div class="faq-item">
+    <div class="faq-q">How quickly do you respond to enquiries? <span class="faq-toggle">+</span></div>
+    <div class="faq-a">We respond to all enquiries within 24 business hours Monday–Friday. Messages sent on weekends or after 6 PM IST will be responded to the next business day.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">How do I get a quote for custom pattern making? <span class="faq-toggle">+</span></div>
+    <div class="faq-a">Send us a message using the form above with details about your garment category, design complexity, and quantities needed. We'll send you a quote within 24 hours.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Can I visit your office to discuss my project? <span class="faq-toggle">+</span></div>
+    <div class="faq-a">Yes, in-person consultations are available at our Bijwasan, Delhi office but only by prior appointment. Please send us an email or WhatsApp to schedule a visit.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">I have a subscription issue — who do I contact? <span class="faq-toggle">+</span></div>
+    <div class="faq-a">Select "Subscription / Billing" in the subject dropdown and describe your issue. We'll resolve billing and subscription queries within 12 business hours.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Do you work with brands outside Delhi? <span class="faq-toggle">+</span></div>
+    <div class="faq-a">Yes! We serve brands across India. All pattern files are delivered digitally, and our manufacturer connections cover Delhi NCR. Remote consultations are available via email and WhatsApp.</div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2>Ready to Launch Your Brand?</h2>
+  <p>Explore our plans and get access to patterns, spec sheets, manufacturer connections, and expert consultation.</p>
+  <a href="/subscribe.html" class="btn-cta">View Pricing →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3>Launch My Clothing Brand</h3>
+      <p>Professional digital pattern making and manufacturer data services for clothing brands in India.</p>
+      <div class="addr">Bijwasan, Delhi — 110061</div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="/services.html">Pattern Making</a></li>
+        <li><a href="/library.html">Pattern Library</a></li>
+        <li><a href="/specsheets.html">Spec Sheets</a></li>
+        <li><a href="/insights.html">Industry Insights</a></li>
+        <li><a href="/services.html">Expert Consultation</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal & Support</h4>
+      <ul>
+        <li><a href="/contact.html">Contact Us</a></li>
+        <li><a href="/subscribe.html">Pricing</a></li>
+        <li><a href="/manufacturers.html">Manufacturers</a></li>
+        <li><a href="/terms.html">Terms of Service</a></li>
+        <li><a href="/privacy.html">Privacy Policy</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="mailto:hello.launchmyclothing@gmail.com">✉ Email Us</a></li>
+        <li><a href="https://wa.me/918796158321" target="_blank">💬 WhatsApp</a></li>
+      </ul>
+      <p style="font-size:.75rem;color:var(--muted);margin-top:.75rem;">Phone support available for Pro Elite members.</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Launch My Clothing Brand. All Rights Reserved.</p>
+    <p>launchmyclothingbrand.com · Bijwasan, Delhi 110061</p>
+  </div>
+</footer>
+
+<!-- WA FLOAT -->
+<div class="wa-float">
+  <a href="https://wa.me/918796158321?text=Hi%2C+I+have+a+question" target="_blank">💬 WhatsApp Us</a>
+</div>
+
+<!-- MOBILE BOTTOM NAV -->
+<div class="mob-nav">
+  <div class="mob-nav-inner">
+    <a href="/index.html">🏠<br>Home</a>
+    <a href="/services.html">📐<br>Services</a>
+    <a href="/manufacturers.html">🏭<br>Factories</a>
+    <a href="/specsheets.html">📋<br>Spec</a>
+    <a href="/insights.html">🎬<br>Insights</a>
+    <a href="/subscribe.html">⭐<br>Plans</a>
+  </div>
+</div>
+
+<script>
+const SB_URL  = 'https://tldbjsqhjqapdwmfeuwq.supabase.co';
+const SB_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ';
+const WA_NUM  = '918796158321';
+const sb = supabase.createClient(SB_URL, SB_KEY);
+
+function toggleMenu(){ document.getElementById('mobMenu').classList.toggle('open'); }
+
+// FAQ
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.querySelector('.faq-q').addEventListener('click', () => {
+    const open = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!open) item.classList.add('open');
+  });
+});
+
+function showAlert(msg, type) {
+  const el = document.getElementById('formAlert');
+  el.textContent = msg;
+  el.className = 'alert show ' + type;
+}
+
+async function submitForm() {
+  const name    = document.getElementById('fName').value.trim();
+  const lname   = document.getElementById('lName').value.trim();
+  const email   = document.getElementById('fEmail').value.trim();
+  const phone   = document.getElementById('fPhone').value.trim();
+  const subject = document.getElementById('fSubject').value;
+  const message = document.getElementById('fMessage').value.trim();
+
+  // clear errors
+  ['fName','fEmail','fSubject','fMessage'].forEach(id => document.getElementById(id).classList.remove('err'));
+
+  let valid = true;
+  if (!name)    { document.getElementById('fName').classList.add('err');    valid = false; }
+  if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { document.getElementById('fEmail').classList.add('err');   valid = false; }
+  if (!subject) { document.getElementById('fSubject').classList.add('err'); valid = false; }
+  if (!message) { document.getElementById('fMessage').classList.add('err'); valid = false; }
+  if (!valid) { showAlert('Please fill in all required fields.', 'error'); return; }
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Sending...';
+
+  try {
+    // save to Supabase contacts table
+    const { error } = await sb.from('contacts').insert({
+      first_name: name,
+      last_name:  lname,
+      email,
+      phone,
+      subject,
+      message,
+      created_at: new Date().toISOString()
+    });
+
+    if (error) throw new Error(error.message);
+
+    // notify via WhatsApp
+    const waMsg = encodeURIComponent(
+      `📬 New Contact Form Submission!\n\nName: ${name} ${lname}\nEmail: ${email}\nPhone: ${phone || '—'}\nSubject: ${subject}\n\nMessage:\n${message}`
+    );
+    window.open(`https://wa.me/${WA_NUM}?text=${waMsg}`, '_blank');
+
+    showAlert('✅ Message sent! We\'ll get back to you within 24 hours.', 'success');
+
+    // reset form
+    ['fName','lName','fEmail','fPhone','fMessage'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('fSubject').value = '';
+
+  } catch (err) {
+    showAlert('Failed to send: ' + err.message + '. Please email us directly.', 'error');
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Send Message →';
+}
+</script>
+</body>
+</html>

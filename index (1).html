@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Expert freelance pattern making and CAD services for clothing brands in India. Production-ready files, pattern library, and manufacturer connections. Based in Delhi NCR.">
+<meta name="robots" content="index, follow">
+<meta name="geo.placename" content="Delhi">
+<meta name="geo.region" content="IN-DL">
+<meta name="keywords" content="pattern making India, CAD pattern making, clothing brand startup, garment manufacturing, DXF pattern files, manufacturer connection Delhi">
+<meta property="og:title" content="Launch My Clothing Brand | Pattern Making & CAD Services">
+<meta property="og:description" content="Expert freelance pattern making and CAD services. Stop wasting money on bad samples. Get production-ready files.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://launchmyclothingbrand.com/">
+<title>Launch My Clothing Brand | Pattern Making & Manufacturing Services India</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d1117;--bg2:#161b22;--bg3:#21262d;--border:#30363d;--gold:#d4a843;--gold2:#f0c96a;--gold-dim:#8b6e1f;--text:#e6edf3;--muted:#8b949e;--green:#3fb950;--red:#f85149;--radius:8px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;min-height:100vh;overflow-x:hidden;}
+a{color:var(--gold);text-decoration:none;}
+a:hover{text-decoration:underline;}
+img{max-width:100%;}
+
+/* NAV */
+nav{background:rgba(13,17,23,.97);border-bottom:1px solid var(--border);padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(10px);}
+.nav-logo{font-size:1rem;font-weight:700;color:var(--text);display:flex;flex-direction:column;line-height:1.2;text-decoration:none;}
+.nav-logo span{font-size:.7rem;font-weight:400;color:var(--muted);}
+.nav-links{display:flex;gap:1.5rem;list-style:none;align-items:center;}
+.nav-links a{color:var(--muted);font-size:.85rem;transition:color .2s;text-decoration:none;}
+.nav-links a:hover{color:var(--text);}
+.nav-right{display:flex;align-items:center;gap:1rem;}
+.nav-user{font-size:.78rem;color:var(--gold);display:none;align-items:center;gap:.4rem;}
+.nav-user.show{display:flex;}
+.nav-cta{background:var(--gold);color:#000 !important;padding:.4rem 1.1rem;border-radius:var(--radius);font-weight:600;font-size:.8rem;transition:background .2s;text-decoration:none !important;}
+.nav-cta:hover{background:var(--gold2) !important;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:all .3s;}
+.mob-menu{display:none;position:fixed;top:57px;left:0;right:0;background:var(--bg2);border-bottom:1px solid var(--border);z-index:99;padding:1rem 1.5rem;flex-direction:column;gap:.75rem;}
+.mob-menu.open{display:flex;}
+.mob-menu a{color:var(--muted);font-size:.9rem;padding:.5rem 0;border-bottom:1px solid var(--border);text-decoration:none;}
+.mob-menu a:last-child{border:none;}
+@media(max-width:900px){.nav-links{display:none;}.hamburger{display:flex;}}
+
+/* HERO */
+.hero{min-height:calc(100vh - 57px);display:flex;align-items:center;padding:4rem 2rem;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 60% 40%, rgba(212,168,67,.05) 0%, transparent 70%);pointer-events:none;}
+.hero-inner{max-width:1100px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+@media(max-width:900px){.hero-inner{grid-template-columns:1fr;gap:2.5rem;}.hero{min-height:auto;padding:3rem 1.5rem;}}
+.hero-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.2);color:var(--gold);font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.35rem .9rem;border-radius:20px;margin-bottom:1.5rem;}
+.hero h1{font-size:clamp(2.2rem,5vw,3.4rem);font-weight:700;line-height:1.15;margin-bottom:1.25rem;letter-spacing:-.02em;}
+.hero h1 em{color:var(--gold);font-style:italic;}
+.hero-desc{font-size:1rem;color:var(--muted);line-height:1.7;margin-bottom:2rem;max-width:480px;}
+.hero-btns{display:flex;gap:.75rem;flex-wrap:wrap;}
+.btn-primary{background:var(--gold);color:#000;padding:.8rem 1.75rem;border-radius:var(--radius);font-weight:600;font-size:.9rem;border:none;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block;}
+.btn-primary:hover{background:var(--gold2);transform:translateY(-1px);text-decoration:none;}
+.btn-secondary{background:transparent;color:var(--text);padding:.8rem 1.75rem;border-radius:var(--radius);font-weight:500;font-size:.9rem;border:1px solid var(--border);cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block;}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold);text-decoration:none;}
+.hero-stats{display:flex;gap:2rem;margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--border);flex-wrap:wrap;}
+.hstat-num{font-size:1.6rem;font-weight:700;color:var(--gold);}
+.hstat-label{font-size:.72rem;color:var(--muted);margin-top:2px;}
+/* hero image */
+.hero-img-wrap{position:relative;}
+.hero-img{width:100%;border-radius:16px;object-fit:cover;height:420px;border:1px solid var(--border);}
+@media(max-width:900px){.hero-img{height:260px;}}
+.hero-img-badge{position:absolute;bottom:1rem;left:1rem;right:1rem;background:rgba(13,17,23,.92);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:var(--radius);padding:.75rem 1rem;font-size:.75rem;color:var(--muted);overflow:hidden;}
+.ticker-wrap{overflow:hidden;white-space:nowrap;}
+.ticker{display:inline-block;animation:ticker 20s linear infinite;}
+.ticker-item{display:inline-block;margin-right:2rem;color:var(--gold);}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTION COMMONS */
+section{padding:5rem 2rem;}
+.section-wrap{max-width:1100px;margin:0 auto;}
+.section-tag{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem;}
+.section-title{font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:700;line-height:1.2;margin-bottom:.5rem;}
+.section-title em{color:var(--gold);font-style:italic;}
+.section-sub{color:var(--muted);font-size:.9rem;line-height:1.7;max-width:560px;}
+.divider{border:none;border-top:1px solid var(--border);margin:0;}
+
+/* TRUST BAR */
+.trust-bar{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1rem 2rem;}
+.trust-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:3rem;flex-wrap:wrap;}
+.trust-item{display:flex;align-items:center;gap:.5rem;font-size:.78rem;color:var(--muted);}
+.trust-item strong{color:var(--text);}
+
+/* ABOUT */
+#about{background:var(--bg2);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+@media(max-width:768px){.about-grid{grid-template-columns:1fr;gap:2rem;}}
+.about-points{display:flex;flex-direction:column;gap:.75rem;margin-top:1.5rem;}
+.about-point{display:flex;align-items:flex-start;gap:.75rem;font-size:.88rem;color:var(--muted);line-height:1.5;}
+.about-point::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px;}
+.about-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:2rem;}
+.astat{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;text-align:center;}
+.astat-num{font-size:1.8rem;font-weight:700;color:var(--gold);}
+.astat-label{font-size:.72rem;color:var(--muted);margin-top:4px;}
+
+/* SERVICES */
+#services{background:var(--bg);}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem;margin-top:3rem;}
+.service-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1.75rem;transition:border-color .2s,transform .2s;display:flex;flex-direction:column;}
+.service-card:hover{border-color:rgba(212,168,67,.35);transform:translateY(-3px);}
+.svc-num{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem;}
+.svc-icon{font-size:1.6rem;margin-bottom:.75rem;}
+.svc-title{font-size:1rem;font-weight:600;margin-bottom:.5rem;}
+.svc-desc{font-size:.82rem;color:var(--muted);line-height:1.6;flex:1;margin-bottom:1rem;}
+.svc-tags{display:flex;flex-wrap:wrap;gap:.35rem;}
+.svc-tag{font-size:.68rem;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.15);color:var(--gold);padding:2px 8px;border-radius:4px;}
+.svc-link{margin-top:1rem;font-size:.8rem;color:var(--gold);font-weight:500;}
+.svc-link:hover{text-decoration:underline;}
+
+/* BRANDS */
+#brands{background:var(--bg2);}
+.brands-sub{color:var(--muted);font-size:.85rem;margin-top:.4rem;margin-bottom:2.5rem;}
+.brands-marquee{overflow:hidden;position:relative;}
+.brands-marquee::before,.brands-marquee::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none;}
+.brands-marquee::before{left:0;background:linear-gradient(to right,var(--bg2),transparent);}
+.brands-marquee::after{right:0;background:linear-gradient(to left,var(--bg2),transparent);}
+.brands-track{display:flex;gap:1rem;animation:marquee 25s linear infinite;width:max-content;}
+.brands-track:hover{animation-play-state:paused;}
+.brand-pill{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:.6rem 1.25rem;font-size:.82rem;font-weight:500;color:var(--muted);white-space:nowrap;transition:border-color .2s,color .2s;}
+.brand-pill:hover{border-color:rgba(212,168,67,.3);color:var(--gold);}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SCOPE */
+#scope{background:var(--bg);}
+.scope-intro{margin-bottom:2.5rem;}
+.scope-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;}
+.scope-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1.5rem;text-align:center;opacity:.7;}
+.scope-icon{font-size:1.8rem;margin-bottom:.75rem;}
+.scope-title{font-size:.88rem;font-weight:600;color:var(--text);margin-bottom:.4rem;}
+.scope-desc{font-size:.75rem;color:var(--muted);line-height:1.5;}
+.scope-note{max-width:600px;margin:2rem auto 0;text-align:center;font-size:.82rem;color:var(--muted);line-height:1.6;}
+
+/* CTA BANNER */
+.cta-banner{background:linear-gradient(135deg,rgba(212,168,67,.1) 0%,rgba(212,168,67,.04) 100%);border:1px solid rgba(212,168,67,.2);border-radius:16px;padding:3rem 2rem;text-align:center;max-width:700px;margin:0 auto;}
+.cta-banner h2{font-size:1.8rem;font-weight:700;margin-bottom:.75rem;}
+.cta-banner h2 em{color:var(--gold);font-style:italic;}
+.cta-banner p{color:var(--muted);font-size:.9rem;margin-bottom:2rem;line-height:1.6;}
+.cta-btns{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 2rem 1rem;}
+.footer-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;margin-bottom:2rem;}
+@media(max-width:768px){.footer-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.footer-grid{grid-template-columns:1fr;}}
+.footer-brand h3{font-size:1rem;font-weight:700;margin-bottom:.4rem;}
+.footer-brand p{font-size:.78rem;color:var(--muted);line-height:1.6;margin-bottom:.5rem;}
+.footer-brand .addr{font-size:.75rem;color:var(--muted);}
+.footer-col h4{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.75rem;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem;}
+.footer-col ul li a{font-size:.8rem;color:var(--muted);text-decoration:none;transition:color .2s;}
+.footer-col ul li a:hover{color:var(--gold);}
+.footer-bottom{max-width:1100px;margin:0 auto;padding-top:1.25rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;}
+.footer-bottom p{font-size:.75rem;color:var(--muted);}
+
+/* MOBILE NAV */
+.mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);padding:.4rem .5rem;z-index:90;}
+.mob-nav-inner{display:flex;justify-content:space-around;}
+.mob-nav a{display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--muted);font-size:.58rem;text-decoration:none;padding:.25rem .5rem;}
+.mob-nav a:hover{color:var(--gold);}
+@media(max-width:768px){.mob-nav{display:block;}body{padding-bottom:60px;}}
+
+/* WA float */
+.wa-float{position:fixed;bottom:5rem;right:1rem;z-index:200;}
+@media(max-width:768px){.wa-float{bottom:4.5rem;}}
+.wa-float a{background:#25d366;color:#fff;padding:.55rem 1rem;border-radius:24px;font-size:.78rem;font-weight:600;display:flex;align-items:center;gap:.4rem;box-shadow:0 4px 16px rgba(0,0,0,.4);text-decoration:none;}
+
+/* ANIMATIONS */
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s;}
+.fade-up.visible{opacity:1;transform:none;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/index.html" class="nav-logo">Launch My Clothing Brand <span>Pattern Making & Manufacturing</span></a>
+  <ul class="nav-links">
+    <li><a href="/services.html">Services</a></li>
+    <li><a href="/library.html">Patterns</a></li>
+    <li><a href="/specsheets.html">Spec Sheets</a></li>
+    <li><a href="/insights.html">Insights</a></li>
+    <li><a href="/manufacturers.html">Manufacturers</a></li>
+    <li><a href="/contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <span class="nav-user" id="navUser">👋 <span id="navUserName"></span></span>
+    <a href="/subscribe.html" class="nav-cta" id="navCta">Get Started</a>
+  </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="/services.html">Services</a>
+  <a href="/library.html">Patterns</a>
+  <a href="/specsheets.html">Spec Sheets</a>
+  <a href="/insights.html">Insights</a>
+  <a href="/manufacturers.html">Manufacturers</a>
+  <a href="/contact.html">Contact</a>
+  <a href="/subscribe.html" style="color:var(--gold);font-weight:600;">Get Started →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">Delhi NCR · Pan-India Coverage · 12+ Years</div>
+      <h1>Turn Your Vision Into <em>Production Reality</em></h1>
+      <p class="hero-desc">Expert freelance pattern making and CAD services. Stop wasting money on bad samples. Get production-ready files and expert clothing brand startup consultation.</p>
+      <div class="hero-btns">
+        <a href="/subscribe.html" class="btn-primary">Get Started Now</a>
+        <a href="/services.html" class="btn-secondary">Explore Services</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="hstat-num">12+</div><div class="hstat-label">Years Experience</div></div>
+        <div><div class="hstat-num">NCR</div><div class="hstat-label">Based HQ</div></div>
+        <div><div class="hstat-num">PAN</div><div class="hstat-label">India Coverage</div></div>
+      </div>
+    </div>
+    <div class="hero-img-wrap">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="Pattern making and garment design" class="hero-img">
+      <div class="hero-img-badge">
+        <div style="font-size:.65rem;color:var(--muted);margin-bottom:.3rem;letter-spacing:.1em;text-transform:uppercase;">Production-Ready Files</div>
+        <div class="ticker-wrap">
+          <div class="ticker">
+            <span class="ticker-item">Digital Pattern Making</span>
+            <span class="ticker-item">CAD Services</span>
+            <span class="ticker-item">DXF & PDF Output</span>
+            <span class="ticker-item">Grading Included</span>
+            <span class="ticker-item">Manufacturer Connect</span>
+            <span class="ticker-item">Pattern Library</span>
+            <span class="ticker-item">Spec Sheets</span>
+            <span class="ticker-item">Brand Startup Consultation</span>
+            <span class="ticker-item">Pan-India Coverage</span>
+            <span class="ticker-item">Delhi NCR Based</span>
+            <span class="ticker-item">Digital Pattern Making</span>
+            <span class="ticker-item">CAD Services</span>
+            <span class="ticker-item">DXF & PDF Output</span>
+            <span class="ticker-item">Grading Included</span>
+            <span class="ticker-item">Manufacturer Connect</span>
+            <span class="ticker-item">Pattern Library</span>
+            <span class="ticker-item">Spec Sheets</span>
+            <span class="ticker-item">Brand Startup Consultation</span>
+            <span class="ticker-item">Pan-India Coverage</span>
+            <span class="ticker-item">Delhi NCR Based</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item">⭐⭐⭐⭐⭐ <strong>Client Rated</strong></div>
+    <div class="trust-item">🏭 <strong>11+</strong> Verified Manufacturers</div>
+    <div class="trust-item">📐 <strong>Production-Ready</strong> DXF & PDF Files</div>
+    <div class="trust-item">⚡ <strong>24hr</strong> Response Time</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-wrap">
+    <div class="about-grid">
+      <div class="fade-up">
+        <span class="section-tag">Trusted by Industry Leaders</span>
+        <h2 class="section-title">12+ Years of <em>Excellence</em> in Pattern Making</h2>
+        <p class="section-sub" style="margin-top:.75rem;">For over a decade, we have built lasting relationships with major apparel brands, boutique fashion houses, and large-scale manufacturers. Our commitment to precision, reliability, and quality has made us the preferred pattern making partner for industry leaders.</p>
+        <p class="section-sub" style="margin-top:.75rem;">We specialize in converting visual ideas into industry-standard digital patterns. Our expertise in CAD software ensures that your designs translate perfectly from concept to production.</p>
+        <div class="about-points">
+          <div class="about-point">Production-ready DXF & PDF files using advanced CAD software</div>
+          <div class="about-point">Complete grading and fabric consumption calculations</div>
+          <div class="about-point">Specialized support for clothing brand startups</div>
+          <div class="about-point">Direct connections to verified manufacturers across Delhi NCR</div>
+        </div>
+      </div>
+      <div class="fade-up">
+        <div class="about-stats">
+          <div class="astat"><div class="astat-num">12+</div><div class="astat-label">Years Experience</div></div>
+          <div class="astat"><div class="astat-num">NCR</div><div class="astat-label">Headquarters</div></div>
+          <div class="astat"><div class="astat-num">PAN</div><div class="astat-label">India Coverage</div></div>
+          <div class="astat"><div class="astat-num">★★★★★</div><div class="astat-label">Client Rated</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-wrap">
+    <div class="fade-up">
+      <span class="section-tag">Core Offerings</span>
+      <h2 class="section-title">Everything You Need to <em>Launch Your Brand</em></h2>
+      <p class="section-sub" style="margin-top:.5rem;">Four focused services designed to take your clothing idea from sketch to production — without the guesswork.</p>
+    </div>
+    <div class="services-grid fade-up">
+
+      <div class="service-card">
+        <div class="svc-num">01</div>
+        <div class="svc-icon">🎬</div>
+        <div class="svc-title">Industry Insights</div>
+        <div class="svc-desc">Exclusive video tutorials on industry trends, brand development strategies, and expert tips to grow your clothing brand successfully.</div>
+        <div class="svc-tags">
+          <span class="svc-tag">Expert Video Tutorials</span>
+          <span class="svc-tag">Industry Trends</span>
+          <span class="svc-tag">Brand Development Tips</span>
+        </div>
+        <a href="/insights.html" class="svc-link">Watch Insights →</a>
+      </div>
+
+      <div class="service-card">
+        <div class="svc-num">02</div>
+        <div class="svc-icon">📚</div>
+        <div class="svc-title">Pattern Library</div>
+        <div class="svc-desc">Access pre-made designs to speed up your sampling process. Download production-ready patterns instantly with your subscription.</div>
+        <div class="svc-tags">
+          <span class="svc-tag">Ready-to-use Patterns</span>
+          <span class="svc-tag">Instant Download</span>
+          <span class="svc-tag">Regular Updates</span>
+        </div>
+        <a href="/library.html" class="svc-link">Browse Patterns →</a>
+      </div>
+
+      <div class="service-card">
+        <div class="svc-num">03</div>
+        <div class="svc-icon">🏭</div>
+        <div class="svc-title">Connect to Manufacturers</div>
+        <div class="svc-desc">We connect you with trusted manufacturers across Delhi NCR. Whether you need small MOQs for a startup or large-scale production for established brands.</div>
+        <div class="svc-tags">
+          <span class="svc-tag">Verified Manufacturers</span>
+          <span class="svc-tag">Flexible MOQs</span>
+          <span class="svc-tag">Direct Contact Access</span>
+        </div>
+        <a href="/manufacturers.html" class="svc-link">View Manufacturers →</a>
+      </div>
+
+      <div class="service-card">
+        <div class="svc-num">04</div>
+        <div class="svc-icon">📋</div>
+        <div class="svc-title">Spec Sheets</div>
+        <div class="svc-desc">Access professionally crafted specification sheets for Kids, Womens and Mens garment categories. Industry-proven dummy measurements used by top brands.</div>
+        <div class="svc-tags">
+          <span class="svc-tag">Kids 6M to 8Y</span>
+          <span class="svc-tag">Womens XS to XXL</span>
+          <span class="svc-tag">Mens Standard Sizes</span>
+        </div>
+        <a href="/specsheets.html" class="svc-link">View Spec Sheets →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- BRANDS -->
+<section id="brands">
+  <div class="section-wrap fade-up">
+    <span class="section-tag">Trusted by Industry Leaders</span>
+    <h2 class="section-title">Brands We've <em>Worked With</em></h2>
+    <p class="brands-sub">We've had the privilege of working with these amazing brands and helping them bring their designs to life.</p>
+  </div>
+  <div class="brands-marquee">
+    <div class="brands-track">
+      <div class="brand-pill">Myntra Sellers</div>
+      <div class="brand-pill">Delhi Boutiques</div>
+      <div class="brand-pill">Meesho Brands</div>
+      <div class="brand-pill">IndiaMART Exporters</div>
+      <div class="brand-pill">Startup Labels</div>
+      <div class="brand-pill">Ethnic Wear Houses</div>
+      <div class="brand-pill">Kids Wear Brands</div>
+      <div class="brand-pill">Corporate Uniform Makers</div>
+      <div class="brand-pill">Export Houses</div>
+      <div class="brand-pill">Fast Fashion Labels</div>
+      <div class="brand-pill">D2C Clothing Brands</div>
+      <div class="brand-pill">Streetwear Labels</div>
+      <!-- duplicate for infinite loop -->
+      <div class="brand-pill">Myntra Sellers</div>
+      <div class="brand-pill">Delhi Boutiques</div>
+      <div class="brand-pill">Meesho Brands</div>
+      <div class="brand-pill">IndiaMART Exporters</div>
+      <div class="brand-pill">Startup Labels</div>
+      <div class="brand-pill">Ethnic Wear Houses</div>
+      <div class="brand-pill">Kids Wear Brands</div>
+      <div class="brand-pill">Corporate Uniform Makers</div>
+      <div class="brand-pill">Export Houses</div>
+      <div class="brand-pill">Fast Fashion Labels</div>
+      <div class="brand-pill">D2C Clothing Brands</div>
+      <div class="brand-pill">Streetwear Labels</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SCOPE -->
+<section id="scope">
+  <div class="section-wrap">
+    <div class="scope-intro fade-up">
+      <span class="section-tag">What We Don't Offer</span>
+      <h2 class="section-title">Outside Our <em>Scope</em></h2>
+      <p class="section-sub" style="margin-top:.5rem;">To maintain our expertise and deliver the best quality, we focus exclusively on standard apparel pattern making. The following specialized categories are outside our scope.</p>
+    </div>
+    <div class="scope-grid fade-up">
+      <div class="scope-card">
+        <div class="scope-icon">🎭</div>
+        <div class="scope-title">Heavy Draping</div>
+        <div class="scope-desc">Complex draped garments & couture draping techniques</div>
+      </div>
+      <div class="scope-card">
+        <div class="scope-icon">👙</div>
+        <div class="scope-title">Lingerie Patterns</div>
+        <div class="scope-desc">Intimate wear, bras, underwear & specialized innerwear</div>
+      </div>
+      <div class="scope-card">
+        <div class="scope-icon">🌊</div>
+        <div class="scope-title">Swimwear</div>
+        <div class="scope-desc">Bikinis, swimsuits & specialized stretch swimwear</div>
+      </div>
+      <div class="scope-card">
+        <div class="scope-icon">🧥</div>
+        <div class="scope-title">Leather & Fur</div>
+        <div class="scope-desc">Leather garments, fur coats & exotic material patterns</div>
+      </div>
+    </div>
+    <p class="scope-note">For these specialized categories, we recommend consulting dedicated specialists in those fields.</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CTA -->
+<section style="padding:5rem 2rem;">
+  <div class="cta-banner fade-up">
+    <h2>Start Your <em>Brand Journey</em></h2>
+    <p>Tell us about your vision and let's create something amazing together. Get access to patterns, spec sheets, manufacturer connections, and expert consultation.</p>
+    <div class="cta-btns">
+      <a href="/subscribe.html" class="btn-primary">Get Started Now →</a>
+      <a href="/contact.html" class="btn-secondary">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3>Launch My Clothing Brand</h3>
+      <p>Professional digital pattern making and manufacturer data services for clothing brands in India.</p>
+      <div class="addr">Bijwasan, Delhi — 110061</div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="/services.html">Pattern Making</a></li>
+        <li><a href="/library.html">Pattern Library</a></li>
+        <li><a href="/specsheets.html">Spec Sheets</a></li>
+        <li><a href="/insights.html">Industry Insights</a></li>
+        <li><a href="/services.html">Expert Consultation</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal & Support</h4>
+      <ul>
+        <li><a href="/contact.html">Contact Us</a></li>
+        <li><a href="/subscribe.html">Pricing</a></li>
+        <li><a href="/terms.html">Terms of Service</a></li>
+        <li><a href="/privacy.html">Privacy Policy</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect With Us</h4>
+      <ul>
+        <li><a href="mailto:hello.launchmyclothing@gmail.com">✉ hello.launchmyclothing@gmail.com</a></li>
+        <li><a href="https://wa.me/918796158321" target="_blank">💬 WhatsApp Us</a></li>
+      </ul>
+      <p style="font-size:.75rem;color:var(--muted);margin-top:.75rem;">Phone support available for premium members only.</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Launch My Clothing Brand. All Rights Reserved.</p>
+    <p>launchmyclothingbrand.com · Bijwasan, Delhi 110061</p>
+  </div>
+</footer>
+
+<!-- WA FLOAT -->
+<div class="wa-float">
+  <a href="https://wa.me/918796158321?text=Hi%2C+I+have+a+question+about+your+services" target="_blank">💬 WhatsApp Support</a>
+</div>
+
+<!-- MOBILE BOTTOM NAV -->
+<div class="mob-nav">
+  <div class="mob-nav-inner">
+    <a href="/index.html">🏠<br>Home</a>
+    <a href="/services.html">📐<br>Services</a>
+    <a href="/manufacturers.html">🏭<br>Factories</a>
+    <a href="/specsheets.html">📋<br>Spec</a>
+    <a href="/insights.html">🎬<br>Insights</a>
+    <a href="/subscribe.html">⭐<br>Plans</a>
+  </div>
+</div>
+
+<script>
+// mobile menu
+function toggleMenu(){ document.getElementById('mobMenu').classList.toggle('open'); }
+
+// show logged-in user in nav
+const session = JSON.parse(localStorage.getItem('lmcb_user') || 'null');
+if (session && session.firstName) {
+  document.getElementById('navUser').classList.add('show');
+  document.getElementById('navUserName').textContent = session.firstName;
+  const cta = document.getElementById('navCta');
+  cta.textContent = 'My Account';
+  cta.href = '/subscribe.html';
+}
+
+// scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
