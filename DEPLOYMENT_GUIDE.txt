@@ -1,0 +1,102 @@
+# LMCB — Deployment Guide
+## What's in this folder & how to deploy everything
+
+---
+
+## STEP 1 — Set up Supabase (do this FIRST, takes 2 min)
+
+1. Go to https://supabase.com → Sign in
+2. Open your project (tldbjsqhjqapdwmfeuwq)
+3. Click "SQL Editor" in the left sidebar → "New Query"
+4. Copy-paste the entire contents of `supabase_setup.sql`
+5. Click "Run"
+6. You should see: "Success. No rows returned"
+7. That's it. Your `users` and `orders` tables are now ready.
+
+---
+
+## STEP 2 — Upload files to GitHub
+
+Files to upload to your GitHub repo root:
+- `CNAME`               ← CRITICAL — keeps your domain working after every push
+- `register.html`       ← Replaces old version (now saves to Supabase)
+- `login.html`          ← Replaces old version (now authenticates from Supabase)
+- `subscribe.html`      ← Replaces old version (real Razorpay payment, no login wall)
+
+How to upload:
+1. Go to https://github.com/satishsharma1467-arch → your repo
+2. Click "Add file" → "Upload files"
+3. Drag ALL FOUR files at once (including CNAME)
+4. Scroll down → type commit message: "Fix auth, payment, CNAME"
+5. Click "Commit changes"
+
+---
+
+## STEP 3 — Verify GitHub Pages domain
+
+1. Go to your repo → Settings → Pages
+2. Under "Custom domain" it should show: launchmyclothingbrand.com
+3. If it's blank, type it in and click Save
+4. Tick "Enforce HTTPS"
+5. Wait 2–3 minutes, then visit your site
+
+---
+
+## HOW THE NEW FLOW WORKS
+
+### New user journey:
+1. User clicks "Get Started" on any page
+2. Goes to `subscribe.html` — SEES PLANS IMMEDIATELY (no login wall)
+3. Clicks "Subscribe Now" on any plan
+4. If not logged in → redirected to `register.html` with plan pre-selected
+5. Fills name, email, phone, password → clicks "Create Account"
+6. Account saved to Supabase `users` table with `plan_status: pending`
+7. Immediately redirected back to `subscribe.html` with all details in URL
+8. Razorpay payment opens pre-filled with their name/email/phone
+9. On payment success → Supabase `users` table updated to `plan_status: active`
+10. Payment saved to `orders` table
+11. WhatsApp notification sent to your number (918796158321)
+12. Success modal shown
+
+### Returning user:
+1. Goes to `login.html`
+2. Enters email + password
+3. Password hashed (SHA-256) and matched against Supabase
+4. Session stored in localStorage
+5. Redirected to subscribe page or library
+
+### Admin (on login.html):
+1. Scroll to bottom → click tiny "Admin Access" link
+2. Enter password: SATISH@1467
+3. Full user dashboard appears:
+   - Total users, joined today, paid members, total revenue
+   - Full user table with plan/status
+   - Export CSV button
+   - Clear All button (use carefully!)
+
+---
+
+## WHAT'S STILL ON YOUR TODO LIST
+
+These pages need separate work (not in this batch):
+- `library.html`     — fix broken `${template literal}` rendering
+- `insights.html`    — admin panel to add YouTube videos to Supabase
+- `specsheets.html`  — check if working
+- `manufacturers.html` — admin panel needs Supabase integration (currently localStorage)
+
+---
+
+## GITHUB PUSH CHECKLIST (every time you update the site)
+
+Always include CNAME in your upload. Never push without it.
+If domain breaks after a push: go to Settings → Pages → re-enter launchmyclothingbrand.com → Save.
+
+DNS A Records at your registrar (if ever resetting):
+  185.199.108.153
+  185.199.109.153
+  185.199.110.153
+  185.199.111.153
+
+---
+
+Questions? WhatsApp: 918796158321 | Email: hello.launchmyclothing@gmail.com
