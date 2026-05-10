@@ -1,534 +1,568 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Access production-ready patterns. Download DXF and PDF files instantly. Premium subscription required.">
-<title>Pattern Library | Launch My Clothing Brand</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<style>
-:root{--bg:#0d1117;--bg2:#161b22;--bg3:#21262d;--border:#30363d;--gold:#d4a843;--gold2:#f0c96a;--text:#e6edf3;--muted:#8b949e;--green:#3fb950;--red:#f85149;--radius:8px;}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;min-height:100vh;padding-bottom:80px;}
-a{color:var(--gold);text-decoration:none;}
-a:hover{text-decoration:underline;}
-
-/* NAV */
-nav{background:rgba(13,17,23,.97);border-bottom:1px solid var(--border);padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(8px);}
-.nav-logo{font-size:1rem;font-weight:600;color:var(--text);display:flex;flex-direction:column;line-height:1.2;text-decoration:none;}
-.nav-logo span{font-size:.7rem;font-weight:400;color:var(--muted);}
-.nav-links{display:flex;gap:1.5rem;list-style:none;align-items:center;}
-.nav-links a{color:var(--muted);font-size:.85rem;transition:color .2s;text-decoration:none;}
-.nav-links a:hover{color:var(--text);}
-.nav-cta{background:var(--gold);color:#000;padding:.4rem 1rem;border-radius:var(--radius);font-weight:500;font-size:.8rem;}
-.nav-cta:hover{background:var(--gold2)!important;color:#000!important;}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
-.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:all .3s;}
-.mob-menu{display:none;position:fixed;top:57px;left:0;right:0;background:var(--bg2);border-bottom:1px solid var(--border);z-index:99;padding:1rem 1.5rem;flex-direction:column;gap:.75rem;}
-.mob-menu.open{display:flex;}
-.mob-menu a{color:var(--muted);font-size:.9rem;padding:.5rem 0;border-bottom:1px solid var(--border);text-decoration:none;}
-.mob-menu a:last-child{border:none;}
-@media(max-width:768px){.nav-links{display:none;}.hamburger{display:flex;}}
-
-/* HERO */
-.hero{text-align:center;padding:3rem 1.5rem 2rem;}
-.hero-tag{display:inline-block;background:rgba(212,168,67,.12);border:1px solid rgba(212,168,67,.25);color:var(--gold);font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .9rem;border-radius:20px;margin-bottom:1rem;}
-.hero h1{font-size:2rem;font-weight:700;line-height:1.25;margin-bottom:.6rem;}
-.hero h1 em{color:var(--gold);font-style:italic;}
-.hero p{color:var(--muted);font-size:.9rem;max-width:500px;margin:0 auto 2rem;}
-.hero-stats{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;}
-.hstat{text-align:center;}
-.hstat-num{font-size:1.4rem;font-weight:700;color:var(--gold);}
-.hstat-label{font-size:.72rem;color:var(--muted);margin-top:2px;}
-
-/* ACCESS BANNER */
-.access-banner{max-width:700px;margin:1.5rem auto;padding:1rem 1.5rem;border-radius:var(--radius);font-size:.85rem;text-align:center;display:none;}
-.access-banner.locked{background:rgba(248,81,73,.08);border:1px solid rgba(248,81,73,.2);color:var(--red);display:block;}
-.access-banner.unlocked{background:rgba(63,185,80,.08);border:1px solid rgba(63,185,80,.2);color:var(--green);display:block;}
-.access-banner a{color:inherit;font-weight:600;text-decoration:underline;}
-
-/* FILTERS */
-.filters-bar{max-width:960px;margin:0 auto 1.5rem;padding:0 1.5rem;display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;}
-.filter-btn{background:var(--bg3);border:1px solid var(--border);color:var(--muted);padding:.4rem .9rem;border-radius:20px;font-size:.78rem;cursor:pointer;transition:all .2s;}
-.filter-btn:hover,.filter-btn.active{background:rgba(212,168,67,.12);border-color:var(--gold);color:var(--gold);}
-
-/* GRID */
-.grid{max-width:960px;margin:0 auto;padding:0 1.5rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;}
-@media(max-width:600px){.grid{grid-template-columns:1fr;}}
-
-/* CARD */
-.pattern-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color .2s,transform .2s;display:flex;flex-direction:column;}
-.pattern-card:hover{border-color:rgba(212,168,67,.3);transform:translateY(-2px);}
-.card-img{width:100%;height:160px;object-fit:cover;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:2.5rem;}
-.card-img img{width:100%;height:100%;object-fit:cover;}
-.card-body{padding:1.25rem;flex:1;display:flex;flex-direction:column;}
-.card-badges{display:flex;gap:.4rem;margin-bottom:.75rem;flex-wrap:wrap;}
-.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.68rem;font-weight:600;}
-.badge-dxf{background:rgba(56,139,253,.15);color:#79c0ff;}
-.badge-pdf{background:rgba(248,81,73,.15);color:#ff7b72;}
-.badge-zip{background:rgba(63,185,80,.15);color:var(--green);}
-.badge-lock{background:rgba(212,168,67,.12);color:var(--gold);}
-.card-name{font-size:.95rem;font-weight:600;margin-bottom:.4rem;color:var(--text);}
-.card-desc{font-size:.8rem;color:var(--muted);line-height:1.5;flex:1;margin-bottom:1rem;}
-.card-meta{display:grid;grid-template-columns:1fr 1fr;gap:.4rem;margin-bottom:1rem;}
-.meta-item{font-size:.72rem;color:var(--muted);}
-.meta-item span{color:var(--text);font-weight:500;}
-.card-actions{margin-top:auto;}
-.btn-download{width:100%;padding:.65rem;border-radius:var(--radius);font-size:.82rem;font-weight:600;cursor:pointer;border:none;transition:all .2s;text-align:center;display:block;}
-.btn-download.unlocked{background:var(--gold);color:#000;}
-.btn-download.unlocked:hover{background:var(--gold2);}
-.btn-download.locked{background:var(--bg3);border:1px solid var(--border);color:var(--muted);cursor:not-allowed;}
-.btn-download.coming{background:var(--bg3);border:1px solid var(--border);color:var(--muted);cursor:default;}
-
-/* EMPTY */
-.empty-state{text-align:center;padding:4rem 2rem;color:var(--muted);}
-.empty-state .icon{font-size:3rem;margin-bottom:1rem;}
-
-/* CTA */
-.cta-section{text-align:center;padding:3rem 2rem;border-top:1px solid var(--border);margin-top:3rem;}
-.cta-section h2{font-size:1.5rem;font-weight:700;margin-bottom:.5rem;}
-.cta-section p{color:var(--muted);font-size:.85rem;margin-bottom:1.5rem;}
-.btn-cta{display:inline-block;background:var(--gold);color:#000;padding:.75rem 2rem;border-radius:var(--radius);font-weight:600;font-size:.88rem;border:none;cursor:pointer;transition:background .2s;text-decoration:none;}
-.btn-cta:hover{background:var(--gold2);}
-
-/* ADMIN */
-.admin-trigger{position:fixed;bottom:5.5rem;left:1rem;z-index:150;background:var(--bg3);border:1px solid var(--border);color:var(--muted);padding:.4rem .75rem;border-radius:var(--radius);font-size:.72rem;cursor:pointer;}
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:500;display:none;align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto;}
-.overlay.open{display:flex;}
-.admin-panel{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:2rem;width:100%;max-width:640px;margin:auto;}
-.admin-panel h2{font-size:1.2rem;font-weight:700;color:var(--gold);margin-bottom:1.5rem;display:flex;justify-content:space-between;align-items:center;}
-.close-btn{background:none;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;line-height:1;}
-.close-btn:hover{color:var(--text);}
-.field{margin-bottom:1rem;}
-.field label{display:block;font-size:.75rem;font-weight:500;color:var(--muted);margin-bottom:.4rem;letter-spacing:.03em;}
-.field input,.field select,.field textarea{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:.6rem .85rem;color:var(--text);font-size:.88rem;outline:none;transition:border-color .2s;font-family:inherit;}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold);}
-.field textarea{resize:vertical;min-height:70px;}
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
-.file-upload-area{border:2px dashed var(--border);border-radius:var(--radius);padding:1.5rem;text-align:center;cursor:pointer;transition:border-color .2s;position:relative;}
-.file-upload-area:hover{border-color:var(--gold);}
-.file-upload-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
-.file-upload-area .icon{font-size:1.5rem;margin-bottom:.4rem;}
-.file-upload-area p{font-size:.78rem;color:var(--muted);}
-.file-name{font-size:.75rem;color:var(--green);margin-top:.5rem;display:none;}
-.progress-bar{width:100%;height:4px;background:var(--bg3);border-radius:2px;margin-top:.5rem;display:none;}
-.progress-fill{height:100%;background:var(--gold);border-radius:2px;width:0;transition:width .3s;}
-.btn-add{width:100%;background:var(--gold);color:#000;border:none;padding:.75rem;border-radius:var(--radius);font-size:.88rem;font-weight:600;cursor:pointer;transition:background .2s;margin-top:.5rem;}
-.btn-add:hover:not(:disabled){background:var(--gold2);}
-.btn-add:disabled{opacity:.6;cursor:not-allowed;}
-.existing-list{margin-top:1.5rem;border-top:1px solid var(--border);padding-top:1.25rem;}
-.existing-list h3{font-size:.85rem;font-weight:600;color:var(--muted);margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.08em;}
-.exist-item{display:flex;align-items:center;justify-content:space-between;padding:.6rem .75rem;background:var(--bg3);border-radius:var(--radius);margin-bottom:.5rem;font-size:.82rem;}
-.exist-item-name{flex:1;color:var(--text);}
-.exist-item-badge{font-size:.68rem;padding:2px 7px;border-radius:4px;background:rgba(212,168,67,.15);color:var(--gold);margin-left:.5rem;}
-.exist-item-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;padding:0 4px;transition:color .2s;}
-.exist-item-del:hover{color:var(--red);}
-.alert-sm{border-radius:var(--radius);padding:.6rem .85rem;margin-bottom:.75rem;font-size:.8rem;display:none;}
-.alert-sm.show{display:block;}
-.alert-sm.success{background:rgba(63,185,80,.1);border:1px solid rgba(63,185,80,.25);color:var(--green);}
-.alert-sm.error{background:rgba(248,81,73,.1);border:1px solid rgba(248,81,73,.25);color:var(--red);}
-.spinner{display:inline-block;width:13px;height:13px;border:2px solid rgba(0,0,0,.3);border-top-color:#000;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:5px;}
-@keyframes spin{to{transform:rotate(360deg);}}
-
-/* MOBILE BOTTOM NAV */
-.mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);padding:.4rem .5rem;z-index:90;}
-.mob-nav-inner{display:flex;justify-content:space-around;}
-.mob-nav a{display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--muted);font-size:.58rem;text-decoration:none;padding:.25rem .5rem;}
-.mob-nav a:hover{color:var(--gold);}
-@media(max-width:768px){.mob-nav{display:block;}}
-
-/* WA float */
-.wa-float{position:fixed;bottom:5rem;right:1rem;z-index:200;}
-@media(max-width:768px){.wa-float{bottom:4.5rem;}}
-.wa-float a{background:#25d366;color:#fff;padding:.55rem 1rem;border-radius:24px;font-size:.78rem;font-weight:600;display:flex;align-items:center;gap:.4rem;box-shadow:0 4px 16px rgba(0,0,0,.4);text-decoration:none;}
-</style>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pattern Library | Launch My Clothing Brand</title>
+  <meta name="description" content="Access production-ready patterns. Download DXF and PDF files instantly. Premium subscription required." />
+  <meta name="robots" content="index, follow" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --gold: #C8A951; --gold-light: #E8C96A; --bg: #0E0B06; --card-bg: #1C1609; --cream: #F5F0E8; --ink: #1A1208; --border: rgba(200,169,81,0.2); }
+    body { background: var(--bg); color: var(--cream); font-family: 'DM Mono', monospace; min-height: 100vh; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 3rem; background: rgba(14,11,6,0.95); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; letter-spacing: 0.08em; text-decoration: none; color: var(--cream); display: flex; flex-direction: column; }
+    .nav-logo span { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.45; margin-top: 0.15rem; }
+    .nav-links { display: flex; gap: 1.2rem; list-style: none; align-items: center; }
+    .nav-links a { color: var(--cream); text-decoration: none; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.6; transition: opacity 0.2s; }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold); }
+    .nav-cta { background: var(--gold) !important; color: var(--ink) !important; padding: 0.5rem 1rem !important; opacity: 1 !important; font-weight: 500 !important; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--gold); }
+    .nav-close { display: none; position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; color: var(--gold); font-size: 1.5rem; cursor: pointer; }
+    .page-hero { padding: 8rem 4rem 4rem; border-bottom: 1px solid var(--border); }
+    .section-label { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); opacity: 0.7; margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; }
+    .section-label::before { content: ''; width: 2rem; height: 1px; background: var(--gold); opacity: 0.5; }
+    .page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 4vw, 4rem); font-weight: 300; line-height: 1.1; margin-bottom: 1.5rem; }
+    .page-hero h1 em { font-style: italic; color: var(--gold); }
+    .page-hero p { font-size: 0.9rem; opacity: 0.6; max-width: 600px; line-height: 1.8; }
+    .lock-banner { background: rgba(200,169,81,0.06); border: 1px solid var(--border); padding: 1.2rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin: 0 4rem 0; }
+    .lock-banner p { font-size: 0.78rem; opacity: 0.65; }
+    .lock-banner a { background: var(--gold); color: var(--ink); padding: 0.6rem 1.5rem; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; white-space: nowrap; font-family: 'DM Mono', monospace; }
+    .stats-bar { display: flex; border-bottom: 1px solid var(--border); }
+    .stat-cell { flex: 1; padding: 1.5rem 2rem; border-right: 1px solid var(--border); }
+    .stat-cell:last-child { border-right: none; }
+    .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--gold); line-height: 1; }
+    .stat-label { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.4; margin-top: 0.3rem; }
+    .library-section { padding: 4rem; }
+    .library-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+    .filter-bar { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 3rem; }
+    .filter-btn { padding: 0.8rem 1.5rem; font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; background: transparent; border: none; color: var(--cream); opacity: 0.45; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; }
+    .filter-btn:hover { opacity: 0.7; }
+    .filter-btn.active { opacity: 1; color: var(--gold); border-bottom-color: var(--gold); }
+    .pattern-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
+    .pattern-card { background: var(--card-bg); }
+    .pattern-preview { position: relative; aspect-ratio: 1; overflow: hidden; background: #0E0B06; display: flex; align-items: center; justify-content: center; }
+    .pattern-preview img { width: 100%; height: 100%; object-fit: cover; }
+    .pattern-svg { width: 60%; height: 60%; fill: none; }
+    .pattern-lock-overlay { position: absolute; inset: 0; background: rgba(14,11,6,0.7); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; opacity: 0; transition: opacity 0.2s; }
+    .pattern-card:hover .pattern-lock-overlay { opacity: 1; }
+    .pattern-lock-icon { font-size: 1.5rem; }
+    .pattern-lock-text { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+    .pattern-body { padding: 1.5rem; }
+    .pattern-meta { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
+    .meta-tag { font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.2rem 0.6rem; background: rgba(200,169,81,0.1); border: 1px solid var(--border); }
+    .meta-tag.format { color: var(--gold); border-color: rgba(200,169,81,0.3); }
+    .pattern-name { font-size: 0.88rem; font-weight: 500; line-height: 1.4; margin-bottom: 0.5rem; }
+    .pattern-desc { font-size: 0.72rem; opacity: 0.5; line-height: 1.7; margin-bottom: 1rem; }
+    .pattern-file-info { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin-bottom: 1rem; }
+    .file-info-cell { background: #0E0B06; padding: 0.5rem 0.7rem; }
+    .file-info-label { font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); opacity: 0.6; margin-bottom: 0.2rem; }
+    .file-info-val { font-size: 0.72rem; }
+    .pattern-download-locked { text-align: center; padding: 0.75rem; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.35; border: 1px solid var(--border); }
+    button.pattern-download-btn { border: none; cursor: pointer; width: 100%; }
+    .pattern-download-btn { display: block; background: var(--gold); color: var(--ink); text-align: center; padding: 0.8rem; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; text-decoration: none; transition: background 0.2s; font-family: 'DM Mono', monospace; }
+    .pattern-download-btn:hover { background: var(--gold-light); }
+    .cta-band { background: var(--gold); padding: 5rem 4rem; text-align: center; }
+    .cta-band h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem,3.5vw,3.5rem); font-weight: 300; color: var(--ink); margin-bottom: 1rem; }
+    .cta-band p { font-size: 0.85rem; color: var(--ink); opacity: 0.7; margin-bottom: 2rem; }
+    .btn-dark { background: var(--ink); color: var(--gold); padding: 1rem 2.5rem; font-family: 'DM Mono', monospace; font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; text-decoration: none; display: inline-block; }
+    footer { background: #090704; border-top: 1px solid var(--border); padding: 4rem; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+    .footer-brand-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 300; margin-bottom: 0.5rem; }
+    .footer-brand p { font-size: 0.68rem; opacity: 0.35; line-height: 1.7; margin-top: 0.5rem; }
+    .footer-col h4 { font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); opacity: 0.7; margin-bottom: 1.2rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.6rem; }
+    .footer-col ul li a { color: var(--cream); text-decoration: none; font-size: 0.72rem; opacity: 0.45; transition: opacity 0.2s; }
+    .footer-col ul li a:hover { opacity: 0.8; }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .footer-copy { font-size: 0.62rem; opacity: 0.3; }
+    .admin-fab { position: fixed; bottom: 2rem; left: 2rem; width: 44px; height: 44px; background: rgba(200,169,81,0.15); border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.1rem; z-index: 400; }
+    .admin-fab:hover { background: rgba(200,169,81,0.25); }
+    #admin-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 9000; align-items: flex-start; justify-content: center; padding: 2rem; overflow-y: auto; }
+    .admin-panel { background: #110d05; border: 1px solid rgba(200,169,81,0.3); max-width: 720px; width: 100%; padding: 2.5rem; margin: auto; }
+    .admin-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; color: var(--gold); margin-bottom: 1.5rem; }
+    .admin-input { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--cream); padding: 0.75rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.82rem; outline: none; margin-bottom: 0.8rem; }
+    .admin-input:focus { border-color: var(--gold); }
+    .admin-select { width: 100%; background: #0E0B06; border: 1px solid var(--border); color: var(--cream); padding: 0.75rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.82rem; outline: none; margin-bottom: 0.8rem; }
+    .admin-btn { background: var(--gold); color: var(--ink); border: none; padding: 0.75rem 1.8rem; font-family: 'DM Mono', monospace; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; cursor: pointer; margin-right: 0.5rem; margin-top: 0.5rem; }
+    .admin-btn-sm { background: transparent; border: 1px solid var(--border); color: var(--cream); padding: 0.5rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.72rem; cursor: pointer; opacity: 0.6; margin-right: 0.4rem; margin-top: 0.4rem; }
+    .admin-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.5; margin-bottom: 0.4rem; display: block; }
+    .admin-section { font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); opacity: 0.7; margin: 1.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+    .editor-item { display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem 1rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(200,169,81,0.1); margin-bottom: 0.4rem; }
+    .editor-thumb { width: 48px; height: 48px; flex-shrink: 0; background: #0E0B06; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; font-size: 1.2rem; opacity: 0.4; }
+    .editor-thumb img { width: 100%; height: 100%; object-fit: cover; opacity: 1; }
+    .editor-info { flex: 1; min-width: 0; }
+    .editor-name { font-size: 0.82rem; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .editor-meta { font-size: 0.65rem; opacity: 0.4; margin-top: 0.2rem; }
+    .editor-btn { background: transparent; border: 1px solid var(--border); color: var(--gold); padding: 0.3rem 0.6rem; font-family: 'DM Mono', monospace; font-size: 0.65rem; cursor: pointer; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.08em; margin-left: 0.3rem; }
+    .editor-btn:hover { background: var(--gold); color: var(--ink); }
+    .editor-btn-file { background: rgba(200,169,81,0.1); border: 1px solid rgba(200,169,81,0.4); color: var(--gold); }
+    .editor-btn-del { border-color: rgba(212,71,42,0.3); color: #D4472A; }
+    .editor-btn-del:hover { background: #D4472A; color: #fff; border-color: #D4472A; }
+    .pw-err { display: none; color: #f44336; font-size: 0.72rem; margin-bottom: 0.8rem; }
+    #wa-bubble { display: none; visibility: hidden; position: fixed; bottom: 2rem; right: 2rem; z-index: 900; flex-direction: column; align-items: flex-end; gap: 0.8rem; }
+    .mobile-nav { display: none; position: fixed; bottom: 0; left: 0; right: 0; height: 62px; background: #0E0B06; border-top: 1px solid var(--border); z-index: 500; justify-content: space-around; align-items: center; }
+    .mobile-nav a { display: flex; flex-direction: column; align-items: center; gap: 3px; text-decoration: none; color: var(--cream); opacity: 0.5; font-size: 0.52rem; letter-spacing: 0.08em; text-transform: uppercase; flex: 1; text-align: center; padding: 8px 4px; }
+    .mobile-nav a.active, .mobile-nav a:hover { opacity: 1; color: var(--gold); }
+    .mobile-nav .nav-icon { font-size: 1.2rem; }
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { display: none; position: fixed; inset: 0; background: rgba(14,11,6,0.98); flex-direction: column; justify-content: center; align-items: center; gap: 1.5rem; z-index: 999; }
+      .nav-links.open { display: flex; }
+      .nav-hamburger { display: flex; }
+      .nav-close { display: block; }
+      .page-hero { padding: 6rem 1.2rem 2.5rem; }
+      .library-section { padding: 3rem 1.2rem; }
+      .pattern-grid { grid-template-columns: 1fr; }
+      .lock-banner { margin: 0 1.2rem; flex-direction: column; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+      body { padding-bottom: 70px; }
+      .mobile-nav { display: flex; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="/index.html" class="nav-logo">Launch My Clothing Brand <span>Pattern Making & Manufacturing</span></a>
-  <ul class="nav-links">
-    <li><a href="/services.html">Services</a></li>
-    <li><a href="/library.html" style="color:var(--text)">Patterns</a></li>
-    <li><a href="/specsheets.html">Spec Sheets</a></li>
-    <li><a href="/insights.html">Insights</a></li>
-    <li><a href="/manufacturers.html">Manufacturers</a></li>
-    <li><a href="/contact.html">Contact</a></li>
-    <li><a href="/subscribe.html" class="nav-cta">Get Started</a></li>
-  </ul>
-  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-<div class="mob-menu" id="mobMenu">
-  <a href="/services.html">Services</a>
-  <a href="/library.html">Patterns</a>
-  <a href="/specsheets.html">Spec Sheets</a>
-  <a href="/insights.html">Insights</a>
-  <a href="/manufacturers.html">Manufacturers</a>
-  <a href="/contact.html">Contact</a>
-  <a href="/subscribe.html" style="color:var(--gold);font-weight:600;">Get Started →</a>
-</div>
+  <nav>
+    <a href="/index.html" class="nav-logo">Launch My Clothing Brand<span>Pattern Making & Manufacturing</span></a>
+    <ul class="nav-links" id="main-nav">
+      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">✕</button>
+      <li><a href="/services.html">Services</a></li>
+      <li><a href="/library.html" class="active">Patterns</a></li>
+      <li><a href="/specsheets.html">Spec Sheets</a></li>
+      <li><a href="/insights.html">Insights</a></li>
+      <li><a href="/manufacturers.html">Manufacturers</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+      <li><a href="/subscribe.html" class="nav-cta">Get Started</a></li>
+    </ul>
+    <button class="nav-hamburger" onclick="document.getElementById('main-nav').classList.add('open')"><span></span><span></span><span></span></button>
+  </nav>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-tag">Pattern Library</div>
-  <h1>Production-Ready <em>Patterns</em></h1>
-  <p>Access production-ready patterns to speed up your sampling process. Download DXF and PDF files instantly with a premium subscription.</p>
-  <div class="hero-stats">
-    <div class="hstat"><div class="hstat-num" id="totalCount">—</div><div class="hstat-label">Patterns Available</div></div>
-    <div class="hstat"><div class="hstat-num">DXF</div><div class="hstat-label">Industry Standard</div></div>
-    <div class="hstat"><div class="hstat-num">PDF</div><div class="hstat-label">Print-Ready Files</div></div>
-    <div class="hstat"><div class="hstat-num" id="accessLabel">🔒</div><div class="hstat-label">Download Access</div></div>
+  <div class="page-hero">
+    <div class="section-label">Pattern Library</div>
+    <h1>Production-Ready <em>Patterns</em></h1>
+    <p>Access production-ready patterns to speed up your sampling process. Download DXF and PDF files instantly with a premium subscription.</p>
   </div>
-</div>
 
-<!-- ACCESS BANNER -->
-<div class="access-banner" id="accessBanner"></div>
-
-<!-- FILTERS -->
-<div class="filters-bar">
-  <span style="font-size:.78rem;color:var(--muted);margin-right:.25rem;">Filter:</span>
-  <button class="filter-btn active" onclick="filterCards('all',this)">All</button>
-  <button class="filter-btn" onclick="filterCards('DXF',this)">DXF</button>
-  <button class="filter-btn" onclick="filterCards('PDF',this)">PDF</button>
-  <button class="filter-btn" onclick="filterCards('ZIP',this)">ZIP / Bundle</button>
-</div>
-
-<!-- GRID -->
-<div class="grid" id="patternsGrid">
-  <div class="empty-state" style="grid-column:1/-1">
-    <div class="icon">⏳</div>
-    <p>Loading patterns...</p>
+  <div class="lock-banner">
+    <p>🔒 Subscribe to download pattern files and access manufacturer contact details.</p>
+    <a href="/subscribe.html">View Plans →</a>
   </div>
-</div>
 
-<!-- CTA -->
-<div class="cta-section">
-  <h2>Unlock the Full Library</h2>
-  <p>Get instant access to all patterns — DXF, PDF, and ZIP bundles — with a premium subscription.</p>
-  <a href="/subscribe.html" class="btn-cta">View Plans →</a>
-</div>
-
-<!-- ADMIN TRIGGER -->
-<button class="admin-trigger" onclick="openAdminPrompt()">⚙️ Admin</button>
-
-<!-- ADMIN PASSWORD PROMPT -->
-<div class="overlay" id="promptOverlay">
-  <div class="admin-panel" style="max-width:360px;">
-    <h2>Admin Access <button class="close-btn" onclick="closeOverlay('promptOverlay')">✕</button></h2>
-    <div class="alert-sm" id="promptAlert"></div>
-    <div class="field">
-      <label>Admin Password</label>
-      <input type="password" id="adminPwInput" placeholder="Enter password" onkeydown="if(event.key==='Enter')checkAdminPw()">
-    </div>
-    <button class="btn-add" onclick="checkAdminPw()">Unlock →</button>
+  <div class="stats-bar">
+    <div class="stat-cell"><div class="stat-num" id="total-count">3+</div><div class="stat-label">Patterns Available</div></div>
+    <div class="stat-cell"><div class="stat-num">DXF</div><div class="stat-label">Industry Standard Format</div></div>
+    <div class="stat-cell"><div class="stat-num">PDF</div><div class="stat-label">Print-Ready Files</div></div>
+    <div class="stat-cell"><div class="stat-num">🔒</div><div class="stat-label">Premium Download Access</div></div>
   </div>
-</div>
 
-<!-- ADMIN PANEL -->
-<div class="overlay" id="adminOverlay">
-  <div class="admin-panel">
-    <h2>📚 Pattern Library Editor <button class="close-btn" onclick="closeOverlay('adminOverlay')">✕</button></h2>
-    <div class="alert-sm" id="adminAlert"></div>
-
-    <div class="field-row">
-      <div class="field">
-        <label>Pattern Name *</label>
-        <input type="text" id="aName" placeholder="e.g. Basic T-Shirt Pattern">
-      </div>
-      <div class="field">
-        <label>Format</label>
-        <select id="aFormat">
-          <option value="DXF">DXF</option>
-          <option value="PDF">PDF</option>
-          <option value="ZIP">ZIP</option>
-        </select>
-      </div>
+  <section class="library-section">
+    <div class="library-header">
+      <div style="font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.45;" id="section-label-text">All Patterns</div>
     </div>
-
-    <div class="field-row">
-      <div class="field">
-        <label>Category</label>
-        <input type="text" id="aCategory" value="Pattern Making" placeholder="Pattern Making">
-      </div>
-      <div class="field">
-        <label>File Size (e.g. 2.4 MB)</label>
-        <input type="text" id="aSize" placeholder="2.4 MB">
-      </div>
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterPatterns('all',this)">All</button>
+      <button class="filter-btn" onclick="filterPatterns('DXF',this)">DXF</button>
+      <button class="filter-btn" onclick="filterPatterns('PDF',this)">PDF</button>
+      <button class="filter-btn" onclick="filterPatterns('ZIP',this)">ZIP / Bundle</button>
     </div>
-
-    <div class="field">
-      <label>Description</label>
-      <textarea id="aDesc" placeholder="Brief description of this pattern..."></textarea>
+    <div class="pattern-grid" id="pattern-grid">
+      <!-- Rendered by JavaScript -->
     </div>
+  </section>
 
-    <div class="field">
-      <label>Pattern Image (optional)</label>
-      <div class="file-upload-area" id="imgUploadArea">
-        <input type="file" id="imgFile" accept="image/*" onchange="handleFileSelect('imgFile','imgFileName')">
-        <div class="icon">📷</div>
-        <p>Click to choose image</p>
-        <div class="file-name" id="imgFileName"></div>
+  <div class="cta-band">
+    <h2>Unlock the Full <em>Library</em></h2>
+    <p>Get instant access to all patterns — DXF, PDF, and ZIP bundles — with a premium subscription.</p>
+    <a href="/subscribe.html" class="btn-dark">View Plans →</a>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-brand-name">Launch My Clothing Brand</div>
+        <p>Professional digital pattern making and manufacturer data services for clothing brands in India.</p>
+        <p style="margin-top:0.5rem;">Bijwasan, Delhi — 110061</p>
       </div>
+      <div class="footer-col"><h4>Services</h4><ul>
+        <li><a href="/services.html">Pattern Making</a></li>
+        <li><a href="/library.html">Pattern Library</a></li>
+        <li><a href="/services.html">Expert Consultation</a></li>
+        <li><a href="/specsheets.html">Spec Sheets</a></li>
+        <li><a href="/insights.html">Industry Insights</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Legal & Support</h4><ul>
+        <li><a href="/contact.html">Contact Us</a></li>
+        <li><a href="/terms.html">Terms of Service</a></li>
+        <li><a href="/privacy.html">Privacy Policy</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Connect With Us</h4><ul>
+        <li><a href="mailto:hello.launchmyclothing@gmail.com">✉ hello.launchmyclothing@gmail.com</a></li>
+      </ul></div>
     </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Launch My Clothing Brand. All Rights Reserved.</div>
+      <div class="footer-copy">launchmyclothingbrand.com · Bijwasan, Delhi 110061</div>
+    </div>
+  </footer>
 
-    <div class="field">
-      <label>📎 Attach Pattern File (PDF / DXF / ZIP) — subscribers will download this</label>
-      <div class="file-upload-area" id="fileUploadArea">
-        <input type="file" id="patternFile" accept=".pdf,.dxf,.zip,.dwg" onchange="handleFileSelect('patternFile','patternFileName')">
-        <div class="icon">📁</div>
-        <p>Click to choose pattern file</p>
-        <div class="file-name" id="patternFileName"></div>
+  <div class="admin-fab" onclick="openAdmin()" title="Admin Panel">⚙️</div>
+
+  <div id="admin-overlay">
+    <div class="admin-panel">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border);">
+        <div class="admin-title">Pattern Library Admin</div>
+        <button onclick="closeAdmin()" style="background:transparent;border:none;color:var(--cream);font-size:1.2rem;cursor:pointer;opacity:0.5;">✕</button>
       </div>
-      <div class="progress-bar" id="uploadProgress"><div class="progress-fill" id="progressFill"></div></div>
-    </div>
-
-    <button class="btn-add" id="addBtn" onclick="addPattern()">Add Pattern →</button>
-
-    <div class="existing-list">
-      <h3>Current Patterns</h3>
-      <div id="existingList"><p style="font-size:.8rem;color:var(--muted)">Loading...</p></div>
+      <div id="admin-login">
+        <span class="admin-label">Admin Password</span>
+        <input type="password" id="admin-pw" class="admin-input" placeholder="Enter password" />
+        <div class="pw-err" id="admin-pw-error">Incorrect password.</div>
+        <button class="admin-btn" onclick="adminLogin()">Unlock →</button>
+      </div>
+      <div id="admin-editor" style="display:none;">
+        <div class="admin-section">Current Patterns</div>
+        <div id="pattern-editor-list"></div>
+        <div class="admin-section">Add New Pattern</div>
+        <span class="admin-label">Pattern Name *</span>
+        <input type="text" id="new-pname" class="admin-input" placeholder="e.g. Basic T-Shirt Pattern XS-XXL" />
+        <span class="admin-label">Format</span>
+        <select id="new-pformat" class="admin-select"><option>DXF</option><option>PDF</option><option>ZIP</option></select>
+        <span class="admin-label">File Size</span>
+        <input type="text" id="new-psize" class="admin-input" placeholder="e.g. 2.4 MB" />
+        <span class="admin-label">Category</span>
+        <input type="text" id="new-pcategory" class="admin-input" placeholder="e.g. Pattern Making" />
+        <span class="admin-label">Description</span>
+        <input type="text" id="new-pdesc" class="admin-input" placeholder="Brief description" />
+        <span class="admin-label">Preview Image (optional)</span>
+        <label style="display:inline-flex;align-items:center;gap:0.5rem;border:1px dashed var(--border);padding:0.6rem 1rem;cursor:pointer;font-size:0.8rem;opacity:0.7;margin-bottom:0.8rem;">
+          📷 Choose Image <input type="file" id="new-pimage" accept="image/*" style="display:none;" onchange="previewImg(event)" />
+        </label>
+        <span id="new-pimage-name" style="font-size:0.72rem;opacity:0.4;margin-left:0.5rem;"></span>
+        <div id="new-pimage-preview" style="margin-bottom:0.8rem;display:none;"><img id="new-pimage-thumb" style="height:60px;border:1px solid var(--border);" /></div>
+        <span class="admin-label" style="color:var(--gold);">📎 Attach Pattern File (PDF/DXF/ZIP)</span>
+        <label style="display:inline-flex;align-items:center;gap:0.5rem;border:1px dashed rgba(200,169,81,0.5);padding:0.7rem 1rem;cursor:pointer;font-size:0.8rem;background:rgba(200,169,81,0.05);margin-bottom:0.4rem;">
+          📁 Choose File <input type="file" id="new-pfile" accept=".pdf,.dxf,.zip,.xlsx" style="display:none;" onchange="handleFile(event)" />
+        </label>
+        <span id="new-pfile-name" style="font-size:0.72rem;opacity:0.5;margin-left:0.5rem;"></span>
+        <div id="new-pfile-status" style="font-size:0.72rem;color:var(--gold);margin:0.4rem 0 0.8rem;display:none;"></div>
+        <div style="margin-top:1rem;">
+          <button class="admin-btn" onclick="addPattern()">Add Pattern →</button>
+          <button class="admin-btn-sm" onclick="applyPatterns()">Apply Changes</button>
+          <button class="admin-btn-sm" onclick="resetPatterns()">Reset</button>
+          <button class="admin-btn-sm" onclick="closeAdmin()">Close</button>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- WA FLOAT -->
-<div class="wa-float">
-  <a href="https://wa.me/918796158321?text=Hi%2C+I+need+help+with+the+pattern+library" target="_blank">💬 WhatsApp Support</a>
-</div>
+  <nav class="mobile-nav">
+    <a href="/index.html"><span class="nav-icon">🏠</span><span>Home</span></a>
+    <a href="/services.html"><span class="nav-icon">📐</span><span>Services</span></a>
+    <a href="/manufacturers.html"><span class="nav-icon">🏭</span><span>Factories</span></a>
+    <a href="/specsheets.html"><span class="nav-icon">📋</span><span>Spec</span></a>
+    <a href="/insights.html"><span class="nav-icon">🎬</span><span>Insights</span></a>
+    <a href="/subscribe.html"><span class="nav-icon">⭐</span><span>Plans</span></a>
+  </nav>
 
-<!-- MOBILE BOTTOM NAV -->
-<div class="mob-nav">
-  <div class="mob-nav-inner">
-    <a href="/index.html">🏠<br>Home</a>
-    <a href="/services.html">📐<br>Services</a>
-    <a href="/manufacturers.html">🏭<br>Factories</a>
-    <a href="/specsheets.html">📋<br>Spec</a>
-    <a href="/insights.html">🎬<br>Insights</a>
-    <a href="/subscribe.html">⭐<br>Plans</a>
+  <div id="wa-bubble">
+    <a id="wa-link" href="#" target="_blank" style="background:#25D366;color:#fff;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;text-decoration:none;box-shadow:0 4px 12px rgba(37,211,102,0.4);">💬</a>
   </div>
-</div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-const SB_URL  = 'https://tldbjsqhjqapdwmfeuwq.supabase.co';
-const SB_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ';
-const BUCKET  = 'lmcb-files';
 const ADMIN_PW = 'SATISH@1467';
+const SB_URL = 'https://tldbjsqhjqapdwmfeuwq.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ';
 
-const sb = supabase.createClient(SB_URL, SB_KEY);
+const DEFAULT_PATTERNS = [
+  { id:'dp1', name:'Basic T-Shirt Pattern - DXF', format:'DXF', size:'2.4 MB', category:'Pattern Making', desc:'Industry-standard digital pattern for basic crew neck t-shirt with grading from XS to XXL.', icon:'tshirt' },
+  { id:'dp2', name:'Hoodie Pattern with Tech Pack', format:'ZIP', size:'5.8 MB', category:'Pattern Making', desc:'Complete hoodie pattern with measurement charts, fabric consumption guide, and technical specifications.', icon:'hoodie' },
+  { id:'dp3', name:'Denim Jeans Pattern - PDF', format:'PDF', size:'3.2 MB', category:'Pattern Making', desc:'Professional denim jeans pattern with pocket details and construction notes.', icon:'jeans' }
+];
 
-// session check
-const session = JSON.parse(localStorage.getItem('lmcb_user') || 'null');
-const isPaid  = session && session.plan_status === 'active';
+// Storage
+function getDefaultState() { try { return JSON.parse(localStorage.getItem('lmcb_dp_state')||'{}'); } catch(e) { return {}; } }
+function saveDefaultState(s) { localStorage.setItem('lmcb_dp_state', JSON.stringify(s)); saveToSB('lmcb_dp_state', JSON.stringify(s)); }
+function getExtras() { try { return JSON.parse(localStorage.getItem('lmcb_patterns_extra')||'[]'); } catch(e) { return []; } }
+function saveExtras(e) { var v=JSON.stringify(e); localStorage.setItem('lmcb_patterns_extra',v); saveToSB('lmcb_patterns_extra',v); }
 
-// show access banner
-const banner = document.getElementById('accessBanner');
-if (isPaid) {
-  banner.textContent = `✅ ${session.firstName}, you have ${planDownloads(session.plan)} downloads this month. Click any pattern to download.`;
-  banner.className = 'access-banner unlocked';
-  document.getElementById('accessLabel').textContent = '✅';
-} else {
-  banner.innerHTML = `🔒 Subscribe to download patterns. <a href="/subscribe.html">View Plans →</a>`;
-  banner.className = 'access-banner locked';
+function getAllPatterns() {
+  var state = getDefaultState();
+  var defs = DEFAULT_PATTERNS.map(function(d) { return Object.assign({},d,state[d.id]||{}); });
+  return defs.concat(getExtras());
 }
 
-function planDownloads(plan) {
-  return { basic: 4, brand_builder: 9, pro_elite: 15 }[plan] || 0;
-}
-
-// mobile nav
-function toggleMenu() {
-  document.getElementById('mobMenu').classList.toggle('open');
-}
-
-// load patterns
-let allPatterns = [];
-async function loadPatterns() {
-  const { data, error } = await sb.from('patterns').select('*').eq('is_active', true).order('created_at', { ascending: true });
-  if (error) { renderEmpty('Failed to load patterns.'); return; }
-  allPatterns = data || [];
-  document.getElementById('totalCount').textContent = allPatterns.length;
-  renderCards(allPatterns);
-}
-
-function renderCards(patterns) {
-  const grid = document.getElementById('patternsGrid');
-  if (!patterns.length) { renderEmpty('No patterns found.'); return; }
-  grid.innerHTML = patterns.map(p => cardHTML(p)).join('');
-}
-
-function renderEmpty(msg) {
-  document.getElementById('patternsGrid').innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="icon">📭</div><p>${msg}</p></div>`;
-}
-
-function badgeClass(fmt) {
-  return { DXF: 'badge-dxf', PDF: 'badge-pdf', ZIP: 'badge-zip' }[fmt] || 'badge-dxf';
-}
-
-function cardHTML(p) {
-  const imgBlock = p.image_url
-    ? `<div class="card-img"><img src="${p.image_url}" alt="${p.name}" loading="lazy"></div>`
-    : `<div class="card-img" style="font-size:3rem">📐</div>`;
-
-  let actionBtn = '';
-  if (isPaid && p.file_url) {
-    actionBtn = `<a href="${p.file_url}" target="_blank" download class="btn-download unlocked">⬇ Download Pattern</a>`;
-  } else if (!isPaid && p.file_url) {
-    actionBtn = `<a href="/subscribe.html" class="btn-download locked">🔒 Subscribe to Download</a>`;
-  } else {
-    actionBtn = `<span class="btn-download coming">📂 File Coming Soon</span>`;
-  }
-
-  return `
-  <div class="pattern-card" data-format="${p.format}">
-    ${imgBlock}
-    <div class="card-body">
-      <div class="card-badges">
-        <span class="badge ${badgeClass(p.format)}">${p.format}</span>
-        <span class="badge badge-lock">${isPaid ? '✅ Premium' : '🔒 Premium Only'}</span>
-      </div>
-      <div class="card-name">${p.name}</div>
-      <div class="card-desc">${p.description || ''}</div>
-      <div class="card-meta">
-        <div class="meta-item">Format <br><span>${p.format}</span></div>
-        <div class="meta-item">Size <br><span>${p.file_size || 'N/A'}</span></div>
-        <div class="meta-item">Category <br><span>${p.category || '—'}</span></div>
-      </div>
-      <div class="card-actions">${actionBtn}</div>
-    </div>
-  </div>`;
-}
-
-// filter
-function filterCards(format, btn) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  const filtered = format === 'all' ? allPatterns : allPatterns.filter(p => p.format === format);
-  renderCards(filtered);
-}
-
-// admin
-function openAdminPrompt() { document.getElementById('promptOverlay').classList.add('open'); }
-function closeOverlay(id)  { document.getElementById(id).classList.remove('open'); }
-
-function checkAdminPw() {
-  const pw = document.getElementById('adminPwInput').value;
-  if (pw !== ADMIN_PW) { showAlert('promptAlert', 'Incorrect password.', 'error'); return; }
-  closeOverlay('promptOverlay');
-  document.getElementById('adminOverlay').classList.add('open');
-  loadExisting();
-}
-
-function showAlert(id, msg, type) {
-  const el = document.getElementById(id);
-  el.textContent = msg; el.className = 'alert-sm show ' + type;
-  setTimeout(() => el.className = 'alert-sm', 4000);
-}
-
-function handleFileSelect(inputId, nameId) {
-  const file = document.getElementById(inputId).files[0];
-  if (file) {
-    const el = document.getElementById(nameId);
-    el.textContent = '✅ ' + file.name;
-    el.style.display = 'block';
-  }
-}
-
-async function uploadToStorage(file, folder) {
-  const ext  = file.name.split('.').pop();
-  const path = `${folder}/${Date.now()}_${Math.random().toString(36).slice(2)}.${ext}`;
-  const { data, error } = await sb.storage.from(BUCKET).upload(path, file, { upsert: false });
-  if (error) throw new Error('Upload failed: ' + error.message);
-  const { data: urlData } = sb.storage.from(BUCKET).getPublicUrl(path);
-  return urlData.publicUrl;
-}
-
-async function addPattern() {
-  const name     = document.getElementById('aName').value.trim();
-  const format   = document.getElementById('aFormat').value;
-  const category = document.getElementById('aCategory').value.trim() || 'Pattern Making';
-  const size     = document.getElementById('aSize').value.trim();
-  const desc     = document.getElementById('aDesc').value.trim();
-  const imgFile  = document.getElementById('imgFile').files[0];
-  const patFile  = document.getElementById('patternFile').files[0];
-
-  if (!name) { showAlert('adminAlert', 'Pattern name is required.', 'error'); return; }
-
-  const btn = document.getElementById('addBtn');
-  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>Uploading...';
-
-  const progress = document.getElementById('uploadProgress');
-  const fill     = document.getElementById('progressFill');
-
+async function saveToSB(key, value) {
   try {
-    let image_url = null, file_url = null;
+    var _sb = supabase.createClient(SB_URL, SB_KEY);
+    var payload = {id:'main', updated_at: new Date().toISOString()};
+    payload[key] = value;
+    await _sb.from('site_settings').upsert(payload);
+  } catch(e) {}
+}
 
-    if (imgFile) {
-      progress.style.display = 'block'; fill.style.width = '20%';
-      image_url = await uploadToStorage(imgFile, 'images');
-      fill.style.width = '50%';
+// Load from Supabase on start
+async function loadFromSB() {
+  try {
+    var _sb = supabase.createClient(SB_URL, SB_KEY);
+    var r = await _sb.from('site_settings').select('*').eq('id','main').single();
+    if (r.data) {
+      var d = r.data;
+      if (d.lmcb_dp_state) localStorage.setItem('lmcb_dp_state', d.lmcb_dp_state);
+      if (d.lmcb_patterns_extra) localStorage.setItem('lmcb_patterns_extra', d.lmcb_patterns_extra);
+      if (d.lmcb_patterns_all) localStorage.setItem('lmcb_patterns_all', d.lmcb_patterns_all);
+      if (d.lmcb_admin_pw) localStorage.setItem('lmcb_admin_pw', d.lmcb_admin_pw);
     }
+  } catch(e) {}
+}
 
-    if (patFile) {
-      fill.style.width = '60%';
-      file_url = await uploadToStorage(patFile, 'patterns');
-      fill.style.width = '90%';
-    }
+var activeFilter = 'all';
 
-    const { error } = await sb.from('patterns').insert({
-      name, format, category, file_size: size, description: desc, image_url, file_url
-    });
+function renderCards() {
+  var patterns = getAllPatterns();
+  var plan = localStorage.getItem('lmcb_current_plan');
+  var lusers = JSON.parse(localStorage.getItem('lmcb_users') || '[]');
+  var isLoggedIn = lusers.some(function(u) { return u.lastLogin; });
+  var isPaid = isLoggedIn && (plan === 'brand_builder' || plan === 'pro_elite');
+  var filtered = activeFilter === 'all' ? patterns : patterns.filter(function(p) { return p.format === activeFilter; });
+  document.getElementById('total-count').textContent = patterns.length + '+';
+  var grid = document.getElementById('pattern-grid');
+  if (!filtered.length) { grid.innerHTML = '<div style="grid-column:1/-1;padding:4rem;text-align:center;opacity:0.4;">No patterns found.</div>'; return; }
+  var FORMAT_ICONS = { DXF:'📐', PDF:'📄', ZIP:'📦' };
+  grid.innerHTML = filtered.map(function(p, i) {
+    var formatEmoji = FORMAT_ICONS[p.format] || '📁';
+    var preview = p.image
+      ? '<img src="'+p.image+'" alt="'+p.name+'" style="width:100%;height:100%;object-fit:cover;" />'
+      : '<svg class="pattern-svg" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><path d="M10 20 L25 10 L40 18 L55 10 L70 20 L58 30 L58 70 L22 70 L22 30 Z" stroke="#C8A951" stroke-width="2" fill="none" stroke-linecap="round"/></svg><div style="position:absolute;bottom:0.8rem;left:50%;transform:translateX(-50%);font-size:0.5rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(200,169,81,0.4);white-space:nowrap;">Image Coming Soon</div>';
+    var dlBtn = p.fileUrl
+      ? '<button class="pattern-download-btn" onclick="showDownloadModal(\'' + p.fileUrl + '\')">⬇ Download Pattern</button>'
+      : '<button class="pattern-download-btn" onclick="showDownloadModal(null)">⬇ Download Pattern</button>';
+    return '<div class="pattern-card" data-format="'+p.format+'"><div class="pattern-preview">'+preview+'<div class="pattern-lock-overlay"><div class="pattern-lock-icon">🔒</div><div class="pattern-lock-text">Premium Only</div></div></div><div class="pattern-body"><div class="pattern-meta"><span class="meta-tag format">'+formatEmoji+' '+p.format+'</span><span class="meta-tag">'+p.category+'</span></div><div class="pattern-name">'+p.name+'</div><div class="pattern-desc">'+p.desc+'</div><div class="pattern-file-info"><div class="file-info-cell"><div class="file-info-label">Format</div><div class="file-info-val">'+p.format+'</div></div><div class="file-info-cell"><div class="file-info-label">Size</div><div class="file-info-val">'+p.size+'</div></div><div class="file-info-cell"><div class="file-info-label">Category</div><div class="file-info-val">'+p.category+'</div></div></div>'+dlBtn+'</div></div>';
+  }).join('');
+}
 
-    if (error) throw new Error(error.message);
+function filterPatterns(fmt, btn) {
+  activeFilter = fmt;
+  document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  renderCards();
+}
 
-    fill.style.width = '100%';
-    showAlert('adminAlert', '✅ Pattern added successfully!', 'success');
+// Admin
+function openAdmin() {
+  document.getElementById('admin-overlay').style.display = 'flex';
+  document.getElementById('admin-login').style.display = 'block';
+  document.getElementById('admin-editor').style.display = 'none';
+  document.getElementById('admin-pw').value = '';
+  document.getElementById('admin-pw-error').style.display = 'none';
+  setTimeout(function() { document.getElementById('admin-pw').focus(); }, 100);
+}
+function closeAdmin() { document.getElementById('admin-overlay').style.display = 'none'; }
 
-    // reset
-    document.getElementById('aName').value = '';
-    document.getElementById('aSize').value = '';
-    document.getElementById('aDesc').value = '';
-    document.getElementById('imgFile').value = '';
-    document.getElementById('patternFile').value = '';
-    document.getElementById('imgFileName').style.display = 'none';
-    document.getElementById('patternFileName').style.display = 'none';
-    progress.style.display = 'none'; fill.style.width = '0';
-
-    loadPatterns();
-    loadExisting();
-
-  } catch(err) {
-    showAlert('adminAlert', '❌ ' + err.message, 'error');
-    progress.style.display = 'none';
+function adminLogin() {
+  var pw = document.getElementById('admin-pw').value;
+  var correct = localStorage.getItem('lmcb_admin_pw') || ADMIN_PW;
+  if (pw === correct) {
+    document.getElementById('admin-login').style.display = 'none';
+    document.getElementById('admin-editor').style.display = 'block';
+    renderEditorList();
+  } else {
+    document.getElementById('admin-pw-error').style.display = 'block';
+    document.getElementById('admin-pw').value = '';
+    document.getElementById('admin-pw').focus();
   }
-
-  btn.disabled = false; btn.textContent = 'Add Pattern →';
 }
 
-async function loadExisting() {
-  const { data } = await sb.from('patterns').select('id,name,format').order('created_at', { ascending: false });
-  const list = document.getElementById('existingList');
-  if (!data || !data.length) { list.innerHTML = '<p style="font-size:.8rem;color:var(--muted)">No patterns yet.</p>'; return; }
-  list.innerHTML = data.map(p => `
-    <div class="exist-item">
-      <span class="exist-item-name">${p.name}</span>
-      <span class="exist-item-badge">${p.format}</span>
-      <button class="exist-item-del" onclick="deletePattern('${p.id}')" title="Delete">🗑</button>
-    </div>`).join('');
+function renderEditorList() {
+  var patterns = getAllPatterns();
+  document.getElementById('pattern-editor-list').innerHTML = patterns.map(function(p, i) {
+    var isDefault = !!p.id;
+    var thumb = p.image ? '<img src="'+p.image+'" />' : '📐';
+    return '<div class="editor-item"><div class="editor-thumb">'+(p.image?'<img src="'+p.image+'" />':(FORMAT_ICONS[p.format]||'📁'))+'</div><div class="editor-info"><div class="editor-name">'+p.name+(isDefault?' <span style="font-size:0.6rem;color:var(--gold);opacity:0.5">[default]</span>':'')+'</div><div class="editor-meta">'+p.format+' · '+p.size+' · '+(p.fileUrl?'✅ File attached':'⚠ No file')+'</div></div><label class="editor-btn editor-btn-file">📎 File<input type="file" accept=".pdf,.dxf,.zip" style="display:none;" onchange="attachFileToPattern(event,'+i+')" /></label><label class="editor-btn">📷<input type="file" accept="image/*" style="display:none;" onchange="attachImageToPattern(event,'+i+')" /></label><button class="editor-btn" onclick="editPattern('+i+')">Edit</button>'+(!isDefault?'<button class="editor-btn editor-btn-del" onclick="removePattern('+i+')">✕</button>':'')+'</div>';
+  }).join('');
 }
 
-async function deletePattern(id) {
-  if (!confirm('Delete this pattern?')) return;
-  await sb.from('patterns').delete().eq('id', id);
-  loadPatterns(); loadExisting();
+var FORMAT_ICONS = { DXF:'📐', PDF:'📄', ZIP:'📦' };
+
+async function attachFileToPattern(event, index) {
+  var file = event.target.files[0]; if (!file) return;
+  showMsg('⏳ Uploading '+file.name+'...');
+  try {
+    var _sb = supabase.createClient(SB_URL, SB_KEY);
+    var path = 'patterns/'+Date.now()+'_'+file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+    var result = await _sb.storage.from('files').upload(path, file, {upsert:true});
+    if (result.error) throw result.error;
+    var url = _sb.storage.from('files').getPublicUrl(path).data.publicUrl;
+    var patterns = getAllPatterns();
+    var p = patterns[index];
+    if (p.id) { var state=getDefaultState(); state[p.id]=Object.assign({},state[p.id]||{},{fileUrl:url}); saveDefaultState(state); }
+    else { var extras=getExtras(); extras[index-DEFAULT_PATTERNS.length].fileUrl=url; saveExtras(extras); }
+    renderEditorList(); renderCards();
+    showMsg('✅ File attached!');
+  } catch(e) { showMsg('❌ Upload failed: '+e.message); }
 }
 
-// init
-loadPatterns();
+async function attachImageToPattern(event, index) {
+  var file = event.target.files[0]; if (!file) return;
+  showMsg('⏳ Uploading image...');
+  try {
+    var _sb = supabase.createClient(SB_URL, SB_KEY);
+    var path = 'images/'+Date.now()+'_'+file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+    var result = await _sb.storage.from('files').upload(path, file, {upsert:true});
+    if (result.error) throw result.error;
+    var url = _sb.storage.from('files').getPublicUrl(path).data.publicUrl;
+    var patterns = getAllPatterns();
+    var p = patterns[index];
+    if (p.id) { var state=getDefaultState(); state[p.id]=Object.assign({},state[p.id]||{},{image:url}); saveDefaultState(state); }
+    else { var extras=getExtras(); extras[index-DEFAULT_PATTERNS.length].image=url; saveExtras(extras); }
+    renderEditorList(); renderCards();
+    showMsg('✅ Image added!');
+  } catch(e) { showMsg('❌ Failed: '+e.message); }
+}
+
+function removePattern(index) {
+  var patterns = getAllPatterns();
+  if (!confirm('Remove "'+patterns[index].name+'"?')) return;
+  var extras = getExtras();
+  extras.splice(index-DEFAULT_PATTERNS.length, 1);
+  saveExtras(extras);
+  renderEditorList(); renderCards();
+}
+
+function editPattern(index) {
+  var patterns = getAllPatterns();
+  var p = patterns[index];
+  var name=prompt('Name:',p.name); if(name===null) return;
+  var format=prompt('Format (DXF/PDF/ZIP):',p.format); if(format===null) return;
+  var size=prompt('Size:',p.size); if(size===null) return;
+  var desc=prompt('Description:',p.desc); if(desc===null) return;
+  if (p.id) { var state=getDefaultState(); state[p.id]=Object.assign({},state[p.id]||{},{name,format,size,desc}); saveDefaultState(state); }
+  else { var extras=getExtras(); Object.assign(extras[index-DEFAULT_PATTERNS.length],{name,format,size,desc}); saveExtras(extras); }
+  renderEditorList(); renderCards();
+}
+
+var newImg=null, newFileUrl=null;
+
+function previewImg(event) {
+  var file=event.target.files[0]; if(!file) return;
+  // Upload to Supabase instead of base64
+  (async function() {
+    showMsg('⏳ Uploading image...');
+    try {
+      var _sb=supabase.createClient(SB_URL,SB_KEY);
+      var path='images/'+Date.now()+'_'+file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+      var result=await _sb.storage.from('files').upload(path,file,{upsert:true});
+      if(result.error) throw result.error;
+      newImg=_sb.storage.from('files').getPublicUrl(path).data.publicUrl;
+      document.getElementById('new-pimage-name').textContent=file.name;
+      document.getElementById('new-pimage-thumb').src=newImg;
+      document.getElementById('new-pimage-preview').style.display='block';
+      showMsg('✅ Image ready!');
+    } catch(e) { showMsg('❌ '+e.message); }
+  })();
+}
+
+async function handleFile(event) {
+  var file=event.target.files[0]; if(!file) return;
+  document.getElementById('new-pfile-name').textContent=file.name;
+  document.getElementById('new-pfile-status').style.display='block';
+  document.getElementById('new-pfile-status').textContent='⏳ Uploading...';
+  try {
+    var _sb=supabase.createClient(SB_URL,SB_KEY);
+    var path='patterns/'+Date.now()+'_'+file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+    var result=await _sb.storage.from('files').upload(path,file,{upsert:true});
+    if(result.error) throw result.error;
+    newFileUrl=_sb.storage.from('files').getPublicUrl(path).data.publicUrl;
+    document.getElementById('new-pfile-status').textContent='✅ '+file.name+' ready!';
+  } catch(e) {
+    document.getElementById('new-pfile-status').textContent='❌ Failed: '+e.message;
+    newFileUrl=null;
+  }
+}
+
+function addPattern() {
+  var name=document.getElementById('new-pname').value.trim();
+  if(!name){alert('Please enter a pattern name.');return;}
+  var extras=getExtras();
+  extras.push({name,format:document.getElementById('new-pformat').value,size:document.getElementById('new-psize').value.trim()||'N/A',category:document.getElementById('new-pcategory').value.trim()||'Pattern Making',desc:document.getElementById('new-pdesc').value.trim(),image:newImg||null,fileUrl:newFileUrl||null});
+  saveExtras(extras);
+  ['new-pname','new-psize','new-pcategory','new-pdesc'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('new-pimage').value='';
+  document.getElementById('new-pimage-name').textContent='';
+  document.getElementById('new-pimage-preview').style.display='none';
+  document.getElementById('new-pfile').value='';
+  document.getElementById('new-pfile-name').textContent='';
+  document.getElementById('new-pfile-status').style.display='none';
+  newImg=null; newFileUrl=null;
+  renderEditorList(); renderCards();
+  showMsg('✅ Pattern added!');
+}
+
+function applyPatterns() { renderCards(); closeAdmin(); showMsg('✓ Changes saved!'); }
+
+function resetPatterns() {
+  if(!confirm('Reset all changes?')) return;
+  localStorage.removeItem('lmcb_dp_state');
+  localStorage.removeItem('lmcb_patterns_extra');
+  renderEditorList(); renderCards();
+}
+
+function showMsg(text) {
+  var e=document.getElementById('_msg'); if(e) e.remove();
+  var m=document.createElement('div'); m.id='_msg'; m.textContent=text;
+  m.style.cssText='position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#1C1609;border:1px solid var(--border);color:var(--gold);padding:0.8rem 1.5rem;font-family:DM Mono,monospace;font-size:0.85rem;z-index:99999;white-space:nowrap;border-radius:3px;';
+  document.body.appendChild(m); setTimeout(function(){m.remove();},3000);
+}
+
+
+function showDownloadModal(fileUrl) {
+  var users = JSON.parse(localStorage.getItem('lmcb_users') || '[]');
+  var isLoggedIn = users.some(function(u) { return u.lastLogin; });
+  var plan = localStorage.getItem('lmcb_current_plan');
+  var isPaid = isLoggedIn && (plan === 'brand_builder' || plan === 'pro_elite');
+  var modal = document.getElementById('download-modal');
+  var msg = document.getElementById('modal-msg');
+  var btns = document.getElementById('modal-btns');
+  var title = document.getElementById('modal-title');
+
+  if (!isLoggedIn) {
+    title.textContent = 'Login Required';
+    msg.textContent = 'You need to create a free account to download pattern files.';
+    btns.innerHTML = '<a href="/register.html" style="background:#C8A951;color:#1A1208;padding:0.9rem;font-family:DM Mono,monospace;font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:500;text-decoration:none;display:block;">Create Free Account →</a><a href="/login.html" style="border:1px solid rgba(200,169,81,0.35);color:#F5F0E8;padding:0.9rem;font-family:DM Mono,monospace;font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;display:block;">Already have an account? Log In</a>';
+  } else if (!isPaid) {
+    title.textContent = 'Subscription Required';
+    msg.textContent = 'Pattern downloads are available for Brand Builder and Pro Elite subscribers only.';
+    btns.innerHTML = '<a href="/subscribe.html" style="background:#C8A951;color:#1A1208;padding:0.9rem;font-family:DM Mono,monospace;font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:500;text-decoration:none;display:block;">View Plans →</a><button onclick="document.getElementById('download-modal').style.display='none'" style="border:1px solid rgba(200,169,81,0.35);color:#F5F0E8;padding:0.9rem;font-family:DM Mono,monospace;font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;background:transparent;cursor:pointer;width:100%;">Maybe Later</button>';
+  } else if (fileUrl) {
+    // Paid user - download directly
+    window.open(fileUrl, '_blank');
+    return;
+  }
+  modal.style.display = 'flex';
+}
+
+// WhatsApp
+var _WA_NUM='918796158321',_WA_MSG='Hi! I need help with my clothing brand.';
+function _initWA(){var b=document.getElementById('wa-bubble'),l=document.getElementById('wa-link');if(!b||!l)return;l.href='https://wa.me/'+_WA_NUM+'?text='+encodeURIComponent(_WA_MSG);var p=localStorage.getItem('lmcb_current_plan');if(p==='brand_builder'||p==='pro_elite'){b.style.display='flex';b.style.visibility='visible';}else{b.style.display='none';b.style.visibility='hidden';}}
+
+// Init
+document.addEventListener('DOMContentLoaded', async function() {
+  // Check login
+  await loadFromSB();
+  renderCards();
+  document.getElementById('admin-pw').addEventListener('keydown', function(e) { if(e.key==='Enter') adminLogin(); });
+  var params=new URLSearchParams(window.location.search);
+  if(params.has('admin')) openAdmin();
+  _initWA();
+});
 </script>
 </body>
 </html>
