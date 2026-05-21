@@ -1,0 +1,1 @@
+export { TestimonialsContent } from "./TestimonialsContent"

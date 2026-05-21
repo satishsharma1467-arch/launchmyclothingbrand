@@ -1,0 +1,160 @@
+.section {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+@media (min-width: 1024px) {
+  .section {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+}
+
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .container { max-width: 640px; }
+}
+@media (min-width: 768px) {
+  .container { max-width: 768px; }
+}
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+@media (min-width: 1280px) {
+  .container { max-width: 1280px; }
+}
+@media (min-width: 1536px) {
+  .container { max-width: 1536px; }
+}
+
+.header {
+  max-width: 48rem;
+  margin-bottom: 4rem;
+}
+@media (min-width: 1024px) {
+  .header { margin-bottom: 6rem; }
+}
+
+.eyebrow {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  margin-bottom: 1.5rem;
+}
+
+.heading {
+  font-size: 1.875rem;
+  line-height: 1.25;
+  font-weight: 300;
+  text-wrap: balance;
+}
+@media (min-width: 768px) {
+  .heading { font-size: 2.25rem; }
+}
+@media (min-width: 1024px) {
+  .heading { font-size: 3rem; }
+}
+
+.headingAccent {
+  font-style: italic;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.grid {
+  display: grid;
+  gap: 3rem;
+}
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4rem;
+  }
+}
+
+.item {
+  position: relative;
+}
+
+.quote {
+  font-size: 1.25rem;
+  line-height: 1.625;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  text-wrap: balance;
+}
+@media (min-width: 768px) {
+  .quote { font-size: 1.5rem; }
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatar {
+  position: relative;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.name {
+  font-weight: 500;
+}
+
+.role {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--muted-foreground);
+}
+
+.linkWrap {
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.025em;
+  color: var(--foreground);
+  border-bottom: 1px solid color-mix(in oklch, var(--foreground) 20%, transparent);
+  padding-bottom: 0.25rem;
+  transition: border-color 0.2s ease;
+  text-decoration: none;
+}
+
+.link:hover {
+  border-bottom-color: var(--foreground);
+}
+
+.linkIcon {
+  width: 1rem;
+  height: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.link:hover .linkIcon {
+  transform: translateX(0.25rem);
+}
