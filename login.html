@@ -672,7 +672,7 @@
       <input type="email" id="forgotEmail" placeholder="you@example.com">
     </div>
     <div class="modal-btns">
-      <button class="btn btn-gold" style="flex:1" onclick="sendReset()">Send Recovery Email →</button>
+      <button class="btn btn-gold" style="flex:1" id="forgotBtn" onclick="sendReset()">Send Recovery Email →</button>
       <button class="btn" style="background:rgba(255,255,255,0.05); color:var(--cream); border:1px solid var(--border); flex:0 0 auto; padding:0.8rem 1.2rem;" onclick="closeForgot()">Cancel</button>
     </div>
   </div>
@@ -824,13 +824,88 @@ function closeForgot() { document.getElementById('forgotOverlay').classList.remo
 
 async function sendReset() {
   const email = document.getElementById('forgotEmail').value.trim().toLowerCase();
-  if (!email) return;
-  await fetch(`${SB_URL}/rest/v1/users?email=eq.${encodeURIComponent(email)}`, {
-    method: 'PATCH',
-    headers: { 'Content-Type': 'application/json', 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` },
-    body: JSON.stringify({ reset_requested: true, reset_requested_at: new Date().toISOString() })
-  });
-  showAlert('forgotAlert', 'Reset request noted. We will contact you on WhatsApp/email within a few minutes.', 'success');
+  const alertBoxId = 'forgotAlert';
+  const btn = document.getElementById('forgotBtn');
+  
+  if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+    showAlert(alertBoxId, '⚠️ Please enter a valid email address.', 'error');
+    return;
+  }
+  
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Sending...';
+  document.getElementById(alertBoxId).style.display = 'none';
+
+  try {
+    // 1. Verify if user exists in our ledger
+    const checkRes = await fetch(`${SB_URL}/rest/v1/users?email=eq.${encodeURIComponent(email)}&select=name,phone`, {
+      headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` }
+    });
+    
+    if (!checkRes.ok) throw new Error("Verification request failed.");
+    const users = await checkRes.json();
+    
+    if (!Array.isArray(users) || users.length === 0) {
+      showAlert(alertBoxId, '❌ No registered brand account was found with this email.', 'error');
+      btn.disabled = false;
+      btn.textContent = 'Send Recovery Email →';
+      return;
+    }
+    
+    const user = users[0];
+    const fullName = user.name || 'Brand Partner';
+    const phone = user.phone || '';
+    
+    // 2. Safely log the reset request as a system ticket in the messages ledger
+    const logRes = await fetch(`${SB_URL}/rest/v1/messages`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SB_KEY,
+        'Authorization': `Bearer ${SB_KEY}`,
+        'Prefer': 'return=representation'
+      },
+      body: JSON.stringify([{
+        name: fullName,
+        email: email,
+        phone: phone,
+        subject: 'Password Reset Request',
+        message: `SYSTEM NOTIFICATION: User "${fullName}" has requested a password reset. Please contact them at their registered email (${email}) or phone (${phone || 'N/A'}) to securely reset their password.`,
+        received_at: new Date().toISOString()
+      }])
+    });
+    
+    if (!logRes.ok) console.warn("Supabase logging failed, falling back to local cache.");
+
+    // 3. Backup to local localStorage lmcb_messages for instant admin panel synchronization
+    const localMsgs = JSON.parse(localStorage.getItem('lmcb_messages') || '[]');
+    localMsgs.unshift({
+      id: Date.now(),
+      name: fullName,
+      email: email,
+      phone: phone,
+      subject: 'Password Reset Request',
+      message: `SYSTEM NOTIFICATION: User "${fullName}" has requested a password reset. Please contact them at their registered email (${email}) or phone (${phone || 'N/A'}) to securely reset their password.`,
+      receivedAt: new Date().toISOString(),
+      read: false
+    });
+    localStorage.setItem('lmcb_messages', JSON.stringify(localMsgs));
+    
+    showAlert(alertBoxId, '✅ Reset request securely logged! A support specialist will contact you on WhatsApp/email shortly.', 'success');
+    document.getElementById('forgotEmail').value = '';
+    
+    setTimeout(() => {
+      closeForgot();
+      btn.disabled = false;
+      btn.textContent = 'Send Recovery Email →';
+      document.getElementById(alertBoxId).style.display = 'none';
+    }, 3500);
+
+  } catch (err) {
+    showAlert(alertBoxId, '❌ Reset failed: ' + err.message, 'error');
+    btn.disabled = false;
+    btn.textContent = 'Send Recovery Email →';
+  }
 }
 
 // SECURED ADMIN LOGIN (NO CLEAR-TEXT CONSTANTS IN CLIENT FILE)
