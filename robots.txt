@@ -1,3 +1,10 @@
+# ==========================================
+# 🤖 Robots.txt for Launch My Clothing Brand
+# ==========================================
+# Allow all search engines to crawl the site
+
 User-agent: *
 Allow: /
+
+# Sitemap Location
 Sitemap: https://launchmyclothingbrand.com/sitemap.xml
