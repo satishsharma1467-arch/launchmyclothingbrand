@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <title>Log In | Launch My Clothing Brand</title>
 
@@ -26,12 +26,14 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { font-size: 16px; }
 
-  body { font-size: 16px; background: #0E0B06;
+  body {
+    background: #0E0B06;
     color: var(--cream);
     font-family: 'DM Mono', monospace;
     font-weight: 300;
     min-height: 100vh;
-    overflow-x: hidden; }
+    overflow-x: hidden;
+  }
 
   body::before {
     content: '';
@@ -478,10 +480,19 @@
   .btn-sm.danger:hover { border-color: var(--red); color: var(--red); }
 
   /* MOBILE BOTTOM NAVIGATION */
-  
-  
-  
-  @media(max-width:768px){  body { font-size: 16px; padding-bottom: 70px; } }
+  .mob-nav {
+    display: none; position: fixed; bottom: 0; left: 0; right: 0;
+    height: 62px; background: #0E0B06; border-top: 1px solid var(--border);
+    z-index: 500; justify-content: space-around; align-items: center;
+  }
+  .mob-nav a {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    text-decoration: none; color: var(--cream); opacity: 0.5;
+    font-size: 0.52rem; letter-spacing: 0.08em; text-transform: uppercase;
+    flex: 1; text-align: center; padding: 8px 4px;
+  }
+  .mob-nav a:hover { opacity: 1; color: var(--gold); }
+  @media(max-width:768px){ .mob-nav { display: flex; } body { padding-bottom: 70px; } }
 
     /* â•â•â• MOBILE HEADER & DRAWER OVERLAYS SOLID BLACK CONTRAST FIX â•â•â• */
     @media (max-width: 1100px) {
@@ -504,54 +515,15 @@
       .nav-links {
         background: #0E0B06 !important;
       }
-      .mobile-bottom-nav, 
-      .mobile-bottom-nav a, 
+      .mobile-bottom-nav, .mobile-nav {
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200, 169, 81, 0.25) !important;
+      }
+      .mobile-bottom-nav a, .mobile-nav a {
+        background: #0E0B06 !important;
+      }
     }
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-
-    .mobile-bottom-nav {
-      display: none;
-    }
-    @media (max-width: 768px) {
-      .mobile-bottom-nav {
-        display: flex !important;
-        position: fixed !important;
-        bottom: 0 !important; left: 0 !important; right: 0 !important;
-        height: 62px !important;
-        background: #0E0B06 !important;
-        border-top: 1px solid rgba(200,169,81,0.25) !important;
-        z-index: 500 !important;
-        justify-content: space-around !important;
-        align-items: center !important;
-        padding: 0 !important;
-      }
-      .mobile-bottom-nav a {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 3px !important;
-        text-decoration: none !important;
-        color: #F5F0E8 !important;
-        opacity: 0.5 !important;
-        font-family: 'DM Mono', monospace !important;
-        font-size: 0.52rem !important;
-        letter-spacing: 0.08em !important;
-        text-transform: uppercase !important;
-        padding: 8px 4px !important;
-        flex: 1 !important;
-        text-align: center !important;
-        transition: opacity 0.2s, color 0.2s !important;
-      }
-      .mobile-bottom-nav a:hover,
-      .mobile-bottom-nav a.active {
-        opacity: 1 !important;
-        color: #C8A951 !important;
-      }
-      .mobile-bottom-nav .nav-icon {
-        font-size: 1.2rem !important;
-        line-height: 1 !important;
-      }
-    }
 </style>
 </head>
 <body>
@@ -686,7 +658,14 @@
 </div>
 
 <!-- Mobile Bottom Navigation -->
-
+<nav class="mob-nav">
+  <a href="/index.html">🏠<br>Home</a>
+  <a href="/services.html">📐<br>Services</a>
+  <a href="/manufacturers.html">🏭<br>Factories</a>
+  <a href="/specsheets.html">📋<br>Spec</a>
+  <a href="/insights.html">🎬<br>Insights</a>
+  <a href="/subscribe.html">⭐<br>Plans</a>
+</nav>
 
 <script>
 const SB_URL = 'https://tldbjsqhjqapdwmfeuwq.supabase.co';
@@ -914,56 +893,5 @@ async function confirmClear() {
   }
 }
 </script>
-
-  <!-- MOBILE BOTTOM NAVIGATION -->
-  <nav class="mobile-bottom-nav">
-    <a href="/index.html" id="bn-home">
-      <span class="nav-icon">🏠</span>
-      <span>Home</span>
-    </a>
-    <a href="/services.html" id="bn-services">
-      <span class="nav-icon">📐</span>
-      <span>Services</span>
-    </a>
-    <a href="/manufacturers.html" id="bn-mfr">
-      <span class="nav-icon">🏭</span>
-      <span>Factories</span>
-    </a>
-    <a href="/specsheets.html" id="bn-spec">
-      <span class="nav-icon">📋</span>
-      <span>Spec</span>
-    </a>
-    <a href="/insights.html" id="bn-insights">
-      <span class="nav-icon">🎬</span>
-      <span>Insights</span>
-    </a>
-    <a href="/subscribe.html" id="bn-pricing">
-      <span class="nav-icon">⭐</span>
-      <span>Plans</span>
-    </a>
-  </nav>
-
-  <script>
-    // Highlight active bottom nav item
-    (function() {
-      var path = window.location.pathname;
-      var map = {
-        'index': 'bn-home',
-        'services': 'bn-services', 
-        'manufacturers': 'bn-mfr',
-        'specsheets': 'bn-spec',
-        'insights': 'bn-insights',
-        'subscribe': 'bn-pricing',
-        'library': 'bn-services',
-        'contact': 'bn-home',
-      };
-      var page = path.replace(/.*\//, '').replace('.html', '') || 'index';
-      var activeId = map[page];
-      if (activeId) {
-        var el = document.getElementById(activeId);
-        if (el) el.classList.add('active');
-      }
-    })();
-  </script>
 </body>
 </html>
