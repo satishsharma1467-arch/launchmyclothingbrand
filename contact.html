@@ -954,7 +954,17 @@
 // ── SUPABASE CONFIG ──────────────────────────────────
 const SUPABASE_URL = 'https://tldbjsqhjqapdwmfeuwq.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ';
-const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let _sb = null;
+if (typeof supabase !== 'undefined') {
+  try {
+    _sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  } catch (e) {
+    console.error("Supabase client failed to initialize:", e);
+  }
+} else {
+  console.warn("Supabase SDK is not loaded. Safe fallback to offline localStorage is active.");
+}
 
 // ── USER FUNCTIONS ───────────────────────────────────
 async function sbRegisterUser(user) {
@@ -991,15 +1001,22 @@ async function sbUpdatePlan(email, plan, planName, paymentId, amount) {
 }
 
 async function sbSaveMessage(msg) {
-  const { data, error } = await _sb.from('messages').insert([{
-    name: msg.name,
-    email: msg.email,
-    phone: msg.phone || '',
-    subject: msg.subject || '',
-    message: msg.message,
-    received_at: new Date().toISOString()
-  }]);
-  return { data, error };
+  if (!_sb) {
+    return { data: null, error: new Error("Supabase client is not initialized.") };
+  }
+  try {
+    const { data, error } = await _sb.from('messages').insert([{
+      name: msg.name,
+      email: msg.email,
+      phone: msg.phone || '',
+      subject: msg.subject || '',
+      message: msg.message,
+      received_at: new Date().toISOString()
+    }]);
+    return { data, error };
+  } catch (err) {
+    return { data: null, error: err };
+  }
 }
 
 // ── FILE UPLOAD ──────────────────────────────────────
@@ -1591,7 +1608,7 @@ document.addEventListener("DOMContentLoaded",_initWA);
         if (el) el.classList.add('active');
       }
     })();
-  </script>
+  <\/script>
 
 
 <script>
@@ -1606,8 +1623,8 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(changeAdminPassword, 500);
   }
 });
-</script>
-  <script src="/comm_guard.js"></script>
+<\/script>
+  <script src="/comm_guard.js"><\/script>
 </body></html>
   `);
 }
