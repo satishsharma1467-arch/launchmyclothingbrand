@@ -1423,6 +1423,7 @@ function showMessages() {
 
   const win = window.open('', '_blank', 'width=900,height=700,scrollbars=yes');
   win.document.write(`
+
     <!DOCTYPE html><html><head>
     <title>Contact Messages — Admin</title>
     <style>
@@ -1624,7 +1625,7 @@ document.addEventListener("DOMContentLoaded",_initWA);
   <\/script>
 
 
-<script>
+\x3Cscript>
 // Open admin via URL: add ?admin to any page URL
 // Change password via URL: add ?password to any page URL
 document.addEventListener('DOMContentLoaded', function() {
@@ -1637,7 +1638,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 <\/script>
-  <script src="/comm_guard.js"><\/script>
+  \x3Cscript src="/comm_guard.js"><\/script>
 </body></html>
   `);
 }
