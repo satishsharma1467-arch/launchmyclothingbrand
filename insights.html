@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -855,14 +855,15 @@
     <h1>Industry <em>Insights</em></h1>
     <p>Expert video content on pattern making, garment manufacturing, and building a successful clothing brand in India.</p>
     <div class="hero-stats">
-      <div class="hstat"><div class="hstat-num" id="totalCount">0</div><div class="hstat-label">Videos</div></div>
-      <div class="hstat"><div class="hstat-num">Free</div><div class="hstat-label">Access</div></div>
-      <div class="hstat"><div class="hstat-num">HD</div><div class="hstat-label">Quality</div></div>
-      <div class="hstat"><div class="hstat-num">New</div><div class="hstat-label">Added Regularly</div></div>
+        <div class="hstat"><div class="hstat-num" id="totalCount">0</div><div class="hstat-label">Videos</div></div>
+        <div class="hstat"><div class="hstat-num">Premium</div><div class="hstat-label">Access</div></div>
+        <div class="hstat"><div class="hstat-num">HD</div><div class="hstat-label">Quality</div></div>
+        <div class="hstat"><div class="hstat-num">New</div><div class="hstat-label">Added Regularly</div></div>
+      </div>
     </div>
   </div>
 
-  <div class="access-note">🎬 Industry Insights are free for all visitors. Subscribe for pattern downloads and factory databases.</div>
+  <div class="access-note">🎬 Premium strategy tutorials are reserved for active subscribers. Free topics are marked accordingly below.</div>
 
   <!-- FILTERS -->
   <div class="filters-bar" id="filtersBar" style="display:none;">
@@ -974,6 +975,10 @@
         <label>Description (optional)</label>
         <textarea id="aDesc" placeholder="Brief description of this video..."></textarea>
       </div>
+      <div class="field" style="display:flex; align-items:center; gap:0.6rem; margin-top:1.5rem; margin-bottom:1.5rem;">
+        <input type="checkbox" id="aIsPremium" style="width:auto; height:18px; width:18px; cursor:pointer; accent-color:var(--gold); margin:0;">
+        <label for="aIsPremium" style="margin-bottom:0; cursor:pointer; font-size:0.75rem; opacity:0.95; letter-spacing:0.05em; text-transform:none;">🔒 Limit access to Premium Subscribers only</label>
+      </div>
       <button class="btn-add" id="addBtn" onclick="addVideo()">Add Video →</button>
       <div class="existing-list">
         <h3>Current Insights</h3>
@@ -1003,7 +1008,58 @@
     const SB_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ';
     const sb = supabase.createClient(SB_URL, SB_KEY);
 
-    
+    // Read subscriber state from session / localStorage
+    const session = JSON.parse(localStorage.getItem('lmcb_user') || 'null');
+    const plan = localStorage.getItem('lmcb_current_plan') || (session ? session.plan : 'free');
+    const isPaid = plan === 'brand_builder' || plan === 'pro_elite';
+
+    // Premium video locking modal
+    function handleLockedVideo(title) {
+      const overlay = document.createElement('div');
+      overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:9999;display:flex;align-items:center;justify-content:center;font-family:\'DM Mono\',monospace;color:#F5F0E8;padding:2rem;backdrop-filter:blur(14px);';
+      overlay.innerHTML = `
+        <div style="background:#1C1609;border:1px solid rgba(200,169,81,0.4);padding:3rem 2rem;max-width:480px;width:100%;text-align:center;position:relative;box-shadow:0 15px 40px rgba(200,169,81,0.25);">
+          <button onclick="this.parentElement.parentElement.remove()" style="position:absolute;top:1rem;right:1.2rem;background:none;border:none;color:#F5F0E8;font-size:1.5rem;cursor:pointer;opacity:0.5;">✕</button>
+          <div style="font-size:3rem;margin-bottom:1rem;">🔒</div>
+          <div style="font-size:1rem;letter-spacing:0.25em;text-transform:uppercase;color:#C8A951;margin-bottom:0.8rem;">Exclusive Content</div>
+          <h3 style="font-family:Cormorant Garamond,serif;font-size:1.8rem;font-weight:300;margin-bottom:1rem;line-height:1.2;">${title}</h3>
+          <p style="font-size:0.9rem;opacity:0.6;line-height:1.7;margin-bottom:2rem;max-width:36ch;margin-left:auto;margin-right:auto;">This expert AI-generated tutorial and garment strategy video is reserved for premium members only.</p>
+          <a href="/subscribe.html" class="btn-primary" style="display:inline-block;background:linear-gradient(135deg, #E8C96A 0%, #C8A951 50%, #A68230 100%) !important;color:#0E0B06 !important;padding:0.8rem 2rem;text-decoration:none;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;box-shadow:0 4px 15px rgba(200,169,81,0.15);border:none;">Unlock with Premium Plan →</a>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+    }
+
+    const DEFAULT_VIDEOS = [
+      {
+        id: 'def-vid-1',
+        title: 'AI-Generated Tech Packs & Garment Strategy || premium',
+        youtube_url: 'https://www.youtube.com/watch?v=y3mBfWv8q98',
+        category: 'Brand Development',
+        duration: '15:45',
+        description: 'Learn how to use AI prompt frameworks to generate highly accurate tech packs and fit specification sheets for manufacturer submittals in minutes.',
+        is_active: true
+      },
+      {
+        id: 'def-vid-2',
+        title: 'Pattern Grading & Digitization Mastery || premium',
+        youtube_url: 'https://www.youtube.com/watch?v=F_f8N4h4bSg',
+        category: 'Pattern Making',
+        duration: '22:10',
+        description: 'Step-by-step masterclass on digitizing manual paper patterns and grading them across standard sizes XS through XXL using professional CAD software.',
+        is_active: true
+      },
+      {
+        id: 'def-vid-3',
+        title: 'Garment Sourcing & Manufacturing in India',
+        youtube_url: 'https://www.youtube.com/watch?v=jW2x1D14FhI',
+        category: 'Manufacturing',
+        duration: '10:30',
+        description: 'Essential guide to finding, vetting, and negotiating contract terms with apparel factories in Delhi, Tirupur, and Mumbai hubs.',
+        is_active: true
+      }
+    ];
+
     function openAdminPrompt(){ document.getElementById('promptOverlay').classList.add('open'); }
     function closeOverlay(id){ document.getElementById(id).classList.remove('open'); }
     function showAlert(id,msg,type){ const el=document.getElementById(id); el.textContent=msg; el.className='alert-sm show '+type; setTimeout(()=>el.className='alert-sm',4000); }
@@ -1038,7 +1094,24 @@
       const { data, error } = await sb.from('videos').select('*').eq('is_active',true).order('created_at',{ascending:false});
       const grid = document.getElementById('videosGrid');
       if (error){ grid.innerHTML='<div class="empty-state"><div class="empty-icon">❌</div><p>Failed to load insights.</p></div>'; return; }
-      allVideos = data || [];
+      
+      let dbVideos = data || [];
+      
+      // Bulletproof merge: Always display defaults plus any database insights
+      const dbTitles = dbVideos.map(v => v.title);
+      const missingDefaults = DEFAULT_VIDEOS.filter(d => !dbTitles.includes(d.title));
+      let rawVideos = [...dbVideos, ...missingDefaults];
+
+      // Parse premium tag from title
+      allVideos = rawVideos.map(v => {
+        const isPremium = v.title.includes(' || premium');
+        return {
+          ...v,
+          is_premium: isPremium,
+          title: isPremium ? v.title.replace(/\s*\|\|\s*premium$/, '') : v.title
+        };
+      });
+
       document.getElementById('totalCount').textContent = allVideos.length;
 
       if(!allVideos.length){
@@ -1078,11 +1151,23 @@
       grid.innerHTML = videos.map(v => {
         const ytId = getYTId(v.youtube_url);
         const thumb = ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : '';
+        
+        // Checked lock logic: If premium and user is not paid, trigger lock overlay
+        const clickAction = (v.is_premium && !isPaid)
+          ? `handleLockedVideo('${v.title.replace(/'/g, "\\'")}')`
+          : `playVideo('${v.id}','${ytId}')`;
+          
+        const badgeContent = v.is_premium
+          ? (isPaid ? `<span style="color:var(--gold);font-weight:500;">👑 Premium Tutorial</span>` : `<span style="opacity:0.65;color:var(--gold)">🔒 Premium Only</span>`)
+          : `<span>🆓 Free Access</span>`;
+          
+        const playIcon = (v.is_premium && !isPaid) ? '🔒' : '▶';
+
         return `
         <div class="video-card">
-          <div class="video-thumb" id="thumb-${v.id}" onclick="playVideo('${v.id}','${ytId}')">
+          <div class="video-thumb" id="thumb-${v.id}" onclick="${clickAction}">
             ${thumb ? `<img src="${thumb}" alt="${v.title}" loading="lazy">` : '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2rem">🎬</div>'}
-            <div class="play-btn"><div class="play-circle">▶</div></div>
+            <div class="play-btn"><div class="play-circle">${playIcon}</div></div>
           </div>
           <div class="video-embed" id="embed-${v.id}">
             <iframe src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
@@ -1093,7 +1178,7 @@
             ${v.description ? `<div class="card-desc">${v.description}</div>` : ''}
             <div class="card-meta">
               ${v.duration ? `<span>⏱ ${v.duration}</span>` : ''}
-              <span>🆓 Free Access</span>
+              <span>${badgeContent}</span>
             </div>
           </div>
         </div>`;
@@ -1116,12 +1201,18 @@
 
     async function addVideo(){
       const url   = document.getElementById('aUrl').value.trim();
-      const title = document.getElementById('aTitle').value.trim();
+      let title   = document.getElementById('aTitle').value.trim();
       const cat   = document.getElementById('aCategory').value;
       const dur   = document.getElementById('aDuration').value.trim();
       const desc  = document.getElementById('aDesc').value.trim();
+      const isPrem = document.getElementById('aIsPremium').checked;
+      
       if(!url||!title){ showAlert('adminAlert','YouTube URL and title are required.','error'); return; }
       if(!getYTId(url)){ showAlert('adminAlert','Invalid YouTube URL format.','error'); return; }
+      
+      if (isPrem) {
+        title = title + ' || premium';
+      }
       
       const btn=document.getElementById('addBtn');
       btn.disabled=true; btn.innerHTML='<span class="spinner"></span>Saving...';
@@ -1131,6 +1222,7 @@
         showAlert('adminAlert','✅ Video added successfully!','success');
         document.getElementById('aUrl').value=''; document.getElementById('aTitle').value='';
         document.getElementById('aDuration').value=''; document.getElementById('aDesc').value='';
+        document.getElementById('aIsPremium').checked = false;
         loadVideos(); loadExisting();
       }
       btn.disabled=false; btn.textContent='Add Video →';
@@ -1140,12 +1232,17 @@
       const { data } = await sb.from('videos').select('id,title,category').order('created_at',{ascending:false});
       const list=document.getElementById('existingList');
       if(!data||!data.length){ list.innerHTML='<p style="font-size:0.75rem;opacity:0.5;">No videos yet.</p>'; return; }
-      list.innerHTML=data.map(v=>`
+      list.innerHTML=data.map(v=> {
+        const isPremium = v.title.includes(' || premium');
+        const displayTitle = isPremium ? v.title.replace(/\s*\|\|\s*premium$/, '') : v.title;
+        const premiumBadge = isPremium ? ' <span style="color:var(--gold);font-size:0.6rem;margin-left:5px;">🔒 Premium</span>' : '';
+        return `
         <div class="exist-item">
-          <span class="exist-item-name">${v.title}</span>
+          <span class="exist-item-name">${displayTitle}${premiumBadge}</span>
           <span class="exist-item-badge">${v.category}</span>
           <button class="exist-item-del" onclick="deleteVideo('${v.id}')">🗑</button>
-        </div>`).join('');
+        </div>`;
+      }).join('');
     }
 
     async function deleteVideo(id){
