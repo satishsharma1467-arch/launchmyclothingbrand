@@ -999,7 +999,113 @@
     /* ════════════════════════════════════════════════════ */
 
 
-    /* ═══ MOBILE BOTTOM NAV BAR ══════════════════════════ */
+            /* ═══ MOBILE BOTTOM NAV BAR ══════════════════════════ */
+    .mobile-bottom-nav {
+      display: none;
+    }
+    
+    @media (max-width: 768px) {
+      /* Add padding to body so content not hidden behind bottom nav */
+      body { padding-bottom: 70px !important; }
+      
+      .mobile-bottom-nav {
+        display: flex !important;
+        position: fixed !important;
+        bottom: 0 !important; left: 0 !important; right: 0 !important;
+        height: 62px !important;
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200,169,81,0.25) !important;
+        z-index: 500 !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        padding: 0 !important;
+      }
+      
+      .mobile-bottom-nav a {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 3px !important;
+        text-decoration: none !important;
+        color: #F5F0E8 !important;
+        opacity: 0.5 !important;
+        font-family: 'DM Mono', monospace !important;
+        font-size: 0.52rem !important;
+        letter-spacing: 0.08em !important;
+        text-transform: uppercase !important;
+        padding: 8px 4px !important;
+        flex: 1 !important;
+        text-align: center !important;
+        transition: opacity 0.2s, color 0.2s !important;
+      }
+      
+      .mobile-bottom-nav a:hover,
+      .mobile-bottom-nav a.active {
+        opacity: 1 !important;
+        color: #C8A951 !important;
+      }
+      
+      .mobile-bottom-nav .nav-icon {
+        font-size: 1.2rem !important;
+        line-height: 1 !important;
+      }
+      
+      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
+      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
+    }
+    .mobile-bottom-nav {
+      display: none;
+    }
+    
+    @media (max-width: 768px) {
+      /* Add padding to body so content not hidden behind bottom nav */
+      body { padding-bottom: 70px !important; }
+      
+      .mobile-bottom-nav {
+        display: flex !important;
+        position: fixed !important;
+        bottom: 0 !important; left: 0 !important; right: 0 !important;
+        height: 62px !important;
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200,169,81,0.25) !important;
+        z-index: 500 !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        padding: 0 !important;
+      }
+      
+      .mobile-bottom-nav a {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 3px !important;
+        text-decoration: none !important;
+        color: #F5F0E8 !important;
+        opacity: 0.5 !important;
+        font-family: 'DM Mono', monospace !important;
+        font-size: 0.52rem !important;
+        letter-spacing: 0.08em !important;
+        text-transform: uppercase !important;
+        padding: 8px 4px !important;
+        flex: 1 !important;
+        text-align: center !important;
+        transition: opacity 0.2s, color 0.2s !important;
+      }
+      
+      .mobile-bottom-nav a:hover,
+      .mobile-bottom-nav a.active {
+        opacity: 1 !important;
+        color: #C8A951 !important;
+      }
+      
+      .mobile-bottom-nav .nav-icon {
+        font-size: 1.2rem !important;
+        line-height: 1 !important;
+      }
+      
+      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
+      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
+    }
     .mobile-bottom-nav {
       display: none;
     }
@@ -1450,7 +1556,7 @@ function changeAdminPassword(){const c=prompt("Enter CURRENT admin password:");i
 document.addEventListener("DOMContentLoaded",_initWA);
 </script>
 
-  <!-- MOBILE BOTTOM NAVIGATION -->
+      <!-- MOBILE BOTTOM NAVIGATION -->
   <nav class="mobile-bottom-nav">
     <a href="/index.html" id="bn-home">
       <span class="nav-icon">🏠</span>
