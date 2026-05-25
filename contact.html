@@ -1298,7 +1298,7 @@ async function handleContactForm() {
     { id: 'c-fname', errId: 'c-fname-err', check: v => v.trim().length > 0 },
     { id: 'c-email', errId: 'c-email-err', check: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) },
     { id: 'c-subject', errId: 'c-subject-err', check: v => v !== '' },
-    { id: 'c-message', errId: 'c-message-err', check: v => v.trim().length > 10 }
+    { id: 'c-message', errId: 'c-message-err', check: v => v.trim().length > 0 }
   ];
 
   document.getElementById('form-error').style.display = 'none';
@@ -1314,7 +1314,13 @@ async function handleContactForm() {
     }
   });
 
-  if (!valid) return;
+  if (!valid) {
+    const errBanner = document.getElementById('form-error');
+    errBanner.textContent = '⚠️ Please correct the marked errors below before submitting.';
+    errBanner.style.display = 'block';
+    errBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
 
   const btn = document.getElementById('contact-btn');
   btn.disabled = true; btn.textContent = 'Sending...';
