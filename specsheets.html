@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -175,15 +175,18 @@
     .mobile-nav a.active, .mobile-nav a:hover { opacity: 1; color: var(--gold); }
     .mobile-nav .nav-icon { font-size: 1.2rem; }
 
-    @media (max-width: 768px) {
-      .mobile-nav { display: flex; }
-      body { padding-bottom: 75px; }
-      .admin-fab { bottom: 75px; }
+    @media (max-width: 1100px) {
       nav { padding: 1rem 1.2rem; }
       .nav-links { display: none; position: fixed; inset: 0; background: #0E0B06 !important; flex-direction: column; justify-content: center; align-items: center; gap: 1.5rem; z-index: 999; }
       .nav-links.open { display: flex; }
       .nav-hamburger { display: flex; }
       .nav-close { display: block; }
+    }
+
+    @media (max-width: 768px) {
+      .mobile-nav { display: flex; }
+      body { padding-bottom: 75px; }
+      .admin-fab { bottom: 75px; }
       .page-hero { padding: 6rem 1.2rem 2.5rem; }
       .spec-section { padding: 3rem 1.2rem; }
       .spec-grid { grid-template-columns: 1fr; }
@@ -233,7 +236,7 @@
       <span>Pattern Making &amp; Manufacturing</span>
     </a>
     <ul class="nav-links" id="main-nav">
-      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">âœ•</button>
+      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">&times;</button>
       <li><a href="/services.html">Services</a></li>
       <li><a href="/library.html">Patterns</a></li>
       <li><a href="/specsheets.html" class="active">Spec Sheets</a></li>
