@@ -2,18 +2,16 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Choose your plan. Basic ₹499/mo, Brand Builder ₹999/mo, Pro Elite ₹1599/mo.">
 <title>Pricing | Launch My Clothing Brand</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <style>
-    html { font-size: 16px; scroll-behavior: smooth; }
-
   :root{--bg:#0d1117;--bg2:#161b22;--bg3:#21262d;--border:#30363d;--gold:#d4a843;--gold2:#f0c96a;--text:#e6edf3;--muted:#8b949e;--green:#3fb950;--red:#f85149;--radius:8px;}
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-  body { font-size: 16px; background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif; }
+  body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;}
   a{color:var(--gold);text-decoration:none;}
   a:hover{text-decoration:underline;}
 
@@ -134,9 +132,9 @@
   .spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(0,0,0,.3);border-top-color:#000;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:6px;}
   @keyframes spin{to{transform:rotate(360deg);}}
 
-  
-  
-  @media(min-width:769px){}
+  .mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);padding:.5rem;display:flex;justify-content:space-around;}
+  .mob-nav a{display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--muted);font-size:.6rem;text-decoration:none;}
+  @media(min-width:769px){.mob-nav{display:none!important;}}
 
     /* â•â•â• MOBILE HEADER & DRAWER OVERLAYS SOLID BLACK CONTRAST FIX â•â•â• */
     @media (max-width: 1100px) {
@@ -159,54 +157,15 @@
       .nav-links {
         background: #0E0B06 !important;
       }
-      .mobile-bottom-nav, 
-      .mobile-bottom-nav a, 
+      .mobile-bottom-nav, .mobile-nav {
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200, 169, 81, 0.25) !important;
+      }
+      .mobile-bottom-nav a, .mobile-nav a {
+        background: #0E0B06 !important;
+      }
     }
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-
-    .mobile-bottom-nav {
-      display: none;
-    }
-    @media (max-width: 768px) {
-      .mobile-bottom-nav {
-        display: flex !important;
-        position: fixed !important;
-        bottom: 0 !important; left: 0 !important; right: 0 !important;
-        height: 62px !important;
-        background: #0E0B06 !important;
-        border-top: 1px solid rgba(200,169,81,0.25) !important;
-        z-index: 500 !important;
-        justify-content: space-around !important;
-        align-items: center !important;
-        padding: 0 !important;
-      }
-      .mobile-bottom-nav a {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 3px !important;
-        text-decoration: none !important;
-        color: #F5F0E8 !important;
-        opacity: 0.5 !important;
-        font-family: 'DM Mono', monospace !important;
-        font-size: 0.52rem !important;
-        letter-spacing: 0.08em !important;
-        text-transform: uppercase !important;
-        padding: 8px 4px !important;
-        flex: 1 !important;
-        text-align: center !important;
-        transition: opacity 0.2s, color 0.2s !important;
-      }
-      .mobile-bottom-nav a:hover,
-      .mobile-bottom-nav a.active {
-        opacity: 1 !important;
-        color: #C8A951 !important;
-      }
-      .mobile-bottom-nav .nav-icon {
-        font-size: 1.2rem !important;
-        line-height: 1 !important;
-      }
-    }
 </style>
 </head>
 <body>
@@ -510,56 +469,5 @@ async function activateSubscription(uid, planKey, amount, paymentId, name, phone
   document.getElementById('successOverlay').classList.add('open');
 }
 </script>
-
-  <!-- MOBILE BOTTOM NAVIGATION -->
-  <nav class="mobile-bottom-nav">
-    <a href="/index.html" id="bn-home">
-      <span class="nav-icon">🏠</span>
-      <span>Home</span>
-    </a>
-    <a href="/services.html" id="bn-services">
-      <span class="nav-icon">📐</span>
-      <span>Services</span>
-    </a>
-    <a href="/manufacturers.html" id="bn-mfr">
-      <span class="nav-icon">🏭</span>
-      <span>Factories</span>
-    </a>
-    <a href="/specsheets.html" id="bn-spec">
-      <span class="nav-icon">📋</span>
-      <span>Spec</span>
-    </a>
-    <a href="/insights.html" id="bn-insights">
-      <span class="nav-icon">🎬</span>
-      <span>Insights</span>
-    </a>
-    <a href="/subscribe.html" id="bn-pricing">
-      <span class="nav-icon">⭐</span>
-      <span>Plans</span>
-    </a>
-  </nav>
-
-  <script>
-    // Highlight active bottom nav item
-    (function() {
-      var path = window.location.pathname;
-      var map = {
-        'index': 'bn-home',
-        'services': 'bn-services', 
-        'manufacturers': 'bn-mfr',
-        'specsheets': 'bn-spec',
-        'insights': 'bn-insights',
-        'subscribe': 'bn-pricing',
-        'library': 'bn-services',
-        'contact': 'bn-home',
-      };
-      var page = path.replace(/.*\//, '').replace('.html', '') || 'index';
-      var activeId = map[page];
-      if (activeId) {
-        var el = document.getElementById(activeId);
-        if (el) el.classList.add('active');
-      }
-    })();
-  </script>
 </body>
 </html>
