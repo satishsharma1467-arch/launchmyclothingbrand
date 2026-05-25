@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Connect with verified manufacturers across Delhi NCR and India. Contact details available to premium subscribers.">
   <title>Manufacturers | Launch My Clothing Brand</title>
   
@@ -27,15 +27,13 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
 
-    body {
-      background: #0E0B06;
+    body { font-size: 16px; background: #0E0B06;
       color: var(--cream);
       font-family: 'DM Mono', monospace;
       font-weight: 300;
       overflow-x: hidden;
       min-height: 100vh;
-      padding-bottom: 80px;
-    }
+      padding-bottom: 80px; }
 
     body::before {
       content: '';
@@ -50,17 +48,17 @@
     a { color: var(--gold); text-decoration: none; transition: color 0.2s; }
     a:hover { color: var(--gold-light); }
 
-        /* NAV */
+    /* NAV */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      padding: 1.3rem 4rem;
+      padding: 1.2rem 3rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid var(--border);
-      background: rgba(14,11,6,0.92);
+      background: rgba(14,11,6,0.95);
       backdrop-filter: blur(14px);
     }
 
@@ -84,7 +82,6 @@
       opacity: 0.45;
       margin-top: 0.15rem;
       color: var(--cream);
-      display: block;
     }
 
     .nav-links {
@@ -104,20 +101,64 @@
       transition: opacity 0.2s, color 0.2s;
     }
 
-    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold); }
+    .nav-links a:hover { opacity: 1; color: var(--gold); }
 
     .nav-cta {
       background: var(--gold) !important;
       color: var(--ink) !important;
-      padding: 0.6rem 1.4rem !important;
+      padding: 0.5rem 1rem !important;
       opacity: 1 !important;
       font-weight: 500 !important;
-      transition: background 0.2s !important;
     }
 
     .nav-cta:hover { background: var(--gold-light) !important; color: var(--ink) !important; }
 
-    .nav-close { display: none; }
+    
+
+    .mob-menu a {
+      color: var(--cream);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(200,169,81,0.1);
+      opacity: 0.8;
+    }
+
+    .mob-menu a:last-child { border: none; }
+    .mob-menu a:hover { color: var(--gold); opacity: 1; }
+
+    @media (max-width: 768px) {
+      /* Sliding nav drawer styles */
+      .nav-hamburger { display: flex !important; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; z-index: 100; }
+      .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--gold); }
+      
+      .nav-links {
+        display: none !important;
+        position: fixed !important;
+        top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
+        background: #0E0B06 !important;
+        flex-direction: column !important; justify-content: center !important;
+        align-items: center !important; gap: 1.5rem !important;
+        z-index: 999 !important; padding: 2rem !important;
+      }
+      .nav-links.open { display: flex !important; }
+      .nav-links a { font-size: 1rem !important; letter-spacing: 0.15em !important; display: block; width: 100%; text-align: center; padding: 0.5rem 0; border-bottom: 1px solid rgba(200,169,81,0.1); }
+      .nav-links .nav-cta { background: var(--gold) !important; color: var(--ink) !important; width: auto !important; padding: 0.6rem 2rem !important; border-bottom: none !important; margin-top: 0.5rem; }
+      
+      .nav-close {
+        display: block !important;
+        position: absolute !important;
+        top: 1.5rem !important; right: 1.5rem !important;
+        background: none !important; border: none !important;
+        color: var(--gold) !important; font-size: 1.5rem !important;
+        cursor: pointer !important; z-index: 1000 !important;
+      }
+      .nav-hamburger span { background: var(--gold) !important; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      nav { padding: 1rem 1.2rem; }
+    }
 
     /* HERO */
     .hero {
@@ -584,112 +625,22 @@
 
     @keyframes spin { to { transform: rotate(360deg); } }
 
-            /* ═══ MOBILE BOTTOM NAV BAR ══════════════════════════ */
-    .mobile-bottom-nav {
-      display: none;
-    }
+    /* MOBILE NAVIGATION */
     
-    @media (max-width: 768px) {
-      /* Add padding to body so content not hidden behind bottom nav */
-      body { padding-bottom: 70px !important; }
-      
-      .mobile-bottom-nav {
-        display: flex !important;
-        position: fixed !important;
-        bottom: 0 !important; left: 0 !important; right: 0 !important;
-        height: 62px !important;
-        background: #0E0B06 !important;
-        border-top: 1px solid rgba(200,169,81,0.25) !important;
-        z-index: 500 !important;
-        justify-content: space-around !important;
-        align-items: center !important;
-        padding: 0 !important;
-      }
-      
-      .mobile-bottom-nav a {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 3px !important;
-        text-decoration: none !important;
-        color: #F5F0E8 !important;
-        opacity: 0.5 !important;
-        font-family: 'DM Mono', monospace !important;
-        font-size: 0.52rem !important;
-        letter-spacing: 0.08em !important;
-        text-transform: uppercase !important;
-        padding: 8px 4px !important;
-        flex: 1 !important;
-        text-align: center !important;
-        transition: opacity 0.2s, color 0.2s !important;
-      }
-      
-      .mobile-bottom-nav a:hover,
-      .mobile-bottom-nav a.active {
-        opacity: 1 !important;
-        color: #C8A951 !important;
-      }
-      
-      .mobile-bottom-nav .nav-icon {
-        font-size: 1.2rem !important;
-        line-height: 1 !important;
-      }
-      
-      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
-      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
-    }
-    .mobile-bottom-nav {
-      display: none;
-    }
+
     
+
+    .mobile-nav a:hover, .mobile-nav a.active {
+      opacity: 1;
+      color: var(--gold);
+    }
+
+    
+
     @media (max-width: 768px) {
-      /* Add padding to body so content not hidden behind bottom nav */
-      body { padding-bottom: 70px !important; }
       
-      .mobile-bottom-nav {
-        display: flex !important;
-        position: fixed !important;
-        bottom: 0 !important; left: 0 !important; right: 0 !important;
-        height: 62px !important;
-        background: #0E0B06 !important;
-        border-top: 1px solid rgba(200,169,81,0.25) !important;
-        z-index: 500 !important;
-        justify-content: space-around !important;
-        align-items: center !important;
-        padding: 0 !important;
-      }
-      
-      .mobile-bottom-nav a {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 3px !important;
-        text-decoration: none !important;
-        color: #F5F0E8 !important;
-        opacity: 0.5 !important;
-        font-family: 'DM Mono', monospace !important;
-        font-size: 0.52rem !important;
-        letter-spacing: 0.08em !important;
-        text-transform: uppercase !important;
-        padding: 8px 4px !important;
-        flex: 1 !important;
-        text-align: center !important;
-        transition: opacity 0.2s, color 0.2s !important;
-      }
-      
-      .mobile-bottom-nav a:hover,
-      .mobile-bottom-nav a.active {
-        opacity: 1 !important;
-        color: #C8A951 !important;
-      }
-      
-      .mobile-bottom-nav .nav-icon {
-        font-size: 1.2rem !important;
-        line-height: 1 !important;
-      }
-      
-      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
-      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
+      body { font-size: 16px; padding-bottom: 75px; }
+      .admin-trigger { bottom: 75px; }
     }
 
     /* WHATSAPP FLOAT */
@@ -801,79 +752,54 @@
       .nav-links {
         background: #0E0B06 !important;
       }
-      .mobile-bottom-nav, .mobile-nav {
-        background: #0E0B06 !important;
-        border-top: 1px solid rgba(200, 169, 81, 0.25) !important;
-      }
-      .mobile-bottom-nav a, .mobile-nav a {
-        background: #0E0B06 !important;
-      }
+      .mobile-bottom-nav, 
+      .mobile-bottom-nav a, 
     }
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
-    /* â•â•â• OPTIONS A: LUXURY PREMIUM SENSORY CONTRAST OVERRIDES â•â•â• */
-    /* Brushed Gold Gradient */
-    .btn-primary, .nav-cta, .cta, .btn-submit, .btn-gold {
-      background: linear-gradient(135deg, #E8C96A 0%, #C8A951 50%, #A68230 100%) !important;
-      color: #0E0B06 !important;
-      border: 1px solid rgba(232, 201, 106, 0.2) !important;
-      box-shadow: 0 4px 15px rgba(200, 169, 81, 0.15) !important;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-      text-shadow: none !important;
+    .mobile-bottom-nav {
+      display: none;
     }
-    
-    .btn-primary:hover, .btn-primary:active, .btn-primary:focus,
-    .nav-cta:hover, .nav-cta:active, .nav-cta:focus,
-    .cta:hover, .cta:active, .cta:focus,
-    .btn-submit:hover, .btn-submit:active, .btn-submit:focus,
-    .btn-gold:hover, .btn-gold:active, .btn-gold:focus {
-      transform: translateY(-2px) !important;
-      box-shadow: 0 8px 25px rgba(200, 169, 81, 0.3) !important;
-      filter: brightness(1.08) !important;
-      outline: none !important;
+    @media (max-width: 768px) {
+      .mobile-bottom-nav {
+        display: flex !important;
+        position: fixed !important;
+        bottom: 0 !important; left: 0 !important; right: 0 !important;
+        height: 62px !important;
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200,169,81,0.25) !important;
+        z-index: 500 !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        padding: 0 !important;
+      }
+      .mobile-bottom-nav a {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 3px !important;
+        text-decoration: none !important;
+        color: #F5F0E8 !important;
+        opacity: 0.5 !important;
+        font-family: 'DM Mono', monospace !important;
+        font-size: 0.52rem !important;
+        letter-spacing: 0.08em !important;
+        text-transform: uppercase !important;
+        padding: 8px 4px !important;
+        flex: 1 !important;
+        text-align: center !important;
+        transition: opacity 0.2s, color 0.2s !important;
+      }
+      .mobile-bottom-nav a:hover,
+      .mobile-bottom-nav a.active {
+        opacity: 1 !important;
+        color: #C8A951 !important;
+      }
+      .mobile-bottom-nav .nav-icon {
+        font-size: 1.2rem !important;
+        line-height: 1 !important;
+      }
     }
-    
-    /* Outline Button */
-    .btn-outline {
-      border: 1px solid rgba(200, 169, 81, 0.45) !important;
-      color: #F5F0E8 !important;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    
-    .btn-outline:hover, .btn-outline:active, .btn-outline:focus {
-      border-color: #C8A951 !important;
-      color: #C8A951 !important;
-      background: rgba(200, 169, 81, 0.05) !important;
-      transform: translateY(-2px) !important;
-      box-shadow: 0 6px 20px rgba(200, 169, 81, 0.08) !important;
-      outline: none !important;
-    }
-    
-    /* Card Interactions and Gold Dust Glows */
-    .mfr-card, .spec-card, .pattern-card, .service-card, .plan-card, .video-card {
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    
-    .mfr-card:hover, .mfr-card:active,
-    .spec-card:hover, .spec-card:active,
-    .pattern-card:hover, .pattern-card:active,
-    .service-card:hover, .service-card:active,
-    .plan-card:hover, .plan-card:active,
-    .video-card:hover, .video-card:active {
-      transform: translateY(-4px) !important;
-      border-color: rgba(200, 169, 81, 0.45) !important;
-      box-shadow: 0 12px 30px rgba(200, 169, 81, 0.16) !important;
-    }
-    
-    /* Logo Hover Glow */
-    .nav-logo {
-      transition: text-shadow 0.3s ease !important;
-    }
-    
-    .nav-logo:hover, .nav-logo:active {
-      text-shadow: 0 0 12px rgba(200, 169, 81, 0.4) !important;
-    }
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 </style>
 </head>
 <body>
@@ -886,11 +812,10 @@
       <span>Pattern Making &amp; Manufacturing</span>
     </a>
     <ul class="nav-links" id="main-nav">
-      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">&times;</button>
+      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">âœ•</button>
       <li><a href="/services.html">Services</a></li>
       <li><a href="/library.html">Patterns</a></li>
       <li><a href="/specsheets.html">Spec Sheets</a></li>
-      <li><a href="/phototopattern.html">Photo to Pattern</a></li>
       <li><a href="/insights.html">Insights</a></li>
       <li><a href="/manufacturers.html" class="active">Manufacturers</a></li>
       <li><a href="/subscribe.html" class="nav-cta">Get Started</a></li>
@@ -928,7 +853,35 @@
   </div>
 
   <!-- FOOTER -->
-  <footer>
+  
+  <!-- MOBILE BOTTOM NAVIGATION -->
+  <nav class="mobile-bottom-nav">
+    <a href="/index.html" id="bn-home">
+      <span class="nav-icon">🏠</span>
+      <span>Home</span>
+    </a>
+    <a href="/services.html" id="bn-services">
+      <span class="nav-icon">📐</span>
+      <span>Services</span>
+    </a>
+    <a href="/manufacturers.html" id="bn-mfr">
+      <span class="nav-icon">🏭</span>
+      <span>Factories</span>
+    </a>
+    <a href="/specsheets.html" id="bn-spec">
+      <span class="nav-icon">📋</span>
+      <span>Spec</span>
+    </a>
+    <a href="/insights.html" id="bn-insights">
+      <span class="nav-icon">🎬</span>
+      <span>Insights</span>
+    </a>
+    <a href="/subscribe.html" id="bn-pricing">
+      <span class="nav-icon">⭐</span>
+      <span>Plans</span>
+    </a>
+  </nav>
+<footer>
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="footer-brand-name">Launch My Clothing Brand</div>
@@ -1015,33 +968,146 @@
     </a>
   </div>
 
-      <!-- MOBILE BOTTOM NAVIGATION -->
-  <nav class="mobile-bottom-nav">
-    <a href="/index.html" id="bn-home">
-      <span class="nav-icon">🏠</span>
-      <span>Home</span>
-    </a>
-    <a href="/services.html" id="bn-services">
-      <span class="nav-icon">📐</span>
-      <span>Services</span>
-    </a>
-    <a href="/manufacturers.html" id="bn-mfr">
-      <span class="nav-icon">🏭</span>
-      <span>Factories</span>
-    </a>
-    <a href="/specsheets.html" id="bn-spec">
-      <span class="nav-icon">📋</span>
-      <span>Spec</span>
-    </a>
-    <a href="/insights.html" id="bn-insights">
-      <span class="nav-icon">🎬</span>
-      <span>Insights</span>
-    </a>
-    <a href="/subscribe.html" id="bn-pricing">
-      <span class="nav-icon">⭐</span>
-      <span>Plans</span>
-    </a>
-  </nav>
+  <!-- MOBILE BOTTOM NAVIGATION -->
+  
+
+  <script>
+    const SB_URL  = 'https://tldbjsqhjqapdwmfeuwq.supabase.co';
+    const SB_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ';
+    const sb = supabase.createClient(SB_URL, SB_KEY);
+
+    const session   = JSON.parse(localStorage.getItem('lmcb_user') || 'null');
+    const isPaid    = session && session.plan_status === 'active';
+    const isBuilder = isPaid && ['brand_builder','pro_elite'].includes(session.plan);
+
+    const banner = document.getElementById('accessBanner');
+    banner.style.display = 'block';
+    if (isBuilder) {
+      banner.textContent = `✅ Welcome, ${session.firstName}! You have unlocked full access to all factory contacts.`;
+      banner.className = 'access-banner unlocked';
+    } else {
+      banner.innerHTML = `🔒 Subscribe to Brand Builder or Pro Elite to unlock direct phone and email contact details. <a href="/subscribe.html">Unlock Database →</a>`;
+      banner.className = 'access-banner locked';
+    }
+
+    
+    function openAdminPrompt(){ document.getElementById('promptOverlay').classList.add('open'); }
+    function closeOverlay(id){ document.getElementById(id).classList.remove('open'); }
+    function showAlert(id,msg,type){ const el=document.getElementById(id); el.textContent=msg; el.className='alert-sm show '+type; setTimeout(()=>el.className='alert-sm',4000); }
+
+    // SECURED PASSWORD VERIFICATION
+    async function checkAdminPw(){
+      const enteredPw = document.getElementById('adminPwInput').value;
+      if (!enteredPw) { showAlert('promptAlert', 'Please enter a password.', 'error'); return; }
+      
+      const { data, error } = await sb.from('site_settings').select('id').eq('id', 'main').eq('lmcb_admin_pw', enteredPw).single();
+      
+      if (error || !data) {
+        showAlert('promptAlert', 'Incorrect password. Try again.', 'error');
+        document.getElementById('adminPwInput').value = '';
+        document.getElementById('adminPwInput').focus();
+      } else {
+        closeOverlay('promptOverlay');
+        document.getElementById('adminOverlay').classList.add('open');
+        loadExisting();
+      }
+    }
+
+    async function loadManufacturers(){
+      const { data, error } = await sb.from('manufacturers').select('*').eq('is_active',true).order('sort_order');
+      const list = document.getElementById('mfrList');
+      if(error||!data){ list.innerHTML='<div style="text-align:center;padding:3rem;opacity:0.5;font-size:0.8rem;">Failed to load manufacturer data.</div>'; return; }
+      document.getElementById('totalCount').textContent = data.length + '+';
+      if(!data.length){ list.innerHTML='<div style="text-align:center;padding:3rem;opacity:0.5;font-size:0.8rem;">No factories listed yet in the network.</div>'; return; }
+
+      list.innerHTML = data.map((m,i) => {
+        let contactBlock = '';
+        if(isBuilder){
+          const phonePill = m.phone ? `<a href="tel:${m.phone}" class="contact-pill phone">📞 ${m.phone}</a>` : '';
+          const emailPill = m.email ? `<a href="mailto:${m.email}" class="contact-pill email">✉ ${m.email}</a>` : '';
+          contactBlock = (phonePill||emailPill) ? `<div class="contact-block">${phonePill}${emailPill}</div>` : '<span style="font-size:.72rem;opacity:0.4;">Contact not listed yet</span>';
+        } else {
+          contactBlock = `<a href="/subscribe.html" class="contact-pill locked">🔒 Subscribe to Unlock Contact</a>`;
+        }
+        return `
+        <div class="mfr-card">
+          <div class="mfr-header">
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.4rem;">
+                <span class="mfr-num">${String(i+1).padStart(2,'0')}</span>
+                <div class="mfr-name">${m.name}</div>
+              </div>
+              <div class="mfr-location">📍 ${m.location || '—'}</div>
+            </div>
+          </div>
+          ${m.specialization ? `<div><span class="mfr-spec">Specialization: ${m.specialization}</span></div>` : ''}
+          <p class="mfr-desc">${m.description || ''}</p>
+          <div class="mfr-footer">
+            <div class="mfr-moq">Minimum Order Quantity (MOQ): <span>${m.min_order || 'N/A'}</span></div>
+            ${contactBlock}
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    async function addManufacturer(){
+      const name = document.getElementById('aName').value.trim();
+      const loc  = document.getElementById('aLocation').value.trim();
+      if(!name||!loc){ showAlert('adminAlert','Name and location are required.','error'); return; }
+      
+      const btn = document.getElementById('addBtn');
+      btn.disabled=true; btn.innerHTML='<span class="spinner"></span>Saving...';
+      const { error } = await sb.from('manufacturers').insert({
+        name,
+        location:  loc,
+        min_order: document.getElementById('aMoq').value.trim(),
+        specialization: document.getElementById('aSpec').value.trim(),
+        description: document.getElementById('aDesc').value.trim(),
+        phone: document.getElementById('aPhone').value.trim(),
+        email: document.getElementById('aEmail').value.trim()
+      });
+      
+      if(error){ showAlert('adminAlert','❌ '+error.message,'error'); }
+      else {
+        ['aName','aLocation','aMoq','aSpec','aDesc','aPhone','aEmail'].forEach(id=>document.getElementById(id).value='');
+        loadManufacturers(); loadExisting();
+        closeOverlay('adminOverlay');
+        showMsg('✅ Manufacturer successfully added!');
+      }
+      btn.disabled=false; btn.textContent='Add Manufacturer →';
+    }
+
+    async function loadExisting(){
+      const { data } = await sb.from('manufacturers').select('id,name').order('sort_order');
+      const list=document.getElementById('existingList');
+      if(!data||!data.length){ list.innerHTML='<p style="font-size:0.75rem;opacity:0.5;">No manufacturers listed yet.</p>'; return; }
+      list.innerHTML=data.map(m=>`
+        <div class="exist-item">
+          <span class="exist-item-name">${m.name}</span>
+          <button class="exist-item-del" onclick="deleteMfr('${m.id}')">🗑</button>
+        </div>`).join('');
+    }
+
+    async function deleteMfr(id){
+      if(!confirm('Are you sure you want to remove this manufacturer?')) return;
+      await sb.from('manufacturers').delete().eq('id',id);
+      loadManufacturers(); loadExisting();
+    }
+
+    function showMsg(text) {
+      const e = document.getElementById('_msg');
+      if (e) e.remove();
+      const m = document.createElement('div');
+      m.id = '_msg';
+      m.textContent = text;
+      m.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#1C1609;border:1px solid var(--border);color:var(--gold);padding:0.8rem 1.5rem;font-family:DM Mono,monospace;font-size:0.85rem;z-index:99999;white-space:nowrap;border-radius:3px;';
+      document.body.appendChild(m);
+      setTimeout(() => m.remove(), 3500);
+    }
+
+    loadManufacturers();
+  </script>
+
   <script>
     // Highlight active bottom nav item
     (function() {
@@ -1064,6 +1130,5 @@
       }
     })();
   </script>
-  <script src="/comm_guard.js"></script>
 </body>
 </html>
