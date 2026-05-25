@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -29,15 +29,13 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { font-size: 16px; scroll-behavior: smooth; }
 
-    body {
-      background: #0E0B06;
+    body { font-size: 16px; background: #0E0B06;
       color: var(--ink);
       font-family: 'DM Mono', monospace;
       font-weight: 300;
-      overflow-x: hidden;
-    }
+      overflow-x: hidden; }
 
     body::before {
       content: '';
@@ -49,7 +47,7 @@
       opacity: 0.4;
     }
 
-        /* NAV */
+    /* NAV */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -64,31 +62,29 @@
     }
 
     .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      font-weight: 400;
-      letter-spacing: 0.08em;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.26rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
       text-decoration: none;
-      color: var(--cream);
-      display: flex;
-      flex-direction: column;
-      line-height: 1.2;
+      line-height: 1;
     }
 
     .nav-logo span {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.55rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      opacity: 0.45;
-      margin-top: 0.15rem;
-      color: var(--cream);
       display: block;
+      font-family: 'DM Mono', monospace;
+      font-size: 1.26rem;
+      letter-spacing: 0.18em;
+      color: var(--ink);
+      opacity: 0.4;
+      font-weight: 300;
+      margin-top: 0.1rem;
+      text-transform: uppercase;
     }
 
     .nav-links {
       display: flex;
-      gap: 1.5rem;
+      gap: 2.5rem;
       list-style: none;
       align-items: center;
     }
@@ -96,14 +92,14 @@
     .nav-links a {
       color: var(--cream);
       text-decoration: none;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
+      font-size: 1.26rem;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       opacity: 0.6;
       transition: opacity 0.2s, color 0.2s;
     }
 
-    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold); }
+    .nav-links a:hover { opacity: 1; color: var(--gold); }
 
     .nav-cta {
       background: var(--gold) !important;
@@ -115,8 +111,6 @@
     }
 
     .nav-cta:hover { background: var(--gold-light) !important; color: var(--ink) !important; }
-
-    .nav-close { display: none; }
 
     /* HERO */
     .hero {
@@ -131,7 +125,7 @@
     }
 
     .hero-eyebrow {
-      font-size: 0.65rem;
+      font-size: 1.26rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
       color: var(--gold);
@@ -168,9 +162,9 @@
     .btn-primary {
       background: var(--gold);
       color: var(--ink);
-      padding: 0.8rem 2rem;
+      padding: 0.95rem 2.4rem;
       font-family: 'DM Mono', monospace;
-      font-size: 0.78rem;
+      font-size: 1.26rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       font-weight: 500;
@@ -186,9 +180,9 @@
     .btn-outline {
       border: 1px solid rgba(200,169,81,0.4);
       color: var(--ink);
-      padding: 0.8rem 2rem;
+      padding: 0.95rem 2.4rem;
       font-family: 'DM Mono', monospace;
-      font-size: 0.78rem;
+      font-size: 1.26rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       background: transparent;
@@ -216,7 +210,7 @@
     }
 
     .hero-stat-label {
-      font-size: 0.58rem;
+      font-size: 1.26rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       opacity: 0.5;
@@ -258,8 +252,8 @@
       right: -1.5rem;
       background: var(--gold);
       color: var(--ink);
-      padding: 0.6rem 1.2rem;
-      font-size: 0.7rem;
+      padding: 1rem 1.4rem;
+      font-size: 1.26rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       font-weight: 500;
@@ -288,7 +282,7 @@
     }
 
     .ticker-item {
-      font-size: 0.8rem;
+      font-size: 1.26rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--gold);
@@ -304,7 +298,7 @@
     section { padding: 7rem 4rem; }
 
     .section-label {
-      font-size: 0.6rem;
+      font-size: 1.26rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
       color: var(--gold);
@@ -327,7 +321,7 @@
     h2 em { font-style: italic; color: var(--gold); }
 
     .section-sub {
-      font-size: 0.9rem;
+      font-size: 1.26rem;
       line-height: 1.9;
       opacity: 0.55;
       max-width: 58ch;
@@ -391,7 +385,7 @@
     }
 
     .trust-stat-label {
-      font-size: 0.8rem;
+      font-size: 1.26rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       opacity: 0.45;
@@ -406,7 +400,7 @@
       max-width: 1100px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 1px;
       background: var(--border);
     }
@@ -452,7 +446,7 @@
     }
 
     .service-card p {
-      font-size: 0.8rem;
+      font-size: 1.26rem;
       line-height: 1.85;
       opacity: 0.55;
       margin-bottom: 1.5rem;
@@ -461,7 +455,7 @@
     .service-bullets { display: flex; flex-direction: column; gap: 0.55rem; }
 
     .service-bullet {
-      font-size: 0.68rem;
+      font-size: 1.26rem;
       opacity: 0.7;
       display: flex;
       align-items: center;
@@ -508,13 +502,13 @@
       opacity: 0.55;
     }
 
-    .exclusion-card p { font-size: 0.8rem; opacity: 0.38; line-height: 1.7; }
+    .exclusion-card p { font-size: 1.26rem; opacity: 0.38; line-height: 1.7; }
 
     .exclusion-card::before {
       content: '✕';
       position: absolute;
       top: 1.5rem; right: 1.5rem;
-      font-size: 0.8rem;
+      font-size: 1.26rem;
       color: #D4472A;
       opacity: 0.5;
     }
@@ -547,7 +541,7 @@
     }
 
     .cta-band p {
-      font-size: 0.8rem;
+      font-size: 1.26rem;
       color: var(--ink-soft);
       opacity: 0.75;
       max-width: 48ch;
@@ -560,7 +554,7 @@
       color: var(--gold);
       padding: 1rem 2.8rem;
       font-family: 'DM Mono', monospace;
-      font-size: 0.8rem;
+      font-size: 1.26rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       font-weight: 500;
@@ -604,10 +598,10 @@
       margin-bottom: 1.2rem;
     }
 
-    .footer-address { font-size: 0.8rem; opacity: 0.35; line-height: 1.6; }
+    .footer-address { font-size: 1.26rem; opacity: 0.35; line-height: 1.6; }
 
     .footer-col h4 {
-      font-size: 0.55rem;
+      font-size: 1.26rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
       color: var(--gold);
@@ -631,7 +625,7 @@
       display: flex;
       align-items: flex-start;
       gap: 0.6rem;
-      font-size: 0.8rem;
+      font-size: 1.26rem;
       color: var(--gold);
       opacity: 0.65;
       text-decoration: none;
@@ -643,7 +637,7 @@
 
     .footer-email:hover { opacity: 1; }
 
-    .footer-note { font-size: 0.8rem; opacity: 0.3; line-height: 1.6; margin-top: 0.5rem; }
+    .footer-note { font-size: 1.26rem; opacity: 0.3; line-height: 1.6; margin-top: 0.5rem; }
 
     .footer-bottom {
       border-top: 1px solid var(--border);
@@ -655,7 +649,7 @@
       gap: 1rem;
     }
 
-    .footer-copy { font-size: 0.8rem; opacity: 0.28; letter-spacing: 0.05em; }
+    .footer-copy { font-size: 1.26rem; opacity: 0.28; letter-spacing: 0.05em; }
 
     /* ANIMATIONS */
     @keyframes fadeUp {
@@ -906,7 +900,7 @@
       h3 { color: #F5F0E8 !important; }
       
       /* Fix body background */
-      body { background: #0E0B06 !important; color: #F5F0E8 !important; }
+      body { font-size: 16px; background: #0E0B06 !important; color: #F5F0E8 !important; }
       
       /* Fix page hero background */
       .page-hero { background: #0E0B06 !important; }
@@ -999,45 +993,16 @@
     /* ════════════════════════════════════════════════════ */
 
 
-            /* ═══ MOBILE BOTTOM NAV BAR ══════════════════════════ */
-    .mobile-bottom-nav {
-      display: none;
-    }
+    /* ═══ MOBILE BOTTOM NAV BAR ══════════════════════════ */
+    
     
     @media (max-width: 768px) {
       /* Add padding to body so content not hidden behind bottom nav */
-      body { padding-bottom: 70px !important; }
+      body { font-size: 16px; padding-bottom: 70px !important; }
       
-      .mobile-bottom-nav {
-        display: flex !important;
-        position: fixed !important;
-        bottom: 0 !important; left: 0 !important; right: 0 !important;
-        height: 62px !important;
-        background: #0E0B06 !important;
-        border-top: 1px solid rgba(200,169,81,0.25) !important;
-        z-index: 500 !important;
-        justify-content: space-around !important;
-        align-items: center !important;
-        padding: 0 !important;
-      }
       
-      .mobile-bottom-nav a {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 3px !important;
-        text-decoration: none !important;
-        color: #F5F0E8 !important;
-        opacity: 0.5 !important;
-        font-family: 'DM Mono', monospace !important;
-        font-size: 0.52rem !important;
-        letter-spacing: 0.08em !important;
-        text-transform: uppercase !important;
-        padding: 8px 4px !important;
-        flex: 1 !important;
-        text-align: center !important;
-        transition: opacity 0.2s, color 0.2s !important;
-      }
+      
+      
       
       .mobile-bottom-nav a:hover,
       .mobile-bottom-nav a.active {
@@ -1045,116 +1010,7 @@
         color: #C8A951 !important;
       }
       
-      .mobile-bottom-nav .nav-icon {
-        font-size: 1.2rem !important;
-        line-height: 1 !important;
-      }
       
-      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
-      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
-    }
-    .mobile-bottom-nav {
-      display: none;
-    }
-    
-    @media (max-width: 768px) {
-      /* Add padding to body so content not hidden behind bottom nav */
-      body { padding-bottom: 70px !important; }
-      
-      .mobile-bottom-nav {
-        display: flex !important;
-        position: fixed !important;
-        bottom: 0 !important; left: 0 !important; right: 0 !important;
-        height: 62px !important;
-        background: #0E0B06 !important;
-        border-top: 1px solid rgba(200,169,81,0.25) !important;
-        z-index: 500 !important;
-        justify-content: space-around !important;
-        align-items: center !important;
-        padding: 0 !important;
-      }
-      
-      .mobile-bottom-nav a {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 3px !important;
-        text-decoration: none !important;
-        color: #F5F0E8 !important;
-        opacity: 0.5 !important;
-        font-family: 'DM Mono', monospace !important;
-        font-size: 0.52rem !important;
-        letter-spacing: 0.08em !important;
-        text-transform: uppercase !important;
-        padding: 8px 4px !important;
-        flex: 1 !important;
-        text-align: center !important;
-        transition: opacity 0.2s, color 0.2s !important;
-      }
-      
-      .mobile-bottom-nav a:hover,
-      .mobile-bottom-nav a.active {
-        opacity: 1 !important;
-        color: #C8A951 !important;
-      }
-      
-      .mobile-bottom-nav .nav-icon {
-        font-size: 1.2rem !important;
-        line-height: 1 !important;
-      }
-      
-      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
-      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
-    }
-    .mobile-bottom-nav {
-      display: none;
-    }
-    
-    @media (max-width: 768px) {
-      /* Add padding to body so content not hidden behind bottom nav */
-      body { padding-bottom: 70px !important; }
-      
-      .mobile-bottom-nav {
-        display: flex !important;
-        position: fixed !important;
-        bottom: 0 !important; left: 0 !important; right: 0 !important;
-        height: 62px !important;
-        background: #0E0B06 !important;
-        border-top: 1px solid rgba(200,169,81,0.25) !important;
-        z-index: 500 !important;
-        justify-content: space-around !important;
-        align-items: center !important;
-        padding: 0 !important;
-      }
-      
-      .mobile-bottom-nav a {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 3px !important;
-        text-decoration: none !important;
-        color: #F5F0E8 !important;
-        opacity: 0.5 !important;
-        font-family: 'DM Mono', monospace !important;
-        font-size: 0.52rem !important;
-        letter-spacing: 0.08em !important;
-        text-transform: uppercase !important;
-        padding: 8px 4px !important;
-        flex: 1 !important;
-        text-align: center !important;
-        transition: opacity 0.2s, color 0.2s !important;
-      }
-      
-      .mobile-bottom-nav a:hover,
-      .mobile-bottom-nav a.active {
-        opacity: 1 !important;
-        color: #C8A951 !important;
-      }
-      
-      .mobile-bottom-nav .nav-icon {
-        font-size: 1.2rem !important;
-        line-height: 1 !important;
-      }
       
       /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
       #wa-bubble { bottom: 75px !important; right: 1rem !important; }
@@ -1183,79 +1039,54 @@
       .nav-links {
         background: #0E0B06 !important;
       }
-      .mobile-bottom-nav, .mobile-nav {
-        background: #0E0B06 !important;
-        border-top: 1px solid rgba(200, 169, 81, 0.25) !important;
-      }
-      .mobile-bottom-nav a, .mobile-nav a {
-        background: #0E0B06 !important;
-      }
+      .mobile-bottom-nav, 
+      .mobile-bottom-nav a, 
     }
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
-    /* â•â•â• OPTIONS A: LUXURY PREMIUM SENSORY CONTRAST OVERRIDES â•â•â• */
-    /* Brushed Gold Gradient */
-    .btn-primary, .nav-cta, .cta, .btn-submit, .btn-gold {
-      background: linear-gradient(135deg, #E8C96A 0%, #C8A951 50%, #A68230 100%) !important;
-      color: #0E0B06 !important;
-      border: 1px solid rgba(232, 201, 106, 0.2) !important;
-      box-shadow: 0 4px 15px rgba(200, 169, 81, 0.15) !important;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-      text-shadow: none !important;
+    .mobile-bottom-nav {
+      display: none;
     }
-    
-    .btn-primary:hover, .btn-primary:active, .btn-primary:focus,
-    .nav-cta:hover, .nav-cta:active, .nav-cta:focus,
-    .cta:hover, .cta:active, .cta:focus,
-    .btn-submit:hover, .btn-submit:active, .btn-submit:focus,
-    .btn-gold:hover, .btn-gold:active, .btn-gold:focus {
-      transform: translateY(-2px) !important;
-      box-shadow: 0 8px 25px rgba(200, 169, 81, 0.3) !important;
-      filter: brightness(1.08) !important;
-      outline: none !important;
+    @media (max-width: 768px) {
+      .mobile-bottom-nav {
+        display: flex !important;
+        position: fixed !important;
+        bottom: 0 !important; left: 0 !important; right: 0 !important;
+        height: 62px !important;
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200,169,81,0.25) !important;
+        z-index: 500 !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        padding: 0 !important;
+      }
+      .mobile-bottom-nav a {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 3px !important;
+        text-decoration: none !important;
+        color: #F5F0E8 !important;
+        opacity: 0.5 !important;
+        font-family: 'DM Mono', monospace !important;
+        font-size: 0.52rem !important;
+        letter-spacing: 0.08em !important;
+        text-transform: uppercase !important;
+        padding: 8px 4px !important;
+        flex: 1 !important;
+        text-align: center !important;
+        transition: opacity 0.2s, color 0.2s !important;
+      }
+      .mobile-bottom-nav a:hover,
+      .mobile-bottom-nav a.active {
+        opacity: 1 !important;
+        color: #C8A951 !important;
+      }
+      .mobile-bottom-nav .nav-icon {
+        font-size: 1.2rem !important;
+        line-height: 1 !important;
+      }
     }
-    
-    /* Outline Button */
-    .btn-outline {
-      border: 1px solid rgba(200, 169, 81, 0.45) !important;
-      color: #F5F0E8 !important;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    
-    .btn-outline:hover, .btn-outline:active, .btn-outline:focus {
-      border-color: #C8A951 !important;
-      color: #C8A951 !important;
-      background: rgba(200, 169, 81, 0.05) !important;
-      transform: translateY(-2px) !important;
-      box-shadow: 0 6px 20px rgba(200, 169, 81, 0.08) !important;
-      outline: none !important;
-    }
-    
-    /* Card Interactions and Gold Dust Glows */
-    .mfr-card, .spec-card, .pattern-card, .service-card, .plan-card, .video-card {
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    
-    .mfr-card:hover, .mfr-card:active,
-    .spec-card:hover, .spec-card:active,
-    .pattern-card:hover, .pattern-card:active,
-    .service-card:hover, .service-card:active,
-    .plan-card:hover, .plan-card:active,
-    .video-card:hover, .video-card:active {
-      transform: translateY(-4px) !important;
-      border-color: rgba(200, 169, 81, 0.45) !important;
-      box-shadow: 0 12px 30px rgba(200, 169, 81, 0.16) !important;
-    }
-    
-    /* Logo Hover Glow */
-    .nav-logo {
-      transition: text-shadow 0.3s ease !important;
-    }
-    
-    .nav-logo:hover, .nav-logo:active {
-      text-shadow: 0 0 12px rgba(200, 169, 81, 0.4) !important;
-    }
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 </style>
 </head>
 <body>
@@ -1267,322 +1098,33 @@
       <span>Pattern Making &amp; Manufacturing</span>
     </a>
     <ul class="nav-links" id="main-nav">
-      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">&times;</button>
+      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">âœ•</button>
       <li><a href="/services.html">Services</a></li>
       <li><a href="/library.html">Patterns</a></li>
       <li><a href="/specsheets.html">Spec Sheets</a></li>
-      <li><a href="/phototopattern.html">Photo to Pattern</a></li>
       <li><a href="/insights.html">Insights</a></li>
       <li><a href="/manufacturers.html">Manufacturers</a></li>
       <li><a href="/subscribe.html" class="nav-cta">Get Started</a></li>
     </ul>
     <button class="nav-hamburger" onclick="openNav()" aria-label="Open Menu"><span></span><span></span><span></span></button>
   </nav>
-  <script>
-    function openNav() { document.getElementById('main-nav').classList.add('open'); }
-    function closeNav() { document.getElementById('main-nav').classList.remove('open'); }
-  </script>
+  
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-left">
-      <div class="hero-eyebrow">Delhi NCR · Pan-India Coverage · 12+ Years</div>
-      <h1>Turn Your Vision Into<br/><em>Production Reality</em></h1>
-      <p class="hero-sub">Expert freelance pattern making and CAD services. Stop wasting money on bad samples. Get production-ready files and expert clothing brand startup consultation.</p>
-      <div class="hero-btns">
-        <a href="/subscribe.html" class="btn-primary">Get Started Now</a>
-        <a href="/services.html" class="btn-outline">Explore Services</a>
-      </div>
-      <div class="hero-stats">
-        <div>
-          <div class="hero-stat-num">12+</div>
-          <div class="hero-stat-label">Years Experience</div>
-        </div>
-        <div>
-          <div class="hero-stat-num">NCR</div>
-          <div class="hero-stat-label">Based HQ</div>
-        </div>
-        <div>
-          <div class="hero-stat-num">PAN</div>
-          <div class="hero-stat-label">India Coverage</div>
-        </div>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div class="hero-img-frame">
-        <img src="/hero_theme.png" alt="Pattern making and garment design" />
-      </div>
-      <div class="hero-float-tag">Production-Ready Files</div>
-    </div>
-  </section>
 
-  <!-- TICKER -->
-  <div class="ticker">
-    <div class="ticker-track">
-      <span class="ticker-item">Digital Pattern Making</span>
-      <span class="ticker-item">CAD Services</span>
-      <span class="ticker-item">DXF &amp; PDF Output</span>
-      <span class="ticker-item">Grading Included</span>
-      <span class="ticker-item">Manufacturer Connect</span>
-      <span class="ticker-item">Pattern Library</span>
-      <span class="ticker-item">Spec Sheets</span>
-      <span class="ticker-item">Brand Startup Consultation</span>
-      <span class="ticker-item">Pan-India Coverage</span>
-      <span class="ticker-item">Delhi NCR Based</span>
-      <span class="ticker-item">Digital Pattern Making</span>
-      <span class="ticker-item">CAD Services</span>
-      <span class="ticker-item">DXF &amp; PDF Output</span>
-      <span class="ticker-item">Grading Included</span>
-      <span class="ticker-item">Manufacturer Connect</span>
-      <span class="ticker-item">Pattern Library</span>
-      <span class="ticker-item">Spec Sheets</span>
-      <span class="ticker-item">Brand Startup Consultation</span>
-      <span class="ticker-item">Pan-India Coverage</span>
-      <span class="ticker-item">Delhi NCR Based</span>
-    </div>
-  </div>
-
-  <!-- TRUST / ABOUT -->
-  <div class="trust-band">
-    <div class="trust-inner">
-      <div class="trust-left">
-        <div class="section-label">Trusted by Industry Leaders</div>
-        <h2>12+ Years of <em>Excellence</em><br/>in Pattern Making</h2>
-        <p class="section-sub">For over a decade, we have built lasting relationships with major apparel brands, boutique fashion houses, and large-scale manufacturers. Our commitment to precision, reliability, and quality has made us the preferred pattern making partner for industry leaders.</p>
-        <p class="section-sub" style="margin-top:1rem;">We specialize in converting visual ideas into industry-standard digital patterns. Our expertise in CAD software ensures that your designs translate perfectly from concept to production.</p>
-        <div class="trust-bullets">
-          <div class="trust-bullet">Production-ready DXF &amp; PDF files using advanced CAD software</div>
-          <div class="trust-bullet">Complete grading and fabric consumption calculations</div>
-          <div class="trust-bullet">Specialized support for clothing brand startups</div>
-        </div>
-      </div>
-      <div class="trust-right">
-        <div class="trust-stat-box">
-          <div class="trust-stat-num">12+</div>
-          <div class="trust-stat-label">Years Experience</div>
-        </div>
-        <div class="trust-stat-box">
-          <div class="trust-stat-num">NCR</div>
-          <div class="trust-stat-label">Headquarters</div>
-        </div>
-        <div class="trust-stat-box">
-          <div class="trust-stat-num">PAN</div>
-          <div class="trust-stat-label">India Coverage</div>
-        </div>
-        <div class="trust-stat-box">
-          <div class="trust-stat-num">★★★★★</div>
-          <div class="trust-stat-label">Client Rated</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SERVICES -->
-  <section id="services">
-    <div class="services-header">
-      <div class="section-label">Core Offerings</div>
-      <h2>Everything You Need to<br/><em>Launch Your Brand</em></h2>
-      <p class="section-sub">Three focused services designed to take your clothing idea from sketch to production — without the guesswork.</p>
-    </div>
-    <div class="services-grid">
-
-      <div class="service-card">
-        <div class="service-num">01</div>
-        <div class="service-icon">🎬</div>
-        <h3><a href="/insights.html" style="color:inherit;text-decoration:none;">Industry Insights</a></h3>
-        <p>Exclusive video tutorials on industry trends, brand development strategies, and expert tips to grow your clothing brand successfully.</p>
-        <div class="service-bullets">
-          <div class="service-bullet">Expert Video Tutorials</div>
-          <div class="service-bullet">Industry Trends</div>
-          <div class="service-bullet">Brand Development Tips</div>
-          <div class="service-bullet">Brand Builder &amp; Pro Elite</div>
-        </div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-num">02</div>
-        <div class="service-icon">📚</div>
-        <h3>Pattern Library</h3>
-        <p>Access pre-made designs to speed up your sampling process. Download production-ready patterns instantly with your subscription.</p>
-        <div class="service-bullets">
-          <div class="service-bullet">Ready-to-use Patterns</div>
-          <div class="service-bullet">Multiple Categories</div>
-          <div class="service-bullet">Instant Download</div>
-          <div class="service-bullet">Regular Updates</div>
-        </div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-num">03</div>
-        <div class="service-icon">🏭</div>
-        <h3>Connect to Manufacturers</h3>
-        <p>We connect you with trusted manufacturers across Gurgaon. Whether you need small MOQs for a startup or large-scale production for established brands.</p>
-        <div class="service-bullets">
-          <div class="service-bullet">Verified Manufacturers</div>
-          <div class="service-bullet">Quality Assurance</div>
-          <div class="service-bullet">Flexible MOQs</div>
-          <div class="service-bullet">Direct Contact Access</div>
-        </div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-num">04</div>
-        <div class="service-icon">📋</div>
-        <h3><a href="/specsheets.html" style="color:inherit;text-decoration:none;">Spec Sheets</a></h3>
-        <p>Access professionally crafted specification sheets for Kids, Womens and Mens garment categories. Industry-proven dummy measurements used by top brands.</p>
-        <div class="service-bullets">
-          <div class="service-bullet">Kids 6M to 8Y Measurements</div>
-          <div class="service-bullet">Womens XS to XXL</div>
-          <div class="service-bullet">Mens Standard Sizes</div>
-          <div class="service-bullet">Production Ready PDF</div>
-        </div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-num">05</div>
-        <div class="service-icon">📸</div>
-        <h3><a href="/phototopattern.html" style="color:inherit;text-decoration:none;">Photo to Pattern</a></h3>
-        <p>Convert any garment design photo into custom-graded patterns and specification sheets. Submit your style photo and get perfect custom measurements delivered directly to your WhatsApp.</p>
-        <div class="service-bullets">
-          <div class="service-bullet">Custom Sizing Calculations</div>
-          <div class="service-bullet">8 Sizing Fit Options</div>
-          <div class="service-bullet">Direct WhatsApp Delivery</div>
-          <div class="service-bullet">Waived for Pro Elite</div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- EXCLUSIONS -->
-  <section id="exclusions">
-    <div class="exclusions-inner">
-      <div class="exclusions-header">
-        <div class="section-label">What We Don't Offer</div>
-        <h2>Outside Our <em>Scope</em></h2>
-        <p class="section-sub">To maintain our expertise and deliver the best quality, we focus exclusively on standard apparel pattern making. The following specialized categories are outside our scope.</p>
-      </div>
-      <div class="exclusions-grid">
-        <div class="exclusion-card">
-          <div class="exclusion-icon">🎭</div>
-          <h4>Heavy Draping</h4>
-          <p>Complex draped garments &amp; couture draping techniques</p>
-        </div>
-        <div class="exclusion-card">
-          <div class="exclusion-icon">👙</div>
-          <h4>Lingerie Patterns</h4>
-          <p>Intimate wear, bras, underwear &amp; specialized innerwear</p>
-        </div>
-        <div class="exclusion-card">
-          <div class="exclusion-icon">🌊</div>
-          <h4>Swimwear</h4>
-          <p>Bikinis, swimsuits &amp; specialized stretch swimwear</p>
-        </div>
-        <div class="exclusion-card">
-          <div class="exclusion-icon">🧥</div>
-          <h4>Leather &amp; Fur</h4>
-          <p>Leather garments, fur coats &amp; exotic material patterns</p>
-        </div>
-      </div>
-      <p class="exclusions-note">For these specialized categories, we recommend consulting dedicated specialists in those fields.</p>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <div class="cta-band">
-    <h2>Start Your Brand Journey</h2>
-    <p>Tell us about your vision and let's create something amazing together.</p>
-    <a href="/subscribe.html" class="btn-dark">Get Started Now →</a>
-  </div>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <h3>Launch My<br/>Clothing Brand</h3>
-        <p>Professional digital pattern making and manufacturer data services for clothing brands in India.</p>
-        <div class="footer-address">Bijwasan, Delhi — 110061</div>
-      </div>
-      <div class="footer-col">
-        <h4>Services</h4>
-        <ul>
-          <li><a href="/services.html">Pattern Making</a></li>
-          <li><a href="/library.html">Pattern Library</a></li>
-          <li><a href="/specsheets.html">Spec Sheets</a></li>
-          <li><a href="/insights.html">Industry Insights</a></li>
-          <li><a href="/services.html">Expert Consultation</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Legal &amp; Support</h4>
-        <ul>
-          <li><a href="/contact.html">Contact Us</a></li>
-          <li><a href="/terms.html">Terms of Service</a></li>
-          <li><a href="/privacy.html">Privacy Policy</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Connect With Us</h4>
-        <a href="mailto:hello.launchmyclothing@gmail.com" class="footer-email">
-          ✉ hello.launchmyclothing@gmail.com
-        </a>
-        <p class="footer-note">Follow us on social media for updates, tips, and industry insights.</p>
-        <p class="footer-note">Phone support available for premium members only.</p>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="footer-copy">© 2026 Launch My Clothing Brand. All Rights Reserved.</div>
-      <div class="footer-copy">launchmyclothingbrand.com · Bijwasan, Delhi 110061</div>
-    </div>
-  </footer>
-
-<!-- WhatsApp Chat Bubble -->
-<div id="wa-bubble" style="display:none;visibility:hidden;pointer-events:none;position:fixed;bottom:2rem;right:2rem;z-index:900;flex-direction:column;align-items:flex-end;gap:0.8rem;">
-  <div id="wa-tooltip" style="display:none;background:#1C1609;border:1px solid rgba(200,169,81,0.3);padding:1rem 1.4rem;font-family:DM Mono,monospace;font-size:1.08rem;color:#F5F0E8;max-width:240px;line-height:1.7;position:relative;">
-    <div style="font-size: 0.8rem;letter-spacing:0.2em;text-transform:uppercase;color:#C8A951;margin-bottom:0.4rem;">WhatsApp Support</div>
-    Chat with us directly for quick support.
-    <button onclick="document.getElementById('wa-tooltip').style.display='none'" style="position:absolute;top:0.5rem;right:0.7rem;background:none;border:none;color:#F5F0E8;opacity:0.4;cursor:pointer;">✕</button>
-  </div>
-  <a id="wa-link" href="#" target="_blank" rel="noopener" style="width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.35);transition:transform 0.2s;text-decoration:none;" onmouseover="this.style.transform='scale(1.1)';document.getElementById('wa-tooltip').style.display='block'" onmouseout="this.style.transform='scale(1)'">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-  </a>
-</div>
 <script>
-const _WA_NUM="918796158321",_WA_MSG="Hi! I need help with my clothing brand.";
-function _initWA(){const b=document.getElementById("wa-bubble"),l=document.getElementById("wa-link");if(!b||!l)return;l.href="https://wa.me/"+_WA_NUM+"?text="+encodeURIComponent(_WA_MSG);const p=localStorage.getItem("lmcb_current_plan");const paid=["brand_builder","pro_elite"];if(p&&paid.indexOf(p)!==-1){b.style.display="flex";b.style.visibility="visible";b.style.pointerEvents="auto";}else{b.style.display="none";b.style.visibility="hidden";b.style.pointerEvents="none";}}
-function getAdminPassword(){return localStorage.getItem("lmcb_admin_pw")||"admin123";}
-function changeAdminPassword(){const c=prompt("Enter CURRENT admin password:");if(!c)return;if(c!==getAdminPassword()){alert("Incorrect password.");return;}const n=prompt("Enter NEW password (min 8 chars):");if(!n||n.length<8){alert("Min 8 characters required.");return;}const c2=prompt("Confirm new password:");if(n!==c2){alert("Passwords do not match.");return;}localStorage.setItem("lmcb_admin_pw",n);alert("Password updated! New password: "+n);}
-
-document.addEventListener("DOMContentLoaded",_initWA);
+// Open admin via URL: add ?admin to any page URL
+// Change password via URL: add ?password to any page URL
+document.addEventListener('DOMContentLoaded', function() {
+  var params = new URLSearchParams(window.location.search);
+  if (params.has('admin') && typeof openAdmin === 'function') {
+    openAdmin();
+  }
+  if (params.has('password') && typeof changeAdminPassword === 'function') {
+    setTimeout(changeAdminPassword, 500);
+  }
+});
 </script>
 
-      <!-- MOBILE BOTTOM NAVIGATION -->
-  <nav class="mobile-bottom-nav">
-    <a href="/index.html" id="bn-home">
-      <span class="nav-icon">🏠</span>
-      <span>Home</span>
-    </a>
-    <a href="/services.html" id="bn-services">
-      <span class="nav-icon">📐</span>
-      <span>Services</span>
-    </a>
-    <a href="/manufacturers.html" id="bn-mfr">
-      <span class="nav-icon">🏭</span>
-      <span>Factories</span>
-    </a>
-    <a href="/specsheets.html" id="bn-spec">
-      <span class="nav-icon">📋</span>
-      <span>Spec</span>
-    </a>
-    <a href="/insights.html" id="bn-insights">
-      <span class="nav-icon">🎬</span>
-      <span>Insights</span>
-    </a>
-    <a href="/subscribe.html" id="bn-pricing">
-      <span class="nav-icon">⭐</span>
-      <span>Plans</span>
-    </a>
-  </nav>
   <script>
     // Highlight active bottom nav item
     (function() {
@@ -1605,21 +1147,5 @@ document.addEventListener("DOMContentLoaded",_initWA);
       }
     })();
   </script>
-
-
-<script>
-// Open admin via URL: add ?admin to any page URL
-// Change password via URL: add ?password to any page URL
-document.addEventListener('DOMContentLoaded', function() {
-  var params = new URLSearchParams(window.location.search);
-  if (params.has('admin') && typeof openAdmin === 'function') {
-    openAdmin();
-  }
-  if (params.has('password') && typeof changeAdminPassword === 'function') {
-    setTimeout(changeAdminPassword, 500);
-  }
-});
-</script>
-  <script src="/comm_guard.js"></script>
 </body>
 </html>
