@@ -18,11 +18,13 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 16px; scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; }
 
-    body { font-size: 16px; background: #0E0B06; color: var(--ink);
+    body {
+      background: #0E0B06; color: var(--ink);
       font-family: 'DM Mono', monospace; font-weight: 300;
-      overflow-x: hidden; }
+      overflow-x: hidden;
+    }
 
     body::before {
       content: ''; position: fixed; inset: 0;
@@ -162,7 +164,7 @@
       font-size: 1.08rem; background: #0E0B06;
     }
 
-    .contact-card-body { font-size: 16px; flex: 1; }
+    .contact-card-body { flex: 1; }
 
     .contact-card-type {
       font-size: 1.26rem; letter-spacing: 0.22em; text-transform: uppercase;
@@ -699,7 +701,7 @@
       h3 { color: #F5F0E8 !important; }
       
       /* Fix body background */
-      body { font-size: 16px; background: #0E0B06 !important; color: #F5F0E8 !important; }
+      body { background: #0E0B06 !important; color: #F5F0E8 !important; }
       
       /* Fix page hero background */
       .page-hero { background: #0E0B06 !important; }
@@ -793,15 +795,44 @@
 
 
     /* ═══ MOBILE BOTTOM NAV BAR ══════════════════════════ */
-    
+    .mobile-bottom-nav {
+      display: none;
+    }
     
     @media (max-width: 768px) {
       /* Add padding to body so content not hidden behind bottom nav */
-      body { font-size: 16px; padding-bottom: 70px !important; }
+      body { padding-bottom: 70px !important; }
       
+      .mobile-bottom-nav {
+        display: flex !important;
+        position: fixed !important;
+        bottom: 0 !important; left: 0 !important; right: 0 !important;
+        height: 62px !important;
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200,169,81,0.25) !important;
+        z-index: 500 !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        padding: 0 !important;
+      }
       
-      
-      
+      .mobile-bottom-nav a {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 3px !important;
+        text-decoration: none !important;
+        color: #F5F0E8 !important;
+        opacity: 0.5 !important;
+        font-family: 'DM Mono', monospace !important;
+        font-size: 0.52rem !important;
+        letter-spacing: 0.08em !important;
+        text-transform: uppercase !important;
+        padding: 8px 4px !important;
+        flex: 1 !important;
+        text-align: center !important;
+        transition: opacity 0.2s, color 0.2s !important;
+      }
       
       .mobile-bottom-nav a:hover,
       .mobile-bottom-nav a.active {
@@ -809,7 +840,10 @@
         color: #C8A951 !important;
       }
       
-      
+      .mobile-bottom-nav .nav-icon {
+        font-size: 1.2rem !important;
+        line-height: 1 !important;
+      }
       
       /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
       #wa-bubble { bottom: 75px !important; right: 1rem !important; }
@@ -838,64 +872,553 @@
       .nav-links {
         background: #0E0B06 !important;
       }
-      .mobile-bottom-nav, 
-      .mobile-bottom-nav a, 
+      .mobile-bottom-nav, .mobile-nav {
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200, 169, 81, 0.25) !important;
+      }
+      .mobile-bottom-nav a, .mobile-nav a {
+        background: #0E0B06 !important;
+      }
     }
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-
-    .mobile-bottom-nav {
-      display: none;
-    }
-    @media (max-width: 768px) {
-      .mobile-bottom-nav {
-        display: flex !important;
-        position: fixed !important;
-        bottom: 0 !important; left: 0 !important; right: 0 !important;
-        height: 62px !important;
-        background: #0E0B06 !important;
-        border-top: 1px solid rgba(200,169,81,0.25) !important;
-        z-index: 500 !important;
-        justify-content: space-around !important;
-        align-items: center !important;
-        padding: 0 !important;
-      }
-      .mobile-bottom-nav a {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 3px !important;
-        text-decoration: none !important;
-        color: #F5F0E8 !important;
-        opacity: 0.5 !important;
-        font-family: 'DM Mono', monospace !important;
-        font-size: 0.52rem !important;
-        letter-spacing: 0.08em !important;
-        text-transform: uppercase !important;
-        padding: 8px 4px !important;
-        flex: 1 !important;
-        text-align: center !important;
-        transition: opacity 0.2s, color 0.2s !important;
-      }
-      .mobile-bottom-nav a:hover,
-      .mobile-bottom-nav a.active {
-        opacity: 1 !important;
-        color: #C8A951 !important;
-      }
-      .mobile-bottom-nav .nav-icon {
-        font-size: 1.2rem !important;
-        line-height: 1 !important;
-      }
-    }
 </style>
 
 <!-- Supabase SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// ── SUPABASE CONFIG ──────────────────────────────────
+const SUPABASE_URL = 'https://tldbjsqhjqapdwmfeuwq.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ';
+const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+// ── USER FUNCTIONS ───────────────────────────────────
+async function sbRegisterUser(user) {
+  const { data, error } = await _sb.from('users').insert([{
+    name: user.name,
+    email: user.email,
+    phone: user.phone || '',
+    brand: user.brand || '',
+    plan: user.plan || 'free',
+    password_hash: user.password,
+    created_at: new Date().toISOString()
+  }]);
+  return { data, error };
+}
 
+async function sbLoginUser(email, password) {
+  const { data, error } = await _sb.from('users')
+    .select('*').eq('email', email).eq('password_hash', password).single();
+  if (data) {
+    await _sb.from('users').update({ last_login: new Date().toISOString() }).eq('email', email);
+  }
+  return { data, error };
+}
 
+async function sbUpdatePlan(email, plan, planName, paymentId, amount) {
+  const { data, error } = await _sb.from('users').update({
+    plan: plan,
+    plan_name: planName,
+    payment_id: paymentId,
+    plan_amount: amount,
+    plan_started: new Date().toISOString()
+  }).eq('email', email);
+  return { data, error };
+}
 
+async function sbSaveMessage(msg) {
+  const { data, error } = await _sb.from('messages').insert([{
+    name: msg.name,
+    email: msg.email,
+    phone: msg.phone || '',
+    subject: msg.subject || '',
+    message: msg.message,
+    received_at: new Date().toISOString()
+  }]);
+  return { data, error };
+}
 
+// ── FILE UPLOAD ──────────────────────────────────────
+async function sbUploadFile(file, folder) {
+  const ext = file.name.split('.').pop();
+  const fname = folder + '/' + Date.now() + '_' + file.name.replace(/\s/g,'_');
+  const { data, error } = await _sb.storage.from('files').upload(fname, file, {
+    cacheControl: '3600', upsert: true
+  });
+  if (error) return null;
+  const { data: urlData } = _sb.storage.from('files').getPublicUrl(fname);
+  return urlData.publicUrl;
+}
+</script>
+</head>
+<body>
 
+  <!-- NAV -->
+  <nav>
+    <a href="/index.html" class="nav-logo">
+      Launch My Clothing Brand
+      <span>Pattern Making &amp; Manufacturing</span>
+    </a>
+    <ul class="nav-links" id="main-nav">
+      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">âœ•</button>
+      <li><a href="/services.html">Services</a></li>
+      <li><a href="/library.html">Patterns</a></li>
+      <li><a href="/specsheets.html">Spec Sheets</a></li>
+      <li><a href="/insights.html">Insights</a></li>
+      <li><a href="/manufacturers.html">Manufacturers</a></li>
+      <li><a href="/subscribe.html" class="nav-cta">Get Started</a></li>
+    </ul>
+    <button class="nav-hamburger" onclick="document.getElementById('main-nav').classList.add('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="page-eyebrow">Get In Touch</div>
+    <h1>We're Here to <em>Help</em></h1>
+    <p>We're here to help with your pattern making and manufacturing needs. Reach out to us through any of the following channels and we'll get back to you within 24 business hours.</p>
+  </div>
+
+  <!-- MAIN GRID -->
+  <div class="contact-main">
+
+    <!-- LEFT — Contact Info -->
+    <div class="contact-info">
+      <div class="info-section-label">Contact Channels</div>
+
+      <!-- Email -->
+      <div class="contact-card">
+        <div class="contact-card-icon">✉</div>
+        <div class="contact-card-body">
+          <div class="contact-card-type">Email Support</div>
+          <div class="contact-card-title">Email Us</div>
+          <div class="contact-card-sub">For general inquiries and support</div>
+          <div class="contact-card-value">
+            <a href="mailto:hello.launchmyclothing@gmail.com">hello.launchmyclothing@gmail.com</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phone -->
+      <div class="contact-card">
+        <div class="contact-card-icon">📞</div>
+        <div class="contact-card-body">
+          <div class="contact-card-type">Phone Support</div>
+          <div class="contact-card-title">Call Us</div>
+          <div class="contact-card-sub">Available for premium members only</div>
+          <div class="contact-card-value">
+            <div class="phone-locked">
+              🔒 &nbsp; Subscribe to unlock phone support
+              <a href="/subscribe.html">→ View Plans</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WhatsApp -->
+      <div class="contact-card">
+        <div class="contact-card-icon">💬</div>
+        <div class="contact-card-body">
+          <div class="contact-card-type">WhatsApp Support</div>
+          <div class="contact-card-title">Message Us</div>
+          <div class="contact-card-sub">Available for Brand Builder &amp; Pro Elite members</div>
+          <div class="contact-card-value">
+            <div class="phone-locked">
+              🔒 &nbsp; Subscribe to unlock WhatsApp support
+              <a href="/subscribe.html">→ View Plans</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Address -->
+      <div class="contact-card">
+        <div class="contact-card-icon">📍</div>
+        <div class="contact-card-body">
+          <div class="contact-card-type">Office Address</div>
+          <div class="contact-card-title">Visit Us</div>
+          <div class="contact-card-sub">In-person visits by appointment only</div>
+          <div class="contact-card-value">
+            Launch My Clothing Brand<br/>
+            Bijwasan, Delhi — 110061<br/>
+            India
+          </div>
+        </div>
+      </div>
+
+      <!-- Hours -->
+      <div class="contact-card">
+        <div class="contact-card-icon">🕐</div>
+        <div class="contact-card-body">
+          <div class="contact-card-type">Business Hours</div>
+          <div class="contact-card-title">When We're Available</div>
+          <div class="hours-grid" style="margin-top:0.8rem;">
+            <div class="hours-row">
+              <span class="hours-day">Monday — Friday</span>
+              <span class="hours-time">10:00 AM – 6:00 PM IST</span>
+            </div>
+            <div class="hours-row">
+              <span class="hours-day">Saturday</span>
+              <span class="hours-time">10:00 AM – 2:00 PM IST</span>
+            </div>
+            <div class="hours-row">
+              <span class="hours-day">Sunday</span>
+              <span class="hours-closed">Closed</span>
+            </div>
+          </div>
+          <div class="response-badge">⚡ Response within 24 business hours</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT — Contact Form -->
+    <div class="contact-form-wrap">
+      <div class="form-section-label">Send a Message</div>
+      <div class="form-title">Drop Us a Line</div>
+      <div class="form-sub">Fill in the form below and we'll get back to you within 24 business hours.</div>
+
+      <div class="alert alert-error" id="form-error"></div>
+      <div class="alert alert-success" id="form-success"></div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name *</label>
+          <input type="text" id="c-fname" placeholder="Priya" />
+          <div class="field-err" id="c-fname-err">Required.</div>
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" id="c-lname" placeholder="Mehta" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Email Address *</label>
+        <input type="email" id="c-email" placeholder="hello@yourbrand.com" />
+        <div class="field-err" id="c-email-err">Enter a valid email.</div>
+      </div>
+
+      <div class="form-group">
+        <label>Phone / WhatsApp</label>
+        <input type="tel" id="c-phone" placeholder="+91 98765 43210" />
+      </div>
+
+      <div class="form-group">
+        <label>Subject *</label>
+        <select id="c-subject">
+          <option value="">Select a topic...</option>
+          <option value="Pattern Making Enquiry">Pattern Making Enquiry</option>
+          <option value="Manufacturer Connection">Manufacturer Connection</option>
+          <option value="Pattern Library">Pattern Library</option>
+          <option value="Spec Sheets">Spec Sheets</option>
+          <option value="Subscription / Billing">Subscription / Billing</option>
+          <option value="Technical Support">Technical Support</option>
+          <option value="Partnership / Collaboration">Partnership / Collaboration</option>
+          <option value="General Enquiry">General Enquiry</option>
+        </select>
+        <div class="field-err" id="c-subject-err">Please select a subject.</div>
+      </div>
+
+      <div class="form-group">
+        <label>Message *</label>
+        <textarea id="c-message" placeholder="Tell us about your project, garment category, quantities, and any specific requirements..."></textarea>
+        <div class="field-err" id="c-message-err">Please enter your message.</div>
+      </div>
+
+      <button class="btn-submit" id="contact-btn" onclick="handleContactForm()">Send Message →</button>
+    </div>
+  </div>
+
+  <!-- MAP -->
+  <section class="map-section">
+    <div class="map-inner">
+      <div class="map-label">Location</div>
+      <div class="map-title">Find Us in Delhi</div>
+      <iframe
+        class="map-embed"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3506.6270099099545!2d77.0507!3d28.5008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1b4a99999999%3A0x1234567890abcdef!2sBijwasan%2C%20New%20Delhi%2C%20Delhi%20110061!5e0!3m2!1sen!2sin!4v1234567890"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Launch My Clothing Brand Location — Bijwasan, Delhi">
+      </iframe>
+      <div class="map-note">📍 Bijwasan, Delhi — 110061 · In-person visits by appointment only</div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-strip">
+    <div class="faq-inner">
+      <div class="faq-label">Common Questions</div>
+      <div class="faq-title">Before You Write</div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">How quickly do you respond to enquiries? <span class="faq-icon">+</span></div>
+        <div class="faq-answer">We respond to all enquiries within 24 business hours Monday–Friday. Messages sent on weekends or after 6 PM IST will be responded to the next business day.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">How do I get a quote for custom pattern making? <span class="faq-icon">+</span></div>
+        <div class="faq-answer">Send us a message using the form above with details about your garment category, design complexity, and quantities needed. We'll send you a quote within 24 hours.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">Can I visit your office to discuss my project? <span class="faq-icon">+</span></div>
+        <div class="faq-answer">Yes, in-person consultations are available at our Bijwasan, Delhi office, but only by prior appointment. Please send us an email to schedule a visit.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">I have a subscription issue — who do I contact? <span class="faq-icon">+</span></div>
+        <div class="faq-answer">Select "Subscription / Billing" in the subject dropdown and describe your issue. We'll resolve billing and subscription queries within 12 business hours.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">Do you work with brands outside Delhi? <span class="faq-icon">+</span></div>
+        <div class="faq-answer">Yes! We serve brands across India. All pattern files are delivered digitally, and our manufacturer connections cover Delhi NCR. Remote consultations are available via email and WhatsApp (premium members).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-band">
+    <h2>Ready to Launch Your Brand?</h2>
+    <p>Explore our plans and get access to patterns, spec sheets, manufacturer connections, and expert consultation.</p>
+    <a href="/subscribe.html" class="btn-dark">View Pricing →</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Launch My<br/>Clothing Brand</h3>
+        <p>Professional digital pattern making and manufacturer data services for clothing brands in India.</p>
+        <div class="footer-address">Bijwasan, Delhi — 110061</div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="/services.html">Pattern Making</a></li>
+          <li><a href="/library.html">Pattern Library</a></li>
+          <li><a href="/specsheets.html">Spec Sheets</a></li>
+          <li><a href="/insights.html">Industry Insights</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal &amp; Support</h4>
+        <ul>
+          <li><a href="/contact.html">Contact Us</a></li>
+          <li><a href="/terms.html">Terms of Service</a></li>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+          <li><a href="/subscribe.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="mailto:hello.launchmyclothing@gmail.com" class="footer-email">✉ hello.launchmyclothing@gmail.com</a>
+        <p class="footer-note">Follow us on social media for updates, tips, and industry insights.</p>
+        <p class="footer-note">Phone support available for Pro Elite members only.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Launch My Clothing Brand. All Rights Reserved.</div>
+      <div class="footer-copy">launchmyclothingbrand.com · Bijwasan, Delhi 110061</div>
+    </div>
+  </footer>
+
+<script>
+// ── CONTACT FORM ──────────────────────────────────────────
+function handleContactForm() {
+  let valid = true;
+  const fields = [
+    { id: 'c-fname', errId: 'c-fname-err', check: v => v.trim().length > 0 },
+    { id: 'c-email', errId: 'c-email-err', check: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) },
+    { id: 'c-subject', errId: 'c-subject-err', check: v => v !== '' },
+    { id: 'c-message', errId: 'c-message-err', check: v => v.trim().length > 10 }
+  ];
+
+  document.getElementById('form-error').style.display = 'none';
+  document.getElementById('form-success').style.display = 'none';
+
+  fields.forEach(f => {
+    const el = document.getElementById(f.id);
+    const errEl = document.getElementById(f.errId);
+    if (!f.check(el.value)) {
+      el.classList.add('err'); errEl.style.display = 'block'; valid = false;
+    } else {
+      el.classList.remove('err'); errEl.style.display = 'none';
+    }
+  });
+
+  if (!valid) return;
+
+  const btn = document.getElementById('contact-btn');
+  btn.disabled = true; btn.textContent = 'Sending...';
+
+  // Save to localStorage so you can view messages
+  const fname = document.getElementById('c-fname').value.trim();
+  const lname = document.getElementById('c-lname').value.trim();
+  const email = document.getElementById('c-email').value.trim();
+  const phone = document.getElementById('c-phone').value.trim();
+  const subject = document.getElementById('c-subject').value;
+  const message = document.getElementById('c-message').value.trim();
+
+  const messages = JSON.parse(localStorage.getItem('lmcb_messages') || '[]');
+  messages.unshift({
+    id: Date.now(),
+    name: `${fname} ${lname}`.trim(),
+    email, phone, subject, message,
+    receivedAt: new Date().toISOString(),
+    read: false
+  });
+  localStorage.setItem('lmcb_messages', JSON.stringify(messages));
+
+  setTimeout(() => {
+    const successEl = document.getElementById('form-success');
+    successEl.textContent = `Thank you, ${fname}! Your message has been received. We'll get back to you within 24 business hours.`;
+    successEl.style.display = 'block';
+    btn.textContent = '✓ Message Sent';
+
+    // Reset form
+    ['c-fname','c-lname','c-email','c-phone','c-message'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('c-subject').value = '';
+    setTimeout(() => { btn.disabled = false; btn.textContent = 'Send Message →'; }, 4000);
+  }, 900);
+}
+
+// ── FAQ ───────────────────────────────────────────────────
+function toggleFaq(el) {
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
+  if (!isOpen) el.classList.add('open');
+}
+
+// ── ADMIN: view contact messages ──────────────────────────
+// Access via: Ctrl+Shift+A → password: admin123
+document.addEventListener('keydown', e => {
+  if (e.ctrlKey && e.shiftKey && e.key === 'A') showMessages();
+});
+
+function showMessages() {
+  const pw = prompt('Admin password:');
+  if (pw !== 'admin123') { alert('Incorrect password.'); return; }
+
+  const messages = JSON.parse(localStorage.getItem('lmcb_messages') || '[]');
+  if (messages.length === 0) { alert('No contact messages yet.'); return; }
+
+  const win = window.open('', '_blank', 'width=900,height=700,scrollbars=yes');
+  win.document.write(`
+    <!DOCTYPE html><html><head>
+    <title>Contact Messages — Admin</title>
+    <style>
+      body { background:#0E0B06; color:#F5F0E8; font-family:'DM Mono',monospace; font-size:13px; padding:2rem; }
+      h1 { font-family:serif; font-weight:300; color:#C8A951; margin-bottom:1.5rem; font-size:1.8rem; }
+      .msg { border:1px solid rgba(200,169,81,0.2); padding:1.5rem; margin-bottom:1rem; }
+      .msg-meta { font-size:11px; opacity:0.45; margin-bottom:0.8rem; }
+      .msg-subject { color:#C8A951; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.5rem; }
+      .msg-body { opacity:0.75; line-height:1.7; }
+      .msg-contact { font-size:11px; opacity:0.5; margin-top:0.6rem; }
+      .export-btn { background:#C8A951; color:#F5F0E8; border:none; padding:0.6rem 1.5rem; cursor:pointer; font-family:monospace; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:1.5rem; }
+    
+    /* â•â•â• MOBILE HEADER & DRAWER OVERLAYS SOLID BLACK CONTRAST FIX â•â•â• */
+    @media (max-width: 1100px) {
+      nav {
+        background: #0E0B06 !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+      }
+      #main-nav {
+        background: #0E0B06 !important;
+      }
+    }
+    @media (max-width: 768px) {
+      nav {
+        background: #0E0B06 !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border-bottom: 1px solid rgba(200, 169, 81, 0.25) !important;
+      }
+      .nav-links {
+        background: #0E0B06 !important;
+      }
+      .mobile-bottom-nav, .mobile-nav {
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200, 169, 81, 0.25) !important;
+      }
+      .mobile-bottom-nav a, .mobile-nav a {
+        background: #0E0B06 !important;
+      }
+    }
+    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+</style></head><body>
+    <h1>Contact Messages (${messages.length})</h1>
+    <button class="export-btn" onclick="exportMsgs()">⬇ Export CSV</button>
+    ${messages.map((m, i) => `
+      <div class="msg">
+        <div class="msg-meta">#${messages.length - i} · ${new Date(m.receivedAt).toLocaleString('en-IN')}</div>
+        <div class="msg-subject">${m.subject}</div>
+        <div style="font-size:14px;font-weight:500;margin-bottom:0.3rem;">${m.name}</div>
+        <div class="msg-body">${m.message.replace(/\n/g, '<br/>')}</div>
+        <div class="msg-contact">📧 ${m.email}${m.phone ? ' · 📞 ' + m.phone : ''}</div>
+      </div>
+    `).join('')}
+    <script>
+    function exportMsgs() {
+      const msgs = ${JSON.stringify(messages)};
+      const header = ['#','Name','Email','Phone','Subject','Message','Received'];
+      const rows = msgs.map((m,i) => [msgs.length-i, m.name, m.email, m.phone||'', m.subject, m.message.replace(/"/g,"'"), new Date(m.receivedAt).toLocaleString('en-IN')]);
+      const csv = [header,...rows].map(r => r.map(c => '"'+c+'"').join(',')).join('\\n');
+      const a = document.createElement('a');
+      a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+      a.download = 'lmcb_messages.csv';
+      a.click();
+    }
+    <\/script>
+    <!-- WhatsApp Chat Bubble -->
+<div id="wa-bubble" style="display:none;visibility:hidden;pointer-events:none;position:fixed;bottom:2rem;right:2rem;z-index:900;flex-direction:column;align-items:flex-end;gap:0.8rem;">
+  <div id="wa-tooltip" style="display:none;background:#1C1609;border:1px solid rgba(200,169,81,0.3);padding:1rem 1.4rem;font-family:DM Mono,monospace;font-size:1.08rem;color:#F5F0E8;max-width:240px;line-height:1.7;position:relative;">
+    <div style="font-size:1.26rem;letter-spacing:0.2em;text-transform:uppercase;color:#C8A951;margin-bottom:0.4rem;">WhatsApp Support</div>
+    Chat with us directly for quick support.
+    <button onclick="document.getElementById('wa-tooltip').style.display='none'" style="position:absolute;top:0.5rem;right:0.7rem;background:none;border:none;color:#F5F0E8;opacity:0.4;cursor:pointer;">✕</button>
+  </div>
+  <a id="wa-link" href="#" target="_blank" rel="noopener" style="width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.35);transition:transform 0.2s;text-decoration:none;" onmouseover="this.style.transform='scale(1.1)';document.getElementById('wa-tooltip').style.display='block'" onmouseout="this.style.transform='scale(1)'">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</div>
+<script>
+const _WA_NUM="918796158321",_WA_MSG="Hi! I need help with my clothing brand.";
+function _initWA(){const b=document.getElementById("wa-bubble"),l=document.getElementById("wa-link");if(!b||!l)return;l.href="https://wa.me/"+_WA_NUM+"?text="+encodeURIComponent(_WA_MSG);const p=localStorage.getItem("lmcb_current_plan");const paid=["brand_builder","pro_elite"];if(p&&paid.indexOf(p)!==-1){b.style.display="flex";b.style.visibility="visible";b.style.pointerEvents="auto";}else{b.style.display="none";b.style.visibility="hidden";b.style.pointerEvents="none";}}
+function getAdminPassword(){return localStorage.getItem("lmcb_admin_pw")||"admin123";}
+function changeAdminPassword(){const c=prompt("Enter CURRENT admin password:");if(!c)return;if(c!==getAdminPassword()){alert("Incorrect password.");return;}const n=prompt("Enter NEW password (min 8 chars):");if(!n||n.length<8){alert("Min 8 characters required.");return;}const c2=prompt("Confirm new password:");if(n!==c2){alert("Passwords do not match.");return;}localStorage.setItem("lmcb_admin_pw",n);alert("Password updated! New password: "+n);}
+
+document.addEventListener("DOMContentLoaded",_initWA);
+<\/script>
+
+  <!-- MOBILE BOTTOM NAVIGATION -->
+  <nav class="mobile-bottom-nav">
+    <a href="/index.html" id="bn-home">
+      <span class="nav-icon">🏠</span>
+      <span>Home</span>
+    </a>
+    <a href="/services.html" id="bn-services">
+      <span class="nav-icon">📐</span>
+      <span>Services</span>
+    </a>
+    <a href="/manufacturers.html" id="bn-mfr">
+      <span class="nav-icon">🏭</span>
+      <span>Factories</span>
+    </a>
+    <a href="/specsheets.html" id="bn-spec">
+      <span class="nav-icon">📋</span>
+      <span>Spec</span>
+    </a>
+    <a href="/insights.html" id="bn-insights">
+      <span class="nav-icon">🎬</span>
+      <span>Insights</span>
+    </a>
+    <a href="/subscribe.html" id="bn-pricing">
+      <span class="nav-icon">⭐</span>
+      <span>Plans</span>
+    </a>
+  </nav>
   <script>
     // Highlight active bottom nav item
     (function() {
@@ -918,5 +1441,76 @@
       }
     })();
   </script>
+
+
+<script>
+// Open admin via URL: add ?admin to any page URL
+// Change password via URL: add ?password to any page URL
+document.addEventListener('DOMContentLoaded', function() {
+  var params = new URLSearchParams(window.location.search);
+  if (params.has('admin') && typeof openAdmin === 'function') {
+    openAdmin();
+  }
+  if (params.has('password') && typeof changeAdminPassword === 'function') {
+    setTimeout(changeAdminPassword, 500);
+  }
+});
+</script>
+</body></html>
+  `);
+}
+</script>
+
+
+  <!-- MOBILE BOTTOM NAVIGATION -->
+  <nav class="mobile-bottom-nav">
+    <a href="/index.html" id="bn-home">
+      <span class="nav-icon">🏠</span>
+      <span>Home</span>
+    </a>
+    <a href="/services.html" id="bn-services">
+      <span class="nav-icon">📐</span>
+      <span>Services</span>
+    </a>
+    <a href="/manufacturers.html" id="bn-mfr">
+      <span class="nav-icon">🏭</span>
+      <span>Factories</span>
+    </a>
+    <a href="/specsheets.html" id="bn-spec">
+      <span class="nav-icon">📋</span>
+      <span>Spec</span>
+    </a>
+    <a href="/insights.html" id="bn-insights">
+      <span class="nav-icon">🎬</span>
+      <span>Insights</span>
+    </a>
+    <a href="/subscribe.html" id="bn-pricing">
+      <span class="nav-icon">⭐</span>
+      <span>Plans</span>
+    </a>
+  </nav>
+  <script>
+    // Highlight active bottom nav item
+    (function() {
+      var path = window.location.pathname;
+      var map = {
+        'index': 'bn-home',
+        'services': 'bn-services', 
+        'manufacturers': 'bn-mfr',
+        'specsheets': 'bn-spec',
+        'insights': 'bn-insights',
+        'subscribe': 'bn-pricing',
+        'library': 'bn-services',
+        'contact': 'bn-home',
+      };
+      var page = path.replace(/.*\//, '').replace('.html', '') || 'index';
+      var activeId = map[page];
+      if (activeId) {
+        var el = document.getElementById(activeId);
+        if (el) el.classList.add('active');
+      }
+    })();
+  </script>
+
 </body>
 </html>
