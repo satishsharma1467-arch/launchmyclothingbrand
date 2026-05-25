@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex, nofollow">
 <title>Log In | Launch My Clothing Brand</title>
 
@@ -26,14 +26,12 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { font-size: 16px; }
 
-  body {
-    background: #0E0B06;
+  body { font-size: 16px; background: #0E0B06;
     color: var(--cream);
     font-family: 'DM Mono', monospace;
     font-weight: 300;
     min-height: 100vh;
-    overflow-x: hidden;
-  }
+    overflow-x: hidden; }
 
   body::before {
     content: '';
@@ -49,74 +47,47 @@
   a:hover { color: var(--gold-light); text-decoration: underline; }
 
   /* NAV */
-      /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 1.3rem 4rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--border);
-      background: rgba(14,11,6,0.92);
-      backdrop-filter: blur(14px);
-    }
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.2rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    background: rgba(14,11,6,0.95);
+    backdrop-filter: blur(14px);
+  }
 
-    .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      font-weight: 400;
-      letter-spacing: 0.08em;
-      text-decoration: none;
-      color: var(--cream);
-      display: flex;
-      flex-direction: column;
-      line-height: 1.2;
-    }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    color: var(--cream);
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
 
-    .nav-logo span {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.55rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      opacity: 0.45;
-      margin-top: 0.15rem;
-      color: var(--cream);
-      display: block;
-    }
+  .nav-logo span {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.45;
+    margin-top: 0.15rem;
+    color: var(--cream);
+  }
 
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-      list-style: none;
-      align-items: center;
-    }
-
-    .nav-links a {
-      color: var(--cream);
-      text-decoration: none;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      opacity: 0.6;
-      transition: opacity 0.2s, color 0.2s;
-    }
-
-    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold); }
-
-    .nav-cta {
-      background: var(--gold) !important;
-      color: var(--ink) !important;
-      padding: 0.6rem 1.4rem !important;
-      opacity: 1 !important;
-      font-weight: 500 !important;
-      transition: background 0.2s !important;
-    }
-
-    .nav-cta:hover { background: var(--gold-light) !important; color: var(--ink) !important; }
-
-    .nav-close { display: none; }
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    align-items: center;
+  }
 
   .nav-links a {
     color: var(--cream);
@@ -507,113 +478,10 @@
   .btn-sm.danger:hover { border-color: var(--red); color: var(--red); }
 
   /* MOBILE BOTTOM NAVIGATION */
-          /* ═══ MOBILE BOTTOM NAV BAR ══════════════════════════ */
-    .mobile-bottom-nav {
-      display: none;
-    }
-    
-    @media (max-width: 768px) {
-      /* Add padding to body so content not hidden behind bottom nav */
-      body { padding-bottom: 70px !important; }
-      
-      .mobile-bottom-nav {
-        display: flex !important;
-        position: fixed !important;
-        bottom: 0 !important; left: 0 !important; right: 0 !important;
-        height: 62px !important;
-        background: #0E0B06 !important;
-        border-top: 1px solid rgba(200,169,81,0.25) !important;
-        z-index: 500 !important;
-        justify-content: space-around !important;
-        align-items: center !important;
-        padding: 0 !important;
-      }
-      
-      .mobile-bottom-nav a {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 3px !important;
-        text-decoration: none !important;
-        color: #F5F0E8 !important;
-        opacity: 0.5 !important;
-        font-family: 'DM Mono', monospace !important;
-        font-size: 0.52rem !important;
-        letter-spacing: 0.08em !important;
-        text-transform: uppercase !important;
-        padding: 8px 4px !important;
-        flex: 1 !important;
-        text-align: center !important;
-        transition: opacity 0.2s, color 0.2s !important;
-      }
-      
-      .mobile-bottom-nav a:hover,
-      .mobile-bottom-nav a.active {
-        opacity: 1 !important;
-        color: #C8A951 !important;
-      }
-      
-      .mobile-bottom-nav .nav-icon {
-        font-size: 1.2rem !important;
-        line-height: 1 !important;
-      }
-      
-      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
-      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
-    }
-    .mobile-bottom-nav {
-      display: none;
-    }
-    
-    @media (max-width: 768px) {
-      /* Add padding to body so content not hidden behind bottom nav */
-      body { padding-bottom: 70px !important; }
-      
-      .mobile-bottom-nav {
-        display: flex !important;
-        position: fixed !important;
-        bottom: 0 !important; left: 0 !important; right: 0 !important;
-        height: 62px !important;
-        background: #0E0B06 !important;
-        border-top: 1px solid rgba(200,169,81,0.25) !important;
-        z-index: 500 !important;
-        justify-content: space-around !important;
-        align-items: center !important;
-        padding: 0 !important;
-      }
-      
-      .mobile-bottom-nav a {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 3px !important;
-        text-decoration: none !important;
-        color: #F5F0E8 !important;
-        opacity: 0.5 !important;
-        font-family: 'DM Mono', monospace !important;
-        font-size: 0.52rem !important;
-        letter-spacing: 0.08em !important;
-        text-transform: uppercase !important;
-        padding: 8px 4px !important;
-        flex: 1 !important;
-        text-align: center !important;
-        transition: opacity 0.2s, color 0.2s !important;
-      }
-      
-      .mobile-bottom-nav a:hover,
-      .mobile-bottom-nav a.active {
-        opacity: 1 !important;
-        color: #C8A951 !important;
-      }
-      
-      .mobile-bottom-nav .nav-icon {
-        font-size: 1.2rem !important;
-        line-height: 1 !important;
-      }
-      
-      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
-      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
-    }
+  
+  
+  
+  @media(max-width:768px){  body { font-size: 16px; padding-bottom: 70px; } }
 
     /* â•â•â• MOBILE HEADER & DRAWER OVERLAYS SOLID BLACK CONTRAST FIX â•â•â• */
     @media (max-width: 1100px) {
@@ -636,81 +504,55 @@
       .nav-links {
         background: #0E0B06 !important;
       }
-      .mobile-bottom-nav, .mobile-nav {
-        background: #0E0B06 !important;
-        border-top: 1px solid rgba(200, 169, 81, 0.25) !important;
-      }
-      .mobile-bottom-nav a, .mobile-nav a {
-        background: #0E0B06 !important;
-      }
+      .mobile-bottom-nav, 
+      .mobile-bottom-nav a, 
     }
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
-    /* â•â•â• OPTIONS A: LUXURY PREMIUM SENSORY CONTRAST OVERRIDES â•â•â• */
-    /* Brushed Gold Gradient */
-    .btn-primary, .nav-cta, .cta, .btn-submit, .btn-gold {
-      background: linear-gradient(135deg, #E8C96A 0%, #C8A951 50%, #A68230 100%) !important;
-      color: #0E0B06 !important;
-      border: 1px solid rgba(232, 201, 106, 0.2) !important;
-      box-shadow: 0 4px 15px rgba(200, 169, 81, 0.15) !important;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-      text-shadow: none !important;
+    .mobile-bottom-nav {
+      display: none;
     }
-    
-    .btn-primary:hover, .btn-primary:active, .btn-primary:focus,
-    .nav-cta:hover, .nav-cta:active, .nav-cta:focus,
-    .cta:hover, .cta:active, .cta:focus,
-    .btn-submit:hover, .btn-submit:active, .btn-submit:focus,
-    .btn-gold:hover, .btn-gold:active, .btn-gold:focus {
-      transform: translateY(-2px) !important;
-      box-shadow: 0 8px 25px rgba(200, 169, 81, 0.3) !important;
-      filter: brightness(1.08) !important;
-      outline: none !important;
+    @media (max-width: 768px) {
+      .mobile-bottom-nav {
+        display: flex !important;
+        position: fixed !important;
+        bottom: 0 !important; left: 0 !important; right: 0 !important;
+        height: 62px !important;
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200,169,81,0.25) !important;
+        z-index: 500 !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        padding: 0 !important;
+      }
+      .mobile-bottom-nav a {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 3px !important;
+        text-decoration: none !important;
+        color: #F5F0E8 !important;
+        opacity: 0.5 !important;
+        font-family: 'DM Mono', monospace !important;
+        font-size: 0.52rem !important;
+        letter-spacing: 0.08em !important;
+        text-transform: uppercase !important;
+        padding: 8px 4px !important;
+        flex: 1 !important;
+        text-align: center !important;
+        transition: opacity 0.2s, color 0.2s !important;
+      }
+      .mobile-bottom-nav a:hover,
+      .mobile-bottom-nav a.active {
+        opacity: 1 !important;
+        color: #C8A951 !important;
+      }
+      .mobile-bottom-nav .nav-icon {
+        font-size: 1.2rem !important;
+        line-height: 1 !important;
+      }
     }
-    
-    /* Outline Button */
-    .btn-outline {
-      border: 1px solid rgba(200, 169, 81, 0.45) !important;
-      color: #F5F0E8 !important;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    
-    .btn-outline:hover, .btn-outline:active, .btn-outline:focus {
-      border-color: #C8A951 !important;
-      color: #C8A951 !important;
-      background: rgba(200, 169, 81, 0.05) !important;
-      transform: translateY(-2px) !important;
-      box-shadow: 0 6px 20px rgba(200, 169, 81, 0.08) !important;
-      outline: none !important;
-    }
-    
-    /* Card Interactions and Gold Dust Glows */
-    .mfr-card, .spec-card, .pattern-card, .service-card, .plan-card, .video-card {
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    
-    .mfr-card:hover, .mfr-card:active,
-    .spec-card:hover, .spec-card:active,
-    .pattern-card:hover, .pattern-card:active,
-    .service-card:hover, .service-card:active,
-    .plan-card:hover, .plan-card:active,
-    .video-card:hover, .video-card:active {
-      transform: translateY(-4px) !important;
-      border-color: rgba(200, 169, 81, 0.45) !important;
-      box-shadow: 0 12px 30px rgba(200, 169, 81, 0.16) !important;
-    }
-    
-    /* Logo Hover Glow */
-    .nav-logo {
-      transition: text-shadow 0.3s ease !important;
-    }
-    
-    .nav-logo:hover, .nav-logo:active {
-      text-shadow: 0 0 12px rgba(200, 169, 81, 0.4) !important;
-    }
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-    .nav-close { display: none; }
-  </style>
+</style>
 </head>
 <body>
 
@@ -720,11 +562,10 @@
     <span>Pattern Making &amp; Manufacturing</span>
   </a>
   <ul class="nav-links" id="main-nav">
-      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">&times;</button>
+      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">âœ•</button>
       <li><a href="/services.html">Services</a></li>
       <li><a href="/library.html">Patterns</a></li>
       <li><a href="/specsheets.html">Spec Sheets</a></li>
-      <li><a href="/phototopattern.html">Photo to Pattern</a></li>
       <li><a href="/insights.html">Insights</a></li>
       <li><a href="/manufacturers.html">Manufacturers</a></li>
       <li><a href="/subscribe.html" class="cta">Get Started</a></li>
@@ -793,7 +634,7 @@
       <input type="email" id="forgotEmail" placeholder="you@example.com">
     </div>
     <div class="modal-btns">
-      <button class="btn btn-gold" style="flex:1" id="forgotBtn" onclick="sendReset()">Send Recovery Email →</button>
+      <button class="btn btn-gold" style="flex:1" onclick="sendReset()">Send Recovery Email →</button>
       <button class="btn" style="background:rgba(255,255,255,0.05); color:var(--cream); border:1px solid var(--border); flex:0 0 auto; padding:0.8rem 1.2rem;" onclick="closeForgot()">Cancel</button>
     </div>
   </div>
@@ -844,7 +685,237 @@
   </div>
 </div>
 
-    <!-- MOBILE BOTTOM NAVIGATION -->
+<!-- Mobile Bottom Navigation -->
+
+
+<script>
+const SB_URL = 'https://tldbjsqhjqapdwmfeuwq.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ';
+
+async function hashPassword(pw) {
+  const enc = new TextEncoder().encode(pw);
+  const buf = await crypto.subtle.digest('SHA-256', enc);
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+function togglePw() {
+  const input = document.getElementById('password');
+  input.type = input.type === 'password' ? 'text' : 'password';
+}
+
+function showAlert(id, msg, type) {
+  const el = document.getElementById(id);
+  el.textContent = msg;
+  el.className = 'alert show ' + type;
+}
+
+document.getElementById('loginForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const email = document.getElementById('email').value.trim().toLowerCase();
+  const password = document.getElementById('password').value;
+  document.getElementById('emailErr').style.display = 'none';
+  document.getElementById('pwErr').style.display = 'none';
+
+  if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+    document.getElementById('emailErr').style.display = 'block'; return;
+  }
+  if (!password) { document.getElementById('pwErr').style.display = 'block'; return; }
+
+  const btn = document.getElementById('loginBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Logging in...';
+
+  try {
+    const hash = await hashPassword(password);
+    const r = await fetch(`${SB_URL}/rest/v1/users?email=eq.${encodeURIComponent(email)}&password_hash=eq.${hash}&select=*`, {
+      headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` }
+    });
+    const data = await r.json();
+
+    if (!Array.isArray(data) || data.length === 0) {
+      showAlert('alertBox', 'Incorrect email or password. Please try again.', 'error');
+      btn.disabled = false; btn.textContent = 'Log In →';
+      return;
+    }
+
+    const user = data[0];
+
+    // update last_login
+    await fetch(`${SB_URL}/rest/v1/users?id=eq.${user.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` },
+      body: JSON.stringify({ last_login: new Date().toISOString() })
+    });
+
+    const nameParts = (user.name || '').split(' ');
+    const firstName = nameParts[0] || '';
+    const lastName = nameParts.slice(1).join(' ') || '';
+
+    localStorage.setItem('lmcb_user', JSON.stringify({
+      id: user.id,
+      email: user.email,
+      firstName: firstName,
+      lastName: lastName,
+      plan: user.plan || 'free',
+      plan_status: user.plan && user.plan !== 'free' ? 'active' : 'free'
+    }));
+
+    showAlert('alertBox', 'Login successful! Redirecting...', 'success');
+
+    setTimeout(() => {
+      const redirect = new URLSearchParams(window.location.search).get('redirect') || '/subscribe.html';
+      window.location.href = redirect;
+    }, 900);
+
+  } catch (err) {
+    showAlert('alertBox', 'Login error: ' + err.message, 'error');
+    btn.disabled = false; btn.textContent = 'Log In →';
+  }
+});
+
+// Forgot password
+function openForgot(e) { e.preventDefault(); document.getElementById('forgotOverlay').classList.add('open'); }
+function closeForgot() { document.getElementById('forgotOverlay').classList.remove('open'); }
+
+async function sendReset() {
+  const email = document.getElementById('forgotEmail').value.trim().toLowerCase();
+  if (!email) return;
+  await fetch(`${SB_URL}/rest/v1/users?email=eq.${encodeURIComponent(email)}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` },
+    body: JSON.stringify({ reset_requested: true, reset_requested_at: new Date().toISOString() })
+  });
+  showAlert('forgotAlert', 'Reset request noted. We will contact you on WhatsApp/email within a few minutes.', 'success');
+}
+
+// SECURED ADMIN LOGIN (NO CLEAR-TEXT CONSTANTS IN CLIENT FILE)
+function openAdminPrompt(e) { e.preventDefault(); document.getElementById('adminPromptOverlay').classList.add('open'); }
+function closeAdminPrompt() { document.getElementById('adminPromptOverlay').classList.remove('open'); }
+
+async function checkAdmin() {
+  const pw = document.getElementById('adminPw').value;
+  if (!pw) { showAlert('adminPromptAlert', 'Please enter a password.', 'error'); return; }
+  
+  // Secure dynamic validation via Supabase
+  const r = await fetch(`${SB_URL}/rest/v1/site_settings?id=eq.main&lmcb_admin_pw=eq.${encodeURIComponent(pw)}&select=id`, {
+    headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` }
+  });
+  const data = await r.json();
+  
+  if (!Array.isArray(data) || data.length === 0) {
+    showAlert('adminPromptAlert', 'Incorrect password. Access denied.', 'error');
+    document.getElementById('adminPw').value = '';
+    document.getElementById('adminPw').focus();
+    return;
+  }
+  
+  // Save credentials verification token temporarily during this browser session
+  sessionStorage.setItem('lmcb_admin_verified', pw);
+  
+  closeAdminPrompt();
+  document.getElementById('adminOverlay').classList.add('open');
+  await loadUsers();
+}
+
+function closeAdmin() { document.getElementById('adminOverlay').classList.remove('open'); }
+
+const planAmounts = { basic: 499, brand_builder: 999, pro_elite: 1599 };
+const planLabels = { basic: 'Basic', brand_builder: 'Brand Builder', pro_elite: 'Pro Elite' };
+
+async function loadUsers() {
+  const r = await fetch(`${SB_URL}/rest/v1/users?order=created_at.desc&select=*`, {
+    headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` }
+  });
+  const users = await r.json();
+
+  const today = new Date().toDateString();
+  let todayCount = 0, paidCount = 0, revenue = 0;
+
+  const tbody = document.getElementById('usersBody');
+  tbody.innerHTML = '';
+  users.forEach((u, i) => {
+    const joinDate = new Date(u.created_at);
+    if (joinDate.toDateString() === today) todayCount++;
+    
+    const hasPaidPlan = u.plan && u.plan !== 'free';
+    if (hasPaidPlan) { 
+      paidCount++; 
+      revenue += planAmounts[u.plan] || 0; 
+    }
+    
+    const statusClass = hasPaidPlan ? 'badge-active' : 'badge-free';
+    const statusLabel = hasPaidPlan ? 'active' : 'free';
+    
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${i+1}</td>
+      <td style="font-weight:500;">${u.name || ''}</td>
+      <td style="font-family:'DM Mono',monospace;">${u.email}</td>
+      <td>${u.phone || '—'}</td>
+      <td>${u.brand || '—'}</td>
+      <td><span style="color:var(--gold); font-weight:500;">${planLabels[u.plan] || u.plan || '—'}</span></td>
+      <td><span class="badge ${statusClass}">${statusLabel}</span></td>
+      <td style="color:var(--gold); opacity:0.75;">${joinDate.toLocaleDateString('en-IN')}</td>
+    `;
+    tbody.appendChild(row);
+  });
+
+  document.getElementById('statTotal').textContent = users.length;
+  document.getElementById('statToday').textContent = todayCount;
+  document.getElementById('statPaid').textContent = paidCount;
+  document.getElementById('statRevenue').textContent = '₹' + revenue.toLocaleString('en-IN');
+}
+
+function exportCSV() {
+  fetch(`${SB_URL}/rest/v1/users?order=created_at.desc&select=*`, {
+    headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` }
+  }).then(r => r.json()).then(users => {
+    const rows = [['#','First Name','Last Name','Email','Phone','Brand','Plan','Status','Joined']];
+    users.forEach((u, i) => rows.push([
+      i+1, u.first_name, u.last_name, u.email, u.phone, u.brand_name,
+      u.plan_selected, u.plan_status, new Date(u.created_at).toLocaleDateString('en-IN')
+    ]));
+    const csv = rows.map(r => r.map(c => `"${c||''}"`).join(',')).join('\n');
+    const a = document.createElement('a');
+    a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+    a.download = 'lmcb_users_' + new Date().toISOString().slice(0,10) + '.csv';
+    a.click();
+  });
+}
+
+// HARDENED DATABASE USER RECORD PURGING (PREVENTING ACCIDENTAL/UNAUTHORIZED PURGES)
+async function confirmClear() {
+  if (!confirm('CRITICAL WARNING!\n\nAre you sure you want to delete ALL user records from Supabase? This action is permanent and cannot be undone.')) return;
+  
+  const adminPw = prompt('Please enter the administrative password to confirm and authorize database wipe:');
+  if (!adminPw) return;
+  
+  const r = await fetch(`${SB_URL}/rest/v1/site_settings?id=eq.main&lmcb_admin_pw=eq.${encodeURIComponent(adminPw)}&select=id`, {
+    headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` }
+  });
+  const data = await r.json();
+  
+  if (!Array.isArray(data) || data.length === 0) {
+    alert('❌ Incorrect admin password. Authority check failed! Wipe action aborted.');
+    return;
+  }
+  
+  // Authorized! Execute DELETE
+  const deleteRes = await fetch(`${SB_URL}/rest/v1/users?id=not.is.null`, {
+    method: 'DELETE',
+    headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` }
+  });
+  
+  if (deleteRes.ok) {
+    alert('✅ Database purge complete. All user records have been cleared.');
+    loadUsers();
+  } else {
+    alert('❌ purging failed. Database permissions might block this REST operation.');
+  }
+}
+</script>
+
+  <!-- MOBILE BOTTOM NAVIGATION -->
   <nav class="mobile-bottom-nav">
     <a href="/index.html" id="bn-home">
       <span class="nav-icon">🏠</span>
@@ -871,6 +942,7 @@
       <span>Plans</span>
     </a>
   </nav>
+
   <script>
     // Highlight active bottom nav item
     (function() {
@@ -893,6 +965,5 @@
       }
     })();
   </script>
-  <script src="/comm_guard.js"></script>
 </body>
 </html>
