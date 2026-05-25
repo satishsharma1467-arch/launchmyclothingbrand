@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -26,15 +26,13 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
 
-    body {
-      background: #0E0B06;
+    body { font-size: 16px; background: #0E0B06;
       color: var(--cream);
       font-family: 'DM Mono', monospace;
       font-weight: 300;
       overflow-x: hidden;
       min-height: 100vh;
-      padding-bottom: 80px;
-    }
+      padding-bottom: 80px; }
 
     body::before {
       content: '';
@@ -49,17 +47,17 @@
     a { color: var(--gold); text-decoration: none; transition: color 0.2s; }
     a:hover { color: var(--gold-light); }
 
-        /* NAV */
+    /* NAV */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      padding: 1.3rem 4rem;
+      padding: 1.2rem 3rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid var(--border);
-      background: rgba(14,11,6,0.92);
+      background: rgba(14,11,6,0.95);
       backdrop-filter: blur(14px);
     }
 
@@ -83,7 +81,6 @@
       opacity: 0.45;
       margin-top: 0.15rem;
       color: var(--cream);
-      display: block;
     }
 
     .nav-links {
@@ -103,20 +100,64 @@
       transition: opacity 0.2s, color 0.2s;
     }
 
-    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold); }
+    .nav-links a:hover { opacity: 1; color: var(--gold); }
 
     .nav-cta {
       background: var(--gold) !important;
       color: var(--ink) !important;
-      padding: 0.6rem 1.4rem !important;
+      padding: 0.5rem 1rem !important;
       opacity: 1 !important;
       font-weight: 500 !important;
-      transition: background 0.2s !important;
     }
 
     .nav-cta:hover { background: var(--gold-light) !important; color: var(--ink) !important; }
 
-    .nav-close { display: none; }
+    
+
+    .mob-menu a {
+      color: var(--cream);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(200,169,81,0.1);
+      opacity: 0.8;
+    }
+
+    .mob-menu a:last-child { border: none; }
+    .mob-menu a:hover { color: var(--gold); opacity: 1; }
+
+    @media (max-width: 768px) {
+      /* Sliding nav drawer styles */
+      .nav-hamburger { display: flex !important; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; z-index: 100; }
+      .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--gold); }
+      
+      .nav-links {
+        display: none !important;
+        position: fixed !important;
+        top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
+        background: #0E0B06 !important;
+        flex-direction: column !important; justify-content: center !important;
+        align-items: center !important; gap: 1.5rem !important;
+        z-index: 999 !important; padding: 2rem !important;
+      }
+      .nav-links.open { display: flex !important; }
+      .nav-links a { font-size: 1rem !important; letter-spacing: 0.15em !important; display: block; width: 100%; text-align: center; padding: 0.5rem 0; border-bottom: 1px solid rgba(200,169,81,0.1); }
+      .nav-links .nav-cta { background: var(--gold) !important; color: var(--ink) !important; width: auto !important; padding: 0.6rem 2rem !important; border-bottom: none !important; margin-top: 0.5rem; }
+      
+      .nav-close {
+        display: block !important;
+        position: absolute !important;
+        top: 1.5rem !important; right: 1.5rem !important;
+        background: none !important; border: none !important;
+        color: var(--gold) !important; font-size: 1.5rem !important;
+        cursor: pointer !important; z-index: 1000 !important;
+      }
+      .nav-hamburger span { background: var(--gold) !important; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      nav { padding: 1rem 1.2rem; }
+    }
 
     /* PAGE HERO */
     .page-hero { padding: 8rem 4rem 4rem; border-bottom: 1px solid var(--border); }
@@ -162,7 +203,7 @@
     .pattern-lock-icon { font-size: 1.5rem; }
     .pattern-lock-text { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
     
-    .pattern-body { padding: 1.5rem; display: flex; flex-direction: column; flex: 1; }
+    .pattern-body { font-size: 16px; padding: 1.5rem; display: flex; flex-direction: column; flex: 1; }
     .pattern-meta { display: flex; gap: 0.6rem; margin-bottom: 0.6rem; }
     .meta-tag { font-size: 0.52rem; letter-spacing: 0.1rem; text-transform: uppercase; opacity: 0.5; }
     .meta-tag.format { color: var(--gold); opacity: 1; font-weight: 500; }
@@ -234,115 +275,16 @@
     .pw-err { display: none; color: #f44336; font-size: 0.72rem; margin-bottom: 0.8rem; }
     .spinner { display: inline-block; width: 12px; height: 12px; border: 2px solid rgba(255,255,255,0.2); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.6s linear infinite; vertical-align: middle; margin-right: 5px; }
 
-            /* ═══ MOBILE BOTTOM NAV BAR ══════════════════════════ */
-    .mobile-bottom-nav {
-      display: none;
-    }
+    /* MOBILE NAVIGATION */
     
-    @media (max-width: 768px) {
-      /* Add padding to body so content not hidden behind bottom nav */
-      body { padding-bottom: 70px !important; }
-      
-      .mobile-bottom-nav {
-        display: flex !important;
-        position: fixed !important;
-        bottom: 0 !important; left: 0 !important; right: 0 !important;
-        height: 62px !important;
-        background: #0E0B06 !important;
-        border-top: 1px solid rgba(200,169,81,0.25) !important;
-        z-index: 500 !important;
-        justify-content: space-around !important;
-        align-items: center !important;
-        padding: 0 !important;
-      }
-      
-      .mobile-bottom-nav a {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 3px !important;
-        text-decoration: none !important;
-        color: #F5F0E8 !important;
-        opacity: 0.5 !important;
-        font-family: 'DM Mono', monospace !important;
-        font-size: 0.52rem !important;
-        letter-spacing: 0.08em !important;
-        text-transform: uppercase !important;
-        padding: 8px 4px !important;
-        flex: 1 !important;
-        text-align: center !important;
-        transition: opacity 0.2s, color 0.2s !important;
-      }
-      
-      .mobile-bottom-nav a:hover,
-      .mobile-bottom-nav a.active {
-        opacity: 1 !important;
-        color: #C8A951 !important;
-      }
-      
-      .mobile-bottom-nav .nav-icon {
-        font-size: 1.2rem !important;
-        line-height: 1 !important;
-      }
-      
-      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
-      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
-    }
-    .mobile-bottom-nav {
-      display: none;
-    }
     
-    @media (max-width: 768px) {
-      /* Add padding to body so content not hidden behind bottom nav */
-      body { padding-bottom: 70px !important; }
-      
-      .mobile-bottom-nav {
-        display: flex !important;
-        position: fixed !important;
-        bottom: 0 !important; left: 0 !important; right: 0 !important;
-        height: 62px !important;
-        background: #0E0B06 !important;
-        border-top: 1px solid rgba(200,169,81,0.25) !important;
-        z-index: 500 !important;
-        justify-content: space-around !important;
-        align-items: center !important;
-        padding: 0 !important;
-      }
-      
-      .mobile-bottom-nav a {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 3px !important;
-        text-decoration: none !important;
-        color: #F5F0E8 !important;
-        opacity: 0.5 !important;
-        font-family: 'DM Mono', monospace !important;
-        font-size: 0.52rem !important;
-        letter-spacing: 0.08em !important;
-        text-transform: uppercase !important;
-        padding: 8px 4px !important;
-        flex: 1 !important;
-        text-align: center !important;
-        transition: opacity 0.2s, color 0.2s !important;
-      }
-      
-      .mobile-bottom-nav a:hover,
-      .mobile-bottom-nav a.active {
-        opacity: 1 !important;
-        color: #C8A951 !important;
-      }
-      
-      .mobile-bottom-nav .nav-icon {
-        font-size: 1.2rem !important;
-        line-height: 1 !important;
-      }
-      
-      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
-      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
-    }
+    
+    
 
-    .admin-fab { bottom: 75px; }
+    @media (max-width: 768px) {
+      
+      body { font-size: 16px; padding-bottom: 75px; }
+      .admin-fab { bottom: 75px; }
       .filter-bar { padding: 1.5rem 1.2rem 0.5rem; }
       .library-section { padding: 1rem 1.2rem 4rem; }
     }
@@ -368,79 +310,54 @@
       .nav-links {
         background: #0E0B06 !important;
       }
-      .mobile-bottom-nav, .mobile-nav {
-        background: #0E0B06 !important;
-        border-top: 1px solid rgba(200, 169, 81, 0.25) !important;
-      }
-      .mobile-bottom-nav a, .mobile-nav a {
-        background: #0E0B06 !important;
-      }
+      .mobile-bottom-nav, 
+      .mobile-bottom-nav a, 
     }
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
-    /* â•â•â• OPTIONS A: LUXURY PREMIUM SENSORY CONTRAST OVERRIDES â•â•â• */
-    /* Brushed Gold Gradient */
-    .btn-primary, .nav-cta, .cta, .btn-submit, .btn-gold {
-      background: linear-gradient(135deg, #E8C96A 0%, #C8A951 50%, #A68230 100%) !important;
-      color: #0E0B06 !important;
-      border: 1px solid rgba(232, 201, 106, 0.2) !important;
-      box-shadow: 0 4px 15px rgba(200, 169, 81, 0.15) !important;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-      text-shadow: none !important;
+    .mobile-bottom-nav {
+      display: none;
     }
-    
-    .btn-primary:hover, .btn-primary:active, .btn-primary:focus,
-    .nav-cta:hover, .nav-cta:active, .nav-cta:focus,
-    .cta:hover, .cta:active, .cta:focus,
-    .btn-submit:hover, .btn-submit:active, .btn-submit:focus,
-    .btn-gold:hover, .btn-gold:active, .btn-gold:focus {
-      transform: translateY(-2px) !important;
-      box-shadow: 0 8px 25px rgba(200, 169, 81, 0.3) !important;
-      filter: brightness(1.08) !important;
-      outline: none !important;
+    @media (max-width: 768px) {
+      .mobile-bottom-nav {
+        display: flex !important;
+        position: fixed !important;
+        bottom: 0 !important; left: 0 !important; right: 0 !important;
+        height: 62px !important;
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200,169,81,0.25) !important;
+        z-index: 500 !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        padding: 0 !important;
+      }
+      .mobile-bottom-nav a {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 3px !important;
+        text-decoration: none !important;
+        color: #F5F0E8 !important;
+        opacity: 0.5 !important;
+        font-family: 'DM Mono', monospace !important;
+        font-size: 0.52rem !important;
+        letter-spacing: 0.08em !important;
+        text-transform: uppercase !important;
+        padding: 8px 4px !important;
+        flex: 1 !important;
+        text-align: center !important;
+        transition: opacity 0.2s, color 0.2s !important;
+      }
+      .mobile-bottom-nav a:hover,
+      .mobile-bottom-nav a.active {
+        opacity: 1 !important;
+        color: #C8A951 !important;
+      }
+      .mobile-bottom-nav .nav-icon {
+        font-size: 1.2rem !important;
+        line-height: 1 !important;
+      }
     }
-    
-    /* Outline Button */
-    .btn-outline {
-      border: 1px solid rgba(200, 169, 81, 0.45) !important;
-      color: #F5F0E8 !important;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    
-    .btn-outline:hover, .btn-outline:active, .btn-outline:focus {
-      border-color: #C8A951 !important;
-      color: #C8A951 !important;
-      background: rgba(200, 169, 81, 0.05) !important;
-      transform: translateY(-2px) !important;
-      box-shadow: 0 6px 20px rgba(200, 169, 81, 0.08) !important;
-      outline: none !important;
-    }
-    
-    /* Card Interactions and Gold Dust Glows */
-    .mfr-card, .spec-card, .pattern-card, .service-card, .plan-card, .video-card {
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    
-    .mfr-card:hover, .mfr-card:active,
-    .spec-card:hover, .spec-card:active,
-    .pattern-card:hover, .pattern-card:active,
-    .service-card:hover, .service-card:active,
-    .plan-card:hover, .plan-card:active,
-    .video-card:hover, .video-card:active {
-      transform: translateY(-4px) !important;
-      border-color: rgba(200, 169, 81, 0.45) !important;
-      box-shadow: 0 12px 30px rgba(200, 169, 81, 0.16) !important;
-    }
-    
-    /* Logo Hover Glow */
-    .nav-logo {
-      transition: text-shadow 0.3s ease !important;
-    }
-    
-    .nav-logo:hover, .nav-logo:active {
-      text-shadow: 0 0 12px rgba(200, 169, 81, 0.4) !important;
-    }
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 </style>
 </head>
 <body>
@@ -453,11 +370,10 @@
       <span>Pattern Making &amp; Manufacturing</span>
     </a>
     <ul class="nav-links" id="main-nav">
-      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">&times;</button>
+      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">âœ•</button>
       <li><a href="/services.html">Services</a></li>
       <li><a href="/library.html" class="active">Patterns</a></li>
       <li><a href="/specsheets.html">Spec Sheets</a></li>
-      <li><a href="/phototopattern.html">Photo to Pattern</a></li>
       <li><a href="/insights.html">Insights</a></li>
       <li><a href="/manufacturers.html">Manufacturers</a></li>
       <li><a href="/subscribe.html" class="nav-cta">Get Started</a></li>
@@ -529,7 +445,35 @@
   </div>
 
   <!-- FOOTER -->
-  <footer>
+  
+  <!-- MOBILE BOTTOM NAVIGATION -->
+  <nav class="mobile-bottom-nav">
+    <a href="/index.html" id="bn-home">
+      <span class="nav-icon">🏠</span>
+      <span>Home</span>
+    </a>
+    <a href="/services.html" id="bn-services">
+      <span class="nav-icon">📐</span>
+      <span>Services</span>
+    </a>
+    <a href="/manufacturers.html" id="bn-mfr">
+      <span class="nav-icon">🏭</span>
+      <span>Factories</span>
+    </a>
+    <a href="/specsheets.html" id="bn-spec">
+      <span class="nav-icon">📋</span>
+      <span>Spec</span>
+    </a>
+    <a href="/insights.html" id="bn-insights">
+      <span class="nav-icon">🎬</span>
+      <span>Insights</span>
+    </a>
+    <a href="/subscribe.html" id="bn-pricing">
+      <span class="nav-icon">⭐</span>
+      <span>Plans</span>
+    </a>
+  </nav>
+<footer>
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="footer-brand-name">Launch My Clothing Brand</div>
@@ -657,55 +601,11 @@
     </symbol>
   </svg>
 
-      <!-- MOBILE BOTTOM NAVIGATION -->
-  <nav class="mobile-bottom-nav">
-    <a href="/index.html" id="bn-home">
-      <span class="nav-icon">🏠</span>
-      <span>Home</span>
-    </a>
-    <a href="/services.html" id="bn-services">
-      <span class="nav-icon">📐</span>
-      <span>Services</span>
-    </a>
-    <a href="/manufacturers.html" id="bn-mfr">
-      <span class="nav-icon">🏭</span>
-      <span>Factories</span>
-    </a>
-    <a href="/specsheets.html" id="bn-spec">
-      <span class="nav-icon">📋</span>
-      <span>Spec</span>
-    </a>
-    <a href="/insights.html" id="bn-insights">
-      <span class="nav-icon">🎬</span>
-      <span>Insights</span>
-    </a>
-    <a href="/subscribe.html" id="bn-pricing">
-      <span class="nav-icon">⭐</span>
-      <span>Plans</span>
-    </a>
-  </nav>
-  <script>
-    // Highlight active bottom nav item
-    (function() {
-      var path = window.location.pathname;
-      var map = {
-        'index': 'bn-home',
-        'services': 'bn-services', 
-        'manufacturers': 'bn-mfr',
-        'specsheets': 'bn-spec',
-        'insights': 'bn-insights',
-        'subscribe': 'bn-pricing',
-        'library': 'bn-services',
-        'contact': 'bn-home',
-      };
-      var page = path.replace(/.*\//, '').replace('.html', '') || 'index';
-      var activeId = map[page];
-      if (activeId) {
-        var el = document.getElementById(activeId);
-        if (el) el.classList.add('active');
-      }
-    })();
-  </script>
+  <!-- MOBILE BOTTOM NAVIGATION -->
+  
+
+  <!-- JSZip CDN for in-browser zipping of multiple file uploads -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <!-- Supabase SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
@@ -717,28 +617,6 @@
     const session = JSON.parse(localStorage.getItem('lmcb_user') || 'null');
     const plan = localStorage.getItem('lmcb_current_plan') || (session ? session.plan : 'free');
     const isPaid = plan === 'brand_builder' || plan === 'pro_elite';
-
-    // Dynamic navbar CTA text toggle (Get Started vs Logout)
-    const ctaLink = document.querySelector('#main-nav .cta, #main-nav .nav-cta');
-    if (ctaLink) {
-      if (session) {
-        ctaLink.textContent = 'Logout';
-        ctaLink.href = '#';
-        ctaLink.style.background = 'linear-gradient(135deg, #f85149 0%, #d4472a 100%) !important'; // Premium red gradient
-        ctaLink.style.color = '#F5F0E8 !important';
-        ctaLink.onclick = (e) => {
-          e.preventDefault();
-          if (confirm('Are you sure you want to log out from your account?')) {
-            localStorage.removeItem('lmcb_user');
-            localStorage.removeItem('lmcb_current_plan');
-            window.location.reload();
-          }
-        };
-      } else {
-        ctaLink.textContent = 'Get Started';
-        ctaLink.href = '/subscribe.html';
-      }
-    }
 
     const DEFAULT_PATTERNS = [
       {
@@ -796,6 +674,7 @@
     let patternsList = [];
     let activeFilter = 'all';
 
+    // ── DATABASE SEED & LOADING ──────────────────────────
     async function loadPatterns() {
       const { data, error } = await sb.from('patterns').select('*').eq('is_active', true).order('created_at', { ascending: true });
       if (error) {
@@ -805,14 +684,11 @@
         return;
       }
 
-      // If database contains actual user patterns, show ONLY those patterns.
-      // If database is empty, fallback to display default mock patterns.
+      // Bulletproof merge: Always display defaults plus any new database patterns
       const dbData = data || [];
-      if (dbData.length > 0) {
-        patternsList = dbData;
-      } else {
-        patternsList = DEFAULT_PATTERNS;
-      }
+      const names = dbData.map(p => p.name);
+      const missing = DEFAULT_PATTERNS.filter(d => !names.includes(d.name));
+      patternsList = [...dbData, ...missing];
 
       renderCards();
     }
@@ -1155,6 +1031,28 @@
       if (params.has('admin')) openAdmin();
     });
   </script>
-  <script src="/comm_guard.js"></script>
+
+  <script>
+    // Highlight active bottom nav item
+    (function() {
+      var path = window.location.pathname;
+      var map = {
+        'index': 'bn-home',
+        'services': 'bn-services', 
+        'manufacturers': 'bn-mfr',
+        'specsheets': 'bn-spec',
+        'insights': 'bn-insights',
+        'subscribe': 'bn-pricing',
+        'library': 'bn-services',
+        'contact': 'bn-home',
+      };
+      var page = path.replace(/.*\//, '').replace('.html', '') || 'index';
+      var activeId = map[page];
+      if (activeId) {
+        var el = document.getElementById(activeId);
+        if (el) el.classList.add('active');
+      }
+    })();
+  </script>
 </body>
 </html>
