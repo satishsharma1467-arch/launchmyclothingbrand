@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Convert any garment design photo into custom-graded patterns and specification sheets. Submit your design to WhatsApp.">
   <title>Photo to Pattern | Launch My Clothing Brand</title>
   
@@ -29,15 +29,13 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
 
-    body {
-      background: #0E0B06;
+    body { font-size: 16px; background: #0E0B06;
       color: var(--cream);
       font-family: 'DM Mono', monospace;
       font-weight: 300;
       overflow-x: hidden;
       min-height: 100vh;
-      padding-bottom: 80px;
-    }
+      padding-bottom: 80px; }
 
     body::before {
       content: '';
@@ -365,52 +363,66 @@
       .footer-bottom { flex-direction: column; text-align: center; }
     }
 
-    .mobile-nav {
-      display: none;
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      height: 62px;
-      background: #0E0B06;
-      border-top: 1px solid var(--border);
-      z-index: 500;
-      justify-content: space-around;
-      align-items: center;
-    }
+    
 
-    .mobile-nav a {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
-      text-decoration: none;
-      color: var(--cream);
-      opacity: 0.5;
-      font-size: 0.52rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 8px 4px;
-      flex: 1;
-      text-align: center;
-      transition: opacity 0.2s;
-    }
+    
 
     .mobile-nav a:hover, .mobile-nav a.active { opacity: 1; color: var(--gold); }
-    .mobile-nav .nav-icon { font-size: 1.2rem; }
+    
 
     @media (max-width: 768px) {
-      .mobile-nav { display: flex; }
-      body { padding-bottom: 75px; }
+      
+      body { font-size: 16px; padding-bottom: 75px; }
     }
   
         /* ═══ MOBILE BOTTOM NAV BAR ══════════════════════════ */
-    .mobile-bottom-nav {
-      display: none;
-    }
+    
     
     @media (max-width: 768px) {
       /* Add padding to body so content not hidden behind bottom nav */
-      body { padding-bottom: 70px !important; }
+      body { font-size: 16px; padding-bottom: 70px !important; }
       
+      
+      
+      
+      
+      .mobile-bottom-nav a:hover,
+      .mobile-bottom-nav a.active {
+        opacity: 1 !important;
+        color: #C8A951 !important;
+      }
+      
+      
+      
+      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
+      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
+    }
+    
+    
+    @media (max-width: 768px) {
+      /* Add padding to body so content not hidden behind bottom nav */
+      body { font-size: 16px; padding-bottom: 70px !important; }
+      
+      
+      
+      
+      
+      .mobile-bottom-nav a:hover,
+      .mobile-bottom-nav a.active {
+        opacity: 1 !important;
+        color: #C8A951 !important;
+      }
+      
+      
+      
+      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
+      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
+    }
+
+    .mobile-bottom-nav {
+      display: none;
+    }
+    @media (max-width: 768px) {
       .mobile-bottom-nav {
         display: flex !important;
         position: fixed !important;
@@ -423,7 +435,6 @@
         align-items: center !important;
         padding: 0 !important;
       }
-      
       .mobile-bottom-nav a {
         display: flex !important;
         flex-direction: column !important;
@@ -441,73 +452,15 @@
         text-align: center !important;
         transition: opacity 0.2s, color 0.2s !important;
       }
-      
       .mobile-bottom-nav a:hover,
       .mobile-bottom-nav a.active {
         opacity: 1 !important;
         color: #C8A951 !important;
       }
-      
       .mobile-bottom-nav .nav-icon {
         font-size: 1.2rem !important;
         line-height: 1 !important;
       }
-      
-      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
-      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
-    }
-    .mobile-bottom-nav {
-      display: none;
-    }
-    
-    @media (max-width: 768px) {
-      /* Add padding to body so content not hidden behind bottom nav */
-      body { padding-bottom: 70px !important; }
-      
-      .mobile-bottom-nav {
-        display: flex !important;
-        position: fixed !important;
-        bottom: 0 !important; left: 0 !important; right: 0 !important;
-        height: 62px !important;
-        background: #0E0B06 !important;
-        border-top: 1px solid rgba(200,169,81,0.25) !important;
-        z-index: 500 !important;
-        justify-content: space-around !important;
-        align-items: center !important;
-        padding: 0 !important;
-      }
-      
-      .mobile-bottom-nav a {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 3px !important;
-        text-decoration: none !important;
-        color: #F5F0E8 !important;
-        opacity: 0.5 !important;
-        font-family: 'DM Mono', monospace !important;
-        font-size: 0.52rem !important;
-        letter-spacing: 0.08em !important;
-        text-transform: uppercase !important;
-        padding: 8px 4px !important;
-        flex: 1 !important;
-        text-align: center !important;
-        transition: opacity 0.2s, color 0.2s !important;
-      }
-      
-      .mobile-bottom-nav a:hover,
-      .mobile-bottom-nav a.active {
-        opacity: 1 !important;
-        color: #C8A951 !important;
-      }
-      
-      .mobile-bottom-nav .nav-icon {
-        font-size: 1.2rem !important;
-        line-height: 1 !important;
-      }
-      
-      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
-      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
     }
 </style>
 </head>
@@ -659,7 +612,35 @@
   </div>
 
   <!-- FOOTER -->
-  <footer>
+  
+  <!-- MOBILE BOTTOM NAVIGATION -->
+  <nav class="mobile-bottom-nav">
+    <a href="/index.html" id="bn-home">
+      <span class="nav-icon">🏠</span>
+      <span>Home</span>
+    </a>
+    <a href="/services.html" id="bn-services">
+      <span class="nav-icon">📐</span>
+      <span>Services</span>
+    </a>
+    <a href="/manufacturers.html" id="bn-mfr">
+      <span class="nav-icon">🏭</span>
+      <span>Factories</span>
+    </a>
+    <a href="/specsheets.html" id="bn-spec">
+      <span class="nav-icon">📋</span>
+      <span>Spec</span>
+    </a>
+    <a href="/insights.html" id="bn-insights">
+      <span class="nav-icon">🎬</span>
+      <span>Insights</span>
+    </a>
+    <a href="/subscribe.html" id="bn-pricing">
+      <span class="nav-icon">⭐</span>
+      <span>Plans</span>
+    </a>
+  </nav>
+<footer>
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="footer-brand-name">Launch My Clothing Brand</div>
@@ -698,32 +679,10 @@
   </footer>
 
       <!-- MOBILE BOTTOM NAVIGATION -->
-  <nav class="mobile-bottom-nav">
-    <a href="/index.html" id="bn-home">
-      <span class="nav-icon">🏠</span>
-      <span>Home</span>
-    </a>
-    <a href="/services.html" id="bn-services">
-      <span class="nav-icon">📐</span>
-      <span>Services</span>
-    </a>
-    <a href="/manufacturers.html" id="bn-mfr">
-      <span class="nav-icon">🏭</span>
-      <span>Factories</span>
-    </a>
-    <a href="/specsheets.html" id="bn-spec">
-      <span class="nav-icon">📋</span>
-      <span>Spec</span>
-    </a>
-    <a href="/insights.html" id="bn-insights">
-      <span class="nav-icon">🎬</span>
-      <span>Insights</span>
-    </a>
-    <a href="/subscribe.html" id="bn-pricing">
-      <span class="nav-icon">⭐</span>
-      <span>Plans</span>
-    </a>
-  </nav>
+  
+  
+  <script src="/comm_guard.js"></script>
+
   <script>
     // Highlight active bottom nav item
     (function() {
@@ -746,6 +705,5 @@
       }
     })();
   </script>
-  <script src="/comm_guard.js"></script>
 </body>
 </html>
