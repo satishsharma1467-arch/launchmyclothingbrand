@@ -772,10 +772,20 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
 
   try {
     const hash = await hashPassword(password);
-    const r = await fetch(`${SB_URL}/rest/v1/users?email=eq.${encodeURIComponent(email)}&password_hash=eq.${hash}&select=*`, {
+    let r = await fetch(`${SB_URL}/rest/v1/users?email=eq.${encodeURIComponent(email)}&password_hash=eq.${hash}&select=*`, {
       headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` }
     });
-    const data = await r.json();
+    let data = await r.json();
+    let migrated = false;
+
+    // Legacy Fallback: If hashed matching fails, try plain-text matching (for older accounts)
+    if (!Array.isArray(data) || data.length === 0) {
+      r = await fetch(`${SB_URL}/rest/v1/users?email=eq.${encodeURIComponent(email)}&password_hash=eq.${encodeURIComponent(password)}&select=*`, {
+        headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` }
+      });
+      data = await r.json();
+      migrated = true;
+    }
 
     if (!Array.isArray(data) || data.length === 0) {
       showAlert('alertBox', 'Incorrect email or password. Please try again.', 'error');
@@ -784,6 +794,19 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     }
 
     const user = data[0];
+
+    // Auto-migrate plain-text legacy password to secure SHA-256 hash
+    if (migrated) {
+      try {
+        await fetch(`${SB_URL}/rest/v1/users?id=eq.${user.id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json', 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` },
+          body: JSON.stringify({ password_hash: hash })
+        });
+      } catch (e) {
+        console.warn("Legacy password migration skipped:", e);
+      }
+    }
 
     // update last_login
     await fetch(`${SB_URL}/rest/v1/users?id=eq.${user.id}`, {
