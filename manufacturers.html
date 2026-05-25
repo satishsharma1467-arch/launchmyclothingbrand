@@ -1,315 +1,1146 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Connect with verified manufacturers across Delhi NCR and India. Contact details available to premium subscribers.">
-<title>Manufacturers | Launch My Clothing Brand</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<style>
-:root{--bg:#0d1117;--bg2:#161b22;--bg3:#21262d;--border:#30363d;--gold:#d4a843;--gold2:#f0c96a;--text:#e6edf3;--muted:#8b949e;--green:#3fb950;--red:#f85149;--radius:8px;}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;min-height:100vh;padding-bottom:80px;}
-a{color:var(--gold);text-decoration:none;}
-nav{background:rgba(13,17,23,.97);border-bottom:1px solid var(--border);padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(8px);}
-.nav-logo{font-size:1rem;font-weight:600;color:var(--text);display:flex;flex-direction:column;line-height:1.2;text-decoration:none;}
-.nav-logo span{font-size:.7rem;font-weight:400;color:var(--muted);}
-.nav-links{display:flex;gap:1.5rem;list-style:none;align-items:center;}
-.nav-links a{color:var(--muted);font-size:.85rem;transition:color .2s;text-decoration:none;}
-.nav-links a:hover{color:var(--text);}
-.nav-cta{background:var(--gold);color:#000;padding:.4rem 1rem;border-radius:var(--radius);font-weight:500;font-size:.8rem;}
-.nav-cta:hover{background:var(--gold2)!important;color:#000!important;}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
-.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;}
-.mob-menu{display:none;position:fixed;top:57px;left:0;right:0;background:var(--bg2);border-bottom:1px solid var(--border);z-index:99;padding:1rem 1.5rem;flex-direction:column;gap:.75rem;}
-.mob-menu.open{display:flex;}
-.mob-menu a{color:var(--muted);font-size:.9rem;padding:.5rem 0;border-bottom:1px solid var(--border);text-decoration:none;}
-.mob-menu a:last-child{border:none;}
-@media(max-width:768px){.nav-links{display:none;}.hamburger{display:flex;}}
-.hero{text-align:center;padding:3rem 1.5rem 2rem;}
-.hero-tag{display:inline-block;background:rgba(212,168,67,.12);border:1px solid rgba(212,168,67,.25);color:var(--gold);font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .9rem;border-radius:20px;margin-bottom:1rem;}
-.hero h1{font-size:2rem;font-weight:700;margin-bottom:.6rem;}
-.hero h1 em{color:var(--gold);font-style:italic;}
-.hero p{color:var(--muted);font-size:.9rem;max-width:540px;margin:0 auto 2rem;line-height:1.6;}
-.hero-stats{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;}
-.hstat{text-align:center;}
-.hstat-num{font-size:1.4rem;font-weight:700;color:var(--gold);}
-.hstat-label{font-size:.72rem;color:var(--muted);margin-top:2px;}
-.access-banner{max-width:760px;margin:1.5rem auto;padding:1rem 1.5rem;border-radius:var(--radius);font-size:.85rem;text-align:center;}
-.access-banner.locked{background:rgba(248,81,73,.08);border:1px solid rgba(248,81,73,.2);color:var(--red);}
-.access-banner.unlocked{background:rgba(63,185,80,.08);border:1px solid rgba(63,185,80,.2);color:var(--green);}
-.access-banner a{color:inherit;font-weight:600;text-decoration:underline;}
-/* list */
-.list-wrap{max-width:900px;margin:0 auto;padding:0 1.5rem;}
-.mfr-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1rem;transition:border-color .2s;}
-.mfr-card:hover{border-color:rgba(212,168,67,.25);}
-.mfr-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap;}
-.mfr-num{font-size:.72rem;font-weight:700;color:var(--gold);letter-spacing:.08em;background:rgba(212,168,67,.1);padding:2px 8px;border-radius:4px;flex-shrink:0;}
-.mfr-name{font-size:1rem;font-weight:700;flex:1;}
-.mfr-location{font-size:.78rem;color:var(--muted);margin-bottom:.5rem;}
-.mfr-spec{display:inline-block;font-size:.75rem;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.15);color:var(--gold);padding:2px 10px;border-radius:20px;margin-bottom:.75rem;}
-.mfr-desc{font-size:.83rem;color:var(--muted);line-height:1.6;margin-bottom:.85rem;}
-.mfr-footer{display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;}
-.mfr-moq{font-size:.78rem;color:var(--muted);}
-.mfr-moq span{color:var(--text);font-weight:600;}
-.contact-block{display:flex;gap:.5rem;flex-wrap:wrap;}
-.contact-pill{display:inline-flex;align-items:center;gap:.3rem;padding:.35rem .8rem;border-radius:20px;font-size:.78rem;font-weight:500;text-decoration:none;transition:all .2s;}
-.contact-pill.phone{background:rgba(63,185,80,.1);border:1px solid rgba(63,185,80,.25);color:var(--green);}
-.contact-pill.email{background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.2);color:var(--gold);}
-.contact-pill.locked{background:var(--bg3);border:1px solid var(--border);color:var(--muted);cursor:not-allowed;}
-.contact-pill:hover:not(.locked){opacity:.85;}
-/* cta */
-.cta-section{text-align:center;padding:3rem 2rem;border-top:1px solid var(--border);margin-top:2rem;}
-.cta-section h2{font-size:1.4rem;font-weight:700;margin-bottom:.5rem;}
-.cta-section p{color:var(--muted);font-size:.85rem;margin-bottom:1.5rem;}
-.btn-cta{display:inline-block;background:var(--gold);color:#000;padding:.75rem 2rem;border-radius:var(--radius);font-weight:600;font-size:.88rem;text-decoration:none;}
-.btn-cta:hover{background:var(--gold2);}
-/* admin */
-.admin-trigger{position:fixed;bottom:5.5rem;left:1rem;z-index:150;background:var(--bg3);border:1px solid var(--border);color:var(--muted);padding:.4rem .75rem;border-radius:var(--radius);font-size:.72rem;cursor:pointer;}
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:500;display:none;align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto;}
-.overlay.open{display:flex;}
-.admin-panel{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:2rem;width:100%;max-width:600px;margin:auto;}
-.admin-panel h2{font-size:1.2rem;font-weight:700;color:var(--gold);margin-bottom:1.5rem;display:flex;justify-content:space-between;align-items:center;}
-.close-btn{background:none;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;}
-.field{margin-bottom:1rem;}
-.field label{display:block;font-size:.75rem;font-weight:500;color:var(--muted);margin-bottom:.4rem;}
-.field input,.field textarea{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:.6rem .85rem;color:var(--text);font-size:.88rem;outline:none;transition:border-color .2s;font-family:inherit;}
-.field input:focus,.field textarea:focus{border-color:var(--gold);}
-.field textarea{resize:vertical;min-height:60px;}
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
-.btn-add{width:100%;background:var(--gold);color:#000;border:none;padding:.75rem;border-radius:var(--radius);font-size:.88rem;font-weight:600;cursor:pointer;transition:background .2s;margin-top:.5rem;}
-.btn-add:hover:not(:disabled){background:var(--gold2);}
-.btn-add:disabled{opacity:.6;cursor:not-allowed;}
-.existing-list{margin-top:1.5rem;border-top:1px solid var(--border);padding-top:1.25rem;}
-.existing-list h3{font-size:.85rem;font-weight:600;color:var(--muted);margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.08em;}
-.exist-item{display:flex;align-items:center;justify-content:space-between;padding:.6rem .75rem;background:var(--bg3);border-radius:var(--radius);margin-bottom:.5rem;font-size:.82rem;}
-.exist-item-name{flex:1;color:var(--text);}
-.exist-item-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;padding:0 4px;}
-.exist-item-del:hover{color:var(--red);}
-.alert-sm{border-radius:var(--radius);padding:.6rem .85rem;margin-bottom:.75rem;font-size:.8rem;display:none;}
-.alert-sm.show{display:block;}
-.alert-sm.success{background:rgba(63,185,80,.1);border:1px solid rgba(63,185,80,.25);color:var(--green);}
-.alert-sm.error{background:rgba(248,81,73,.1);border:1px solid rgba(248,81,73,.25);color:var(--red);}
-.spinner{display:inline-block;width:13px;height:13px;border:2px solid rgba(0,0,0,.3);border-top-color:#000;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:5px;}
-@keyframes spin{to{transform:rotate(360deg);}}
-.mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);padding:.4rem .5rem;z-index:90;}
-.mob-nav-inner{display:flex;justify-content:space-around;}
-.mob-nav a{display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--muted);font-size:.58rem;text-decoration:none;padding:.25rem .5rem;}
-.mob-nav a:hover{color:var(--gold);}
-@media(max-width:768px){.mob-nav{display:block;}}
-.wa-float{position:fixed;bottom:5rem;right:1rem;z-index:200;}
-@media(max-width:768px){.wa-float{bottom:4.5rem;}}
-.wa-float a{background:#25d366;color:#fff;padding:.55rem 1rem;border-radius:24px;font-size:.78rem;font-weight:600;display:flex;align-items:center;gap:.4rem;box-shadow:0 4px 16px rgba(0,0,0,.4);text-decoration:none;}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Connect with verified manufacturers across Delhi NCR and India. Contact details available to premium subscribers.">
+  <title>Manufacturers | Launch My Clothing Brand</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <style>
+    :root {
+      --gold: #C8A951;
+      --gold-light: #E8C96A;
+      --cream: #F5F0E8;
+      --ink: #1A1208;
+      --ink-soft: #3D2E10;
+      --bg: #0E0B06;
+      --card-bg: #1C1609;
+      --border: rgba(200,169,81,0.2);
+      --red: #D4472A;
+      --green: #4CAF50;
+      --radius: 3px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background: #0E0B06;
+      color: var(--cream);
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      overflow-x: hidden;
+      min-height: 100vh;
+      padding-bottom: 80px;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
+    }
+
+    a { color: var(--gold); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--gold-light); }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.2rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      background: rgba(14,11,6,0.95);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      color: var(--cream);
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .nav-logo span {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.45;
+      margin-top: 0.15rem;
+      color: var(--cream);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      transition: opacity 0.2s, color 0.2s;
+    }
+
+    .nav-links a:hover { opacity: 1; color: var(--gold); }
+
+    .nav-cta {
+      background: var(--gold) !important;
+      color: var(--ink) !important;
+      padding: 0.5rem 1rem !important;
+      opacity: 1 !important;
+      font-weight: 500 !important;
+    }
+
+    .nav-cta:hover { background: var(--gold-light) !important; color: var(--ink) !important; }
+
+    .nav-close { display: none; }
+
+    
+
+    .mob-menu a {
+      color: var(--cream);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(200,169,81,0.1);
+      opacity: 0.8;
+    }
+
+    .mob-menu a:last-child { border: none; }
+    .mob-menu a:hover { color: var(--gold); opacity: 1; }
+
+    @media (max-width: 768px) {
+      /* Sliding nav drawer styles */
+      .nav-hamburger { display: flex !important; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; z-index: 100; }
+      .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--gold); }
+      
+      .nav-links {
+        display: none !important;
+        position: fixed !important;
+        top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
+        background: #0E0B06 !important;
+        flex-direction: column !important; justify-content: center !important;
+        align-items: center !important; gap: 1.5rem !important;
+        z-index: 999 !important; padding: 2rem !important;
+      }
+      .nav-links.open { display: flex !important; }
+      .nav-links a { font-size: 1rem !important; letter-spacing: 0.15em !important; display: block; width: 100%; text-align: center; padding: 0.5rem 0; border-bottom: 1px solid rgba(200,169,81,0.1); }
+      .nav-links .nav-cta { background: var(--gold) !important; color: var(--ink) !important; width: auto !important; padding: 0.6rem 2rem !important; border-bottom: none !important; margin-top: 0.5rem; }
+      
+      .nav-close {
+        display: block !important;
+        position: absolute !important;
+        top: 1.5rem !important; right: 1.5rem !important;
+        background: none !important; border: none !important;
+        color: var(--gold) !important; font-size: 1.5rem !important;
+        cursor: pointer !important; z-index: 1000 !important;
+      }
+      .nav-hamburger span { background: var(--gold) !important; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      nav { padding: 1rem 1.2rem; }
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 8rem 4rem 3rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(200,169,81,0.06);
+      border: 1px solid var(--border);
+      color: var(--gold);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero h1 em { color: var(--gold); font-style: italic; }
+
+    .hero p {
+      color: var(--cream);
+      opacity: 0.6;
+      font-size: 0.9rem;
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.8;
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .hstat { text-align: center; }
+
+    .hstat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .hstat-label {
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.4;
+      margin-top: 0.3rem;
+    }
+
+    /* ACCESS BANNER */
+    .access-banner {
+      max-width: 900px;
+      margin: 2.5rem auto 1rem;
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius);
+      font-size: 0.78rem;
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+
+    .access-banner.locked {
+      background: rgba(212,71,42,0.06);
+      border: 1px solid rgba(212,71,42,0.25);
+      color: var(--red);
+    }
+
+    .access-banner.unlocked {
+      background: rgba(76,175,80,0.06);
+      border: 1px solid rgba(76,175,80,0.25);
+      color: var(--green);
+    }
+
+    .access-banner a { color: inherit; font-weight: 500; text-decoration: underline; }
+
+    /* LIST */
+    .list-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .mfr-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.8rem;
+      margin-bottom: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .mfr-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-1px);
+    }
+
+    .mfr-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .mfr-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      background: rgba(200,169,81,0.1);
+      padding: 3px 10px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      flex-shrink: 0;
+    }
+
+    .mfr-name {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--cream);
+      flex: 1;
+    }
+
+    .mfr-location {
+      font-size: 0.72rem;
+      color: var(--cream);
+      opacity: 0.5;
+      margin-bottom: 0.6rem;
+    }
+
+    .mfr-spec {
+      display: inline-block;
+      font-size: 0.68rem;
+      background: rgba(200,169,81,0.06);
+      border: 1px solid var(--border);
+      color: var(--gold);
+      padding: 3px 12px;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+    }
+
+    .mfr-desc {
+      font-size: 0.78rem;
+      color: var(--cream);
+      opacity: 0.6;
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+
+    .mfr-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(200,169,81,0.1);
+      padding-top: 1rem;
+    }
+
+    .mfr-moq {
+      font-size: 0.72rem;
+      color: var(--cream);
+      opacity: 0.5;
+    }
+
+    .mfr-moq span {
+      color: var(--gold);
+      font-weight: 500;
+      opacity: 1;
+    }
+
+    .contact-block {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 1rem;
+      border-radius: var(--radius);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .contact-pill.phone {
+      background: rgba(76,175,80,0.1);
+      border: 1px solid rgba(76,175,80,0.25);
+      color: var(--green);
+    }
+
+    .contact-pill.email {
+      background: rgba(200,169,81,0.06);
+      border: 1px solid var(--border);
+      color: var(--gold);
+    }
+
+    .contact-pill.locked {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      color: var(--cream);
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .contact-pill:hover:not(.locked) {
+      opacity: 0.95;
+      transform: translateY(-1px);
+    }
+
+    /* CTA SECTION */
+    .cta-section {
+      text-align: center;
+      padding: 5rem 4rem;
+      border-top: 1px solid var(--border);
+      background: var(--gold);
+      color: var(--ink);
+      margin-top: 4rem;
+    }
+
+    .cta-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3.5rem);
+      font-weight: 300;
+      margin-bottom: 0.8rem;
+    }
+
+    .cta-section p {
+      opacity: 0.7;
+      font-size: 0.85rem;
+      margin-bottom: 2rem;
+      max-width: 500px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
+    }
+
+    .btn-cta {
+      display: inline-block;
+      background: var(--ink);
+      color: var(--gold);
+      padding: 0.95rem 2.4rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: all 0.25s;
+    }
+
+    .btn-cta:hover {
+      background: var(--ink-soft);
+      transform: translateY(-2px);
+    }
+
+    /* ADMIN TRIGGER */
+    .admin-trigger {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      z-index: 150;
+      background: rgba(200,169,81,0.15);
+      border: 1px solid var(--border);
+      color: var(--gold);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .admin-trigger:hover { background: rgba(200,169,81,0.25); }
+
+    /* MODALS */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 500;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 2rem 1rem;
+      overflow-y: auto;
+    }
+
+    .overlay.open { display: flex; }
+
+    .admin-panel {
+      background: #110d05;
+      border: 1px solid rgba(200,169,81,0.3);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+      font-family: 'DM Mono', monospace;
+      color: var(--cream);
+    }
+
+    .admin-panel h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: var(--cream);
+      font-size: 1.3rem;
+      cursor: pointer;
+      opacity: 0.5;
+    }
+    .close-btn:hover { opacity: 1; }
+
+    .field { margin-bottom: 1.25rem; }
+
+    .field label {
+      display: block;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+      margin-bottom: 0.4rem;
+    }
+
+    .field input, .field textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.75rem 1rem;
+      color: var(--cream);
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color 0.2s;
+      font-family: inherit;
+    }
+
+    .field input:focus, .field textarea:focus {
+      border-color: var(--gold);
+    }
+
+    .field textarea { resize: vertical; min-height: 70px; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+
+    .btn-add {
+      width: 100%;
+      background: var(--gold);
+      color: var(--ink);
+      border: none;
+      padding: 0.8rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 0.5rem;
+    }
+
+    .btn-add:hover:not(:disabled) { background: var(--gold-light); }
+    .btn-add:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .existing-list {
+      margin-top: 2rem;
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+    }
+
+    .existing-list h3 {
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+      margin-bottom: 1rem;
+    }
+
+    .exist-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(200,169,81,0.08);
+      margin-bottom: 0.4rem;
+      font-size: 0.78rem;
+    }
+
+    .exist-item-name {
+      flex: 1;
+      color: var(--cream);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .exist-item-del {
+      background: none;
+      border: none;
+      color: var(--cream);
+      opacity: 0.4;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0 4px;
+      transition: opacity 0.2s;
+    }
+    .exist-item-del:hover { color: var(--red); opacity: 1; }
+
+    .alert-sm {
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.78rem;
+      display: none;
+      border-radius: var(--radius);
+    }
+
+    .alert-sm.show { display: block; }
+    .alert-sm.success { background: rgba(76,175,80,0.1); border: 1px solid rgba(76,175,80,0.25); color: var(--green); }
+    .alert-sm.error { background: rgba(212,71,42,0.1); border: 1px solid rgba(212,71,42,0.25); color: var(--red); }
+
+    .spinner {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(0,0,0,0.3);
+      border-top-color: var(--ink);
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* MOBILE NAVIGATION */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 62px;
+      background: #0E0B06;
+      border-top: 1px solid var(--border);
+      z-index: 500;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .mobile-nav a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      text-decoration: none;
+      color: var(--cream);
+      opacity: 0.5;
+      font-size: 0.52rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 8px 4px;
+      flex: 1;
+      text-align: center;
+      transition: opacity 0.2s;
+    }
+
+    .mobile-nav a:hover, .mobile-nav a.active {
+      opacity: 1;
+      color: var(--gold);
+    }
+
+    .mobile-nav .nav-icon { font-size: 1.2rem; }
+
+    @media (max-width: 768px) {
+      .mobile-nav { display: flex; }
+      body { padding-bottom: 75px; }
+      .admin-trigger { bottom: 75px; }
+    }
+
+    /* WHATSAPP FLOAT */
+    .wa-float { position: fixed; bottom: 2rem; right: 2rem; z-index: 200; }
+    @media (max-width: 768px) { .wa-float { bottom: 75px; right: 1.2rem; } }
+
+    .wa-float a {
+      background: #25d366;
+      color: #fff;
+      padding: 0.7rem 1.2rem;
+      border-radius: 24px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      text-decoration: none;
+      transition: transform 0.2s;
+    }
+    .wa-float a:hover { transform: scale(1.05); }
+
+    /* FOOTER */
+    footer {
+      background: #090704;
+      border-top: 1px solid var(--border);
+      padding: 4rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 300;
+      margin-bottom: 0.5rem;
+      color: var(--gold);
+    }
+
+    .footer-brand p {
+      font-size: 0.68rem;
+      opacity: 0.35;
+      line-height: 1.7;
+      margin-top: 0.5rem;
+    }
+
+    .footer-col h4 {
+      font-size: 0.55rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.6rem; }
+
+    .footer-col ul li a {
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.72rem;
+      opacity: 0.45;
+      transition: opacity 0.2s;
+    }
+    .footer-col ul li a:hover { opacity: 0.8; color: var(--gold); }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-copy { font-size: 0.62rem; opacity: 0.3; }
+
+    @media (max-width: 768px) {
+      footer { padding: 3rem 1.2rem; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  
+    /* â•â•â• MOBILE HEADER & DRAWER OVERLAYS SOLID BLACK CONTRAST FIX â•â•â• */
+    @media (max-width: 1100px) {
+      nav {
+        background: #0E0B06 !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+      }
+      #main-nav {
+        background: #0E0B06 !important;
+      }
+    }
+    @media (max-width: 768px) {
+      nav {
+        background: #0E0B06 !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border-bottom: 1px solid rgba(200, 169, 81, 0.25) !important;
+      }
+      .nav-links {
+        background: #0E0B06 !important;
+      }
+      .mobile-bottom-nav, .mobile-nav {
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200, 169, 81, 0.25) !important;
+      }
+      .mobile-bottom-nav a, .mobile-nav a {
+        background: #0E0B06 !important;
+      }
+    }
+    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
+    /* â•â•â• OPTIONS A: LUXURY PREMIUM SENSORY CONTRAST OVERRIDES â•â•â• */
+    /* Brushed Gold Gradient */
+    .btn-primary, .nav-cta, .cta, .btn-submit, .btn-gold {
+      background: linear-gradient(135deg, #E8C96A 0%, #C8A951 50%, #A68230 100%) !important;
+      color: #0E0B06 !important;
+      border: 1px solid rgba(232, 201, 106, 0.2) !important;
+      box-shadow: 0 4px 15px rgba(200, 169, 81, 0.15) !important;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      text-shadow: none !important;
+    }
+    
+    .btn-primary:hover, .btn-primary:active, .btn-primary:focus,
+    .nav-cta:hover, .nav-cta:active, .nav-cta:focus,
+    .cta:hover, .cta:active, .cta:focus,
+    .btn-submit:hover, .btn-submit:active, .btn-submit:focus,
+    .btn-gold:hover, .btn-gold:active, .btn-gold:focus {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 8px 25px rgba(200, 169, 81, 0.3) !important;
+      filter: brightness(1.08) !important;
+      outline: none !important;
+    }
+    
+    /* Outline Button */
+    .btn-outline {
+      border: 1px solid rgba(200, 169, 81, 0.45) !important;
+      color: #F5F0E8 !important;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    
+    .btn-outline:hover, .btn-outline:active, .btn-outline:focus {
+      border-color: #C8A951 !important;
+      color: #C8A951 !important;
+      background: rgba(200, 169, 81, 0.05) !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 6px 20px rgba(200, 169, 81, 0.08) !important;
+      outline: none !important;
+    }
+    
+    /* Card Interactions and Gold Dust Glows */
+    .mfr-card, .spec-card, .pattern-card, .service-card, .plan-card, .video-card {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    
+    .mfr-card:hover, .mfr-card:active,
+    .spec-card:hover, .spec-card:active,
+    .pattern-card:hover, .pattern-card:active,
+    .service-card:hover, .service-card:active,
+    .plan-card:hover, .plan-card:active,
+    .video-card:hover, .video-card:active {
+      transform: translateY(-4px) !important;
+      border-color: rgba(200, 169, 81, 0.45) !important;
+      box-shadow: 0 12px 30px rgba(200, 169, 81, 0.16) !important;
+    }
+    
+    /* Logo Hover Glow */
+    .nav-logo {
+      transition: text-shadow 0.3s ease !important;
+    }
+    
+    .nav-logo:hover, .nav-logo:active {
+      text-shadow: 0 0 12px rgba(200, 169, 81, 0.4) !important;
+    }
+    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 </style>
 </head>
 <body>
-<nav>
-  <a href="/index.html" class="nav-logo">Launch My Clothing Brand <span>Pattern Making & Manufacturing</span></a>
-  <ul class="nav-links">
-    <li><a href="/services.html">Services</a></li>
-    <li><a href="/library.html">Patterns</a></li>
-    <li><a href="/specsheets.html">Spec Sheets</a></li>
-    <li><a href="/insights.html">Insights</a></li>
-    <li><a href="/manufacturers.html" style="color:var(--text)">Manufacturers</a></li>
-    <li><a href="/contact.html">Contact</a></li>
-    <li><a href="/subscribe.html" class="nav-cta">Get Started</a></li>
-  </ul>
-  <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
-</nav>
-<div class="mob-menu" id="mobMenu">
-  <a href="/services.html">Services</a>
-  <a href="/library.html">Patterns</a>
-  <a href="/specsheets.html">Spec Sheets</a>
-  <a href="/insights.html">Insights</a>
-  <a href="/manufacturers.html">Manufacturers</a>
-  <a href="/contact.html">Contact</a>
-  <a href="/subscribe.html" style="color:var(--gold);font-weight:600;">Get Started →</a>
-</div>
 
-<div class="hero">
-  <div class="hero-tag">Manufacturer Network</div>
-  <h1>Trusted <em>Manufacturers</em></h1>
-  <p>Connect with verified manufacturers across India. Contact details available to Brand Builder and Pro Elite subscribers.</p>
-  <div class="hero-stats">
-    <div class="hstat"><div class="hstat-num" id="totalCount">—</div><div class="hstat-label">Verified Manufacturers</div></div>
-    <div class="hstat"><div class="hstat-num">NCR</div><div class="hstat-label">Primary Coverage</div></div>
-    <div class="hstat"><div class="hstat-num">40+</div><div class="hstat-label">Min. MOQ Available</div></div>
-    <div class="hstat"><div class="hstat-num">🔒</div><div class="hstat-label">Premium Contact Access</div></div>
-  </div>
-</div>
+  <!-- NAV -->
+  <!-- NAV -->
+  <nav>
+    <a href="/index.html" class="nav-logo">
+      Launch My Clothing Brand
+      <span>Pattern Making &amp; Manufacturing</span>
+    </a>
+    <ul class="nav-links" id="main-nav">
+      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">&times;</button>
+      <li><a href="/services.html">Services</a></li>
+      <li><a href="/library.html">Patterns</a></li>
+      <li><a href="/specsheets.html">Spec Sheets</a></li>
+      <li><a href="/phototopattern.html">Photo to Pattern</a></li>
+      <li><a href="/insights.html">Insights</a></li>
+      <li><a href="/manufacturers.html" class="active">Manufacturers</a></li>
+      <li><a href="/subscribe.html" class="nav-cta">Get Started</a></li>
+    </ul>
+    <button class="nav-hamburger" onclick="document.getElementById('main-nav').classList.add('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
 
-<div class="access-banner" id="accessBanner" style="display:none;"></div>
-
-<div class="list-wrap" id="mfrList">
-  <div style="text-align:center;padding:3rem;color:var(--muted)">⏳ Loading manufacturers...</div>
-</div>
-
-<div class="cta-section">
-  <h2>Ready to Connect?</h2>
-  <p>Get direct contact details — phone and email — for all verified manufacturers with a premium subscription.</p>
-  <a href="/subscribe.html" class="btn-cta">Unlock Access →</a>
-</div>
-
-<button class="admin-trigger" onclick="openAdminPrompt()">⚙️ Admin</button>
-
-<div class="overlay" id="promptOverlay">
-  <div class="admin-panel" style="max-width:360px;">
-    <h2>Admin Access <button class="close-btn" onclick="closeOverlay('promptOverlay')">✕</button></h2>
-    <div class="alert-sm" id="promptAlert"></div>
-    <div class="field"><label>Admin Password</label><input type="password" id="adminPwInput" placeholder="Enter password" onkeydown="if(event.key==='Enter')checkAdminPw()"></div>
-    <button class="btn-add" onclick="checkAdminPw()">Unlock →</button>
-  </div>
-</div>
-
-<div class="overlay" id="adminOverlay">
-  <div class="admin-panel">
-    <h2>🏭 Manufacturer Editor <button class="close-btn" onclick="closeOverlay('adminOverlay')">✕</button></h2>
-    <div class="alert-sm" id="adminAlert"></div>
-    <div class="field"><label>Manufacturer Name *</label><input type="text" id="aName" placeholder="e.g. SAROSE CLOTHING"></div>
-    <div class="field-row">
-      <div class="field"><label>Location *</label><input type="text" id="aLocation" placeholder="Gurgaon, Haryana"></div>
-      <div class="field"><label>Min. Order (MOQ)</label><input type="text" id="aMoq" placeholder="50–100"></div>
-    </div>
-    <div class="field"><label>Specialization</label><input type="text" id="aSpec" placeholder="Womens, Mens and Kids Wear"></div>
-    <div class="field"><label>Description</label><textarea id="aDesc" placeholder="Details about this manufacturer..."></textarea></div>
-    <div class="field-row">
-      <div class="field"><label>📞 Phone (visible to subscribers)</label><input type="text" id="aPhone" placeholder="+91 98765 43210"></div>
-      <div class="field"><label>✉ Email (visible to subscribers)</label><input type="email" id="aEmail" placeholder="contact@factory.com"></div>
-    </div>
-    <button class="btn-add" id="addBtn" onclick="addManufacturer()">Add Manufacturer →</button>
-    <div class="existing-list">
-      <h3>Current Manufacturers</h3>
-      <div id="existingList"><p style="font-size:.8rem;color:var(--muted)">Loading...</p></div>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag">Manufacturer Network</div>
+    <h1>Trusted <em>Manufacturers</em></h1>
+    <p>Connect with verified apparel manufacturers across India. Direct contact details available to Brand Builder and Pro Elite subscribers.</p>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-num" id="totalCount">—</div><div class="hstat-label">Verified Factories</div></div>
+      <div class="hstat"><div class="hstat-num">NCR</div><div class="hstat-label">Primary HQ Area</div></div>
+      <div class="hstat"><div class="hstat-num">40+</div><div class="hstat-label">Min. MOQ Available</div></div>
+      <div class="hstat"><div class="hstat-num">🔒</div><div class="hstat-label">Premium Contacts</div></div>
     </div>
   </div>
-</div>
 
-<div class="wa-float"><a href="https://wa.me/918796158321?text=Hi%2C+I+want+to+connect+with+manufacturers" target="_blank">💬 WhatsApp Support</a></div>
+  <div class="access-banner" id="accessBanner" style="display:none;"></div>
 
-<div class="mob-nav">
-  <div class="mob-nav-inner">
-    <a href="/index.html">🏠<br>Home</a>
-    <a href="/services.html">📐<br>Services</a>
-    <a href="/manufacturers.html">🏭<br>Factories</a>
-    <a href="/specsheets.html">📋<br>Spec</a>
-    <a href="/insights.html">🎬<br>Insights</a>
-    <a href="/subscribe.html">⭐<br>Plans</a>
+  <!-- FACTORY LIST -->
+  <div class="list-wrap" id="mfrList">
+    <div style="text-align:center;padding:3rem;opacity:0.5;font-size:0.8rem;">⏳ Loading factory database...</div>
   </div>
-</div>
 
-<script>
-const SB_URL  = 'https://tldbjsqhjqapdwmfeuwq.supabase.co';
-const SB_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ';
-const ADMIN_PW = 'SATISH@1467';
-const sb = supabase.createClient(SB_URL, SB_KEY);
+  <!-- CTA SECTION -->
+  <div class="cta-section">
+    <h2>Ready to Start Production?</h2>
+    <p>Get direct phone numbers and emails for verified garment factories with a Brand Builder or Pro Elite subscription.</p>
+    <a href="/subscribe.html" class="btn-cta">Unlock Factory Database →</a>
+  </div>
 
-const session   = JSON.parse(localStorage.getItem('lmcb_user') || 'null');
-const isPaid    = session && session.plan_status === 'active';
-const isBuilder = isPaid && ['brand_builder','pro_elite'].includes(session.plan);
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-brand-name">Launch My Clothing Brand</div>
+        <p>Expert digital pattern making and manufacturer data services for apparel brands and startups in India.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="/services.html">Pattern Making</a></li>
+          <li><a href="/library.html">Pattern Library</a></li>
+          <li><a href="/specsheets.html">Spec Sheets</a></li>
+          <li><a href="/insights.html">Industry Insights</a></li>
+          <li><a href="/services.html">Consultation</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/contact.html">Contact Us</a></li>
+          <li><a href="/subscribe.html">Pricing Plans</a></li>
+          <li><a href="/manufacturers.html">Factories</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/terms.html">Terms of Service</a></li>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Launch My Clothing Brand. All rights reserved.</div>
+      <div class="footer-copy">launchmyclothingbrand.com · Bijwasan, Delhi 110061</div>
+    </div>
+  </footer>
 
-const banner = document.getElementById('accessBanner');
-banner.style.display = 'block';
-if (isBuilder) {
-  banner.textContent = `✅ ${session.firstName}, you have full access to all manufacturer contact details.`;
-  banner.className = 'access-banner unlocked';
-} else {
-  banner.innerHTML = `🔒 Subscribe to Brand Builder or Pro Elite to unlock direct contact details. <a href="/subscribe.html">Unlock Access →</a>`;
-  banner.className = 'access-banner locked';
-}
+  <!-- ADMIN TRIGGER -->
+  <button class="admin-trigger" onclick="openAdminPrompt()">⚙️ Admin Editor</button>
 
-function toggleMenu(){ document.getElementById('mobMenu').classList.toggle('open'); }
-function openAdminPrompt(){ document.getElementById('promptOverlay').classList.add('open'); }
-function closeOverlay(id){ document.getElementById(id).classList.remove('open'); }
-function showAlert(id,msg,type){ const el=document.getElementById(id); el.textContent=msg; el.className='alert-sm show '+type; setTimeout(()=>el.className='alert-sm',4000); }
+  <!-- PASSWORD PROMPT -->
+  <div class="overlay" id="promptOverlay">
+    <div class="admin-panel" style="max-width:360px;">
+      <h2>Admin Access <button class="close-btn" onclick="closeOverlay('promptOverlay')">✕</button></h2>
+      <div class="alert-sm" id="promptAlert"></div>
+      <div class="field">
+        <label>Admin Password</label>
+        <input type="password" id="adminPwInput" placeholder="Enter password" onkeydown="if(event.key==='Enter')checkAdminPw()">
+      </div>
+      <button class="btn-add" onclick="checkAdminPw()">Unlock Editor →</button>
+    </div>
+  </div>
 
-async function loadManufacturers(){
-  const { data, error } = await sb.from('manufacturers').select('*').eq('is_active',true).order('sort_order');
-  const list = document.getElementById('mfrList');
-  if(error||!data){ list.innerHTML='<div style="text-align:center;padding:3rem;color:var(--muted)">Failed to load.</div>'; return; }
-  document.getElementById('totalCount').textContent = data.length + '+';
-  if(!data.length){ list.innerHTML='<div style="text-align:center;padding:3rem;color:var(--muted)">No manufacturers listed yet.</div>'; return; }
+  <!-- FACTORY EDITOR -->
+  <div class="overlay" id="adminOverlay">
+    <div class="admin-panel">
+      <h2>🏭 Manufacturer Editor <button class="close-btn" onclick="closeOverlay('adminOverlay')">✕</button></h2>
+      <div class="alert-sm" id="adminAlert"></div>
+      <div class="field">
+        <label>Manufacturer Name *</label>
+        <input type="text" id="aName" placeholder="e.g. SAROSE CLOTHING">
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Location *</label><input type="text" id="aLocation" placeholder="Gurgaon, Haryana"></div>
+        <div class="field"><label>Min. Order (MOQ)</label><input type="text" id="aMoq" placeholder="50–100"></div>
+      </div>
+      <div class="field"><label>Specialization</label><input type="text" id="aSpec" placeholder="Womens, Mens and Kids Wear"></div>
+      <div class="field"><label>Description</label><textarea id="aDesc" placeholder="Details about this manufacturer..."></textarea></div>
+      <div class="field-row">
+        <div class="field"><label>📞 Phone (visible to subscribers)</label><input type="text" id="aPhone" placeholder="+91 98765 43210"></div>
+        <div class="field"><label>✉ Email (visible to subscribers)</label><input type="email" id="aEmail" placeholder="contact@factory.com"></div>
+      </div>
+      <button class="btn-add" id="addBtn" onclick="addManufacturer()">Add Manufacturer →</button>
+      <div class="existing-list">
+        <h3>Current Factories</h3>
+        <div id="existingList"><p style="font-size:0.75rem;opacity:0.5;">Loading...</p></div>
+      </div>
+    </div>
+  </div>
 
-  list.innerHTML = data.map((m,i) => {
-    let contactBlock = '';
-    if(isBuilder){
-      const phonePill = m.phone ? `<a href="tel:${m.phone}" class="contact-pill phone">📞 ${m.phone}</a>` : '';
-      const emailPill = m.email ? `<a href="mailto:${m.email}" class="contact-pill email">✉ ${m.email}</a>` : '';
-      contactBlock = (phonePill||emailPill) ? `<div class="contact-block">${phonePill}${emailPill}</div>` : '<span style="font-size:.78rem;color:var(--muted)">Contact not listed yet</span>';
+  <div class="wa-float">
+    <a href="https://wa.me/918796158321?text=Hi%2C+I+want+to+connect+with+manufacturers" target="_blank">
+      💬 WhatsApp Support
+    </a>
+  </div>
+
+  <!-- MOBILE BOTTOM NAVIGATION -->
+  <nav class="mobile-nav">
+    <a href="/index.html"><span class="nav-icon">🏠</span><span>Home</span></a>
+    <a href="/services.html"><span class="nav-icon">📐</span><span>Services</span></a>
+    <a href="/manufacturers.html" class="active"><span class="nav-icon">🏭</span><span>Factories</span></a>
+    <a href="/specsheets.html"><span class="nav-icon">📋</span><span>Spec</span></a>
+    <a href="/insights.html"><span class="nav-icon">🎬</span><span>Insights</span></a>
+    <a href="/subscribe.html"><span class="nav-icon">⭐</span><span>Plans</span></a>
+  </nav>
+
+  <script>
+    const SB_URL  = 'https://tldbjsqhjqapdwmfeuwq.supabase.co';
+    const SB_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ';
+    const sb = supabase.createClient(SB_URL, SB_KEY);
+
+    const session   = JSON.parse(localStorage.getItem('lmcb_user') || 'null');
+    const isPaid    = session && session.plan_status === 'active';
+    const isBuilder = isPaid && ['brand_builder','pro_elite'].includes(session.plan);
+
+    const banner = document.getElementById('accessBanner');
+    banner.style.display = 'block';
+    if (isBuilder) {
+      banner.textContent = `✅ Welcome, ${session.firstName}! You have unlocked full access to all factory contacts.`;
+      banner.className = 'access-banner unlocked';
     } else {
-      contactBlock = `<a href="/subscribe.html" class="contact-pill locked">🔒 Subscribe to Unlock Contact</a>`;
+      banner.innerHTML = `🔒 Subscribe to Brand Builder or Pro Elite to unlock direct phone and email contact details. <a href="/subscribe.html">Unlock Database →</a>`;
+      banner.className = 'access-banner locked';
     }
-    return `
-    <div class="mfr-card">
-      <div class="mfr-header">
-        <div style="flex:1">
-          <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.4rem;">
-            <span class="mfr-num">${String(i+1).padStart(2,'0')}</span>
-            <div class="mfr-name">${m.name}</div>
+
+    
+    function openAdminPrompt(){ document.getElementById('promptOverlay').classList.add('open'); }
+    function closeOverlay(id){ document.getElementById(id).classList.remove('open'); }
+    function showAlert(id,msg,type){ const el=document.getElementById(id); el.textContent=msg; el.className='alert-sm show '+type; setTimeout(()=>el.className='alert-sm',4000); }
+
+    // SECURED PASSWORD VERIFICATION
+    async function checkAdminPw(){
+      const enteredPw = document.getElementById('adminPwInput').value;
+      if (!enteredPw) { showAlert('promptAlert', 'Please enter a password.', 'error'); return; }
+      
+      const { data, error } = await sb.from('site_settings').select('id').eq('id', 'main').eq('lmcb_admin_pw', enteredPw).single();
+      
+      if (error || !data) {
+        showAlert('promptAlert', 'Incorrect password. Try again.', 'error');
+        document.getElementById('adminPwInput').value = '';
+        document.getElementById('adminPwInput').focus();
+      } else {
+        closeOverlay('promptOverlay');
+        document.getElementById('adminOverlay').classList.add('open');
+        loadExisting();
+      }
+    }
+
+    async function loadManufacturers(){
+      const { data, error } = await sb.from('manufacturers').select('*').eq('is_active',true).order('sort_order');
+      const list = document.getElementById('mfrList');
+      if(error||!data){ list.innerHTML='<div style="text-align:center;padding:3rem;opacity:0.5;font-size:0.8rem;">Failed to load manufacturer data.</div>'; return; }
+      document.getElementById('totalCount').textContent = data.length + '+';
+      if(!data.length){ list.innerHTML='<div style="text-align:center;padding:3rem;opacity:0.5;font-size:0.8rem;">No factories listed yet in the network.</div>'; return; }
+
+      list.innerHTML = data.map((m,i) => {
+        let contactBlock = '';
+        if(isBuilder){
+          const phonePill = m.phone ? `<a href="tel:${m.phone}" class="contact-pill phone">📞 ${m.phone}</a>` : '';
+          const emailPill = m.email ? `<a href="mailto:${m.email}" class="contact-pill email">✉ ${m.email}</a>` : '';
+          contactBlock = (phonePill||emailPill) ? `<div class="contact-block">${phonePill}${emailPill}</div>` : '<span style="font-size:.72rem;opacity:0.4;">Contact not listed yet</span>';
+        } else {
+          contactBlock = `<a href="/subscribe.html" class="contact-pill locked">🔒 Subscribe to Unlock Contact</a>`;
+        }
+        return `
+        <div class="mfr-card">
+          <div class="mfr-header">
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.4rem;">
+                <span class="mfr-num">${String(i+1).padStart(2,'0')}</span>
+                <div class="mfr-name">${m.name}</div>
+              </div>
+              <div class="mfr-location">📍 ${m.location || '—'}</div>
+            </div>
           </div>
-          <div class="mfr-location">📍 ${m.location || '—'}</div>
-        </div>
-      </div>
-      ${m.specialization ? `<div><span class="mfr-spec">Specialization: ${m.specialization}</span></div>` : ''}
-      <p class="mfr-desc">${m.description || ''}</p>
-      <div class="mfr-footer">
-        <div class="mfr-moq">Minimum Order: <span>${m.min_order || 'N/A'}</span></div>
-        ${contactBlock}
-      </div>
-    </div>`;
-  }).join('');
-}
+          ${m.specialization ? `<div><span class="mfr-spec">Specialization: ${m.specialization}</span></div>` : ''}
+          <p class="mfr-desc">${m.description || ''}</p>
+          <div class="mfr-footer">
+            <div class="mfr-moq">Minimum Order Quantity (MOQ): <span>${m.min_order || 'N/A'}</span></div>
+            ${contactBlock}
+          </div>
+        </div>`;
+      }).join('');
+    }
 
-function checkAdminPw(){
-  if(document.getElementById('adminPwInput').value !== ADMIN_PW){ showAlert('promptAlert','Incorrect password.','error'); return; }
-  closeOverlay('promptOverlay');
-  document.getElementById('adminOverlay').classList.add('open');
-  loadExisting();
-}
+    async function addManufacturer(){
+      const name = document.getElementById('aName').value.trim();
+      const loc  = document.getElementById('aLocation').value.trim();
+      if(!name||!loc){ showAlert('adminAlert','Name and location are required.','error'); return; }
+      
+      const btn = document.getElementById('addBtn');
+      btn.disabled=true; btn.innerHTML='<span class="spinner"></span>Saving...';
+      const { error } = await sb.from('manufacturers').insert({
+        name,
+        location:  loc,
+        min_order: document.getElementById('aMoq').value.trim(),
+        specialization: document.getElementById('aSpec').value.trim(),
+        description: document.getElementById('aDesc').value.trim(),
+        phone: document.getElementById('aPhone').value.trim(),
+        email: document.getElementById('aEmail').value.trim()
+      });
+      
+      if(error){ showAlert('adminAlert','❌ '+error.message,'error'); }
+      else {
+        ['aName','aLocation','aMoq','aSpec','aDesc','aPhone','aEmail'].forEach(id=>document.getElementById(id).value='');
+        loadManufacturers(); loadExisting();
+        closeOverlay('adminOverlay');
+        showMsg('✅ Manufacturer successfully added!');
+      }
+      btn.disabled=false; btn.textContent='Add Manufacturer →';
+    }
 
-async function addManufacturer(){
-  const name = document.getElementById('aName').value.trim();
-  const loc  = document.getElementById('aLocation').value.trim();
-  if(!name||!loc){ showAlert('adminAlert','Name and location are required.','error'); return; }
-  const btn = document.getElementById('addBtn');
-  btn.disabled=true; btn.innerHTML='<span class="spinner"></span>Saving...';
-  const { error } = await sb.from('manufacturers').insert({
-    name,
-    location:  loc,
-    min_order: document.getElementById('aMoq').value.trim(),
-    specialization: document.getElementById('aSpec').value.trim(),
-    description: document.getElementById('aDesc').value.trim(),
-    phone: document.getElementById('aPhone').value.trim(),
-    email: document.getElementById('aEmail').value.trim()
-  });
-  if(error){ showAlert('adminAlert','❌ '+error.message,'error'); }
-  else {
-    showAlert('adminAlert','✅ Manufacturer added!','success');
-    ['aName','aLocation','aMoq','aSpec','aDesc','aPhone','aEmail'].forEach(id=>document.getElementById(id).value='');
-    loadManufacturers(); loadExisting();
-  }
-  btn.disabled=false; btn.textContent='Add Manufacturer →';
-}
+    async function loadExisting(){
+      const { data } = await sb.from('manufacturers').select('id,name').order('sort_order');
+      const list=document.getElementById('existingList');
+      if(!data||!data.length){ list.innerHTML='<p style="font-size:0.75rem;opacity:0.5;">No manufacturers listed yet.</p>'; return; }
+      list.innerHTML=data.map(m=>`
+        <div class="exist-item">
+          <span class="exist-item-name">${m.name}</span>
+          <button class="exist-item-del" onclick="deleteMfr('${m.id}')">🗑</button>
+        </div>`).join('');
+    }
 
-async function loadExisting(){
-  const { data } = await sb.from('manufacturers').select('id,name').order('sort_order');
-  const list=document.getElementById('existingList');
-  if(!data||!data.length){ list.innerHTML='<p style="font-size:.8rem;color:var(--muted)">No manufacturers yet.</p>'; return; }
-  list.innerHTML=data.map(m=>`
-    <div class="exist-item">
-      <span class="exist-item-name">${m.name}</span>
-      <button class="exist-item-del" onclick="deleteMfr('${m.id}')">🗑</button>
-    </div>`).join('');
-}
+    async function deleteMfr(id){
+      if(!confirm('Are you sure you want to remove this manufacturer?')) return;
+      await sb.from('manufacturers').delete().eq('id',id);
+      loadManufacturers(); loadExisting();
+    }
 
-async function deleteMfr(id){
-  if(!confirm('Remove this manufacturer?')) return;
-  await sb.from('manufacturers').delete().eq('id',id);
-  loadManufacturers(); loadExisting();
-}
+    function showMsg(text) {
+      const e = document.getElementById('_msg');
+      if (e) e.remove();
+      const m = document.createElement('div');
+      m.id = '_msg';
+      m.textContent = text;
+      m.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#1C1609;border:1px solid var(--border);color:var(--gold);padding:0.8rem 1.5rem;font-family:DM Mono,monospace;font-size:0.85rem;z-index:99999;white-space:nowrap;border-radius:3px;';
+      document.body.appendChild(m);
+      setTimeout(() => m.remove(), 3500);
+    }
 
-loadManufacturers();
-</script>
+    loadManufacturers();
+  </script>
+  <script src="/comm_guard.js"></script>
 </body>
 </html>
