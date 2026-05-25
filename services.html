@@ -25,13 +25,15 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 16px; scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; }
 
-    body { font-size: 16px; background: #0E0B06;
+    body {
+      background: #0E0B06;
       color: var(--ink);
       font-family: 'DM Mono', monospace;
       font-weight: 300;
-      overflow-x: hidden; }
+      overflow-x: hidden;
+    }
 
     body::before {
       content: '';
@@ -831,7 +833,7 @@
       h3 { color: #F5F0E8 !important; }
       
       /* Fix body background */
-      body { font-size: 16px; background: #0E0B06 !important; color: #F5F0E8 !important; }
+      body { background: #0E0B06 !important; color: #F5F0E8 !important; }
       
       /* Fix page hero background */
       .page-hero { background: #0E0B06 !important; }
@@ -925,15 +927,44 @@
 
 
     /* ═══ MOBILE BOTTOM NAV BAR ══════════════════════════ */
-    
+    .mobile-bottom-nav {
+      display: none;
+    }
     
     @media (max-width: 768px) {
       /* Add padding to body so content not hidden behind bottom nav */
-      body { font-size: 16px; padding-bottom: 70px !important; }
+      body { padding-bottom: 70px !important; }
       
+      .mobile-bottom-nav {
+        display: flex !important;
+        position: fixed !important;
+        bottom: 0 !important; left: 0 !important; right: 0 !important;
+        height: 62px !important;
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200,169,81,0.25) !important;
+        z-index: 500 !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        padding: 0 !important;
+      }
       
-      
-      
+      .mobile-bottom-nav a {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 3px !important;
+        text-decoration: none !important;
+        color: #F5F0E8 !important;
+        opacity: 0.5 !important;
+        font-family: 'DM Mono', monospace !important;
+        font-size: 0.52rem !important;
+        letter-spacing: 0.08em !important;
+        text-transform: uppercase !important;
+        padding: 8px 4px !important;
+        flex: 1 !important;
+        text-align: center !important;
+        transition: opacity 0.2s, color 0.2s !important;
+      }
       
       .mobile-bottom-nav a:hover,
       .mobile-bottom-nav a.active {
@@ -941,7 +972,10 @@
         color: #C8A951 !important;
       }
       
-      
+      .mobile-bottom-nav .nav-icon {
+        font-size: 1.2rem !important;
+        line-height: 1 !important;
+      }
       
       /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
       #wa-bubble { bottom: 75px !important; right: 1rem !important; }
@@ -970,54 +1004,15 @@
       .nav-links {
         background: #0E0B06 !important;
       }
-      .mobile-bottom-nav, 
-      .mobile-bottom-nav a, 
+      .mobile-bottom-nav, .mobile-nav {
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200, 169, 81, 0.25) !important;
+      }
+      .mobile-bottom-nav a, .mobile-nav a {
+        background: #0E0B06 !important;
+      }
     }
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-
-    .mobile-bottom-nav {
-      display: none;
-    }
-    @media (max-width: 768px) {
-      .mobile-bottom-nav {
-        display: flex !important;
-        position: fixed !important;
-        bottom: 0 !important; left: 0 !important; right: 0 !important;
-        height: 62px !important;
-        background: #0E0B06 !important;
-        border-top: 1px solid rgba(200,169,81,0.25) !important;
-        z-index: 500 !important;
-        justify-content: space-around !important;
-        align-items: center !important;
-        padding: 0 !important;
-      }
-      .mobile-bottom-nav a {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 3px !important;
-        text-decoration: none !important;
-        color: #F5F0E8 !important;
-        opacity: 0.5 !important;
-        font-family: 'DM Mono', monospace !important;
-        font-size: 0.52rem !important;
-        letter-spacing: 0.08em !important;
-        text-transform: uppercase !important;
-        padding: 8px 4px !important;
-        flex: 1 !important;
-        text-align: center !important;
-        transition: opacity 0.2s, color 0.2s !important;
-      }
-      .mobile-bottom-nav a:hover,
-      .mobile-bottom-nav a.active {
-        opacity: 1 !important;
-        color: #C8A951 !important;
-      }
-      .mobile-bottom-nav .nav-icon {
-        font-size: 1.2rem !important;
-        line-height: 1 !important;
-      }
-    }
 </style>
 </head>
 <body>
@@ -1230,35 +1225,7 @@
   </div>
 
   <!-- FOOTER -->
-  
-  <!-- MOBILE BOTTOM NAVIGATION -->
-  <nav class="mobile-bottom-nav">
-    <a href="/index.html" id="bn-home">
-      <span class="nav-icon">🏠</span>
-      <span>Home</span>
-    </a>
-    <a href="/services.html" id="bn-services">
-      <span class="nav-icon">📐</span>
-      <span>Services</span>
-    </a>
-    <a href="/manufacturers.html" id="bn-mfr">
-      <span class="nav-icon">🏭</span>
-      <span>Factories</span>
-    </a>
-    <a href="/specsheets.html" id="bn-spec">
-      <span class="nav-icon">📋</span>
-      <span>Spec</span>
-    </a>
-    <a href="/insights.html" id="bn-insights">
-      <span class="nav-icon">🎬</span>
-      <span>Insights</span>
-    </a>
-    <a href="/subscribe.html" id="bn-pricing">
-      <span class="nav-icon">⭐</span>
-      <span>Plans</span>
-    </a>
-  </nav>
-<footer>
+  <footer>
     <div class="footer-grid">
       <div class="footer-brand">
         <h3>Launch My<br/>Clothing Brand</h3>
@@ -1356,23 +1323,177 @@
   </div>
 </div>
 
-
-
-
 <script>
-// Open admin via URL: add ?admin to any page URL
-// Change password via URL: add ?password to any page URL
-document.addEventListener('DOMContentLoaded', function() {
-  var params = new URLSearchParams(window.location.search);
-  if (params.has('admin') && typeof openAdmin === 'function') {
-    openAdmin();
+// ─── ADMIN PASSWORD (change this) ───────────────────────
+const ADMIN_PASSWORD = 'admin123';
+
+// ─── DEFAULT BRANDS ──────────────────────────────────────
+const DEFAULT_BRANDS = {
+  row1: ['Rubicon','Louis Bayrad','Klistel','Vastra','Salt Attire','Sarose Clothing','Fugazee','QUA','Teeny Weeny','Dhruv Kapoor'],
+  row2: ['Groyo Fashion','Tanera','VKNP Designs','Ronak Enterprise','Shri','ZNX Fashion','Cilory','Pacific Designs','Tushi Creations','Clementine Clothing','MB Impex']
+};
+
+// Load from localStorage or use defaults
+let brands = JSON.parse(localStorage.getItem('lmcb_brands') || 'null') || JSON.parse(JSON.stringify(DEFAULT_BRANDS));
+
+// Render marquee rows on page load
+function renderMarquee() {
+  const saved = localStorage.getItem('lmcb_brands');
+  const data = saved ? JSON.parse(saved) : DEFAULT_BRANDS;
+  ['1','2'].forEach(r => {
+    const list = data['row' + r] || [];
+    const doubled = [...list, ...list];
+    const el = document.getElementById('marquee-row-' + r);
+    if (!el) return;
+    el.innerHTML = doubled.map(b => `<div class="brand-chip">${b}</div>`).join('');
+  });
+}
+
+// Open/close admin
+function openAdmin() {
+  const o = document.getElementById('admin-overlay');
+  o.style.display = 'flex';
+  document.getElementById('admin-login').style.display = 'block';
+  document.getElementById('admin-editor').style.display = 'none';
+  document.getElementById('admin-pw').value = '';
+  document.getElementById('admin-pw-error').style.display = 'none';
+  setTimeout(() => document.getElementById('admin-pw').focus(), 100);
+}
+
+function closeAdmin() {
+  document.getElementById('admin-overlay').style.display = 'none';
+}
+
+function adminLogin() {
+  const pw = document.getElementById('admin-pw').value;
+  if (pw === ADMIN_PASSWORD) {
+    document.getElementById('admin-login').style.display = 'none';
+    document.getElementById('admin-editor').style.display = 'block';
+    renderBrandList();
+  } else {
+    document.getElementById('admin-pw-error').style.display = 'block';
+    document.getElementById('admin-pw').value = '';
+    document.getElementById('admin-pw').focus();
   }
-  if (params.has('password') && typeof changeAdminPassword === 'function') {
-    setTimeout(changeAdminPassword, 500);
-  }
+}
+
+// Allow Enter key on password field
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('admin-pw').addEventListener('keydown', e => { if (e.key === 'Enter') adminLogin(); });
+  renderMarquee();
+
+  // Open via URL param
+  if (location.search.includes('admin')) openAdmin();
 });
+
+// Keyboard shortcut Ctrl+Shift+A
+
+
+// Render editable brand list in panel
+function renderBrandList() {
+  const container = document.getElementById('brand-list');
+  container.innerHTML = '';
+  ['row1','row2'].forEach(row => {
+    const rowLabel = document.createElement('div');
+    rowLabel.style.cssText = 'font-size:1.08rem;letter-spacing:0.2em;text-transform:uppercase;color:#C8A951;opacity:0.6;margin:0.8rem 0 0.4rem;';
+    rowLabel.textContent = row === 'row1' ? '— Row 1 (top marquee)' : '— Row 2 (bottom marquee)';
+    container.appendChild(rowLabel);
+
+    brands[row].forEach((name, i) => {
+      const item = document.createElement('div');
+      item.style.cssText = 'display:flex;gap:0.6rem;align-items:center;';
+      item.innerHTML = `
+        <input value="${name}" data-row="${row}" data-index="${i}"
+          style="flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(200,169,81,0.2);color:#F5F0E8;padding:0.55rem 0.8rem;font-family:DM Mono,monospace;font-size:1.26rem;outline:none;"
+          onchange="brands['${row}'][${i}]=this.value" />
+        <button onclick="removeBrand('${row}',${i})"
+          style="background:transparent;border:1px solid rgba(212,71,42,0.3);color:#D4472A;padding:0.5rem 0.7rem;font-size:1.26rem;cursor:pointer;flex-shrink:0;font-family:DM Mono,monospace;">✕</button>
+      `;
+      container.appendChild(item);
+    });
+  });
+}
+
+function removeBrand(row, index) {
+  brands[row].splice(index, 1);
+  renderBrandList();
+}
+
+function addBrand() {
+  const name = document.getElementById('new-brand-input').value.trim();
+  const row = 'row' + document.getElementById('new-brand-row').value;
+  if (!name) return;
+  brands[row].push(name);
+  document.getElementById('new-brand-input').value = '';
+  renderBrandList();
+}
+
+function applyBrands() {
+  localStorage.setItem('lmcb_brands', JSON.stringify(brands));
+  renderMarquee();
+  closeAdmin();
+  // Flash confirmation
+  const msg = document.createElement('div');
+  msg.textContent = '✓ Brands updated successfully';
+  msg.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#C8A951;color:#F5F0E8;padding:0.8rem 2rem;font-family:DM Mono,monospace;font-size:1.26rem;letter-spacing:0.12em;text-transform:uppercase;z-index:9999;font-weight:500;';
+  document.body.appendChild(msg);
+  setTimeout(() => msg.remove(), 3000);
+}
+
+function resetBrands() {
+  if (!confirm('Reset to original brand list?')) return;
+  brands = JSON.parse(JSON.stringify(DEFAULT_BRANDS));
+  localStorage.removeItem('lmcb_brands');
+  renderBrandList();
+}
+</script>
+<!-- WhatsApp Chat Bubble -->
+<div id="wa-bubble" style="display:none;visibility:hidden;pointer-events:none;position:fixed;bottom:2rem;right:2rem;z-index:900;flex-direction:column;align-items:flex-end;gap:0.8rem;">
+  <div id="wa-tooltip" style="display:none;background:#1C1609;border:1px solid rgba(200,169,81,0.3);padding:1rem 1.4rem;font-family:DM Mono,monospace;font-size:1.08rem;color:#F5F0E8;max-width:240px;line-height:1.7;position:relative;">
+    <div style="font-size:1.26rem;letter-spacing:0.2em;text-transform:uppercase;color:#C8A951;margin-bottom:0.4rem;">WhatsApp Support</div>
+    Chat with us directly for quick support.
+    <button onclick="document.getElementById('wa-tooltip').style.display='none'" style="position:absolute;top:0.5rem;right:0.7rem;background:none;border:none;color:#F5F0E8;opacity:0.4;cursor:pointer;">✕</button>
+  </div>
+  <a id="wa-link" href="#" target="_blank" rel="noopener" style="width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.35);transition:transform 0.2s;text-decoration:none;" onmouseover="this.style.transform='scale(1.1)';document.getElementById('wa-tooltip').style.display='block'" onmouseout="this.style.transform='scale(1)'">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</div>
+<script>
+const _WA_NUM="918796158321",_WA_MSG="Hi! I need help with my clothing brand.";
+function _initWA(){const b=document.getElementById("wa-bubble"),l=document.getElementById("wa-link");if(!b||!l)return;l.href="https://wa.me/"+_WA_NUM+"?text="+encodeURIComponent(_WA_MSG);const p=localStorage.getItem("lmcb_current_plan");const paid=["brand_builder","pro_elite"];if(p&&paid.indexOf(p)!==-1){b.style.display="flex";b.style.visibility="visible";b.style.pointerEvents="auto";}else{b.style.display="none";b.style.visibility="hidden";b.style.pointerEvents="none";}}
+function getAdminPassword(){return localStorage.getItem("lmcb_admin_pw")||"admin123";}
+function changeAdminPassword(){const c=prompt("Enter CURRENT admin password:");if(!c)return;if(c!==getAdminPassword()){alert("Incorrect password.");return;}const n=prompt("Enter NEW password (min 8 chars):");if(!n||n.length<8){alert("Min 8 characters required.");return;}const c2=prompt("Confirm new password:");if(n!==c2){alert("Passwords do not match.");return;}localStorage.setItem("lmcb_admin_pw",n);alert("Password updated! New password: "+n);}
+
+document.addEventListener("DOMContentLoaded",_initWA);
 </script>
 
+  <!-- MOBILE BOTTOM NAVIGATION -->
+  <nav class="mobile-bottom-nav">
+    <a href="/index.html" id="bn-home">
+      <span class="nav-icon">🏠</span>
+      <span>Home</span>
+    </a>
+    <a href="/services.html" id="bn-services">
+      <span class="nav-icon">📐</span>
+      <span>Services</span>
+    </a>
+    <a href="/manufacturers.html" id="bn-mfr">
+      <span class="nav-icon">🏭</span>
+      <span>Factories</span>
+    </a>
+    <a href="/specsheets.html" id="bn-spec">
+      <span class="nav-icon">📋</span>
+      <span>Spec</span>
+    </a>
+    <a href="/insights.html" id="bn-insights">
+      <span class="nav-icon">🎬</span>
+      <span>Insights</span>
+    </a>
+    <a href="/subscribe.html" id="bn-pricing">
+      <span class="nav-icon">⭐</span>
+      <span>Plans</span>
+    </a>
+  </nav>
   <script>
     // Highlight active bottom nav item
     (function() {
@@ -1395,5 +1516,20 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     })();
   </script>
+
+
+<script>
+// Open admin via URL: add ?admin to any page URL
+// Change password via URL: add ?password to any page URL
+document.addEventListener('DOMContentLoaded', function() {
+  var params = new URLSearchParams(window.location.search);
+  if (params.has('admin') && typeof openAdmin === 'function') {
+    openAdmin();
+  }
+  if (params.has('password') && typeof changeAdminPassword === 'function') {
+    setTimeout(changeAdminPassword, 500);
+  }
+});
+</script>
 </body>
 </html>
