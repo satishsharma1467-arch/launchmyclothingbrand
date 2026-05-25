@@ -1,97 +1,30 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Choose your plan. Basic ₹499/mo, Brand Builder ₹999/mo, Pro Elite ₹1599/mo.">
 <title>Pricing | Launch My Clothing Brand</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <style>
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 1.3rem 4rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--border);
-      background: rgba(14,11,6,0.92);
-      backdrop-filter: blur(14px);
-    }
-
-    .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      font-weight: 400;
-      letter-spacing: 0.08em;
-      text-decoration: none;
-      color: var(--cream);
-      display: flex;
-      flex-direction: column;
-      line-height: 1.2;
-    }
-
-    .nav-logo span {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.55rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      opacity: 0.45;
-      margin-top: 0.15rem;
-      color: var(--cream);
-      display: block;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-      list-style: none;
-      align-items: center;
-    }
-
-    .nav-links a {
-      color: var(--cream);
-      text-decoration: none;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      opacity: 0.6;
-      transition: opacity 0.2s, color 0.2s;
-    }
-
-    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold); }
-
-    .nav-cta {
-      background: var(--gold) !important;
-      color: var(--ink) !important;
-      padding: 0.6rem 1.4rem !important;
-      opacity: 1 !important;
-      font-weight: 500 !important;
-      transition: background 0.2s !important;
-    }
-
-    .nav-cta:hover { background: var(--gold-light) !important; color: var(--ink) !important; }
-
-    .nav-close { display: none; }
+    html { font-size: 16px; scroll-behavior: smooth; }
 
   :root{--bg:#0d1117;--bg2:#161b22;--bg3:#21262d;--border:#30363d;--gold:#d4a843;--gold2:#f0c96a;--text:#e6edf3;--muted:#8b949e;--green:#3fb950;--red:#f85149;--radius:8px;}
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#0E0B06;color:var(--cream);font-family:'DM Mono',monospace;font-weight:300;min-height:100vh;}
+  body { font-size: 16px; background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif; }
   a{color:var(--gold);text-decoration:none;}
   a:hover{text-decoration:underline;}
 
-  
-  
-  
-  
-  
-  
-  
-  
+  nav{background:rgba(13,17,23,.95);border-bottom:1px solid var(--border);padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(8px);}
+  .nav-logo{font-size:1rem;font-weight:600;color:var(--text);display:flex;flex-direction:column;line-height:1.2;}
+  .nav-logo span{font-size:.7rem;font-weight:400;color:var(--muted);}
+  .nav-links{display:flex;gap:1.5rem;list-style:none;align-items:center;}
+  .nav-links a{color:var(--muted);font-size:.85rem;transition:color .2s;}
+  .nav-links a:hover{color:var(--text);text-decoration:none;}
+  .nav-links .cta{background:var(--gold);color:#000;padding:.4rem 1rem;border-radius:var(--radius);font-weight:500;font-size:.8rem;}
+  .nav-links .cta:hover{background:var(--gold2);text-decoration:none;}
   
   @media(max-width:768px){
     .nav-hamburger { display: flex !important; }
@@ -201,17 +134,40 @@
   .spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(0,0,0,.3);border-top-color:#000;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:6px;}
   @keyframes spin{to{transform:rotate(360deg);}}
 
-  .mob-/* NAV */display:none;position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);padding:.5rem;display:flex;justify-content:space-around;}
-  .mob-nav a{display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--muted);font-size:.6rem;text-decoration:none;}
-  @media(min-width:769px){        /* ═══ MOBILE BOTTOM NAV BAR ══════════════════════════ */
+  
+  
+  @media(min-width:769px){}
+
+    /* â•â•â• MOBILE HEADER & DRAWER OVERLAYS SOLID BLACK CONTRAST FIX â•â•â• */
+    @media (max-width: 1100px) {
+      nav {
+        background: #0E0B06 !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+      }
+      #main-nav {
+        background: #0E0B06 !important;
+      }
+    }
+    @media (max-width: 768px) {
+      nav {
+        background: #0E0B06 !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border-bottom: 1px solid rgba(200, 169, 81, 0.25) !important;
+      }
+      .nav-links {
+        background: #0E0B06 !important;
+      }
+      .mobile-bottom-nav, 
+      .mobile-bottom-nav a, 
+    }
+    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
     .mobile-bottom-nav {
       display: none;
     }
-    
     @media (max-width: 768px) {
-      /* Add padding to body so content not hidden behind bottom nav */
-      body { padding-bottom: 70px !important; }
-      
       .mobile-bottom-nav {
         display: flex !important;
         position: fixed !important;
@@ -224,7 +180,6 @@
         align-items: center !important;
         padding: 0 !important;
       }
-      
       .mobile-bottom-nav a {
         display: flex !important;
         flex-direction: column !important;
@@ -242,94 +197,225 @@
         text-align: center !important;
         transition: opacity 0.2s, color 0.2s !important;
       }
-      
       .mobile-bottom-nav a:hover,
       .mobile-bottom-nav a.active {
         opacity: 1 !important;
         color: #C8A951 !important;
       }
-      
       .mobile-bottom-nav .nav-icon {
         font-size: 1.2rem !important;
         line-height: 1 !important;
       }
-      
-      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
-      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
     }
-    .mobile-bottom-nav {
-      display: none;
-    }
-    
-    @media (max-width: 768px) {
-      /* Add padding to body so content not hidden behind bottom nav */
-      body { padding-bottom: 70px !important; }
-      
-      .mobile-bottom-nav {
-        display: flex !important;
-        position: fixed !important;
-        bottom: 0 !important; left: 0 !important; right: 0 !important;
-        height: 62px !important;
-        background: #0E0B06 !important;
-        border-top: 1px solid rgba(200,169,81,0.25) !important;
-        z-index: 500 !important;
-        justify-content: space-around !important;
-        align-items: center !important;
-        padding: 0 !important;
-      }
-      
-      .mobile-bottom-nav a {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 3px !important;
-        text-decoration: none !important;
-        color: #F5F0E8 !important;
-        opacity: 0.5 !important;
-        font-family: 'DM Mono', monospace !important;
-        font-size: 0.52rem !important;
-        letter-spacing: 0.08em !important;
-        text-transform: uppercase !important;
-        padding: 8px 4px !important;
-        flex: 1 !important;
-        text-align: center !important;
-        transition: opacity 0.2s, color 0.2s !important;
-      }
-      
-      .mobile-bottom-nav a:hover,
-      .mobile-bottom-nav a.active {
-        opacity: 1 !important;
-        color: #C8A951 !important;
-      }
-      
-      .mobile-bottom-nav .nav-icon {
-        font-size: 1.2rem !important;
-        line-height: 1 !important;
-      }
-      
-      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
-      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
-    };
-  } else {
-    ctaLink.textContent = 'Get Started';
-    ctaLink.href = '/subscribe.html';
-  }
-}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/index.html" class="nav-logo">
+    Launch My Clothing Brand
+    <span>Pattern Making &amp; Manufacturing</span>
+  </a>
+  <ul class="nav-links" id="main-nav">
+      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">âœ•</button>
+      <li><a href="/services.html">Services</a></li>
+      <li><a href="/library.html">Patterns</a></li>
+      <li><a href="/specsheets.html">Spec Sheets</a></li>
+      <li><a href="/insights.html">Insights</a></li>
+      <li><a href="/manufacturers.html">Manufacturers</a></li>
+      <li><a href="/subscribe.html" class="cta">Get Started</a></li>
+    </ul>
+  <button class="nav-hamburger" onclick="document.getElementById('main-nav').classList.add('open')" aria-label="Menu" style="display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:4px;">
+    <span style="display:block; width:24px; height:2px; background:var(--gold);"></span>
+    <span style="display:block; width:24px; height:2px; background:var(--gold);"></span>
+    <span style="display:block; width:24px; height:2px; background:var(--gold);"></span>
+  </button>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">Pricing Plans</div>
+  <h1>Unlock <em>Premium Features</em></h1>
+  <p>Take your clothing brand to the next level. Choose the plan that fits your stage — from startup to full-scale production.</p>
+</div>
+
+<div class="welcome-bar" id="welcomeBar"></div>
+<div class="alert info" id="infoAlert" style="text-align:center;"></div>
+
+<div class="plans-section">
+  <div class="plans-grid">
+
+    <!-- BASIC -->
+    <div class="plan-card" id="card-basic">
+      <div class="plan-num">01</div>
+      <div class="plan-icon">📦</div>
+      <div class="plan-name">Basic</div>
+      <div class="plan-tagline">Perfect for getting started</div>
+      <div class="plan-price">
+        <span class="currency">₹</span><span class="amount">499</span>
+        <div class="period">/ month</div>
+      </div>
+      <ul class="plan-features">
+        <li><span class="icon check">✦</span>4 Pattern downloads per month</li>
+        <li><span class="icon check">✦</span>Email support</li>
+        <li><span class="icon check">✦</span>Pattern library access</li>
+        <li><span class="icon dash">—</span><span style="opacity:.5">Manufacturer database</span></li>
+        <li><span class="icon dash">—</span><span style="opacity:.5">WhatsApp support</span></li>
+        <li><span class="icon dash">—</span><span style="opacity:.5">Spec sheet access</span></li>
+      </ul>
+      <button class="btn-plan" onclick="handleSubscribe('basic', 499, 'Basic')">Subscribe Now</button>
+    </div>
+
+    <!-- BRAND BUILDER -->
+    <div class="plan-card popular" id="card-builder">
+      <div class="popular-badge">Most Popular</div>
+      <div class="plan-num">02</div>
+      <div class="plan-icon">🚀</div>
+      <div class="plan-name">Brand Builder</div>
+      <div class="plan-tagline">For growing clothing brands</div>
+      <div class="plan-price">
+        <span class="currency">₹</span><span class="amount">999</span>
+        <div class="period">/ month</div>
+      </div>
+      <ul class="plan-features">
+        <li><span class="icon check">✦</span>9 Pattern downloads per month</li>
+        <li><span class="icon check">✦</span>Full manufacturer database</li>
+        <li><span class="icon check">✦</span>Priority email support</li>
+        <li><span class="icon check">✦</span>WhatsApp support</li>
+        <li><span class="icon check">✦</span>Spec sheet access</li>
+        <li><span class="icon check">✦</span>Early access to new patterns</li>
+      </ul>
+      <button class="btn-plan primary" onclick="handleSubscribe('brand_builder', 999, 'Brand Builder')">Subscribe Now</button>
+    </div>
+
+    <!-- PRO ELITE -->
+    <div class="plan-card" id="card-elite">
+      <div class="plan-num">03</div>
+      <div class="plan-icon">👑</div>
+      <div class="plan-name">Pro Elite</div>
+      <div class="plan-tagline">For established brands & agencies</div>
+      <div class="plan-price">
+        <span class="currency">₹</span><span class="amount">1599</span>
+        <div class="period">/ month</div>
+      </div>
+      <ul class="plan-features">
+        <li><span class="icon check">✦</span>15 Pattern downloads per month</li>
+        <li><span class="icon check">✦</span>Complete manufacturer database</li>
+        <li><span class="icon check">✦</span>Direct phone support</li>
+        <li><span class="icon check">✦</span>Priority expert consultation</li>
+        <li><span class="icon check">✦</span>Custom pattern requests</li>
+        <li><span class="icon check">✦</span>Spec sheet access</li>
+      </ul>
+      <button class="btn-plan" onclick="handleSubscribe('pro_elite', 1599, 'Pro Elite')">Subscribe Now</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- Comparison -->
+<div class="compare-section">
+  <div class="section-head">
+    <h2>Plan Comparison</h2>
+    <p>Everything side by side so you can choose with confidence.</p>
+  </div>
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Basic <br><span style="color:var(--gold)">₹499/mo</span></th>
+        <th class="highlight-col">Brand Builder <br><span style="color:var(--gold)">₹999/mo</span></th>
+        <th>Pro Elite <br><span style="color:var(--gold)">₹1599/mo</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="feature-name">Pattern Downloads / Month</td><td>4</td><td class="highlight-col">9</td><td>15</td></tr>
+      <tr><td class="feature-name">Pattern Library Access</td><td><span class="check-icon">✦</span></td><td><span class="check-icon highlight-col">✦</span></td><td><span class="check-icon">✦</span></td></tr>
+      <tr><td class="feature-name">Manufacturer Database</td><td><span class="dash-icon">—</span></td><td><span class="check-icon highlight-col">✦</span></td><td><span class="check-icon">✦</span></td></tr>
+      <tr><td class="feature-name">Manufacturer Contact Details</td><td><span class="dash-icon">—</span></td><td><span class="check-icon highlight-col">✦</span></td><td><span class="check-icon">✦</span></td></tr>
+      <tr><td class="feature-name">Industry Insight Videos</td><td><span class="dash-icon">—</span></td><td><span class="check-icon highlight-col">✦</span></td><td><span class="check-icon">✦</span></td></tr>
+      <tr><td class="feature-name">Email Support</td><td>✦</td><td class="highlight-col">✦ Priority</td><td>✦ Priority</td></tr>
+      <tr><td class="feature-name">WhatsApp Support</td><td><span class="dash-icon">—</span></td><td><span class="check-icon highlight-col">✦</span></td><td><span class="check-icon">✦</span></td></tr>
+      <tr><td class="feature-name">Phone Support</td><td><span class="dash-icon">—</span></td><td><span class="dash-icon">—</span></td><td><span class="check-icon">✦ Direct</span></td></tr>
+      <tr><td class="feature-name">Expert Consultation</td><td><span class="dash-icon">—</span></td><td><span class="dash-icon">—</span></td><td><span class="check-icon">✦ Priority</span></td></tr>
+      <tr><td class="feature-name">Spec Sheet Access</td><td><span class="dash-icon">—</span></td><td><span class="check-icon highlight-col">✦</span></td><td><span class="check-icon">✦</span></td></tr>
+      <tr><td class="feature-name">Custom Pattern Requests</td><td><span class="dash-icon">—</span></td><td><span class="dash-icon">—</span></td><td><span class="check-icon">✦</span></td></tr>
+      <tr><td class="feature-name">Early Access to New Patterns</td><td><span class="dash-icon">—</span></td><td><span class="check-icon highlight-col">✦</span></td><td><span class="check-icon">✦</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- FAQ -->
+<div class="faq-section">
+  <div class="section-head"><h2>Frequently Asked</h2></div>
+  <div class="faq-item"><div class="faq-q">Can I cancel my subscription anytime? <span class="toggle">+</span></div><div class="faq-a">Yes, you can cancel anytime. Your access continues until the end of your current billing period. No hidden fees or cancellation charges.</div></div>
+  <div class="faq-item"><div class="faq-q">Can I upgrade or downgrade my plan? <span class="toggle">+</span></div><div class="faq-a">Yes. You can upgrade at any time and the new plan takes effect immediately. Downgrading takes effect at the next billing cycle.</div></div>
+  <div class="faq-item"><div class="faq-q">Do unused pattern downloads roll over? <span class="toggle">+</span></div><div class="faq-a">Downloads reset each month and do not roll over. We recommend planning your downloads at the start of each month to make the most of your plan.</div></div>
+  <div class="faq-item"><div class="faq-q">What payment methods do you accept? <span class="toggle">+</span></div><div class="faq-a">We accept UPI, credit/debit cards, net banking, and major digital wallets via Razorpay. All payments are 100% secure.</div></div>
+  <div class="faq-item"><div class="faq-q">Are the manufacturer contact details verified? <span class="toggle">+</span></div><div class="faq-a">Yes. Every manufacturer in our database has been personally verified by our team. We regularly update contact details and add new verified partners.</div></div>
+  <div class="faq-item"><div class="faq-q">What is a custom pattern request? (Pro Elite) <span class="toggle">+</span></div><div class="faq-a">Pro Elite members can request patterns for specific garments not in our library. Our team will create them and add to your account within 5–7 business days.</div></div>
+</div>
+
+<div class="cta-bottom">
+  <h2>Ready to Get Started?</h2>
+  <p>Join hundreds of clothing brands across India who use Launch My Clothing Brand to build faster and smarter.</p>
+  <button class="btn btn-gold" onclick="handleSubscribe('brand_builder', 999, 'Brand Builder')">Start with Brand Builder →</button>
+</div>
+
+<!-- Success modal -->
+<div class="overlay" id="successOverlay">
+  <div class="modal">
+    <div class="big-icon">🎉</div>
+    <h2>Payment Successful!</h2>
+    <p id="successMsg">Your subscription is now active. You can now access all premium features.</p>
+    <button class="btn btn-gold" onclick="window.location.href='/library.html'">Access Pattern Library →</button>
+  </div>
+</div>
+
+<div id="wa-bubble" style="position:fixed;bottom:5rem;right:1.5rem;z-index:200;">
+  <a href="https://wa.me/918796158321?text=Hi%2C+I+want+to+subscribe+to+a+plan" target="_blank"
+     style="background:#25d366;color:#fff;padding:.6rem 1rem;border-radius:24px;font-size:.8rem;font-weight:600;display:flex;align-items:center;gap:.4rem;box-shadow:0 4px 16px rgba(0,0,0,.4);text-decoration:none;">
+    💬 WhatsApp Support
+  </a>
+</div>
+
+<div class="mob-nav">
+  <a href="/index.html">🏠<span>Home</span></a>
+  <a href="/services.html">📐<span>Services</span></a>
+  <a href="/manufacturers.html">🏭<span>Factories</span></a>
+  <a href="/specsheets.html">📋<span>Spec</span></a>
+  <a href="/insights.html">🎬<span>Insights</span></a>
+  <a href="/subscribe.html">⭐<span>Plans</span></a>
+</div>
+
+<script>
+const SB_URL = 'https://tldbjsqhjqapdwmfeuwq.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ';
+const RZP_KEY = 'rzp_live_SG0orAX4pL66PR';
+const WA = '918796158321';
+
+// read URL params (set by register.html after account creation)
+const params = new URLSearchParams(window.location.search);
+const presetPlan   = params.get('plan');
+const presetAmount = params.get('amount');
+const presetUid    = params.get('uid');
+const presetName   = params.get('name');
+const presetEmail  = params.get('email');
+const presetPhone  = params.get('phone');
+
+// also check localStorage session
+const session = JSON.parse(localStorage.getItem('lmcb_user') || 'null');
 
 // welcome bar
 if (session || presetName) {
-  const name = presetName ? decodeURIComponent(presetName) : (session ? session.firstName : '');
+  const name = presetName ? decodeURIComponent(presetName) : session.firstName;
   const bar = document.getElementById('welcomeBar');
-  if (bar && name) {
-    bar.textContent = `👋 Welcome back, ${name}! Choose your plan below to complete your subscription.`;
-    bar.classList.add('show');
-  }
+  bar.textContent = `👋 Welcome, ${name}! Choose your plan below to complete your subscription.`;
+  bar.classList.add('show');
 }
 
 // if came from register with a preset plan, highlight it
 if (presetPlan) {
   const info = document.getElementById('infoAlert');
-  const planLabels = { basic: 'Basic (₹399/mo)', brand_builder: 'Brand Builder (₹999/mo)', pro_elite: 'Pro Elite (₹1999/mo)' };
+  const planLabels = { basic: 'Basic (₹499/mo)', brand_builder: 'Brand Builder (₹999/mo)', pro_elite: 'Pro Elite (₹1599/mo)' };
   info.textContent = `You selected ${planLabels[presetPlan] || presetPlan} during registration. Click "Subscribe Now" to complete payment.`;
   info.classList.add('show');
   // scroll to that plan card
@@ -424,9 +510,8 @@ async function activateSubscription(uid, planKey, amount, paymentId, name, phone
   document.getElementById('successOverlay').classList.add('open');
 }
 </script>
-  <script src="/comm_guard.js"></script>
 
-    <!-- MOBILE BOTTOM NAVIGATION -->
+  <!-- MOBILE BOTTOM NAVIGATION -->
   <nav class="mobile-bottom-nav">
     <a href="/index.html" id="bn-home">
       <span class="nav-icon">🏠</span>
@@ -453,6 +538,7 @@ async function activateSubscription(uid, planKey, amount, paymentId, name, phone
       <span>Plans</span>
     </a>
   </nav>
+
   <script>
     // Highlight active bottom nav item
     (function() {
