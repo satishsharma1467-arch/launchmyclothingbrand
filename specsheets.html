@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -20,7 +20,7 @@
       --radius: 3px;
     }
     html { font-size: 16px; }
-    body { background: var(--bg); color: var(--cream); font-family: 'DM Mono', monospace; min-height: 100vh; }
+    body { font-size: 16px; background: var(--bg); color: var(--cream); font-family: 'DM Mono', monospace; min-height: 100vh; }
 
     body::before {
       content: '';
@@ -32,74 +32,17 @@
       opacity: 0.4;
     }
 
-        /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 1.3rem 4rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--border);
-      background: rgba(14,11,6,0.92);
-      backdrop-filter: blur(14px);
-    }
-
-    .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      font-weight: 400;
-      letter-spacing: 0.08em;
-      text-decoration: none;
-      color: var(--cream);
-      display: flex;
-      flex-direction: column;
-      line-height: 1.2;
-    }
-
-    .nav-logo span {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.55rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      opacity: 0.45;
-      margin-top: 0.15rem;
-      color: var(--cream);
-      display: block;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-      list-style: none;
-      align-items: center;
-    }
-
-    .nav-links a {
-      color: var(--cream);
-      text-decoration: none;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      opacity: 0.6;
-      transition: opacity 0.2s, color 0.2s;
-    }
-
-    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold); }
-
-    .nav-cta {
-      background: var(--gold) !important;
-      color: var(--ink) !important;
-      padding: 0.6rem 1.4rem !important;
-      opacity: 1 !important;
-      font-weight: 500 !important;
-      transition: background 0.2s !important;
-    }
-
-    .nav-cta:hover { background: var(--gold-light) !important; color: var(--ink) !important; }
-
-    .nav-close { display: none; }
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 3rem; background: rgba(14,11,6,0.95); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; letter-spacing: 0.08em; text-decoration: none; color: var(--cream); display: flex; flex-direction: column; }
+    .nav-logo span { font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.45; margin-top: 0.15rem; }
+    .nav-links { display: flex; gap: 1.2rem; list-style: none; align-items: center; }
+    .nav-links a { color: var(--cream); text-decoration: none; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.6; transition: opacity 0.2s; }
+    .nav-links a:hover { opacity: 1; color: var(--gold); }
+    .nav-cta { background: var(--gold) !important; color: var(--ink) !important; padding: 0.5rem 1rem !important; opacity: 1 !important; font-weight: 500 !important; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--gold); }
+    .nav-close { display: none; position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; color: var(--gold); font-size: 1.5rem; cursor: pointer; }
 
     /* PAGE HERO */
     .page-hero { padding: 8rem 4rem 4rem; border-bottom: 1px solid var(--border); }
@@ -141,7 +84,7 @@
     .spec-lock-icon { font-size: 1.5rem; }
     .spec-lock-text { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
     
-    .spec-body { padding: 1.5rem; }
+    .spec-body { font-size: 16px; padding: 1.5rem; }
     .spec-index { font-family: 'Bebas Neue'; font-size: 1.2rem; color: var(--gold); opacity: 0.25; margin-bottom: 0.5rem; }
     .spec-name { font-size: 0.88rem; font-weight: 500; line-height: 1.4; margin-bottom: 0.6rem; }
     .spec-desc { font-size: 0.72rem; opacity: 0.5; line-height: 1.7; margin-bottom: 1rem; }
@@ -217,115 +160,16 @@
     .pw-err { display: none; color: #f44336; font-size: 0.72rem; margin-bottom: 0.8rem; }
     .spinner { display: inline-block; width: 12px; height: 12px; border: 2px solid rgba(255,255,255,0.2); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.6s linear infinite; vertical-align: middle; margin-right: 5px; }
 
-            /* ═══ MOBILE BOTTOM NAV BAR ══════════════════════════ */
-    .mobile-bottom-nav {
-      display: none;
-    }
+    /* MOBILE NAVIGATION */
     
-    @media (max-width: 768px) {
-      /* Add padding to body so content not hidden behind bottom nav */
-      body { padding-bottom: 70px !important; }
-      
-      .mobile-bottom-nav {
-        display: flex !important;
-        position: fixed !important;
-        bottom: 0 !important; left: 0 !important; right: 0 !important;
-        height: 62px !important;
-        background: #0E0B06 !important;
-        border-top: 1px solid rgba(200,169,81,0.25) !important;
-        z-index: 500 !important;
-        justify-content: space-around !important;
-        align-items: center !important;
-        padding: 0 !important;
-      }
-      
-      .mobile-bottom-nav a {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 3px !important;
-        text-decoration: none !important;
-        color: #F5F0E8 !important;
-        opacity: 0.5 !important;
-        font-family: 'DM Mono', monospace !important;
-        font-size: 0.52rem !important;
-        letter-spacing: 0.08em !important;
-        text-transform: uppercase !important;
-        padding: 8px 4px !important;
-        flex: 1 !important;
-        text-align: center !important;
-        transition: opacity 0.2s, color 0.2s !important;
-      }
-      
-      .mobile-bottom-nav a:hover,
-      .mobile-bottom-nav a.active {
-        opacity: 1 !important;
-        color: #C8A951 !important;
-      }
-      
-      .mobile-bottom-nav .nav-icon {
-        font-size: 1.2rem !important;
-        line-height: 1 !important;
-      }
-      
-      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
-      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
-    }
-    .mobile-bottom-nav {
-      display: none;
-    }
     
-    @media (max-width: 768px) {
-      /* Add padding to body so content not hidden behind bottom nav */
-      body { padding-bottom: 70px !important; }
-      
-      .mobile-bottom-nav {
-        display: flex !important;
-        position: fixed !important;
-        bottom: 0 !important; left: 0 !important; right: 0 !important;
-        height: 62px !important;
-        background: #0E0B06 !important;
-        border-top: 1px solid rgba(200,169,81,0.25) !important;
-        z-index: 500 !important;
-        justify-content: space-around !important;
-        align-items: center !important;
-        padding: 0 !important;
-      }
-      
-      .mobile-bottom-nav a {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 3px !important;
-        text-decoration: none !important;
-        color: #F5F0E8 !important;
-        opacity: 0.5 !important;
-        font-family: 'DM Mono', monospace !important;
-        font-size: 0.52rem !important;
-        letter-spacing: 0.08em !important;
-        text-transform: uppercase !important;
-        padding: 8px 4px !important;
-        flex: 1 !important;
-        text-align: center !important;
-        transition: opacity 0.2s, color 0.2s !important;
-      }
-      
-      .mobile-bottom-nav a:hover,
-      .mobile-bottom-nav a.active {
-        opacity: 1 !important;
-        color: #C8A951 !important;
-      }
-      
-      .mobile-bottom-nav .nav-icon {
-        font-size: 1.2rem !important;
-        line-height: 1 !important;
-      }
-      
-      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
-      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
-    }
+    
+    
 
-    .admin-fab { bottom: 75px; }
+    @media (max-width: 768px) {
+      
+      body { font-size: 16px; padding-bottom: 75px; }
+      .admin-fab { bottom: 75px; }
       nav { padding: 1rem 1.2rem; }
       .nav-links { display: none; position: fixed; inset: 0; background: #0E0B06 !important; flex-direction: column; justify-content: center; align-items: center; gap: 1.5rem; z-index: 999; }
       .nav-links.open { display: flex; }
@@ -360,81 +204,55 @@
       .nav-links {
         background: #0E0B06 !important;
       }
-      .mobile-bottom-nav, .mobile-nav {
-        background: #0E0B06 !important;
-        border-top: 1px solid rgba(200, 169, 81, 0.25) !important;
-      }
-      .mobile-bottom-nav a, .mobile-nav a {
-        background: #0E0B06 !important;
-      }
+      .mobile-bottom-nav, 
+      .mobile-bottom-nav a, 
     }
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
-    /* â•â•â• OPTIONS A: LUXURY PREMIUM SENSORY CONTRAST OVERRIDES â•â•â• */
-    /* Brushed Gold Gradient */
-    .btn-primary, .nav-cta, .cta, .btn-submit, .btn-gold {
-      background: linear-gradient(135deg, #E8C96A 0%, #C8A951 50%, #A68230 100%) !important;
-      color: #0E0B06 !important;
-      border: 1px solid rgba(232, 201, 106, 0.2) !important;
-      box-shadow: 0 4px 15px rgba(200, 169, 81, 0.15) !important;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-      text-shadow: none !important;
+    .mobile-bottom-nav {
+      display: none;
     }
-    
-    .btn-primary:hover, .btn-primary:active, .btn-primary:focus,
-    .nav-cta:hover, .nav-cta:active, .nav-cta:focus,
-    .cta:hover, .cta:active, .cta:focus,
-    .btn-submit:hover, .btn-submit:active, .btn-submit:focus,
-    .btn-gold:hover, .btn-gold:active, .btn-gold:focus {
-      transform: translateY(-2px) !important;
-      box-shadow: 0 8px 25px rgba(200, 169, 81, 0.3) !important;
-      filter: brightness(1.08) !important;
-      outline: none !important;
+    @media (max-width: 768px) {
+      .mobile-bottom-nav {
+        display: flex !important;
+        position: fixed !important;
+        bottom: 0 !important; left: 0 !important; right: 0 !important;
+        height: 62px !important;
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200,169,81,0.25) !important;
+        z-index: 500 !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        padding: 0 !important;
+      }
+      .mobile-bottom-nav a {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 3px !important;
+        text-decoration: none !important;
+        color: #F5F0E8 !important;
+        opacity: 0.5 !important;
+        font-family: 'DM Mono', monospace !important;
+        font-size: 0.52rem !important;
+        letter-spacing: 0.08em !important;
+        text-transform: uppercase !important;
+        padding: 8px 4px !important;
+        flex: 1 !important;
+        text-align: center !important;
+        transition: opacity 0.2s, color 0.2s !important;
+      }
+      .mobile-bottom-nav a:hover,
+      .mobile-bottom-nav a.active {
+        opacity: 1 !important;
+        color: #C8A951 !important;
+      }
+      .mobile-bottom-nav .nav-icon {
+        font-size: 1.2rem !important;
+        line-height: 1 !important;
+      }
     }
-    
-    /* Outline Button */
-    .btn-outline {
-      border: 1px solid rgba(200, 169, 81, 0.45) !important;
-      color: #F5F0E8 !important;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    
-    .btn-outline:hover, .btn-outline:active, .btn-outline:focus {
-      border-color: #C8A951 !important;
-      color: #C8A951 !important;
-      background: rgba(200, 169, 81, 0.05) !important;
-      transform: translateY(-2px) !important;
-      box-shadow: 0 6px 20px rgba(200, 169, 81, 0.08) !important;
-      outline: none !important;
-    }
-    
-    /* Card Interactions and Gold Dust Glows */
-    .mfr-card, .spec-card, .pattern-card, .service-card, .plan-card, .video-card {
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    
-    .mfr-card:hover, .mfr-card:active,
-    .spec-card:hover, .spec-card:active,
-    .pattern-card:hover, .pattern-card:active,
-    .service-card:hover, .service-card:active,
-    .plan-card:hover, .plan-card:active,
-    .video-card:hover, .video-card:active {
-      transform: translateY(-4px) !important;
-      border-color: rgba(200, 169, 81, 0.45) !important;
-      box-shadow: 0 12px 30px rgba(200, 169, 81, 0.16) !important;
-    }
-    
-    /* Logo Hover Glow */
-    .nav-logo {
-      transition: text-shadow 0.3s ease !important;
-    }
-    
-    .nav-logo:hover, .nav-logo:active {
-      text-shadow: 0 0 12px rgba(200, 169, 81, 0.4) !important;
-    }
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-    .nav-close { display: none; }
-  </style>
+</style>
 </head>
 <body>
 
@@ -445,11 +263,10 @@
       <span>Pattern Making &amp; Manufacturing</span>
     </a>
     <ul class="nav-links" id="main-nav">
-      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">&times;</button>
+      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">âœ•</button>
       <li><a href="/services.html">Services</a></li>
       <li><a href="/library.html">Patterns</a></li>
       <li><a href="/specsheets.html" class="active">Spec Sheets</a></li>
-      <li><a href="/phototopattern.html">Photo to Pattern</a></li>
       <li><a href="/insights.html">Insights</a></li>
       <li><a href="/manufacturers.html">Manufacturers</a></li>
       <li><a href="/subscribe.html" class="nav-cta">Get Started</a></li>
@@ -507,7 +324,35 @@
   </div>
 
   <!-- FOOTER -->
-  <footer>
+  
+  <!-- MOBILE BOTTOM NAVIGATION -->
+  <nav class="mobile-bottom-nav">
+    <a href="/index.html" id="bn-home">
+      <span class="nav-icon">🏠</span>
+      <span>Home</span>
+    </a>
+    <a href="/services.html" id="bn-services">
+      <span class="nav-icon">📐</span>
+      <span>Services</span>
+    </a>
+    <a href="/manufacturers.html" id="bn-mfr">
+      <span class="nav-icon">🏭</span>
+      <span>Factories</span>
+    </a>
+    <a href="/specsheets.html" id="bn-spec">
+      <span class="nav-icon">📋</span>
+      <span>Spec</span>
+    </a>
+    <a href="/insights.html" id="bn-insights">
+      <span class="nav-icon">🎬</span>
+      <span>Insights</span>
+    </a>
+    <a href="/subscribe.html" id="bn-pricing">
+      <span class="nav-icon">⭐</span>
+      <span>Plans</span>
+    </a>
+  </nav>
+<footer>
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="footer-brand-name">Launch My Clothing Brand</div>
@@ -519,7 +364,6 @@
           <li><a href="/services.html">Pattern Making</a></li>
           <li><a href="/library.html">Pattern Library</a></li>
           <li><a href="/specsheets.html">Spec Sheets</a></li>
-      <li><a href="/phototopattern.html">Photo to Pattern</a></li>
           <li><a href="/insights.html">Insights</a></li>
           <li><a href="/services.html">Consultation</a></li>
         </ul>
@@ -611,55 +455,7 @@
   </div>
 
   <!-- Mobile Bottom Nav -->
-      <!-- MOBILE BOTTOM NAVIGATION -->
-  <nav class="mobile-bottom-nav">
-    <a href="/index.html" id="bn-home">
-      <span class="nav-icon">🏠</span>
-      <span>Home</span>
-    </a>
-    <a href="/services.html" id="bn-services">
-      <span class="nav-icon">📐</span>
-      <span>Services</span>
-    </a>
-    <a href="/manufacturers.html" id="bn-mfr">
-      <span class="nav-icon">🏭</span>
-      <span>Factories</span>
-    </a>
-    <a href="/specsheets.html" id="bn-spec">
-      <span class="nav-icon">📋</span>
-      <span>Spec</span>
-    </a>
-    <a href="/insights.html" id="bn-insights">
-      <span class="nav-icon">🎬</span>
-      <span>Insights</span>
-    </a>
-    <a href="/subscribe.html" id="bn-pricing">
-      <span class="nav-icon">⭐</span>
-      <span>Plans</span>
-    </a>
-  </nav>
-  <script>
-    // Highlight active bottom nav item
-    (function() {
-      var path = window.location.pathname;
-      var map = {
-        'index': 'bn-home',
-        'services': 'bn-services', 
-        'manufacturers': 'bn-mfr',
-        'specsheets': 'bn-spec',
-        'insights': 'bn-insights',
-        'subscribe': 'bn-pricing',
-        'library': 'bn-services',
-        'contact': 'bn-home',
-      };
-      var page = path.replace(/.*\//, '').replace('.html', '') || 'index';
-      var activeId = map[page];
-      if (activeId) {
-        var el = document.getElementById(activeId);
-        if (el) el.classList.add('active');
-      }
-    })();
-  </script>
+  
 
   <!-- JSZip CDN for in-browser zipping of multiple file uploads -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
@@ -1058,6 +854,28 @@
       if (params.has('admin')) openAdmin();
     });
   </script>
-  <script src="/comm_guard.js"></script>
+
+  <script>
+    // Highlight active bottom nav item
+    (function() {
+      var path = window.location.pathname;
+      var map = {
+        'index': 'bn-home',
+        'services': 'bn-services', 
+        'manufacturers': 'bn-mfr',
+        'specsheets': 'bn-spec',
+        'insights': 'bn-insights',
+        'subscribe': 'bn-pricing',
+        'library': 'bn-services',
+        'contact': 'bn-home',
+      };
+      var page = path.replace(/.*\//, '').replace('.html', '') || 'index';
+      var activeId = map[page];
+      if (activeId) {
+        var el = document.getElementById(activeId);
+        if (el) el.classList.add('active');
+      }
+    })();
+  </script>
 </body>
 </html>
