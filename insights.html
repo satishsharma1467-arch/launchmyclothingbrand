@@ -626,47 +626,112 @@
 
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* MOBILE NAVIGATION */
-    .mobile-nav {
+            /* ═══ MOBILE BOTTOM NAV BAR ══════════════════════════ */
+    .mobile-bottom-nav {
       display: none;
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      height: 62px;
-      background: #0E0B06;
-      border-top: 1px solid var(--border);
-      z-index: 500;
-      justify-content: space-around;
-      align-items: center;
     }
-
-    .mobile-nav a {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
-      text-decoration: none;
-      color: var(--cream);
-      opacity: 0.5;
-      font-size: 0.52rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 8px 4px;
-      flex: 1;
-      text-align: center;
-      transition: opacity 0.2s;
-    }
-
-    .mobile-nav a:hover, .mobile-nav a.active {
-      opacity: 1;
-      color: var(--gold);
-    }
-
-    .mobile-nav .nav-icon { font-size: 1.2rem; }
-
+    
     @media (max-width: 768px) {
-      .mobile-nav { display: flex; }
-      body { padding-bottom: 75px; }
-      .admin-trigger { bottom: 75px; }
+      /* Add padding to body so content not hidden behind bottom nav */
+      body { padding-bottom: 70px !important; }
+      
+      .mobile-bottom-nav {
+        display: flex !important;
+        position: fixed !important;
+        bottom: 0 !important; left: 0 !important; right: 0 !important;
+        height: 62px !important;
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200,169,81,0.25) !important;
+        z-index: 500 !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        padding: 0 !important;
+      }
+      
+      .mobile-bottom-nav a {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 3px !important;
+        text-decoration: none !important;
+        color: #F5F0E8 !important;
+        opacity: 0.5 !important;
+        font-family: 'DM Mono', monospace !important;
+        font-size: 0.52rem !important;
+        letter-spacing: 0.08em !important;
+        text-transform: uppercase !important;
+        padding: 8px 4px !important;
+        flex: 1 !important;
+        text-align: center !important;
+        transition: opacity 0.2s, color 0.2s !important;
+      }
+      
+      .mobile-bottom-nav a:hover,
+      .mobile-bottom-nav a.active {
+        opacity: 1 !important;
+        color: #C8A951 !important;
+      }
+      
+      .mobile-bottom-nav .nav-icon {
+        font-size: 1.2rem !important;
+        line-height: 1 !important;
+      }
+      
+      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
+      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
+    }
+    .mobile-bottom-nav {
+      display: none;
+    }
+    
+    @media (max-width: 768px) {
+      /* Add padding to body so content not hidden behind bottom nav */
+      body { padding-bottom: 70px !important; }
+      
+      .mobile-bottom-nav {
+        display: flex !important;
+        position: fixed !important;
+        bottom: 0 !important; left: 0 !important; right: 0 !important;
+        height: 62px !important;
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200,169,81,0.25) !important;
+        z-index: 500 !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        padding: 0 !important;
+      }
+      
+      .mobile-bottom-nav a {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 3px !important;
+        text-decoration: none !important;
+        color: #F5F0E8 !important;
+        opacity: 0.5 !important;
+        font-family: 'DM Mono', monospace !important;
+        font-size: 0.52rem !important;
+        letter-spacing: 0.08em !important;
+        text-transform: uppercase !important;
+        padding: 8px 4px !important;
+        flex: 1 !important;
+        text-align: center !important;
+        transition: opacity 0.2s, color 0.2s !important;
+      }
+      
+      .mobile-bottom-nav a:hover,
+      .mobile-bottom-nav a.active {
+        opacity: 1 !important;
+        color: #C8A951 !important;
+      }
+      
+      .mobile-bottom-nav .nav-icon {
+        font-size: 1.2rem !important;
+        line-height: 1 !important;
+      }
+      
+      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
+      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
     }
 
     /* WHATSAPP FLOAT */
@@ -1019,303 +1084,54 @@
     </a>
   </div>
 
-  <!-- MOBILE BOTTOM NAVIGATION -->
-  <nav class="mobile-nav">
-    <a href="/index.html"><span class="nav-icon">🏠</span><span>Home</span></a>
-    <a href="/services.html"><span class="nav-icon">📐</span><span>Services</span></a>
-    <a href="/manufacturers.html"><span class="nav-icon">🏭</span><span>Factories</span></a>
-    <a href="/specsheets.html"><span class="nav-icon">📋</span><span>Spec</span></a>
-    <a href="/insights.html" class="active"><span class="nav-icon">🎬</span><span>Insights</span></a>
-    <a href="/subscribe.html"><span class="nav-icon">⭐</span><span>Plans</span></a>
+      <!-- MOBILE BOTTOM NAVIGATION -->
+  <nav class="mobile-bottom-nav">
+    <a href="/index.html" id="bn-home">
+      <span class="nav-icon">🏠</span>
+      <span>Home</span>
+    </a>
+    <a href="/services.html" id="bn-services">
+      <span class="nav-icon">📐</span>
+      <span>Services</span>
+    </a>
+    <a href="/manufacturers.html" id="bn-mfr">
+      <span class="nav-icon">🏭</span>
+      <span>Factories</span>
+    </a>
+    <a href="/specsheets.html" id="bn-spec">
+      <span class="nav-icon">📋</span>
+      <span>Spec</span>
+    </a>
+    <a href="/insights.html" id="bn-insights">
+      <span class="nav-icon">🎬</span>
+      <span>Insights</span>
+    </a>
+    <a href="/subscribe.html" id="bn-pricing">
+      <span class="nav-icon">⭐</span>
+      <span>Plans</span>
+    </a>
   </nav>
-
   <script>
-    const SB_URL  = 'https://tldbjsqhjqapdwmfeuwq.supabase.co';
-    const SB_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ';
-    const sb = supabase.createClient(SB_URL, SB_KEY);
-
-    // Read subscriber state from session / localStorage
-    const session = JSON.parse(localStorage.getItem('lmcb_user') || 'null');
-    const plan = localStorage.getItem('lmcb_current_plan') || (session ? session.plan : 'free');
-    const isPaid = plan === 'brand_builder' || plan === 'pro_elite';
-
-    // Dynamic navbar CTA text toggle (Get Started vs Logout)
-    const ctaLink = document.querySelector('#main-nav .cta, #main-nav .nav-cta');
-    if (ctaLink) {
-      if (session) {
-        ctaLink.textContent = 'Logout';
-        ctaLink.href = '#';
-        ctaLink.style.background = 'linear-gradient(135deg, #f85149 0%, #d4472a 100%) !important'; // Premium red gradient
-        ctaLink.style.color = '#F5F0E8 !important';
-        ctaLink.onclick = (e) => {
-          e.preventDefault();
-          if (confirm('Are you sure you want to log out from your account?')) {
-            localStorage.removeItem('lmcb_user');
-            localStorage.removeItem('lmcb_current_plan');
-            window.location.reload();
-          }
-        };
-      } else {
-        ctaLink.textContent = 'Get Started';
-        ctaLink.href = '/subscribe.html';
+    // Highlight active bottom nav item
+    (function() {
+      var path = window.location.pathname;
+      var map = {
+        'index': 'bn-home',
+        'services': 'bn-services', 
+        'manufacturers': 'bn-mfr',
+        'specsheets': 'bn-spec',
+        'insights': 'bn-insights',
+        'subscribe': 'bn-pricing',
+        'library': 'bn-services',
+        'contact': 'bn-home',
+      };
+      var page = path.replace(/.*\//, '').replace('.html', '') || 'index';
+      var activeId = map[page];
+      if (activeId) {
+        var el = document.getElementById(activeId);
+        if (el) el.classList.add('active');
       }
-    }
-
-    // Premium video locking modal
-    function handleLockedVideo(title) {
-      const overlay = document.createElement('div');
-      overlay.style.cssText = 'position:fixed;inset:0;background:rgba(14,11,6,0.96);z-index:9999;display:flex;align-items:center;justify-content:center;font-family:\'DM Mono\',monospace;color:#F5F0E8;padding:2rem;backdrop-filter:blur(14px);animation:fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);';
-      
-      if (!document.getElementById('lock-modal-styles')) {
-        const style = document.createElement('style');
-        style.id = 'lock-modal-styles';
-        style.textContent = `
-          @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-          @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        `;
-        document.head.appendChild(style);
-      }
-      
-      overlay.innerHTML = `
-        <div style="background:#1C1609;border:1px solid rgba(200,169,81,0.35);padding:3.5rem 2.5rem;max-width:500px;width:100%;text-align:center;position:relative;box-shadow:0 25px 60px rgba(200,169,81,0.2);animation:slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);border-radius:3px;">
-          <button onclick="this.parentElement.parentElement.remove()" style="position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:#F5F0E8;font-size:1.8rem;cursor:pointer;opacity:0.5;transition:opacity 0.2s, transform 0.2s;" onmouseover="this.style.opacity=1;this.style.transform='scale(1.1)'" onmouseout="this.style.opacity=0.5;this.style.transform='scale(1)'">&times;</button>
-          <div style="font-size:3.5rem;margin-bottom:1.5rem;text-shadow:0 0 20px rgba(200,169,81,0.3);">🔒</div>
-          <div style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:#C8A951;margin-bottom:1rem;font-weight:500;">Premium Subscriber Video</div>
-          <h3 style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;margin-bottom:1.2rem;line-height:1.25;color:#F5F0E8;">${title}</h3>
-          <p style="font-size:0.8rem;opacity:0.6;line-height:1.8;margin-bottom:2.5rem;max-width:38ch;margin-left:auto;margin-right:auto;">This exclusive, high-end AI tutorial and brand-builder strategy walkthrough is reserved for our Premium members only.</p>
-          <a href="/subscribe.html" style="display:inline-block;background:linear-gradient(135deg, #E8C96A 0%, #C8A951 50%, #A68230 100%) !important;color:#0E0B06 !important;padding:0.95rem 2.4rem;text-decoration:none;font-weight:600;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;box-shadow:0 6px 20px rgba(200,169,81,0.25);border:1px solid rgba(232, 201, 106, 0.2);transition:all 0.4s cubic-bezier(0.16, 1, 0.3, 1);" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 10px 30px rgba(200,169,81,0.45)';this.style.filter='brightness(1.08)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 6px 20px rgba(200,169,81,0.25)';this.style.filter='brightness(1)'">Unlock Content Now →</a>
-        </div>
-      `;
-      document.body.appendChild(overlay);
-    }
-
-    const DEFAULT_VIDEOS = [
-      {
-        id: 'def-vid-1',
-        title: 'AI-Generated Tech Packs & Garment Strategy || premium',
-        youtube_url: 'https://www.youtube.com/watch?v=y3mBfWv8q98',
-        category: 'Brand Development',
-        duration: '15:45',
-        description: 'Learn how to use AI prompt frameworks to generate highly accurate tech packs and fit specification sheets for manufacturer submittals in minutes.',
-        is_active: true
-      },
-      {
-        id: 'def-vid-2',
-        title: 'Pattern Grading & Digitization Mastery || premium',
-        youtube_url: 'https://www.youtube.com/watch?v=F_f8N4h4bSg',
-        category: 'Pattern Making',
-        duration: '22:10',
-        description: 'Step-by-step masterclass on digitizing manual paper patterns and grading them across standard sizes XS through XXL using professional CAD software.',
-        is_active: true
-      },
-      {
-        id: 'def-vid-3',
-        title: 'Garment Sourcing & Manufacturing in India',
-        youtube_url: 'https://www.youtube.com/watch?v=jW2x1D14FhI',
-        category: 'Manufacturing',
-        duration: '10:30',
-        description: 'Essential guide to finding, vetting, and negotiating contract terms with apparel factories in Delhi, Tirupur, and Mumbai hubs.',
-        is_active: true
-      }
-    ];
-    
-    function openAdminPrompt(){ document.getElementById('promptOverlay').classList.add('open'); }
-    function closeOverlay(id){ document.getElementById(id).classList.remove('open'); }
-    function showAlert(id,msg,type){ const el=document.getElementById(id); el.textContent=msg; el.className='alert-sm show '+type; setTimeout(()=>el.className='alert-sm',4000); }
-
-    // SECURED PASSWORD VERIFICATION
-    async function checkAdminPw(){
-      const enteredPw = document.getElementById('adminPwInput').value;
-      if (!enteredPw) { showAlert('promptAlert', 'Please enter a password.', 'error'); return; }
-      
-      const { data, error } = await sb.from('site_settings').select('id').eq('id', 'main').eq('lmcb_admin_pw', enteredPw).single();
-      
-      if (error || !data) {
-        showAlert('promptAlert', 'Incorrect password. Try again.', 'error');
-        document.getElementById('adminPwInput').value = '';
-        document.getElementById('adminPwInput').focus();
-      } else {
-        closeOverlay('promptOverlay');
-        document.getElementById('adminOverlay').classList.add('open');
-        loadExisting();
-      }
-    }
-
-    // extract YouTube video ID from any YT URL format
-    function getYTId(url){
-      const m = url.match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([a-zA-Z0-9_-]{11})/);
-      return m ? m[1] : null;
-    }
-
-    let allVideos = [], allCategories = new Set();
-
-    async function loadVideos(){
-      const { data, error } = await sb.from('videos').select('*').eq('is_active',true).order('created_at',{ascending:false});
-      const grid = document.getElementById('videosGrid');
-      if (error){ grid.innerHTML='<div class="empty-state"><div class="empty-icon">❌</div><p>Failed to load insights.</p></div>'; return; }
-      
-      let dbVideos = data || [];
-      let rawVideos = [];
-      
-      // If database contains actual user videos, show ONLY those videos.
-      // If database is empty, fallback to display default mock tutorials.
-      if (dbVideos.length > 0) {
-        rawVideos = dbVideos;
-      } else {
-        rawVideos = DEFAULT_VIDEOS;
-      }
-
-      // Parse premium tag from title
-      allVideos = rawVideos.map(v => {
-        const isPremium = v.title.includes(' || premium');
-        return {
-          ...v,
-          is_premium: isPremium,
-          title: isPremium ? v.title.replace(/\s*\|\|\s*premium$/, '') : v.title
-        };
-      });
-
-      document.getElementById('totalCount').textContent = allVideos.length;
-
-      if(!allVideos.length){
-        grid.innerHTML='<div class="empty-state"><div class="empty-icon">🎬</div><p>No video insights available. Check back soon!</p></div>';
-        return;
-      }
-
-      // clear existing filter buttons to avoid duplication
-      const bar = document.getElementById('filtersBar');
-      bar.innerHTML = '<span style="font-size:0.72rem; color:var(--gold); opacity:0.7; margin-right:0.5rem; text-transform:uppercase; letter-spacing:0.1em;">Filter:</span>';
-      
-      const allBtn = document.createElement('button');
-      allBtn.className = 'filter-btn active';
-      allBtn.textContent = 'All';
-      allBtn.onclick = () => filterVideos('all', allBtn);
-      bar.appendChild(allBtn);
-
-      allCategories.clear();
-      allVideos.forEach(v => {
-        if(v.category) allCategories.add(v.category);
-      });
-      
-      bar.style.display='flex';
-      allCategories.forEach(cat => {
-        const btn = document.createElement('button');
-        btn.className='filter-btn'; btn.textContent=cat;
-        btn.onclick=()=>filterVideos(cat,btn);
-        bar.appendChild(btn);
-      });
-
-      renderVideos(allVideos);
-    }
-
-    function renderVideos(videos){
-      const grid = document.getElementById('videosGrid');
-      if(!videos.length){ grid.innerHTML='<div class="empty-state"><div class="empty-icon">📭</div><p>No insights found in this category.</p></div>'; return; }
-      grid.innerHTML = videos.map(v => {
-        const ytId = getYTId(v.youtube_url);
-        const thumb = ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : '';
-        
-        // Premium Locking Logic
-        const needsLock = v.is_premium && !isPaid;
-        const clickAction = needsLock 
-          ? `handleLockedVideo('${v.title.replace(/'/g, "\\'")}')`
-          : `playVideo('${v.id}','${ytId}')`;
-          
-        const badgeContent = v.is_premium
-          ? `<span style="color:#C8A951;font-weight:600;letter-spacing:0.04em;">🔒 Subscriber Exclusive</span>`
-          : `<span style="opacity:0.6;">🆓 Free Access</span>`;
-          
-        const playIcon = '▶';
-
-        return `
-        <div class="video-card">
-          <div class="video-thumb" id="thumb-${v.id}" onclick="${clickAction}">
-            ${thumb ? `<img src="${thumb}" alt="${v.title}" loading="lazy">` : '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2rem">🎬</div>'}
-            <div class="play-btn"><div class="play-circle">${playIcon}</div></div>
-          </div>
-          <div class="video-embed" id="embed-${v.id}">
-            <iframe src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
-          </div>
-          <div class="card-body">
-            <div class="card-cat">${v.category || 'General'}</div>
-            <div class="card-title">${v.title}</div>
-            ${v.description ? `<div class="card-desc">${v.description}</div>` : ''}
-            <div class="card-meta">
-              ${v.duration ? `<span>⏱ ${v.duration}</span>` : ''}
-              <span>${badgeContent}</span>
-            </div>
-          </div>
-        </div>`;
-      }).join('');
-    }
-
-    function playVideo(id, ytId){
-      if(!ytId) return;
-      document.getElementById('thumb-'+id).style.display='none';
-      const embed = document.getElementById('embed-'+id);
-      embed.style.display='block';
-      embed.querySelector('iframe').src=`https://www.youtube.com/embed/${ytId}?autoplay=1`;
-    }
-
-    function filterVideos(cat, btn){
-      document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-      renderVideos(cat==='all' ? allVideos : allVideos.filter(v=>v.category===cat));
-    }
-
-    async function addVideo(){
-      const url   = document.getElementById('aUrl').value.trim();
-      let title = document.getElementById('aTitle').value.trim();
-      const cat   = document.getElementById('aCategory').value;
-      const dur   = document.getElementById('aDuration').value.trim();
-      const desc  = document.getElementById('aDesc').value.trim();
-      const isPremium = document.getElementById('aIsPremium').checked;
-      
-      if(!url||!title){ showAlert('adminAlert','YouTube URL and title are required.','error'); return; }
-      if(!getYTId(url)){ showAlert('adminAlert','Invalid YouTube URL format.','error'); return; }
-      
-      if (isPremium) {
-        title = title + ' || premium';
-      }
-      
-      const btn=document.getElementById('addBtn');
-      btn.disabled=true; btn.innerHTML='<span class="spinner"></span>Saving...';
-      const { error } = await sb.from('videos').insert({ youtube_url:url, title, category:cat, duration:dur, description:desc });
-      if(error){ showAlert('adminAlert','❌ '+error.message,'error'); }
-      else {
-        showAlert('adminAlert','✅ Video added successfully!','success');
-        document.getElementById('aUrl').value=''; document.getElementById('aTitle').value='';
-        document.getElementById('aDuration').value=''; document.getElementById('aDesc').value='';
-        document.getElementById('aIsPremium').checked=false;
-        loadVideos(); loadExisting();
-      }
-      btn.disabled=false; btn.textContent='Add Video →';
-    }
-
-    async function loadExisting(){
-      const { data } = await sb.from('videos').select('id,title,category').order('created_at',{ascending:false});
-      const list=document.getElementById('existingList');
-      if(!data||!data.length){ list.innerHTML='<p style="font-size:0.75rem;opacity:0.5;">No videos yet.</p>'; return; }
-      list.innerHTML=data.map(v => {
-        const isPremium = v.title.includes(' || premium');
-        const displayTitle = isPremium ? v.title.replace(/\s*\|\|\s*premium$/, '') : v.title;
-        const premiumBadge = isPremium ? ' <span style="color:var(--gold);font-size:0.6rem;margin-left:5px;">🔒 Premium</span>' : '';
-        return `
-        <div class="exist-item">
-          <span class="exist-item-name">${displayTitle}${premiumBadge}</span>
-          <span class="exist-item-badge">${v.category}</span>
-          <button class="exist-item-del" onclick="deleteVideo('${v.id}')">🗑</button>
-        </div>`;
-      }).join('');
-    }
-
-    async function deleteVideo(id){
-      if(!confirm('Are you sure you want to remove this insight video?')) return;
-      await sb.from('videos').delete().eq('id',id);
-      loadVideos(); loadExisting();
-    }
-
-    loadVideos();
+    })();
   </script>
   <script src="/comm_guard.js"></script>
 </body>
