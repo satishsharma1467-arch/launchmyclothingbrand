@@ -401,7 +401,115 @@
       .mobile-nav { display: flex; }
       body { padding-bottom: 75px; }
     }
-  </style>
+  
+        /* ═══ MOBILE BOTTOM NAV BAR ══════════════════════════ */
+    .mobile-bottom-nav {
+      display: none;
+    }
+    
+    @media (max-width: 768px) {
+      /* Add padding to body so content not hidden behind bottom nav */
+      body { padding-bottom: 70px !important; }
+      
+      .mobile-bottom-nav {
+        display: flex !important;
+        position: fixed !important;
+        bottom: 0 !important; left: 0 !important; right: 0 !important;
+        height: 62px !important;
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200,169,81,0.25) !important;
+        z-index: 500 !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        padding: 0 !important;
+      }
+      
+      .mobile-bottom-nav a {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 3px !important;
+        text-decoration: none !important;
+        color: #F5F0E8 !important;
+        opacity: 0.5 !important;
+        font-family: 'DM Mono', monospace !important;
+        font-size: 0.52rem !important;
+        letter-spacing: 0.08em !important;
+        text-transform: uppercase !important;
+        padding: 8px 4px !important;
+        flex: 1 !important;
+        text-align: center !important;
+        transition: opacity 0.2s, color 0.2s !important;
+      }
+      
+      .mobile-bottom-nav a:hover,
+      .mobile-bottom-nav a.active {
+        opacity: 1 !important;
+        color: #C8A951 !important;
+      }
+      
+      .mobile-bottom-nav .nav-icon {
+        font-size: 1.2rem !important;
+        line-height: 1 !important;
+      }
+      
+      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
+      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
+    }
+    .mobile-bottom-nav {
+      display: none;
+    }
+    
+    @media (max-width: 768px) {
+      /* Add padding to body so content not hidden behind bottom nav */
+      body { padding-bottom: 70px !important; }
+      
+      .mobile-bottom-nav {
+        display: flex !important;
+        position: fixed !important;
+        bottom: 0 !important; left: 0 !important; right: 0 !important;
+        height: 62px !important;
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200,169,81,0.25) !important;
+        z-index: 500 !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        padding: 0 !important;
+      }
+      
+      .mobile-bottom-nav a {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 3px !important;
+        text-decoration: none !important;
+        color: #F5F0E8 !important;
+        opacity: 0.5 !important;
+        font-family: 'DM Mono', monospace !important;
+        font-size: 0.52rem !important;
+        letter-spacing: 0.08em !important;
+        text-transform: uppercase !important;
+        padding: 8px 4px !important;
+        flex: 1 !important;
+        text-align: center !important;
+        transition: opacity 0.2s, color 0.2s !important;
+      }
+      
+      .mobile-bottom-nav a:hover,
+      .mobile-bottom-nav a.active {
+        opacity: 1 !important;
+        color: #C8A951 !important;
+      }
+      
+      .mobile-bottom-nav .nav-icon {
+        font-size: 1.2rem !important;
+        line-height: 1 !important;
+      }
+      
+      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
+      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
+    }
+</style>
 </head>
 <body>
 
@@ -589,179 +697,54 @@
     </div>
   </footer>
 
-  <!-- MOBILE BOTTOM NAVIGATION -->
-  <nav class="mobile-nav">
-    <a href="/index.html"><span class="nav-icon">🏠</span><span>Home</span></a>
-    <a href="/services.html"><span class="nav-icon">📐</span><span>Services</span></a>
-    <a href="/manufacturers.html"><span class="nav-icon">🏭</span><span>Factories</span></a>
-    <a href="/specsheets.html"><span class="nav-icon">📋</span><span>Spec</span></a>
-    <a href="/phototopattern.html" class="active"><span class="nav-icon">📸</span><span>Custom</span></a>
-    <a href="/subscribe.html"><span class="nav-icon">⭐</span><span>Plans</span></a>
+      <!-- MOBILE BOTTOM NAVIGATION -->
+  <nav class="mobile-bottom-nav">
+    <a href="/index.html" id="bn-home">
+      <span class="nav-icon">🏠</span>
+      <span>Home</span>
+    </a>
+    <a href="/services.html" id="bn-services">
+      <span class="nav-icon">📐</span>
+      <span>Services</span>
+    </a>
+    <a href="/manufacturers.html" id="bn-mfr">
+      <span class="nav-icon">🏭</span>
+      <span>Factories</span>
+    </a>
+    <a href="/specsheets.html" id="bn-spec">
+      <span class="nav-icon">📋</span>
+      <span>Spec</span>
+    </a>
+    <a href="/insights.html" id="bn-insights">
+      <span class="nav-icon">🎬</span>
+      <span>Insights</span>
+    </a>
+    <a href="/subscribe.html" id="bn-pricing">
+      <span class="nav-icon">⭐</span>
+      <span>Plans</span>
+    </a>
   </nav>
-
   <script>
-    const SB_URL = 'https://tldbjsqhjqapdwmfeuwq.supabase.co';
-    const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ';
-    const RZP_KEY = 'rzp_live_SG0orAX4pL66PR';
-    const WA_ADMIN_NUMBER = '918796158321';
-    
-    const sb = supabase.createClient(SB_URL, SB_KEY);
-    
-    // Read session state
-    const session = JSON.parse(localStorage.getItem('lmcb_user') || 'null');
-    const plan = localStorage.getItem('lmcb_current_plan') || (session ? session.plan : 'free');
-    const isProElite = plan === 'pro_elite';
-
-    // Dynamic navbar CTA text toggle (Get Started vs Logout)
-    const ctaLink = document.querySelector('#main-nav .cta');
-    if (ctaLink) {
-      if (session) {
-        ctaLink.textContent = 'Logout';
-        ctaLink.href = '#';
-        ctaLink.style.background = 'linear-gradient(135deg, #f85149 0%, #d4472a 100%) !important';
-        ctaLink.style.color = '#F5F0E8 !important';
-        ctaLink.onclick = (e) => {
-          e.preventDefault();
-          if (confirm('Are you sure you want to log out from your account?')) {
-            localStorage.removeItem('lmcb_user');
-            localStorage.removeItem('lmcb_current_plan');
-            window.location.reload();
-          }
-        };
-      } else {
-        ctaLink.textContent = 'Get Started';
-        ctaLink.href = '/subscribe.html';
+    // Highlight active bottom nav item
+    (function() {
+      var path = window.location.pathname;
+      var map = {
+        'index': 'bn-home',
+        'services': 'bn-services', 
+        'manufacturers': 'bn-mfr',
+        'specsheets': 'bn-spec',
+        'insights': 'bn-insights',
+        'subscribe': 'bn-pricing',
+        'library': 'bn-services',
+        'contact': 'bn-home',
+      };
+      var page = path.replace(/.*\//, '').replace('.html', '') || 'index';
+      var activeId = map[page];
+      if (activeId) {
+        var el = document.getElementById(activeId);
+        if (el) el.classList.add('active');
       }
-    }
-
-    // Auto-fill user details if logged in
-    if (session) {
-      document.getElementById('cName').value = (session.firstName || '') + ' ' + (session.lastName || '');
-      document.getElementById('cPhone').value = session.phone || '';
-    }
-
-    // Initialize layout based on plan tier
-    const badgeArea = document.getElementById('tierBadgeArea');
-    const summaryArea = document.getElementById('paymentSummaryArea');
-    const submitBtn = document.getElementById('btnSubmit');
-
-    if (isProElite) {
-      badgeArea.innerHTML = `<div class="tier-badge tier-free">👑 Pro Elite Active Member</div>
-                             <div style="font-size:0.75rem; color:var(--green); margin-bottom:1.5rem;">You get up to <strong>11 custom Photo-to-Pattern sizing requests</strong> included free inside your active Elite Subscription! Flat fee is completely waived.</div>`;
-      summaryArea.style.display = 'none';
-      submitBtn.textContent = 'Submit Free Custom Request →';
-    } else {
-      badgeArea.innerHTML = `<div class="tier-badge tier-premium" style="background:rgba(200,169,81,0.06); border:1px solid var(--border); color:var(--gold);">Standard Free Member / Guest</div>
-                             <div style="font-size:0.75rem; opacity:0.65; margin-bottom:1.5rem;">You do not have a Pro Elite plan. Custom design specifications are processed at a highly discounted flat rate of ₹199 per design.</div>`;
-      summaryArea.style.display = 'block';
-      submitBtn.textContent = 'Pay ₹199 &amp; Submit Request →';
-    }
-
-    // Image preview helper
-    function previewImage(event) {
-      const file = event.target.files[0];
-      const previewWrap = document.getElementById('previewWrap');
-      const imgPreview = document.getElementById('imgPreview');
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          imgPreview.src = e.target.result;
-          previewWrap.style.display = 'block';
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-
-    let compiledMsgText = '';
-
-    async function submitForm() {
-      const name = document.getElementById('cName').value.trim();
-      const brand = document.getElementById('cBrand').value.trim() || 'Not Provided';
-      const phone = document.getElementById('cPhone').value.trim();
-      const category = document.getElementById('cCategory').value;
-      const fabric = document.getElementById('cFabric').value.trim();
-      const fit = document.getElementById('cFit').value;
-      const desc = document.getElementById('cDesc').value.trim();
-
-      const btn = document.getElementById('btnSubmit');
-      btn.disabled = true;
-      btn.innerHTML = '<span class="spinner"></span>Processing...';
-
-      // Compile message text for WhatsApp link
-      compiledMsgText = `🚀 NEW PHOTO TO PATTERN REQUEST 🚀\n----------------------------------\n👤 Name: ${name}\n🏢 Brand Name: ${brand}\n📱 Mobile: ${phone}\n📐 Category: ${category}\n🧵 Fabric: ${fabric}\n⚡ Fit Structure: ${fit}\n📝 Details: ${desc}\n----------------------------------\n`;
-
-      if (isProElite) {
-        // Free submission for Pro Elite! Skip checkout, save to DB, redirect directly
-        compiledMsgText += `👑 [PRO ELITE FREE TICKET]\n👉 Please paste/attach your design reference photo in this chat!`;
-        
-        // Log transaction to DB
-        await sb.from('orders').insert({
-          user_id: session ? session.id : null,
-          plan: 'photo_to_pattern_free',
-          amount: 0,
-          payment_id: 'pro_elite_free_wa',
-          status: 'paid'
-        });
-
-        document.getElementById('successModalText').textContent = "You are a Pro Elite active member! Flat fee has been 100% waived. Click below to redirect directly to WhatsApp chat and send your pattern request details.";
-        document.getElementById('successOverlay').open = true;
-        document.getElementById('successOverlay').classList.add('open');
-        btn.disabled = false;
-        btn.textContent = 'Submit Free Custom Request →';
-      } else {
-        // Flat rate checkout for guest/basic tiers (₹199)
-        const options = {
-          key: RZP_KEY,
-          amount: 199 * 100, // Amount in paise
-          currency: 'INR',
-          name: 'Launch My Clothing Brand',
-          description: 'Photo-to-Pattern Custom Sizing Sheet Request',
-          prefill: {
-            name: name,
-            contact: phone
-          },
-          theme: { color: '#C8A951' },
-          handler: async function(response) {
-            // Save paid order to Supabase
-            await sb.from('orders').insert({
-              user_id: session ? session.id : null,
-              plan: 'photo_to_pattern_flat',
-              amount: 199,
-              payment_id: response.razorpay_payment_id,
-              status: 'paid'
-            });
-
-            compiledMsgText += `✅ [PAID CHECKOUT - ₹199]\nTransaction ID: ${response.razorpay_payment_id}\n👉 Please paste/attach your design reference photo in this chat!`;
-            
-            document.getElementById('successModalText').textContent = `Your transaction of ₹199 has been successfully authorized via Razorpay. (Payment ID: ${response.razorpay_payment_id}). Let's open WhatsApp to send your specifications and design photo directly to Rahul!`;
-            document.getElementById('successOverlay').classList.add('open');
-            btn.disabled = false;
-            btn.textContent = 'Pay ₹199 &amp; Submit Request →';
-          },
-          modal: {
-            ondismiss: function() {
-              btn.disabled = false;
-              btn.textContent = 'Pay ₹199 &amp; Submit Request →';
-            }
-          }
-        };
-
-        try {
-          const rzp = new Razorpay(options);
-          rzp.open();
-        } catch(e) {
-          alert('Razorpay Checkout failed to initialize. Please check your connection or contact us.');
-          btn.disabled = false;
-          btn.textContent = 'Pay ₹199 &amp; Submit Request →';
-        }
-      }
-    }
-
-    function launchWhatsApp() {
-      const url = `https://wa.me/${WA_ADMIN_NUMBER}?text=${encodeURIComponent(compiledMsgText)}`;
-      window.open(url, '_blank');
-      document.getElementById('successOverlay').classList.remove('open');
-    }
+    })();
   </script>
   <script src="/comm_guard.js"></script>
 </body>
