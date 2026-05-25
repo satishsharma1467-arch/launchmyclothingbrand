@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -80,7 +80,7 @@
     @media (max-width: 1100px) {
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(14,11,6,0.98); flex-direction: column; justify-content: center;
+        background: #0E0B06 !important; flex-direction: column; justify-content: center;
         align-items: center; gap: 2rem; z-index: 99; }
       .nav-links.open { display: flex; }
       .nav-links a { font-size: 1.1rem; letter-spacing: 0.2em; }
@@ -467,7 +467,33 @@
     /* ═══ COMPLETE MOBILE OVERHAUL ═══════════════════════ */
     
     /* Base mobile fixes */
-    @media (max-width: 768px) {
+    
+  @media (max-width: 768px) {
+    .nav-hamburger { display: flex !important; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; z-index: 100; }
+    .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--gold); }
+    
+    .nav-links {
+      display: none !important;
+      position: fixed !important;
+      top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
+      background: #0E0B06 !important;
+      flex-direction: column !important; justify-content: center !important;
+      align-items: center !important; gap: 1.5rem !important;
+      z-index: 999 !important; padding: 2rem !important;
+    }
+    .nav-links.open { display: flex !important; }
+    .nav-links a { font-size: 1rem !important; letter-spacing: 0.15em !important; display: block; width: 100%; text-align: center; padding: 0.5rem 0; border-bottom: 1px solid rgba(200,169,81,0.1); }
+    .nav-links .nav-cta { background: var(--gold) !important; color: var(--ink) !important; width: auto !important; padding: 0.6rem 2rem !important; border-bottom: none !important; margin-top: 0.5rem; }
+    
+    .nav-close {
+      display: block !important;
+      position: absolute !important;
+      top: 1.5rem !important; right: 1.5rem !important;
+      background: none !important; border: none !important;
+      color: var(--gold) !important; font-size: 1.5rem !important;
+      cursor: pointer !important; z-index: 1000 !important;
+    }
+    .nav-hamburger span { background: var(--gold) !important; }
       
       /* Fix font sizes for mobile readability */
       body { font-size: 16px !important; }
@@ -483,7 +509,7 @@
         display: none !important;
         position: fixed !important; top: 0 !important; left: 0 !important;
         right: 0 !important; bottom: 0 !important;
-        background: rgba(14,11,6,0.98) !important;
+        background: #0E0B06 !important;
         flex-direction: column !important; justify-content: center !important;
         align-items: center !important; gap: 1.5rem !important;
         z-index: 999 !important; padding: 2rem !important;
@@ -824,6 +850,102 @@
     }
     /* ════════════════════════════════════════════════════ */
 
+  
+    /* â•â•â• MOBILE HEADER & DRAWER OVERLAYS SOLID BLACK CONTRAST FIX â•â•â• */
+    @media (max-width: 1100px) {
+      nav {
+        background: #0E0B06 !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+      }
+      #main-nav {
+        background: #0E0B06 !important;
+      }
+    }
+    @media (max-width: 768px) {
+      nav {
+        background: #0E0B06 !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border-bottom: 1px solid rgba(200, 169, 81, 0.25) !important;
+      }
+      .nav-links {
+        background: #0E0B06 !important;
+      }
+      .mobile-bottom-nav, .mobile-nav {
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200, 169, 81, 0.25) !important;
+      }
+      .mobile-bottom-nav a, .mobile-nav a {
+        background: #0E0B06 !important;
+      }
+    }
+    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
+    /* â•â•â• OPTIONS A: LUXURY PREMIUM SENSORY CONTRAST OVERRIDES â•â•â• */
+    /* Brushed Gold Gradient */
+    .btn-primary, .nav-cta, .cta, .btn-submit, .btn-gold {
+      background: linear-gradient(135deg, #E8C96A 0%, #C8A951 50%, #A68230 100%) !important;
+      color: #0E0B06 !important;
+      border: 1px solid rgba(232, 201, 106, 0.2) !important;
+      box-shadow: 0 4px 15px rgba(200, 169, 81, 0.15) !important;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      text-shadow: none !important;
+    }
+    
+    .btn-primary:hover, .btn-primary:active, .btn-primary:focus,
+    .nav-cta:hover, .nav-cta:active, .nav-cta:focus,
+    .cta:hover, .cta:active, .cta:focus,
+    .btn-submit:hover, .btn-submit:active, .btn-submit:focus,
+    .btn-gold:hover, .btn-gold:active, .btn-gold:focus {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 8px 25px rgba(200, 169, 81, 0.3) !important;
+      filter: brightness(1.08) !important;
+      outline: none !important;
+    }
+    
+    /* Outline Button */
+    .btn-outline {
+      border: 1px solid rgba(200, 169, 81, 0.45) !important;
+      color: #F5F0E8 !important;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    
+    .btn-outline:hover, .btn-outline:active, .btn-outline:focus {
+      border-color: #C8A951 !important;
+      color: #C8A951 !important;
+      background: rgba(200, 169, 81, 0.05) !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 6px 20px rgba(200, 169, 81, 0.08) !important;
+      outline: none !important;
+    }
+    
+    /* Card Interactions and Gold Dust Glows */
+    .mfr-card, .spec-card, .pattern-card, .service-card, .plan-card, .video-card {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    
+    .mfr-card:hover, .mfr-card:active,
+    .spec-card:hover, .spec-card:active,
+    .pattern-card:hover, .pattern-card:active,
+    .service-card:hover, .service-card:active,
+    .plan-card:hover, .plan-card:active,
+    .video-card:hover, .video-card:active {
+      transform: translateY(-4px) !important;
+      border-color: rgba(200, 169, 81, 0.45) !important;
+      box-shadow: 0 12px 30px rgba(200, 169, 81, 0.16) !important;
+    }
+    
+    /* Logo Hover Glow */
+    .nav-logo {
+      transition: text-shadow 0.3s ease !important;
+    }
+    
+    .nav-logo:hover, .nav-logo:active {
+      text-shadow: 0 0 12px rgba(200, 169, 81, 0.4) !important;
+    }
+    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    .nav-close { display: none; }
   </style>
 
 <!-- Supabase SDK -->
@@ -902,14 +1024,18 @@ async function sbUploadFile(file, folder) {
       <span>Pattern Making &amp; Manufacturing</span>
     </a>
     <ul class="nav-links" id="main-nav">
+      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">&times;</button>
       <li><a href="/services.html">Services</a></li>
       <li><a href="/library.html">Patterns</a></li>
       <li><a href="/specsheets.html">Spec Sheets</a></li>
+      <li><a href="/phototopattern.html">Photo to Pattern</a></li>
       <li><a href="/insights.html">Insights</a></li>
       <li><a href="/manufacturers.html">Manufacturers</a></li>
-      <li><a href="/contact.html">Contact</a></li>
       <li><a href="/subscribe.html" class="nav-cta">Get Started</a></li>
     </ul>
+    <button class="nav-hamburger" onclick="document.getElementById('main-nav').classList.add('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <!-- HERO -->
@@ -1257,7 +1383,102 @@ function showMessages() {
       .msg-body { opacity:0.75; line-height:1.7; }
       .msg-contact { font-size:11px; opacity:0.5; margin-top:0.6rem; }
       .export-btn { background:#C8A951; color:#F5F0E8; border:none; padding:0.6rem 1.5rem; cursor:pointer; font-family:monospace; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:1.5rem; }
-    </style></head><body>
+    
+    /* â•â•â• MOBILE HEADER & DRAWER OVERLAYS SOLID BLACK CONTRAST FIX â•â•â• */
+    @media (max-width: 1100px) {
+      nav {
+        background: #0E0B06 !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+      }
+      #main-nav {
+        background: #0E0B06 !important;
+      }
+    }
+    @media (max-width: 768px) {
+      nav {
+        background: #0E0B06 !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border-bottom: 1px solid rgba(200, 169, 81, 0.25) !important;
+      }
+      .nav-links {
+        background: #0E0B06 !important;
+      }
+      .mobile-bottom-nav, .mobile-nav {
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200, 169, 81, 0.25) !important;
+      }
+      .mobile-bottom-nav a, .mobile-nav a {
+        background: #0E0B06 !important;
+      }
+    }
+    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
+    /* â•â•â• OPTIONS A: LUXURY PREMIUM SENSORY CONTRAST OVERRIDES â•â•â• */
+    /* Brushed Gold Gradient */
+    .btn-primary, .nav-cta, .cta, .btn-submit, .btn-gold {
+      background: linear-gradient(135deg, #E8C96A 0%, #C8A951 50%, #A68230 100%) !important;
+      color: #0E0B06 !important;
+      border: 1px solid rgba(232, 201, 106, 0.2) !important;
+      box-shadow: 0 4px 15px rgba(200, 169, 81, 0.15) !important;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      text-shadow: none !important;
+    }
+    
+    .btn-primary:hover, .btn-primary:active, .btn-primary:focus,
+    .nav-cta:hover, .nav-cta:active, .nav-cta:focus,
+    .cta:hover, .cta:active, .cta:focus,
+    .btn-submit:hover, .btn-submit:active, .btn-submit:focus,
+    .btn-gold:hover, .btn-gold:active, .btn-gold:focus {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 8px 25px rgba(200, 169, 81, 0.3) !important;
+      filter: brightness(1.08) !important;
+      outline: none !important;
+    }
+    
+    /* Outline Button */
+    .btn-outline {
+      border: 1px solid rgba(200, 169, 81, 0.45) !important;
+      color: #F5F0E8 !important;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    
+    .btn-outline:hover, .btn-outline:active, .btn-outline:focus {
+      border-color: #C8A951 !important;
+      color: #C8A951 !important;
+      background: rgba(200, 169, 81, 0.05) !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 6px 20px rgba(200, 169, 81, 0.08) !important;
+      outline: none !important;
+    }
+    
+    /* Card Interactions and Gold Dust Glows */
+    .mfr-card, .spec-card, .pattern-card, .service-card, .plan-card, .video-card {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    
+    .mfr-card:hover, .mfr-card:active,
+    .spec-card:hover, .spec-card:active,
+    .pattern-card:hover, .pattern-card:active,
+    .service-card:hover, .service-card:active,
+    .plan-card:hover, .plan-card:active,
+    .video-card:hover, .video-card:active {
+      transform: translateY(-4px) !important;
+      border-color: rgba(200, 169, 81, 0.45) !important;
+      box-shadow: 0 12px 30px rgba(200, 169, 81, 0.16) !important;
+    }
+    
+    /* Logo Hover Glow */
+    .nav-logo {
+      transition: text-shadow 0.3s ease !important;
+    }
+    
+    .nav-logo:hover, .nav-logo:active {
+      text-shadow: 0 0 12px rgba(200, 169, 81, 0.4) !important;
+    }
+    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+</style></head><body>
     <h1>Contact Messages (${messages.length})</h1>
     <button class="export-btn" onclick="exportMsgs()">⬇ Export CSV</button>
     ${messages.map((m, i) => `
@@ -1365,6 +1586,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
+  <script src="/comm_guard.js"></script>
 </body></html>
   `);
 }
