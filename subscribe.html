@@ -6,23 +6,92 @@
 <meta name="description" content="Choose your plan. Basic ₹499/mo, Brand Builder ₹999/mo, Pro Elite ₹1599/mo.">
 <title>Pricing | Launch My Clothing Brand</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <style>
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.3rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      background: rgba(14,11,6,0.92);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      color: var(--cream);
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .nav-logo span {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.45;
+      margin-top: 0.15rem;
+      color: var(--cream);
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      transition: opacity 0.2s, color 0.2s;
+    }
+
+    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold); }
+
+    .nav-cta {
+      background: var(--gold) !important;
+      color: var(--ink) !important;
+      padding: 0.6rem 1.4rem !important;
+      opacity: 1 !important;
+      font-weight: 500 !important;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--gold-light) !important; color: var(--ink) !important; }
+
+    .nav-close { display: none; }
+
   :root{--bg:#0d1117;--bg2:#161b22;--bg3:#21262d;--border:#30363d;--gold:#d4a843;--gold2:#f0c96a;--text:#e6edf3;--muted:#8b949e;--green:#3fb950;--red:#f85149;--radius:8px;}
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-  body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;}
+  body{background:#0E0B06;color:var(--cream);font-family:'DM Mono',monospace;font-weight:300;min-height:100vh;}
   a{color:var(--gold);text-decoration:none;}
   a:hover{text-decoration:underline;}
 
-  nav{background:rgba(13,17,23,.95);border-bottom:1px solid var(--border);padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(8px);}
-  .nav-logo{font-size:1rem;font-weight:600;color:var(--text);display:flex;flex-direction:column;line-height:1.2;}
-  .nav-logo span{font-size:.7rem;font-weight:400;color:var(--muted);}
-  .nav-links{display:flex;gap:1.5rem;list-style:none;align-items:center;}
-  .nav-links a{color:var(--muted);font-size:.85rem;transition:color .2s;}
-  .nav-links a:hover{color:var(--text);text-decoration:none;}
-  .nav-links .cta{background:var(--gold);color:#000;padding:.4rem 1rem;border-radius:var(--radius);font-weight:500;font-size:.8rem;}
-  .nav-links .cta:hover{background:var(--gold2);text-decoration:none;}
+  
+  
+  
+  
+  
+  
+  
+  
   
   @media(max-width:768px){
     .nav-hamburger { display: flex !important; }
@@ -132,7 +201,7 @@
   .spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(0,0,0,.3);border-top-color:#000;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:6px;}
   @keyframes spin{to{transform:rotate(360deg);}}
 
-  .mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);padding:.5rem;display:flex;justify-content:space-around;}
+  .mob-/* NAV */display:none;position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);padding:.5rem;display:flex;justify-content:space-around;}
   .mob-nav a{display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--muted);font-size:.6rem;text-decoration:none;}
   @media(min-width:769px){.mob-nav{display:none!important;}}
 
@@ -248,7 +317,7 @@
       <li><a href="/phototopattern.html">Photo to Pattern</a></li>
       <li><a href="/insights.html">Insights</a></li>
       <li><a href="/manufacturers.html">Manufacturers</a></li>
-      <li><a href="/subscribe.html" class="cta">Get Started</a></li>
+      <li><a href="/subscribe.html" class="nav-cta">Get Started</a></li>
     </ul>
   <button class="nav-hamburger" onclick="document.getElementById('main-nav').classList.add('open')" aria-label="Menu" style="display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:4px;">
     <span style="display:block; width:24px; height:2px; background:var(--gold);"></span>
