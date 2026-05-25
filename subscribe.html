@@ -23,7 +23,30 @@
   .nav-links a:hover{color:var(--text);text-decoration:none;}
   .nav-links .cta{background:var(--gold);color:#000;padding:.4rem 1rem;border-radius:var(--radius);font-weight:500;font-size:.8rem;}
   .nav-links .cta:hover{background:var(--gold2);text-decoration:none;}
-  @media(max-width:768px){.nav-links{display:none;}}
+  
+  @media(max-width:768px){
+    .nav-hamburger { display: flex !important; }
+    .nav-links {
+      display: none !important;
+      position: fixed !important;
+      top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
+      background: #0E0B06 !important;
+      flex-direction: column !important; justify-content: center !important;
+      align-items: center !important; gap: 1.5rem !important;
+      z-index: 999 !important; padding: 2rem !important;
+    }
+    .nav-links.open { display: flex !important; }
+    .nav-links a { font-size: 1rem !important; letter-spacing: 0.15em !important; display: block; width: 100%; text-align: center; padding: 0.5rem 0; border-bottom: 1px solid rgba(200,169,81,0.1); }
+    .nav-links .cta { background: var(--gold) !important; color: var(--ink) !important; width: auto !important; padding: 0.6rem 2rem !important; border-bottom: none !important; margin-top: 0.5rem; }
+    
+    .nav-close {
+      display: block !important;
+      position: absolute !important;
+      top: 1.5rem !important; right: 1.5rem !important;
+      background: none !important; border: none !important;
+      color: var(--gold) !important; font-size: 1.5rem !important;
+      cursor: pointer !important; z-index: 1000 !important;
+    }.nav-links{display:none;}}
 
   /* hero */
   .hero{text-align:center;padding:4rem 2rem 3rem;}
@@ -112,21 +135,126 @@
   .mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);padding:.5rem;display:flex;justify-content:space-around;}
   .mob-nav a{display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--muted);font-size:.6rem;text-decoration:none;}
   @media(min-width:769px){.mob-nav{display:none!important;}}
-</style>
+
+    /* â•â•â• MOBILE HEADER & DRAWER OVERLAYS SOLID BLACK CONTRAST FIX â•â•â• */
+    @media (max-width: 1100px) {
+      nav {
+        background: #0E0B06 !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+      }
+      #main-nav {
+        background: #0E0B06 !important;
+      }
+    }
+    @media (max-width: 768px) {
+      nav {
+        background: #0E0B06 !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border-bottom: 1px solid rgba(200, 169, 81, 0.25) !important;
+      }
+      .nav-links {
+        background: #0E0B06 !important;
+      }
+      .mobile-bottom-nav, .mobile-nav {
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200, 169, 81, 0.25) !important;
+      }
+      .mobile-bottom-nav a, .mobile-nav a {
+        background: #0E0B06 !important;
+      }
+    }
+    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
+    /* â•â•â• OPTIONS A: LUXURY PREMIUM SENSORY CONTRAST OVERRIDES â•â•â• */
+    /* Brushed Gold Gradient */
+    .btn-primary, .nav-cta, .cta, .btn-submit, .btn-gold {
+      background: linear-gradient(135deg, #E8C96A 0%, #C8A951 50%, #A68230 100%) !important;
+      color: #0E0B06 !important;
+      border: 1px solid rgba(232, 201, 106, 0.2) !important;
+      box-shadow: 0 4px 15px rgba(200, 169, 81, 0.15) !important;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      text-shadow: none !important;
+    }
+    
+    .btn-primary:hover, .btn-primary:active, .btn-primary:focus,
+    .nav-cta:hover, .nav-cta:active, .nav-cta:focus,
+    .cta:hover, .cta:active, .cta:focus,
+    .btn-submit:hover, .btn-submit:active, .btn-submit:focus,
+    .btn-gold:hover, .btn-gold:active, .btn-gold:focus {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 8px 25px rgba(200, 169, 81, 0.3) !important;
+      filter: brightness(1.08) !important;
+      outline: none !important;
+    }
+    
+    /* Outline Button */
+    .btn-outline {
+      border: 1px solid rgba(200, 169, 81, 0.45) !important;
+      color: #F5F0E8 !important;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    
+    .btn-outline:hover, .btn-outline:active, .btn-outline:focus {
+      border-color: #C8A951 !important;
+      color: #C8A951 !important;
+      background: rgba(200, 169, 81, 0.05) !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 6px 20px rgba(200, 169, 81, 0.08) !important;
+      outline: none !important;
+    }
+    
+    /* Card Interactions and Gold Dust Glows */
+    .mfr-card, .spec-card, .pattern-card, .service-card, .plan-card, .video-card {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    
+    .mfr-card:hover, .mfr-card:active,
+    .spec-card:hover, .spec-card:active,
+    .pattern-card:hover, .pattern-card:active,
+    .service-card:hover, .service-card:active,
+    .plan-card:hover, .plan-card:active,
+    .video-card:hover, .video-card:active {
+      transform: translateY(-4px) !important;
+      border-color: rgba(200, 169, 81, 0.45) !important;
+      box-shadow: 0 12px 30px rgba(200, 169, 81, 0.16) !important;
+    }
+    
+    /* Logo Hover Glow */
+    .nav-logo {
+      transition: text-shadow 0.3s ease !important;
+    }
+    
+    .nav-logo:hover, .nav-logo:active {
+      text-shadow: 0 0 12px rgba(200, 169, 81, 0.4) !important;
+    }
+    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    .nav-close { display: none; }
+  </style>
 </head>
 <body>
 
 <nav>
-  <a href="/index.html" class="nav-logo">Launch My Clothing Brand <span>Pattern Making & Manufacturing</span></a>
-  <ul class="nav-links">
-    <li><a href="/services.html">Services</a></li>
-    <li><a href="/library.html">Patterns</a></li>
-    <li><a href="/specsheets.html">Spec Sheets</a></li>
-    <li><a href="/insights.html">Insights</a></li>
-    <li><a href="/manufacturers.html">Manufacturers</a></li>
-    <li><a href="/contact.html">Contact</a></li>
-    <li><a href="/subscribe.html" class="cta">Get Started</a></li>
-  </ul>
+  <a href="/index.html" class="nav-logo">
+    Launch My Clothing Brand
+    <span>Pattern Making &amp; Manufacturing</span>
+  </a>
+  <ul class="nav-links" id="main-nav">
+      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">&times;</button>
+      <li><a href="/services.html">Services</a></li>
+      <li><a href="/library.html">Patterns</a></li>
+      <li><a href="/specsheets.html">Spec Sheets</a></li>
+      <li><a href="/phototopattern.html">Photo to Pattern</a></li>
+      <li><a href="/insights.html">Insights</a></li>
+      <li><a href="/manufacturers.html">Manufacturers</a></li>
+      <li><a href="/subscribe.html" class="cta">Get Started</a></li>
+    </ul>
+  <button class="nav-hamburger" onclick="document.getElementById('main-nav').classList.add('open')" aria-label="Menu" style="display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:4px;">
+    <span style="display:block; width:24px; height:2px; background:var(--gold);"></span>
+    <span style="display:block; width:24px; height:2px; background:var(--gold);"></span>
+    <span style="display:block; width:24px; height:2px; background:var(--gold);"></span>
+  </button>
 </nav>
 
 <div class="hero">
@@ -148,7 +276,7 @@
       <div class="plan-name">Basic</div>
       <div class="plan-tagline">Perfect for getting started</div>
       <div class="plan-price">
-        <span class="currency">₹</span><span class="amount">499</span>
+        <span class="currency">₹</span><span class="amount">399</span>
         <div class="period">/ month</div>
       </div>
       <ul class="plan-features">
@@ -159,7 +287,7 @@
         <li><span class="icon dash">—</span><span style="opacity:.5">WhatsApp support</span></li>
         <li><span class="icon dash">—</span><span style="opacity:.5">Spec sheet access</span></li>
       </ul>
-      <button class="btn-plan" onclick="handleSubscribe('basic', 499, 'Basic')">Subscribe Now</button>
+      <button class="btn-plan" onclick="handleSubscribe('basic', 399, 'Basic')">Subscribe Now</button>
     </div>
 
     <!-- BRAND BUILDER -->
@@ -191,7 +319,7 @@
       <div class="plan-name">Pro Elite</div>
       <div class="plan-tagline">For established brands & agencies</div>
       <div class="plan-price">
-        <span class="currency">₹</span><span class="amount">1599</span>
+        <span class="currency">₹</span><span class="amount">1999</span>
         <div class="period">/ month</div>
       </div>
       <ul class="plan-features">
@@ -199,10 +327,10 @@
         <li><span class="icon check">✦</span>Complete manufacturer database</li>
         <li><span class="icon check">✦</span>Direct phone support</li>
         <li><span class="icon check">✦</span>Priority expert consultation</li>
-        <li><span class="icon check">✦</span>Custom pattern requests</li>
+        <li><span class="icon check">✦</span>11 Photo-to-Pattern requests / mo</li>
         <li><span class="icon check">✦</span>Spec sheet access</li>
       </ul>
-      <button class="btn-plan" onclick="handleSubscribe('pro_elite', 1599, 'Pro Elite')">Subscribe Now</button>
+      <button class="btn-plan" onclick="handleSubscribe('pro_elite', 1999, 'Pro Elite')">Subscribe Now</button>
     </div>
 
   </div>
@@ -218,9 +346,9 @@
     <thead>
       <tr>
         <th>Feature</th>
-        <th>Basic <br><span style="color:var(--gold)">₹499/mo</span></th>
+        <th>Basic <br><span style="color:var(--gold)">₹399/mo</span></th>
         <th class="highlight-col">Brand Builder <br><span style="color:var(--gold)">₹999/mo</span></th>
-        <th>Pro Elite <br><span style="color:var(--gold)">₹1599/mo</span></th>
+        <th>Pro Elite <br><span style="color:var(--gold)">₹1999/mo</span></th>
       </tr>
     </thead>
     <tbody>
@@ -301,18 +429,42 @@ const presetPhone  = params.get('phone');
 // also check localStorage session
 const session = JSON.parse(localStorage.getItem('lmcb_user') || 'null');
 
+// Dynamic navbar CTA text toggle (Get Started vs Logout)
+const ctaLink = document.querySelector('#main-nav .cta');
+if (ctaLink) {
+  if (session) {
+    ctaLink.textContent = 'Logout';
+    ctaLink.href = '#';
+    ctaLink.style.background = 'linear-gradient(135deg, #f85149 0%, #d4472a 100%) !important'; // Premium red gradient
+    ctaLink.style.color = '#F5F0E8 !important';
+    ctaLink.onclick = (e) => {
+      e.preventDefault();
+      if (confirm('Are you sure you want to log out from your account?')) {
+        localStorage.removeItem('lmcb_user');
+        localStorage.removeItem('lmcb_current_plan');
+        window.location.href = '/subscribe.html';
+      }
+    };
+  } else {
+    ctaLink.textContent = 'Get Started';
+    ctaLink.href = '/subscribe.html';
+  }
+}
+
 // welcome bar
 if (session || presetName) {
-  const name = presetName ? decodeURIComponent(presetName) : session.firstName;
+  const name = presetName ? decodeURIComponent(presetName) : (session ? session.firstName : '');
   const bar = document.getElementById('welcomeBar');
-  bar.textContent = `👋 Welcome, ${name}! Choose your plan below to complete your subscription.`;
-  bar.classList.add('show');
+  if (bar && name) {
+    bar.textContent = `👋 Welcome back, ${name}! Choose your plan below to complete your subscription.`;
+    bar.classList.add('show');
+  }
 }
 
 // if came from register with a preset plan, highlight it
 if (presetPlan) {
   const info = document.getElementById('infoAlert');
-  const planLabels = { basic: 'Basic (₹499/mo)', brand_builder: 'Brand Builder (₹999/mo)', pro_elite: 'Pro Elite (₹1599/mo)' };
+  const planLabels = { basic: 'Basic (₹399/mo)', brand_builder: 'Brand Builder (₹999/mo)', pro_elite: 'Pro Elite (₹1999/mo)' };
   info.textContent = `You selected ${planLabels[presetPlan] || presetPlan} during registration. Click "Subscribe Now" to complete payment.`;
   info.classList.add('show');
   // scroll to that plan card
@@ -373,10 +525,10 @@ async function activateSubscription(uid, planKey, amount, paymentId, name, phone
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json', 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` },
     body: JSON.stringify({
-      plan_selected: planKey,
-      plan_status: 'active',
-      plan_activated_at: new Date().toISOString(),
-      last_payment_id: paymentId
+      plan: planKey,
+      plan_amount: amount,
+      payment_id: paymentId,
+      plan_started: new Date().toISOString()
     })
   });
 
@@ -407,5 +559,6 @@ async function activateSubscription(uid, planKey, amount, paymentId, name, phone
   document.getElementById('successOverlay').classList.add('open');
 }
 </script>
+  <script src="/comm_guard.js"></script>
 </body>
 </html>
