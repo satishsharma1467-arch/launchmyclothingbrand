@@ -64,29 +64,31 @@
     }
 
     .nav-logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.26rem;
-      letter-spacing: 0.2em;
-      color: var(--gold);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
       text-decoration: none;
-      line-height: 1;
+      color: var(--cream);
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
     }
 
     .nav-logo span {
-      display: block;
       font-family: 'DM Mono', monospace;
-      font-size: 1.26rem;
-      letter-spacing: 0.18em;
-      color: var(--ink);
-      opacity: 0.4;
-      font-weight: 300;
-      margin-top: 0.1rem;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
+      opacity: 0.45;
+      margin-top: 0.15rem;
+      color: var(--cream);
+      display: block;
     }
 
     .nav-links {
       display: flex;
-      gap: 2.5rem;
+      gap: 1.5rem;
       list-style: none;
       align-items: center;
     }
@@ -94,8 +96,8 @@
     .nav-links a {
       color: var(--cream);
       text-decoration: none;
-      font-size: 1.26rem;
-      letter-spacing: 0.15em;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       opacity: 0.6;
       transition: opacity 0.2s, color 0.2s;
@@ -129,7 +131,7 @@
     }
 
     .hero-eyebrow {
-      font-size: 1.26rem;
+      font-size: 0.65rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
       color: var(--gold);
@@ -166,9 +168,9 @@
     .btn-primary {
       background: var(--gold);
       color: var(--ink);
-      padding: 0.95rem 2.4rem;
+      padding: 0.8rem 2rem;
       font-family: 'DM Mono', monospace;
-      font-size: 1.26rem;
+      font-size: 0.78rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       font-weight: 500;
@@ -184,9 +186,9 @@
     .btn-outline {
       border: 1px solid rgba(200,169,81,0.4);
       color: var(--ink);
-      padding: 0.95rem 2.4rem;
+      padding: 0.8rem 2rem;
       font-family: 'DM Mono', monospace;
-      font-size: 1.26rem;
+      font-size: 0.78rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       background: transparent;
@@ -214,7 +216,7 @@
     }
 
     .hero-stat-label {
-      font-size: 1.26rem;
+      font-size: 0.58rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       opacity: 0.5;
@@ -256,8 +258,8 @@
       right: -1.5rem;
       background: var(--gold);
       color: var(--ink);
-      padding: 1rem 1.4rem;
-      font-size: 1.26rem;
+      padding: 0.6rem 1.2rem;
+      font-size: 0.7rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       font-weight: 500;
@@ -286,7 +288,7 @@
     }
 
     .ticker-item {
-      font-size: 1.26rem;
+      font-size: 0.8rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--gold);
@@ -302,7 +304,7 @@
     section { padding: 7rem 4rem; }
 
     .section-label {
-      font-size: 1.26rem;
+      font-size: 0.6rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
       color: var(--gold);
@@ -325,7 +327,7 @@
     h2 em { font-style: italic; color: var(--gold); }
 
     .section-sub {
-      font-size: 1.26rem;
+      font-size: 0.9rem;
       line-height: 1.9;
       opacity: 0.55;
       max-width: 58ch;
@@ -389,7 +391,7 @@
     }
 
     .trust-stat-label {
-      font-size: 1.26rem;
+      font-size: 0.8rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       opacity: 0.45;
@@ -404,7 +406,7 @@
       max-width: 1100px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 1px;
       background: var(--border);
     }
@@ -450,7 +452,7 @@
     }
 
     .service-card p {
-      font-size: 1.26rem;
+      font-size: 0.8rem;
       line-height: 1.85;
       opacity: 0.55;
       margin-bottom: 1.5rem;
@@ -459,7 +461,7 @@
     .service-bullets { display: flex; flex-direction: column; gap: 0.55rem; }
 
     .service-bullet {
-      font-size: 1.26rem;
+      font-size: 0.68rem;
       opacity: 0.7;
       display: flex;
       align-items: center;
@@ -506,13 +508,13 @@
       opacity: 0.55;
     }
 
-    .exclusion-card p { font-size: 1.26rem; opacity: 0.38; line-height: 1.7; }
+    .exclusion-card p { font-size: 0.8rem; opacity: 0.38; line-height: 1.7; }
 
     .exclusion-card::before {
       content: '✕';
       position: absolute;
       top: 1.5rem; right: 1.5rem;
-      font-size: 1.26rem;
+      font-size: 0.8rem;
       color: #D4472A;
       opacity: 0.5;
     }
@@ -545,7 +547,7 @@
     }
 
     .cta-band p {
-      font-size: 1.26rem;
+      font-size: 0.8rem;
       color: var(--ink-soft);
       opacity: 0.75;
       max-width: 48ch;
@@ -558,7 +560,7 @@
       color: var(--gold);
       padding: 1rem 2.8rem;
       font-family: 'DM Mono', monospace;
-      font-size: 1.26rem;
+      font-size: 0.8rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       font-weight: 500;
@@ -602,10 +604,10 @@
       margin-bottom: 1.2rem;
     }
 
-    .footer-address { font-size: 1.26rem; opacity: 0.35; line-height: 1.6; }
+    .footer-address { font-size: 0.8rem; opacity: 0.35; line-height: 1.6; }
 
     .footer-col h4 {
-      font-size: 1.26rem;
+      font-size: 0.55rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
       color: var(--gold);
@@ -629,7 +631,7 @@
       display: flex;
       align-items: flex-start;
       gap: 0.6rem;
-      font-size: 1.26rem;
+      font-size: 0.8rem;
       color: var(--gold);
       opacity: 0.65;
       text-decoration: none;
@@ -641,7 +643,7 @@
 
     .footer-email:hover { opacity: 1; }
 
-    .footer-note { font-size: 1.26rem; opacity: 0.3; line-height: 1.6; margin-top: 0.5rem; }
+    .footer-note { font-size: 0.8rem; opacity: 0.3; line-height: 1.6; margin-top: 0.5rem; }
 
     .footer-bottom {
       border-top: 1px solid var(--border);
@@ -653,7 +655,7 @@
       gap: 1rem;
     }
 
-    .footer-copy { font-size: 1.26rem; opacity: 0.28; letter-spacing: 0.05em; }
+    .footer-copy { font-size: 0.8rem; opacity: 0.28; letter-spacing: 0.05em; }
 
     /* ANIMATIONS */
     @keyframes fadeUp {
@@ -1202,7 +1204,7 @@
     </div>
     <div class="hero-visual">
       <div class="hero-img-frame">
-        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="Pattern making and garment design" />
+        <img src="/hero_theme.png" alt="Pattern making and garment design" />
       </div>
       <div class="hero-float-tag">Production-Ready Files</div>
     </div>
@@ -1330,6 +1332,19 @@
         </div>
       </div>
 
+      <div class="service-card">
+        <div class="service-num">05</div>
+        <div class="service-icon">📸</div>
+        <h3><a href="/phototopattern.html" style="color:inherit;text-decoration:none;">Photo to Pattern</a></h3>
+        <p>Convert any garment design photo into custom-graded patterns and specification sheets. Submit your style photo and get perfect custom measurements delivered directly to your WhatsApp.</p>
+        <div class="service-bullets">
+          <div class="service-bullet">Custom Sizing Calculations</div>
+          <div class="service-bullet">8 Sizing Fit Options</div>
+          <div class="service-bullet">Direct WhatsApp Delivery</div>
+          <div class="service-bullet">Waived for Pro Elite</div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -1418,7 +1433,7 @@
 <!-- WhatsApp Chat Bubble -->
 <div id="wa-bubble" style="display:none;visibility:hidden;pointer-events:none;position:fixed;bottom:2rem;right:2rem;z-index:900;flex-direction:column;align-items:flex-end;gap:0.8rem;">
   <div id="wa-tooltip" style="display:none;background:#1C1609;border:1px solid rgba(200,169,81,0.3);padding:1rem 1.4rem;font-family:DM Mono,monospace;font-size:1.08rem;color:#F5F0E8;max-width:240px;line-height:1.7;position:relative;">
-    <div style="font-size:1.26rem;letter-spacing:0.2em;text-transform:uppercase;color:#C8A951;margin-bottom:0.4rem;">WhatsApp Support</div>
+    <div style="font-size: 0.8rem;letter-spacing:0.2em;text-transform:uppercase;color:#C8A951;margin-bottom:0.4rem;">WhatsApp Support</div>
     Chat with us directly for quick support.
     <button onclick="document.getElementById('wa-tooltip').style.display='none'" style="position:absolute;top:0.5rem;right:0.7rem;background:none;border:none;color:#F5F0E8;opacity:0.4;cursor:pointer;">✕</button>
   </div>
