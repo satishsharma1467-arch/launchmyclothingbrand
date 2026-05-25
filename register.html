@@ -417,19 +417,113 @@
   @keyframes spin { to { transform: rotate(360deg); } }
 
   /* MOBILE BOTTOM NAVIGATION */
-  .mob-nav {
-    display: none; position: fixed; bottom: 0; left: 0; right: 0;
-    height: 62px; background: #0E0B06; border-top: 1px solid var(--border);
-    z-index: 500; justify-content: space-around; align-items: center;
-  }
-  .mob-nav a {
-    display: flex; flex-direction: column; align-items: center; gap: 3px;
-    text-decoration: none; color: var(--cream); opacity: 0.5;
-    font-size: 0.52rem; letter-spacing: 0.08em; text-transform: uppercase;
-    flex: 1; text-align: center; padding: 8px 4px;
-  }
-  .mob-nav a:hover { opacity: 1; color: var(--gold); }
-  @media(max-width:768px){ .mob-nav { display: flex; } body { padding-bottom: 70px; } }
+          /* ═══ MOBILE BOTTOM NAV BAR ══════════════════════════ */
+    .mobile-bottom-nav {
+      display: none;
+    }
+    
+    @media (max-width: 768px) {
+      /* Add padding to body so content not hidden behind bottom nav */
+      body { padding-bottom: 70px !important; }
+      
+      .mobile-bottom-nav {
+        display: flex !important;
+        position: fixed !important;
+        bottom: 0 !important; left: 0 !important; right: 0 !important;
+        height: 62px !important;
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200,169,81,0.25) !important;
+        z-index: 500 !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        padding: 0 !important;
+      }
+      
+      .mobile-bottom-nav a {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 3px !important;
+        text-decoration: none !important;
+        color: #F5F0E8 !important;
+        opacity: 0.5 !important;
+        font-family: 'DM Mono', monospace !important;
+        font-size: 0.52rem !important;
+        letter-spacing: 0.08em !important;
+        text-transform: uppercase !important;
+        padding: 8px 4px !important;
+        flex: 1 !important;
+        text-align: center !important;
+        transition: opacity 0.2s, color 0.2s !important;
+      }
+      
+      .mobile-bottom-nav a:hover,
+      .mobile-bottom-nav a.active {
+        opacity: 1 !important;
+        color: #C8A951 !important;
+      }
+      
+      .mobile-bottom-nav .nav-icon {
+        font-size: 1.2rem !important;
+        line-height: 1 !important;
+      }
+      
+      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
+      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
+    }
+    .mobile-bottom-nav {
+      display: none;
+    }
+    
+    @media (max-width: 768px) {
+      /* Add padding to body so content not hidden behind bottom nav */
+      body { padding-bottom: 70px !important; }
+      
+      .mobile-bottom-nav {
+        display: flex !important;
+        position: fixed !important;
+        bottom: 0 !important; left: 0 !important; right: 0 !important;
+        height: 62px !important;
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200,169,81,0.25) !important;
+        z-index: 500 !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        padding: 0 !important;
+      }
+      
+      .mobile-bottom-nav a {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 3px !important;
+        text-decoration: none !important;
+        color: #F5F0E8 !important;
+        opacity: 0.5 !important;
+        font-family: 'DM Mono', monospace !important;
+        font-size: 0.52rem !important;
+        letter-spacing: 0.08em !important;
+        text-transform: uppercase !important;
+        padding: 8px 4px !important;
+        flex: 1 !important;
+        text-align: center !important;
+        transition: opacity 0.2s, color 0.2s !important;
+      }
+      
+      .mobile-bottom-nav a:hover,
+      .mobile-bottom-nav a.active {
+        opacity: 1 !important;
+        color: #C8A951 !important;
+      }
+      
+      .mobile-bottom-nav .nav-icon {
+        font-size: 1.2rem !important;
+        line-height: 1 !important;
+      }
+      
+      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
+      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
+    }
 
     /* â•â•â• MOBILE HEADER & DRAWER OVERLAYS SOLID BLACK CONTRAST FIX â•â•â• */
     @media (max-width: 1100px) {
@@ -657,147 +751,55 @@
 
 </div>
 
-<!-- Mobile Bottom Navigation -->
-<nav class="mob-nav">
-  <a href="/index.html">🏠<br>Home</a>
-  <a href="/services.html">📐<br>Services</a>
-  <a href="/manufacturers.html">🏭<br>Factories</a>
-  <a href="/specsheets.html">📋<br>Spec</a>
-  <a href="/insights.html">🎬<br>Insights</a>
-  <a href="/subscribe.html">⭐<br>Plans</a>
-</nav>
-
-<script>
-const SB_URL = 'https://tldbjsqhjqapdwmfeuwq.supabase.co';
-const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ';
-
-// plan card selection highlight
-document.querySelectorAll('input[name=plan]').forEach(radio => {
-  radio.addEventListener('change', () => {
-    document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
-    radio.closest('.plan-card').classList.add('selected');
-  });
-});
-
-function togglePw(id, btn) {
-  const input = document.getElementById(id);
-  if (input.type === 'password') { input.type = 'text'; btn.textContent = '🙈'; }
-  else { input.type = 'password'; btn.textContent = '👁'; }
-}
-
-function showAlert(msg, type) {
-  const el = document.getElementById('alertBox');
-  el.textContent = msg;
-  el.className = 'alert show ' + type;
-}
-
-// simple password hash (SHA-256 via SubtleCrypto)
-async function hashPassword(pw) {
-  const enc = new TextEncoder().encode(pw);
-  const buf = await crypto.subtle.digest('SHA-256', enc);
-  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
-}
-
-async function sbPost(table, data) {
-  const r = await fetch(`${SB_URL}/rest/v1/${table}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'apikey': SB_KEY,
-      'Authorization': `Bearer ${SB_KEY}`,
-      'Prefer': 'return=representation'
-    },
-    body: JSON.stringify(data)
-  });
-  return r;
-}
-
-async function checkEmailExists(email) {
-  const r = await fetch(`${SB_URL}/rest/v1/users?email=eq.${encodeURIComponent(email)}&select=id`, {
-    headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` }
-  });
-  const data = await r.json();
-  return Array.isArray(data) && data.length > 0;
-}
-
-document.getElementById('regForm').addEventListener('submit', async function(e) {
-  e.preventDefault();
-
-  // map plan to amount
-  const amounts = { basic: 499, brand_builder: 999, pro_elite: 1599 };
-
-  // clear errors
-  document.querySelectorAll('.field input').forEach(i => i.classList.remove('error'));
-
-  const firstName  = document.getElementById('firstName').value.trim();
-  const lastName   = document.getElementById('lastName').value.trim();
-  const email      = document.getElementById('email').value.trim().toLowerCase();
-  const phone      = document.getElementById('phone').value.trim();
-  const brandName  = document.getElementById('brandName').value.trim();
-  const password   = document.getElementById('password').value;
-  const confirmPw  = document.getElementById('confirmPw').value;
-  const plan       = document.querySelector('input[name=plan]:checked').value;
-
-  let valid = true;
-
-  if (!firstName) { document.getElementById('firstName').classList.add('error'); valid = false; }
-  if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { document.getElementById('email').classList.add('error'); valid = false; }
-  if (password.length < 8) { document.getElementById('password').classList.add('error'); valid = false; }
-  if (password !== confirmPw) { document.getElementById('confirmPw').classList.add('error'); valid = false; }
-  if (!valid) return;
-
-  const btn = document.getElementById('submitBtn');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span>Creating account...';
-
-  try {
-    // check duplicate email
-    const exists = await checkEmailExists(email);
-    if (exists) {
-      showAlert('An account with this email already exists. Please log in.', 'error');
-      btn.disabled = false; btn.textContent = 'Create Account →';
-      return;
-    }
-
-    const passwordHash = await hashPassword(password);
-
-    const res = await sbPost('users', {
-      name: (firstName + ' ' + lastName).trim(),
-      email,
-      phone,
-      brand: brandName,
-      password_hash: passwordHash,
-      plan: plan,
-      plan_amount: amounts[plan] || 0,
-      created_at: new Date().toISOString()
-    });
-
-    if (!res.ok) {
-      const err = await res.json();
-      throw new Error(err.message || 'Registration failed');
-    }
-
-    const userData = await res.json();
-    const user = Array.isArray(userData) ? userData[0] : userData;
-
-    // store session
-    localStorage.setItem('lmcb_user', JSON.stringify({
-      id: user.id, email, firstName, lastName, plan, plan_status: 'pending'
-    }));
-
-    showAlert('Account created! Redirecting to payment...', 'success');
-
-    setTimeout(() => {
-      window.location.href = `/subscribe.html?plan=${plan}&amount=${amounts[plan]}&uid=${user.id}&name=${encodeURIComponent(firstName + ' ' + lastName)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`;
-    }, 1200);
-
-  } catch (err) {
-    showAlert('Error: ' + err.message, 'error');
-    btn.disabled = false;
-    btn.textContent = 'Create Account →';
-  }
-});
-</script>
+    <!-- MOBILE BOTTOM NAVIGATION -->
+  <nav class="mobile-bottom-nav">
+    <a href="/index.html" id="bn-home">
+      <span class="nav-icon">🏠</span>
+      <span>Home</span>
+    </a>
+    <a href="/services.html" id="bn-services">
+      <span class="nav-icon">📐</span>
+      <span>Services</span>
+    </a>
+    <a href="/manufacturers.html" id="bn-mfr">
+      <span class="nav-icon">🏭</span>
+      <span>Factories</span>
+    </a>
+    <a href="/specsheets.html" id="bn-spec">
+      <span class="nav-icon">📋</span>
+      <span>Spec</span>
+    </a>
+    <a href="/insights.html" id="bn-insights">
+      <span class="nav-icon">🎬</span>
+      <span>Insights</span>
+    </a>
+    <a href="/subscribe.html" id="bn-pricing">
+      <span class="nav-icon">⭐</span>
+      <span>Plans</span>
+    </a>
+  </nav>
+  <script>
+    // Highlight active bottom nav item
+    (function() {
+      var path = window.location.pathname;
+      var map = {
+        'index': 'bn-home',
+        'services': 'bn-services', 
+        'manufacturers': 'bn-mfr',
+        'specsheets': 'bn-spec',
+        'insights': 'bn-insights',
+        'subscribe': 'bn-pricing',
+        'library': 'bn-services',
+        'contact': 'bn-home',
+      };
+      var page = path.replace(/.*\//, '').replace('.html', '') || 'index';
+      var activeId = map[page];
+      if (activeId) {
+        var el = document.getElementById(activeId);
+        if (el) el.classList.add('active');
+      }
+    })();
+  </script>
   <script src="/comm_guard.js"></script>
 </body>
 </html>
