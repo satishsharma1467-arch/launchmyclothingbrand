@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -1292,7 +1292,7 @@ async function sbUploadFile(file, folder) {
 
 <script>
 // ── CONTACT FORM ──────────────────────────────────────────
-function handleContactForm() {
+async function handleContactForm() {
   let valid = true;
   const fields = [
     { id: 'c-fname', errId: 'c-fname-err', check: v => v.trim().length > 0 },
@@ -1319,18 +1319,33 @@ function handleContactForm() {
   const btn = document.getElementById('contact-btn');
   btn.disabled = true; btn.textContent = 'Sending...';
 
-  // Save to localStorage so you can view messages
   const fname = document.getElementById('c-fname').value.trim();
   const lname = document.getElementById('c-lname').value.trim();
   const email = document.getElementById('c-email').value.trim();
   const phone = document.getElementById('c-phone').value.trim();
   const subject = document.getElementById('c-subject').value;
   const message = document.getElementById('c-message').value.trim();
+  const fullName = `${fname} ${lname}`.trim();
 
+  // 1. Sync to Supabase Database!
+  try {
+    const { error: dbError } = await sbSaveMessage({
+      name: fullName,
+      email: email,
+      phone: phone,
+      subject: subject,
+      message: message
+    });
+    if (dbError) throw dbError;
+  } catch (err) {
+    console.error("Supabase message sync failed, fallback to local storage:", err);
+  }
+
+  // 2. Backup to localStorage so admin panel continues to show messages locally too
   const messages = JSON.parse(localStorage.getItem('lmcb_messages') || '[]');
   messages.unshift({
     id: Date.now(),
-    name: `${fname} ${lname}`.trim(),
+    name: fullName,
     email, phone, subject, message,
     receivedAt: new Date().toISOString(),
     read: false
