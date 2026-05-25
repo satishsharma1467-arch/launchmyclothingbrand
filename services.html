@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -1562,7 +1562,14 @@ function resetBrands() {
 <script>
   const SUPABASE_URL = 'https://tldbjsqhjqapdwmfeuwq.supabase.co';
   const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ';
-  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  let sb = null;
+  if (typeof supabase !== 'undefined') {
+    try {
+      sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    } catch (e) {
+      console.error("Supabase failed to load:", e);
+    }
+  }
 </script>
 <script>
   const _WA_NUM="918796158321",_WA_MSG="Hi! I need help with my clothing brand.";
@@ -1571,7 +1578,7 @@ function getAdminPassword(){return localStorage.getItem("lmcb_admin_pw")||"admin
 function changeAdminPassword(){const c=prompt("Enter CURRENT admin password:");if(!c)return;if(c!==getAdminPassword()){alert("Incorrect password.");return;}const n=prompt("Enter NEW password (min 8 chars):");if(!n||n.length<8){alert("Min 8 characters required.");return;}const c2=prompt("Confirm new password:");if(n!==c2){alert("Passwords do not match.");return;}localStorage.setItem("lmcb_admin_pw",n);alert("Password updated! New password: "+n);}
 
 document.addEventListener("DOMContentLoaded",_initWA);
-<\/script>
+</script>
 
   <!-- MOBILE BOTTOM NAVIGATION -->
   <nav class="mobile-bottom-nav">
