@@ -584,47 +584,112 @@
 
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* MOBILE NAVIGATION */
-    .mobile-nav {
+            /* ═══ MOBILE BOTTOM NAV BAR ══════════════════════════ */
+    .mobile-bottom-nav {
       display: none;
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      height: 62px;
-      background: #0E0B06;
-      border-top: 1px solid var(--border);
-      z-index: 500;
-      justify-content: space-around;
-      align-items: center;
     }
-
-    .mobile-nav a {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
-      text-decoration: none;
-      color: var(--cream);
-      opacity: 0.5;
-      font-size: 0.52rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 8px 4px;
-      flex: 1;
-      text-align: center;
-      transition: opacity 0.2s;
-    }
-
-    .mobile-nav a:hover, .mobile-nav a.active {
-      opacity: 1;
-      color: var(--gold);
-    }
-
-    .mobile-nav .nav-icon { font-size: 1.2rem; }
-
+    
     @media (max-width: 768px) {
-      .mobile-nav { display: flex; }
-      body { padding-bottom: 75px; }
-      .admin-trigger { bottom: 75px; }
+      /* Add padding to body so content not hidden behind bottom nav */
+      body { padding-bottom: 70px !important; }
+      
+      .mobile-bottom-nav {
+        display: flex !important;
+        position: fixed !important;
+        bottom: 0 !important; left: 0 !important; right: 0 !important;
+        height: 62px !important;
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200,169,81,0.25) !important;
+        z-index: 500 !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        padding: 0 !important;
+      }
+      
+      .mobile-bottom-nav a {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 3px !important;
+        text-decoration: none !important;
+        color: #F5F0E8 !important;
+        opacity: 0.5 !important;
+        font-family: 'DM Mono', monospace !important;
+        font-size: 0.52rem !important;
+        letter-spacing: 0.08em !important;
+        text-transform: uppercase !important;
+        padding: 8px 4px !important;
+        flex: 1 !important;
+        text-align: center !important;
+        transition: opacity 0.2s, color 0.2s !important;
+      }
+      
+      .mobile-bottom-nav a:hover,
+      .mobile-bottom-nav a.active {
+        opacity: 1 !important;
+        color: #C8A951 !important;
+      }
+      
+      .mobile-bottom-nav .nav-icon {
+        font-size: 1.2rem !important;
+        line-height: 1 !important;
+      }
+      
+      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
+      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
+    }
+    .mobile-bottom-nav {
+      display: none;
+    }
+    
+    @media (max-width: 768px) {
+      /* Add padding to body so content not hidden behind bottom nav */
+      body { padding-bottom: 70px !important; }
+      
+      .mobile-bottom-nav {
+        display: flex !important;
+        position: fixed !important;
+        bottom: 0 !important; left: 0 !important; right: 0 !important;
+        height: 62px !important;
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200,169,81,0.25) !important;
+        z-index: 500 !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        padding: 0 !important;
+      }
+      
+      .mobile-bottom-nav a {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 3px !important;
+        text-decoration: none !important;
+        color: #F5F0E8 !important;
+        opacity: 0.5 !important;
+        font-family: 'DM Mono', monospace !important;
+        font-size: 0.52rem !important;
+        letter-spacing: 0.08em !important;
+        text-transform: uppercase !important;
+        padding: 8px 4px !important;
+        flex: 1 !important;
+        text-align: center !important;
+        transition: opacity 0.2s, color 0.2s !important;
+      }
+      
+      .mobile-bottom-nav a:hover,
+      .mobile-bottom-nav a.active {
+        opacity: 1 !important;
+        color: #C8A951 !important;
+      }
+      
+      .mobile-bottom-nav .nav-icon {
+        font-size: 1.2rem !important;
+        line-height: 1 !important;
+      }
+      
+      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
+      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
     }
 
     /* WHATSAPP FLOAT */
@@ -950,151 +1015,54 @@
     </a>
   </div>
 
-  <!-- MOBILE BOTTOM NAVIGATION -->
-  <nav class="mobile-nav">
-    <a href="/index.html"><span class="nav-icon">🏠</span><span>Home</span></a>
-    <a href="/services.html"><span class="nav-icon">📐</span><span>Services</span></a>
-    <a href="/manufacturers.html" class="active"><span class="nav-icon">🏭</span><span>Factories</span></a>
-    <a href="/specsheets.html"><span class="nav-icon">📋</span><span>Spec</span></a>
-    <a href="/insights.html"><span class="nav-icon">🎬</span><span>Insights</span></a>
-    <a href="/subscribe.html"><span class="nav-icon">⭐</span><span>Plans</span></a>
+      <!-- MOBILE BOTTOM NAVIGATION -->
+  <nav class="mobile-bottom-nav">
+    <a href="/index.html" id="bn-home">
+      <span class="nav-icon">🏠</span>
+      <span>Home</span>
+    </a>
+    <a href="/services.html" id="bn-services">
+      <span class="nav-icon">📐</span>
+      <span>Services</span>
+    </a>
+    <a href="/manufacturers.html" id="bn-mfr">
+      <span class="nav-icon">🏭</span>
+      <span>Factories</span>
+    </a>
+    <a href="/specsheets.html" id="bn-spec">
+      <span class="nav-icon">📋</span>
+      <span>Spec</span>
+    </a>
+    <a href="/insights.html" id="bn-insights">
+      <span class="nav-icon">🎬</span>
+      <span>Insights</span>
+    </a>
+    <a href="/subscribe.html" id="bn-pricing">
+      <span class="nav-icon">⭐</span>
+      <span>Plans</span>
+    </a>
   </nav>
-
   <script>
-    const SB_URL  = 'https://tldbjsqhjqapdwmfeuwq.supabase.co';
-    const SB_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ';
-    const sb = supabase.createClient(SB_URL, SB_KEY);
-
-    const session   = JSON.parse(localStorage.getItem('lmcb_user') || 'null');
-    const isPaid    = session && session.plan_status === 'active';
-    const isBuilder = isPaid && ['brand_builder','pro_elite'].includes(session.plan);
-
-    const banner = document.getElementById('accessBanner');
-    banner.style.display = 'block';
-    if (isBuilder) {
-      banner.textContent = `✅ Welcome, ${session.firstName}! You have unlocked full access to all factory contacts.`;
-      banner.className = 'access-banner unlocked';
-    } else {
-      banner.innerHTML = `🔒 Subscribe to Brand Builder or Pro Elite to unlock direct phone and email contact details. <a href="/subscribe.html">Unlock Database →</a>`;
-      banner.className = 'access-banner locked';
-    }
-
-    
-    function openAdminPrompt(){ document.getElementById('promptOverlay').classList.add('open'); }
-    function closeOverlay(id){ document.getElementById(id).classList.remove('open'); }
-    function showAlert(id,msg,type){ const el=document.getElementById(id); el.textContent=msg; el.className='alert-sm show '+type; setTimeout(()=>el.className='alert-sm',4000); }
-
-    // SECURED PASSWORD VERIFICATION
-    async function checkAdminPw(){
-      const enteredPw = document.getElementById('adminPwInput').value;
-      if (!enteredPw) { showAlert('promptAlert', 'Please enter a password.', 'error'); return; }
-      
-      const { data, error } = await sb.from('site_settings').select('id').eq('id', 'main').eq('lmcb_admin_pw', enteredPw).single();
-      
-      if (error || !data) {
-        showAlert('promptAlert', 'Incorrect password. Try again.', 'error');
-        document.getElementById('adminPwInput').value = '';
-        document.getElementById('adminPwInput').focus();
-      } else {
-        closeOverlay('promptOverlay');
-        document.getElementById('adminOverlay').classList.add('open');
-        loadExisting();
+    // Highlight active bottom nav item
+    (function() {
+      var path = window.location.pathname;
+      var map = {
+        'index': 'bn-home',
+        'services': 'bn-services', 
+        'manufacturers': 'bn-mfr',
+        'specsheets': 'bn-spec',
+        'insights': 'bn-insights',
+        'subscribe': 'bn-pricing',
+        'library': 'bn-services',
+        'contact': 'bn-home',
+      };
+      var page = path.replace(/.*\//, '').replace('.html', '') || 'index';
+      var activeId = map[page];
+      if (activeId) {
+        var el = document.getElementById(activeId);
+        if (el) el.classList.add('active');
       }
-    }
-
-    async function loadManufacturers(){
-      const { data, error } = await sb.from('manufacturers').select('*').eq('is_active',true).order('sort_order');
-      const list = document.getElementById('mfrList');
-      if(error||!data){ list.innerHTML='<div style="text-align:center;padding:3rem;opacity:0.5;font-size:0.8rem;">Failed to load manufacturer data.</div>'; return; }
-      document.getElementById('totalCount').textContent = data.length + '+';
-      if(!data.length){ list.innerHTML='<div style="text-align:center;padding:3rem;opacity:0.5;font-size:0.8rem;">No factories listed yet in the network.</div>'; return; }
-
-      list.innerHTML = data.map((m,i) => {
-        let contactBlock = '';
-        if(isBuilder){
-          const phonePill = m.phone ? `<a href="tel:${m.phone}" class="contact-pill phone">📞 ${m.phone}</a>` : '';
-          const emailPill = m.email ? `<a href="mailto:${m.email}" class="contact-pill email">✉ ${m.email}</a>` : '';
-          contactBlock = (phonePill||emailPill) ? `<div class="contact-block">${phonePill}${emailPill}</div>` : '<span style="font-size:.72rem;opacity:0.4;">Contact not listed yet</span>';
-        } else {
-          contactBlock = `<a href="/subscribe.html" class="contact-pill locked">🔒 Subscribe to Unlock Contact</a>`;
-        }
-        return `
-        <div class="mfr-card">
-          <div class="mfr-header">
-            <div style="flex:1">
-              <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.4rem;">
-                <span class="mfr-num">${String(i+1).padStart(2,'0')}</span>
-                <div class="mfr-name">${m.name}</div>
-              </div>
-              <div class="mfr-location">📍 ${m.location || '—'}</div>
-            </div>
-          </div>
-          ${m.specialization ? `<div><span class="mfr-spec">Specialization: ${m.specialization}</span></div>` : ''}
-          <p class="mfr-desc">${m.description || ''}</p>
-          <div class="mfr-footer">
-            <div class="mfr-moq">Minimum Order Quantity (MOQ): <span>${m.min_order || 'N/A'}</span></div>
-            ${contactBlock}
-          </div>
-        </div>`;
-      }).join('');
-    }
-
-    async function addManufacturer(){
-      const name = document.getElementById('aName').value.trim();
-      const loc  = document.getElementById('aLocation').value.trim();
-      if(!name||!loc){ showAlert('adminAlert','Name and location are required.','error'); return; }
-      
-      const btn = document.getElementById('addBtn');
-      btn.disabled=true; btn.innerHTML='<span class="spinner"></span>Saving...';
-      const { error } = await sb.from('manufacturers').insert({
-        name,
-        location:  loc,
-        min_order: document.getElementById('aMoq').value.trim(),
-        specialization: document.getElementById('aSpec').value.trim(),
-        description: document.getElementById('aDesc').value.trim(),
-        phone: document.getElementById('aPhone').value.trim(),
-        email: document.getElementById('aEmail').value.trim()
-      });
-      
-      if(error){ showAlert('adminAlert','❌ '+error.message,'error'); }
-      else {
-        ['aName','aLocation','aMoq','aSpec','aDesc','aPhone','aEmail'].forEach(id=>document.getElementById(id).value='');
-        loadManufacturers(); loadExisting();
-        closeOverlay('adminOverlay');
-        showMsg('✅ Manufacturer successfully added!');
-      }
-      btn.disabled=false; btn.textContent='Add Manufacturer →';
-    }
-
-    async function loadExisting(){
-      const { data } = await sb.from('manufacturers').select('id,name').order('sort_order');
-      const list=document.getElementById('existingList');
-      if(!data||!data.length){ list.innerHTML='<p style="font-size:0.75rem;opacity:0.5;">No manufacturers listed yet.</p>'; return; }
-      list.innerHTML=data.map(m=>`
-        <div class="exist-item">
-          <span class="exist-item-name">${m.name}</span>
-          <button class="exist-item-del" onclick="deleteMfr('${m.id}')">🗑</button>
-        </div>`).join('');
-    }
-
-    async function deleteMfr(id){
-      if(!confirm('Are you sure you want to remove this manufacturer?')) return;
-      await sb.from('manufacturers').delete().eq('id',id);
-      loadManufacturers(); loadExisting();
-    }
-
-    function showMsg(text) {
-      const e = document.getElementById('_msg');
-      if (e) e.remove();
-      const m = document.createElement('div');
-      m.id = '_msg';
-      m.textContent = text;
-      m.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#1C1609;border:1px solid var(--border);color:var(--gold);padding:0.8rem 1.5rem;font-family:DM Mono,monospace;font-size:0.85rem;z-index:99999;white-space:nowrap;border-radius:3px;';
-      document.body.appendChild(m);
-      setTimeout(() => m.remove(), 3500);
-    }
-
-    loadManufacturers();
+    })();
   </script>
   <script src="/comm_guard.js"></script>
 </body>
