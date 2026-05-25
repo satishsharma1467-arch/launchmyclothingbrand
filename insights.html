@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Expert video insights on pattern making, garment manufacturing, and clothing brand development in India.">
   <title>Industry Insights | Launch My Clothing Brand</title>
   
@@ -27,15 +27,13 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
 
-    body {
-      background: #0E0B06;
+    body { font-size: 16px; background: #0E0B06;
       color: var(--cream);
       font-family: 'DM Mono', monospace;
       font-weight: 300;
       overflow-x: hidden;
       min-height: 100vh;
-      padding-bottom: 80px;
-    }
+      padding-bottom: 80px; }
 
     body::before {
       content: '';
@@ -50,17 +48,17 @@
     a { color: var(--gold); text-decoration: none; transition: color 0.2s; }
     a:hover { color: var(--gold-light); }
 
-        /* NAV */
+    /* NAV */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      padding: 1.3rem 4rem;
+      padding: 1.2rem 3rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid var(--border);
-      background: rgba(14,11,6,0.92);
+      background: rgba(14,11,6,0.95);
       backdrop-filter: blur(14px);
     }
 
@@ -84,7 +82,6 @@
       opacity: 0.45;
       margin-top: 0.15rem;
       color: var(--cream);
-      display: block;
     }
 
     .nav-links {
@@ -104,20 +101,64 @@
       transition: opacity 0.2s, color 0.2s;
     }
 
-    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold); }
+    .nav-links a:hover { opacity: 1; color: var(--gold); }
 
     .nav-cta {
       background: var(--gold) !important;
       color: var(--ink) !important;
-      padding: 0.6rem 1.4rem !important;
+      padding: 0.5rem 1rem !important;
       opacity: 1 !important;
       font-weight: 500 !important;
-      transition: background 0.2s !important;
     }
 
     .nav-cta:hover { background: var(--gold-light) !important; color: var(--ink) !important; }
 
-    .nav-close { display: none; }
+    
+
+    .mob-menu a {
+      color: var(--cream);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(200,169,81,0.1);
+      opacity: 0.8;
+    }
+
+    .mob-menu a:last-child { border: none; }
+    .mob-menu a:hover { color: var(--gold); opacity: 1; }
+
+    @media (max-width: 768px) {
+      /* Sliding nav drawer styles */
+      .nav-hamburger { display: flex !important; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; z-index: 100; }
+      .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--gold); }
+      
+      .nav-links {
+        display: none !important;
+        position: fixed !important;
+        top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
+        background: #0E0B06 !important;
+        flex-direction: column !important; justify-content: center !important;
+        align-items: center !important; gap: 1.5rem !important;
+        z-index: 999 !important; padding: 2rem !important;
+      }
+      .nav-links.open { display: flex !important; }
+      .nav-links a { font-size: 1rem !important; letter-spacing: 0.15em !important; display: block; width: 100%; text-align: center; padding: 0.5rem 0; border-bottom: 1px solid rgba(200,169,81,0.1); }
+      .nav-links .nav-cta { background: var(--gold) !important; color: var(--ink) !important; width: auto !important; padding: 0.6rem 2rem !important; border-bottom: none !important; margin-top: 0.5rem; }
+      
+      .nav-close {
+        display: block !important;
+        position: absolute !important;
+        top: 1.5rem !important; right: 1.5rem !important;
+        background: none !important; border: none !important;
+        color: var(--gold) !important; font-size: 1.5rem !important;
+        cursor: pointer !important; z-index: 1000 !important;
+      }
+      .nav-hamburger span { background: var(--gold) !important; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      nav { padding: 1rem 1.2rem; }
+    }
 
     /* HERO */
     .hero {
@@ -275,12 +316,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: none;
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .video-card:hover .video-thumb img {
-      transform: scale(1.04);
+      filter: saturate(0.8) contrast(1.05);
     }
 
     .play-btn {
@@ -289,14 +325,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: transparent;
-      opacity: 0;
-      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), background 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      background: rgba(0, 0, 0, 0.45);
+      transition: background 0.2s;
     }
 
-    .video-card:hover .play-btn {
-      opacity: 1;
-      background: rgba(0, 0, 0, 0.25);
+    .play-btn:hover {
+      background: rgba(0, 0, 0, 0.6);
     }
 
     .play-circle {
@@ -332,7 +366,7 @@
       border: none;
     }
 
-    .card-body { padding: 1.25rem; }
+    .card-body { font-size: 16px; padding: 1.25rem; }
 
     .card-cat {
       font-size: 0.58rem;
@@ -626,112 +660,22 @@
 
     @keyframes spin { to { transform: rotate(360deg); } }
 
-            /* ═══ MOBILE BOTTOM NAV BAR ══════════════════════════ */
-    .mobile-bottom-nav {
-      display: none;
-    }
+    /* MOBILE NAVIGATION */
     
-    @media (max-width: 768px) {
-      /* Add padding to body so content not hidden behind bottom nav */
-      body { padding-bottom: 70px !important; }
-      
-      .mobile-bottom-nav {
-        display: flex !important;
-        position: fixed !important;
-        bottom: 0 !important; left: 0 !important; right: 0 !important;
-        height: 62px !important;
-        background: #0E0B06 !important;
-        border-top: 1px solid rgba(200,169,81,0.25) !important;
-        z-index: 500 !important;
-        justify-content: space-around !important;
-        align-items: center !important;
-        padding: 0 !important;
-      }
-      
-      .mobile-bottom-nav a {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 3px !important;
-        text-decoration: none !important;
-        color: #F5F0E8 !important;
-        opacity: 0.5 !important;
-        font-family: 'DM Mono', monospace !important;
-        font-size: 0.52rem !important;
-        letter-spacing: 0.08em !important;
-        text-transform: uppercase !important;
-        padding: 8px 4px !important;
-        flex: 1 !important;
-        text-align: center !important;
-        transition: opacity 0.2s, color 0.2s !important;
-      }
-      
-      .mobile-bottom-nav a:hover,
-      .mobile-bottom-nav a.active {
-        opacity: 1 !important;
-        color: #C8A951 !important;
-      }
-      
-      .mobile-bottom-nav .nav-icon {
-        font-size: 1.2rem !important;
-        line-height: 1 !important;
-      }
-      
-      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
-      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
-    }
-    .mobile-bottom-nav {
-      display: none;
-    }
+
     
+
+    .mobile-nav a:hover, .mobile-nav a.active {
+      opacity: 1;
+      color: var(--gold);
+    }
+
+    
+
     @media (max-width: 768px) {
-      /* Add padding to body so content not hidden behind bottom nav */
-      body { padding-bottom: 70px !important; }
       
-      .mobile-bottom-nav {
-        display: flex !important;
-        position: fixed !important;
-        bottom: 0 !important; left: 0 !important; right: 0 !important;
-        height: 62px !important;
-        background: #0E0B06 !important;
-        border-top: 1px solid rgba(200,169,81,0.25) !important;
-        z-index: 500 !important;
-        justify-content: space-around !important;
-        align-items: center !important;
-        padding: 0 !important;
-      }
-      
-      .mobile-bottom-nav a {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 3px !important;
-        text-decoration: none !important;
-        color: #F5F0E8 !important;
-        opacity: 0.5 !important;
-        font-family: 'DM Mono', monospace !important;
-        font-size: 0.52rem !important;
-        letter-spacing: 0.08em !important;
-        text-transform: uppercase !important;
-        padding: 8px 4px !important;
-        flex: 1 !important;
-        text-align: center !important;
-        transition: opacity 0.2s, color 0.2s !important;
-      }
-      
-      .mobile-bottom-nav a:hover,
-      .mobile-bottom-nav a.active {
-        opacity: 1 !important;
-        color: #C8A951 !important;
-      }
-      
-      .mobile-bottom-nav .nav-icon {
-        font-size: 1.2rem !important;
-        line-height: 1 !important;
-      }
-      
-      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
-      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
+      body { font-size: 16px; padding-bottom: 75px; }
+      .admin-trigger { bottom: 75px; }
     }
 
     /* WHATSAPP FLOAT */
@@ -843,79 +787,54 @@
       .nav-links {
         background: #0E0B06 !important;
       }
-      .mobile-bottom-nav, .mobile-nav {
-        background: #0E0B06 !important;
-        border-top: 1px solid rgba(200, 169, 81, 0.25) !important;
-      }
-      .mobile-bottom-nav a, .mobile-nav a {
-        background: #0E0B06 !important;
-      }
+      .mobile-bottom-nav, 
+      .mobile-bottom-nav a, 
     }
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
-    /* â•â•â• OPTIONS A: LUXURY PREMIUM SENSORY CONTRAST OVERRIDES â•â•â• */
-    /* Brushed Gold Gradient */
-    .btn-primary, .nav-cta, .cta, .btn-submit, .btn-gold {
-      background: linear-gradient(135deg, #E8C96A 0%, #C8A951 50%, #A68230 100%) !important;
-      color: #0E0B06 !important;
-      border: 1px solid rgba(232, 201, 106, 0.2) !important;
-      box-shadow: 0 4px 15px rgba(200, 169, 81, 0.15) !important;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-      text-shadow: none !important;
+    .mobile-bottom-nav {
+      display: none;
     }
-    
-    .btn-primary:hover, .btn-primary:active, .btn-primary:focus,
-    .nav-cta:hover, .nav-cta:active, .nav-cta:focus,
-    .cta:hover, .cta:active, .cta:focus,
-    .btn-submit:hover, .btn-submit:active, .btn-submit:focus,
-    .btn-gold:hover, .btn-gold:active, .btn-gold:focus {
-      transform: translateY(-2px) !important;
-      box-shadow: 0 8px 25px rgba(200, 169, 81, 0.3) !important;
-      filter: brightness(1.08) !important;
-      outline: none !important;
+    @media (max-width: 768px) {
+      .mobile-bottom-nav {
+        display: flex !important;
+        position: fixed !important;
+        bottom: 0 !important; left: 0 !important; right: 0 !important;
+        height: 62px !important;
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200,169,81,0.25) !important;
+        z-index: 500 !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        padding: 0 !important;
+      }
+      .mobile-bottom-nav a {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 3px !important;
+        text-decoration: none !important;
+        color: #F5F0E8 !important;
+        opacity: 0.5 !important;
+        font-family: 'DM Mono', monospace !important;
+        font-size: 0.52rem !important;
+        letter-spacing: 0.08em !important;
+        text-transform: uppercase !important;
+        padding: 8px 4px !important;
+        flex: 1 !important;
+        text-align: center !important;
+        transition: opacity 0.2s, color 0.2s !important;
+      }
+      .mobile-bottom-nav a:hover,
+      .mobile-bottom-nav a.active {
+        opacity: 1 !important;
+        color: #C8A951 !important;
+      }
+      .mobile-bottom-nav .nav-icon {
+        font-size: 1.2rem !important;
+        line-height: 1 !important;
+      }
     }
-    
-    /* Outline Button */
-    .btn-outline {
-      border: 1px solid rgba(200, 169, 81, 0.45) !important;
-      color: #F5F0E8 !important;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    
-    .btn-outline:hover, .btn-outline:active, .btn-outline:focus {
-      border-color: #C8A951 !important;
-      color: #C8A951 !important;
-      background: rgba(200, 169, 81, 0.05) !important;
-      transform: translateY(-2px) !important;
-      box-shadow: 0 6px 20px rgba(200, 169, 81, 0.08) !important;
-      outline: none !important;
-    }
-    
-    /* Card Interactions and Gold Dust Glows */
-    .mfr-card, .spec-card, .pattern-card, .service-card, .plan-card, .video-card {
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    
-    .mfr-card:hover, .mfr-card:active,
-    .spec-card:hover, .spec-card:active,
-    .pattern-card:hover, .pattern-card:active,
-    .service-card:hover, .service-card:active,
-    .plan-card:hover, .plan-card:active,
-    .video-card:hover, .video-card:active {
-      transform: translateY(-4px) !important;
-      border-color: rgba(200, 169, 81, 0.45) !important;
-      box-shadow: 0 12px 30px rgba(200, 169, 81, 0.16) !important;
-    }
-    
-    /* Logo Hover Glow */
-    .nav-logo {
-      transition: text-shadow 0.3s ease !important;
-    }
-    
-    .nav-logo:hover, .nav-logo:active {
-      text-shadow: 0 0 12px rgba(200, 169, 81, 0.4) !important;
-    }
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 </style>
 </head>
 <body>
@@ -928,11 +847,10 @@
       <span>Pattern Making &amp; Manufacturing</span>
     </a>
     <ul class="nav-links" id="main-nav">
-      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">&times;</button>
+      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">âœ•</button>
       <li><a href="/services.html">Services</a></li>
       <li><a href="/library.html">Patterns</a></li>
       <li><a href="/specsheets.html">Spec Sheets</a></li>
-      <li><a href="/phototopattern.html">Photo to Pattern</a></li>
       <li><a href="/insights.html" class="active">Insights</a></li>
       <li><a href="/manufacturers.html">Manufacturers</a></li>
       <li><a href="/subscribe.html" class="nav-cta">Get Started</a></li>
@@ -949,13 +867,13 @@
     <p>Expert video content on pattern making, garment manufacturing, and building a successful clothing brand in India.</p>
     <div class="hero-stats">
       <div class="hstat"><div class="hstat-num" id="totalCount">0</div><div class="hstat-label">Videos</div></div>
-      <div class="hstat"><div class="hstat-num">Premium</div><div class="hstat-label">Access</div></div>
+      <div class="hstat"><div class="hstat-num">Free</div><div class="hstat-label">Access</div></div>
       <div class="hstat"><div class="hstat-num">HD</div><div class="hstat-label">Quality</div></div>
       <div class="hstat"><div class="hstat-num">New</div><div class="hstat-label">Added Regularly</div></div>
     </div>
   </div>
 
-  <div class="access-note">🎬 Premium strategy tutorials are reserved for active subscribers. Free topics are marked accordingly below.</div>
+  <div class="access-note">🎬 Industry Insights are free for all visitors. Subscribe for pattern downloads and factory databases.</div>
 
   <!-- FILTERS -->
   <div class="filters-bar" id="filtersBar" style="display:none;">
@@ -979,7 +897,35 @@
   </div>
 
   <!-- FOOTER -->
-  <footer>
+  
+  <!-- MOBILE BOTTOM NAVIGATION -->
+  <nav class="mobile-bottom-nav">
+    <a href="/index.html" id="bn-home">
+      <span class="nav-icon">🏠</span>
+      <span>Home</span>
+    </a>
+    <a href="/services.html" id="bn-services">
+      <span class="nav-icon">📐</span>
+      <span>Services</span>
+    </a>
+    <a href="/manufacturers.html" id="bn-mfr">
+      <span class="nav-icon">🏭</span>
+      <span>Factories</span>
+    </a>
+    <a href="/specsheets.html" id="bn-spec">
+      <span class="nav-icon">📋</span>
+      <span>Spec</span>
+    </a>
+    <a href="/insights.html" id="bn-insights">
+      <span class="nav-icon">🎬</span>
+      <span>Insights</span>
+    </a>
+    <a href="/subscribe.html" id="bn-pricing">
+      <span class="nav-icon">⭐</span>
+      <span>Plans</span>
+    </a>
+  </nav>
+<footer>
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="footer-brand-name">Launch My Clothing Brand</div>
@@ -1066,10 +1012,6 @@
         <label>Description (optional)</label>
         <textarea id="aDesc" placeholder="Brief description of this video..."></textarea>
       </div>
-      <div class="field" style="display:flex; align-items:center; gap:0.6rem; margin-top:1.5rem; margin-bottom:1.5rem;">
-        <input type="checkbox" id="aIsPremium" style="width:auto; height:18px; width:18px; cursor:pointer; accent-color:var(--gold); margin:0;">
-        <label for="aIsPremium" style="margin-bottom:0; cursor:pointer; font-size:0.75rem; opacity:0.95; letter-spacing:0.05em; text-transform:none;">🔒 Limit access to Premium Subscribers only</label>
-      </div>
       <button class="btn-add" id="addBtn" onclick="addVideo()">Add Video →</button>
       <div class="existing-list">
         <h3>Current Insights</h3>
@@ -1084,33 +1026,168 @@
     </a>
   </div>
 
-      <!-- MOBILE BOTTOM NAVIGATION -->
-  <nav class="mobile-bottom-nav">
-    <a href="/index.html" id="bn-home">
-      <span class="nav-icon">🏠</span>
-      <span>Home</span>
-    </a>
-    <a href="/services.html" id="bn-services">
-      <span class="nav-icon">📐</span>
-      <span>Services</span>
-    </a>
-    <a href="/manufacturers.html" id="bn-mfr">
-      <span class="nav-icon">🏭</span>
-      <span>Factories</span>
-    </a>
-    <a href="/specsheets.html" id="bn-spec">
-      <span class="nav-icon">📋</span>
-      <span>Spec</span>
-    </a>
-    <a href="/insights.html" id="bn-insights">
-      <span class="nav-icon">🎬</span>
-      <span>Insights</span>
-    </a>
-    <a href="/subscribe.html" id="bn-pricing">
-      <span class="nav-icon">⭐</span>
-      <span>Plans</span>
-    </a>
-  </nav>
+  <!-- MOBILE BOTTOM NAVIGATION -->
+  
+
+  <script>
+    const SB_URL  = 'https://tldbjsqhjqapdwmfeuwq.supabase.co';
+    const SB_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ';
+    const sb = supabase.createClient(SB_URL, SB_KEY);
+
+    
+    function openAdminPrompt(){ document.getElementById('promptOverlay').classList.add('open'); }
+    function closeOverlay(id){ document.getElementById(id).classList.remove('open'); }
+    function showAlert(id,msg,type){ const el=document.getElementById(id); el.textContent=msg; el.className='alert-sm show '+type; setTimeout(()=>el.className='alert-sm',4000); }
+
+    // SECURED PASSWORD VERIFICATION
+    async function checkAdminPw(){
+      const enteredPw = document.getElementById('adminPwInput').value;
+      if (!enteredPw) { showAlert('promptAlert', 'Please enter a password.', 'error'); return; }
+      
+      const { data, error } = await sb.from('site_settings').select('id').eq('id', 'main').eq('lmcb_admin_pw', enteredPw).single();
+      
+      if (error || !data) {
+        showAlert('promptAlert', 'Incorrect password. Try again.', 'error');
+        document.getElementById('adminPwInput').value = '';
+        document.getElementById('adminPwInput').focus();
+      } else {
+        closeOverlay('promptOverlay');
+        document.getElementById('adminOverlay').classList.add('open');
+        loadExisting();
+      }
+    }
+
+    // extract YouTube video ID from any YT URL format
+    function getYTId(url){
+      const m = url.match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([a-zA-Z0-9_-]{11})/);
+      return m ? m[1] : null;
+    }
+
+    let allVideos = [], allCategories = new Set();
+
+    async function loadVideos(){
+      const { data, error } = await sb.from('videos').select('*').eq('is_active',true).order('created_at',{ascending:false});
+      const grid = document.getElementById('videosGrid');
+      if (error){ grid.innerHTML='<div class="empty-state"><div class="empty-icon">❌</div><p>Failed to load insights.</p></div>'; return; }
+      allVideos = data || [];
+      document.getElementById('totalCount').textContent = allVideos.length;
+
+      if(!allVideos.length){
+        grid.innerHTML='<div class="empty-state"><div class="empty-icon">🎬</div><p>No video insights available. Check back soon!</p></div>';
+        return;
+      }
+
+      // clear existing filter buttons to avoid duplication
+      const bar = document.getElementById('filtersBar');
+      bar.innerHTML = '<span style="font-size:0.72rem; color:var(--gold); opacity:0.7; margin-right:0.5rem; text-transform:uppercase; letter-spacing:0.1em;">Filter:</span>';
+      
+      const allBtn = document.createElement('button');
+      allBtn.className = 'filter-btn active';
+      allBtn.textContent = 'All';
+      allBtn.onclick = () => filterVideos('all', allBtn);
+      bar.appendChild(allBtn);
+
+      allCategories.clear();
+      allVideos.forEach(v => {
+        if(v.category) allCategories.add(v.category);
+      });
+      
+      bar.style.display='flex';
+      allCategories.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className='filter-btn'; btn.textContent=cat;
+        btn.onclick=()=>filterVideos(cat,btn);
+        bar.appendChild(btn);
+      });
+
+      renderVideos(allVideos);
+    }
+
+    function renderVideos(videos){
+      const grid = document.getElementById('videosGrid');
+      if(!videos.length){ grid.innerHTML='<div class="empty-state"><div class="empty-icon">📭</div><p>No insights found in this category.</p></div>'; return; }
+      grid.innerHTML = videos.map(v => {
+        const ytId = getYTId(v.youtube_url);
+        const thumb = ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : '';
+        return `
+        <div class="video-card">
+          <div class="video-thumb" id="thumb-${v.id}" onclick="playVideo('${v.id}','${ytId}')">
+            ${thumb ? `<img src="${thumb}" alt="${v.title}" loading="lazy">` : '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2rem">🎬</div>'}
+            <div class="play-btn"><div class="play-circle">▶</div></div>
+          </div>
+          <div class="video-embed" id="embed-${v.id}">
+            <iframe src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+          </div>
+          <div class="card-body">
+            <div class="card-cat">${v.category || 'General'}</div>
+            <div class="card-title">${v.title}</div>
+            ${v.description ? `<div class="card-desc">${v.description}</div>` : ''}
+            <div class="card-meta">
+              ${v.duration ? `<span>⏱ ${v.duration}</span>` : ''}
+              <span>🆓 Free Access</span>
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    function playVideo(id, ytId){
+      if(!ytId) return;
+      document.getElementById('thumb-'+id).style.display='none';
+      const embed = document.getElementById('embed-'+id);
+      embed.style.display='block';
+      embed.querySelector('iframe').src=`https://www.youtube.com/embed/${ytId}?autoplay=1`;
+    }
+
+    function filterVideos(cat, btn){
+      document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      renderVideos(cat==='all' ? allVideos : allVideos.filter(v=>v.category===cat));
+    }
+
+    async function addVideo(){
+      const url   = document.getElementById('aUrl').value.trim();
+      const title = document.getElementById('aTitle').value.trim();
+      const cat   = document.getElementById('aCategory').value;
+      const dur   = document.getElementById('aDuration').value.trim();
+      const desc  = document.getElementById('aDesc').value.trim();
+      if(!url||!title){ showAlert('adminAlert','YouTube URL and title are required.','error'); return; }
+      if(!getYTId(url)){ showAlert('adminAlert','Invalid YouTube URL format.','error'); return; }
+      
+      const btn=document.getElementById('addBtn');
+      btn.disabled=true; btn.innerHTML='<span class="spinner"></span>Saving...';
+      const { error } = await sb.from('videos').insert({ youtube_url:url, title, category:cat, duration:dur, description:desc });
+      if(error){ showAlert('adminAlert','❌ '+error.message,'error'); }
+      else {
+        showAlert('adminAlert','✅ Video added successfully!','success');
+        document.getElementById('aUrl').value=''; document.getElementById('aTitle').value='';
+        document.getElementById('aDuration').value=''; document.getElementById('aDesc').value='';
+        loadVideos(); loadExisting();
+      }
+      btn.disabled=false; btn.textContent='Add Video →';
+    }
+
+    async function loadExisting(){
+      const { data } = await sb.from('videos').select('id,title,category').order('created_at',{ascending:false});
+      const list=document.getElementById('existingList');
+      if(!data||!data.length){ list.innerHTML='<p style="font-size:0.75rem;opacity:0.5;">No videos yet.</p>'; return; }
+      list.innerHTML=data.map(v=>`
+        <div class="exist-item">
+          <span class="exist-item-name">${v.title}</span>
+          <span class="exist-item-badge">${v.category}</span>
+          <button class="exist-item-del" onclick="deleteVideo('${v.id}')">🗑</button>
+        </div>`).join('');
+    }
+
+    async function deleteVideo(id){
+      if(!confirm('Are you sure you want to remove this insight video?')) return;
+      await sb.from('videos').delete().eq('id',id);
+      loadVideos(); loadExisting();
+    }
+
+    loadVideos();
+  </script>
+
   <script>
     // Highlight active bottom nav item
     (function() {
@@ -1133,6 +1210,5 @@
       }
     })();
   </script>
-  <script src="/comm_guard.js"></script>
 </body>
 </html>
