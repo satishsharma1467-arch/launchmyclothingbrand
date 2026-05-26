@@ -6,7 +6,7 @@
 <meta name="description" content="Choose your plan. Basic ₹299/mo, Brand Builder ₹999/mo, Pro Elite ₹1999/mo.">
 <title>Pricing | Launch My Clothing Brand</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Mono:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet">
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <style>
   :root{--bg:#0d1117;--bg2:#161b22;--bg3:#21262d;--border:#30363d;--gold:#d4a843;--gold2:#f0c96a;--text:#e6edf3;--muted:#8b949e;--green:#3fb950;--red:#f85149;--radius:8px;}
@@ -16,8 +16,27 @@
   a:hover{text-decoration:underline;}
 
   nav{background:rgba(13,17,23,.95);border-bottom:1px solid var(--border);padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(8px);}
-  .nav-logo{font-size:1rem;font-weight:600;color:var(--text);display:flex;flex-direction:column;line-height:1.2;}
-  .nav-logo span{font-size:.7rem;font-weight:400;color:var(--muted);}
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-decoration: none;
+    line-height: 1.2;
+    display: flex;
+    flex-direction: column;
+  }
+  .nav-logo span {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    opacity: 0.45;
+    font-weight: 300;
+    margin-top: 0.15rem;
+    text-transform: uppercase;
+  }
   .nav-links{display:flex;gap:1.5rem;list-style:none;align-items:center;}
   .nav-links a{color:var(--muted);font-size:.85rem;transition:color .2s;}
   .nav-links a:hover{color:var(--text);text-decoration:none;}
