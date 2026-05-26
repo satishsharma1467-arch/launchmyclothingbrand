@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -11,6 +11,7 @@
   <meta name="robots" content="index, follow" />
 
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 
   <style>
     :root {
@@ -1004,12 +1005,39 @@
       .mobile-bottom-nav, .mobile-nav {
         background: #0E0B06 !important;
         border-top: 1px solid rgba(200, 169, 81, 0.25) !important;
-      }
       .mobile-bottom-nav a, .mobile-nav a {
         background: #0E0B06 !important;
       }
     }
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    /* === MOBILE HEADER & DRAWER OVERLAYS SOLID BLACK CONTRAST FIX === */
+    
+    /* ADMIN FAB */
+    .admin-fab {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      width: 44px;
+      height: 44px;
+      background: rgba(200,169,81,0.15);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      z-index: 400;
+      transition: background 0.2s;
+    }
+    .admin-fab:hover {
+      background: rgba(200,169,81,0.25);
+    }
+    @media (max-width: 768px) {
+      .admin-fab {
+        bottom: 75px;
+      }
+    }
+    /* ════════════════════════════════════════════════════ */
 </style>
 </head>
 <body>
@@ -1021,7 +1049,7 @@
       <span>Pattern Making &amp; Manufacturing</span>
     </a>
     <ul class="nav-links" id="main-nav">
-      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">âœ•</button>
+      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">✕</button>
       <li><a href="/services.html" class="active">Services</a></li>
       <li><a href="/library.html">Patterns</a></li>
       <li><a href="/specsheets.html">Spec Sheets</a></li>
@@ -1264,6 +1292,9 @@
     </div>
   </footer>
 
+  <!-- Admin FAB -->
+  <div class="admin-fab" onclick="openAdmin()" title="Admin Editor Panel">⚙️</div>
+
 
 <!-- ══════════════════════════════════════════════
      ADMIN BRAND EDITOR
@@ -1323,8 +1354,10 @@
 </div>
 
 <script>
-// ─── ADMIN PASSWORD (change this) ───────────────────────
-const ADMIN_PASSWORD = 'admin123';
+// ─── SUPABASE INITIALIZATION ────────────────────────────
+const SB_URL  = 'https://tldbjsqhjqapdwmfeuwq.supabase.co';
+const SB_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ';
+const sb = supabase.createClient(SB_URL, SB_KEY);
 
 // ─── DEFAULT BRANDS ──────────────────────────────────────
 const DEFAULT_BRANDS = {
@@ -1363,16 +1396,29 @@ function closeAdmin() {
   document.getElementById('admin-overlay').style.display = 'none';
 }
 
-function adminLogin() {
+async function adminLogin() {
   const pw = document.getElementById('admin-pw').value;
-  if (pw === ADMIN_PASSWORD) {
-    document.getElementById('admin-login').style.display = 'none';
-    document.getElementById('admin-editor').style.display = 'block';
-    renderBrandList();
-  } else {
+  if (!pw) return;
+  
+  const { data, error } = await sb.from('site_settings').select('id').eq('id', 'main').eq('lmcb_admin_pw', pw).single();
+  
+  if (error || !data) {
+    // Fallback check to localStorage / default password as a secure offline backup
+    const localPw = localStorage.getItem('lmcb_admin_pw') || 'admin123';
+    if (pw === localPw) {
+      document.getElementById('admin-login').style.display = 'none';
+      document.getElementById('admin-editor').style.display = 'block';
+      renderBrandList();
+      return;
+    }
+    
     document.getElementById('admin-pw-error').style.display = 'block';
     document.getElementById('admin-pw').value = '';
     document.getElementById('admin-pw').focus();
+  } else {
+    document.getElementById('admin-login').style.display = 'none';
+    document.getElementById('admin-editor').style.display = 'block';
+    renderBrandList();
   }
 }
 
@@ -1386,6 +1432,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Keyboard shortcut Ctrl+Shift+A
+document.addEventListener('keydown', e => {
+  if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') {
+    e.preventDefault();
+    openAdmin();
+  }
+});
 
 
 // Render editable brand list in panel
@@ -1530,5 +1582,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
+<script src="/comm_guard.js"></script>
 </body>
 </html>

@@ -431,7 +431,8 @@
 
     const session = JSON.parse(localStorage.getItem('lmcb_user') || 'null');
     const plan = localStorage.getItem('lmcb_current_plan') || (session ? session.plan : 'free');
-    const isPaid = plan === 'brand_builder' || plan === 'pro_elite';
+    const planStatus = session ? session.plan_status : 'free';
+    const isPaid = planStatus === 'active' && ['brand_builder', 'pro_elite'].includes(plan);
 
     let specsList = [];
     let activeFilter = 'All';
@@ -444,19 +445,7 @@
         return;
       }
 
-      // Seed default spec sheets if empty
-      if (data.length === 0) {
-        console.log('Seeding default spec sheets...');
-        const { data: seededData, error: seedError } = await sb.from('spec_sheets').insert(DEFAULT_SPECS).select();
-        if (!seedError && seededData) {
-          specsList = seededData;
-        } else {
-          specsList = [];
-        }
-      } else {
-        specsList = data;
-      }
-
+      specsList = data || [];
       renderCards();
     }
 
@@ -467,7 +456,14 @@
       document.getElementById('total-count').textContent = specsList.length + '+';
       document.getElementById('section-label-text').textContent = activeFilter === 'All' ? 'All Spec Sheets' : activeFilter + ' Spec Sheets';
 
-      if (!filtered.length) { grid.innerHTML = '<div class="spec-empty">No spec sheets in this category.</div>'; return; }
+      if (!filtered.length) {
+        grid.innerHTML = `<div style="grid-column:1/-1;padding:5rem 2rem;text-align:center;border:1px dashed var(--border);background:rgba(200,169,81,0.02);border-radius:3px;font-family:'DM Mono',monospace;">
+          <div style="font-size:1.8rem;margin-bottom:0.8rem;opacity:0.6;">📋</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--gold);margin-bottom:0.4rem;">Spec Sheets Coming Soon</div>
+          <p style="font-size:0.78rem;opacity:0.5;max-width:320px;margin:0 auto;line-height:1.6;">Our expert garment measurement specifications are currently being updated. New files coming soon!</p>
+        </div>`;
+        return;
+      }
 
       grid.innerHTML = filtered.map((s, i) => {
         const icon = CAT_ICONS[s.category] || '📄';
@@ -480,15 +476,19 @@
           ? `<a class="spec-download-btn" href="${s.file_url}" download target="_blank">⬇ Download Spec Sheet</a>` 
           : `<div class="spec-download-locked">🔒 Premium Only — Subscribe to Download</div>`;
 
+        const lockOverlay = isPaid
+          ? ''
+          : `<div class="spec-lock-overlay">
+              <div class="spec-lock-icon">🔒</div>
+              <div class="spec-lock-text">Premium Only</div>
+            </div>`;
+
         return `
         <div class="spec-card">
           <div class="spec-preview">
             ${preview}
             <div class="spec-category-pill">${s.category}</div>
-            <div class="spec-lock-overlay">
-              <div class="spec-lock-icon">🔒</div>
-              <div class="spec-lock-text">Premium Only</div>
-            </div>
+            ${lockOverlay}
           </div>
           <div class="spec-body">
             <div class="spec-index">0${i+1}</div>
@@ -808,5 +808,6 @@
       if (params.has('admin')) openAdmin();
     });
   </script>
+  <script src="/comm_guard.js"></script>
 </body>
 </html>

@@ -16,10 +16,16 @@
     }
 
     function checkPermissions() {
+      const session = JSON.parse(localStorage.getItem('lmcb_user') || 'null');
+      const planStatus = session ? session.plan_status : 'free';
       const plan = getActivePlan();
+      
+      // Bypassed if admin/manual override or if plan is active
+      const isActive = planStatus === 'active' || localStorage.getItem('lmcb_current_plan');
+      
       return {
-        hasChat: plan === 'brand_builder' || plan === 'pro_elite',
-        hasCall: plan === 'pro_elite'
+        hasChat: isActive && (plan === 'brand_builder' || plan === 'pro_elite'),
+        hasCall: isActive && plan === 'pro_elite'
       };
     }
 
@@ -81,14 +87,9 @@
         // Enforce visible sitewide (overriding default inline hiding scripts)
         bubble.style.cssText = 'display: flex !important; visibility: visible !important; pointer-events: auto !important; position: fixed !important; z-index: 900 !important;';
         
-        // Adjust positions based on mobile bottom nav constraints
-        if (window.innerWidth <= 768) {
-          bubble.style.bottom = '75px';
-          bubble.style.right = '1rem';
-        } else {
-          bubble.style.bottom = '2rem';
-          bubble.style.right = '2rem';
-        }
+        // Adjust positions globally (bottom nav is completely removed now)
+        bubble.style.bottom = '2rem';
+        bubble.style.right = '2rem';
         
         // Remote hover tooltip, manage via custom click events
         const tooltip = document.getElementById('wa-tooltip');
@@ -214,11 +215,140 @@
       document.body.appendChild(overlay);
     }
 
+    function sanitizeWhatsAppLinks() {
+      const allLinks = document.querySelectorAll('a');
+      allLinks.forEach(link => {
+        const href = link.getAttribute('href') || '';
+        // If it's a raw WhatsApp link and not explicitly bypassed, sanitize it
+        if ((href.includes('wa.me') || href.includes('whatsapp.com')) && 
+            !link.classList.contains('wa-bypass') && 
+            link.getAttribute('data-bypass') !== 'true') {
+          link.setAttribute('href', '#whatsapp');
+          link.removeAttribute('target');
+        }
+      });
+    }
+
+    function updateNavbarSession() {
+      const session = JSON.parse(localStorage.getItem('lmcb_user') || 'null');
+      if (session) {
+        const ctaBtns = document.querySelectorAll('.nav-cta, .cta, #main-nav a[href*="subscribe.html"]');
+        ctaBtns.forEach(ctaBtn => {
+          ctaBtn.textContent = 'Log Out';
+          ctaBtn.setAttribute('href', '#logout');
+          
+          ctaBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (confirm('Are you sure you want to log out?')) {
+              localStorage.removeItem('lmcb_user');
+              localStorage.removeItem('lmcb_current_plan');
+              window.location.href = '/login.html';
+            }
+          });
+        });
+      }
+    }
+
+    function injectMobileStyles() {
+      if (document.getElementById('comm-mobile-styles')) return;
+      const style = document.createElement('style');
+      style.id = 'comm-mobile-styles';
+      style.textContent = `
+        @media (max-width: 768px) {
+          /* Remove the mobile bottom navigation bars with icons entirely */
+          .mobile-bottom-nav, .mobile-nav, .mob-nav, .mobile-bottom-bar, .wa-float {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+          }
+          /* Reset body bottom padding so content doesn't have an empty gap */
+          body {
+            padding-bottom: 0px !important;
+          }
+          /* Ensure the top header and hamburger button work perfectly */
+          nav {
+            padding: 1rem 1.2rem !important;
+          }
+          /* Fix floating WhatsApp bubble position since bottom nav is gone */
+          #wa-bubble {
+            bottom: 2rem !important;
+            right: 2rem !important;
+          }
+        }
+        @media (max-width: 1100px) {
+          /* Force standard header styling and hamburger visibility */
+          .nav-hamburger {
+            display: flex !important;
+          }
+          .nav-close {
+            display: block !important;
+          }
+          /* Force standard slide-out vertical list styling */
+          .nav-links, #main-nav {
+            display: none !important;
+            position: fixed !important;
+            top: 0 !important; left: 0 !important;
+            right: 0 !important; bottom: 0 !important;
+            background: #0E0B06 !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
+            gap: 1.8rem !important;
+            z-index: 999 !important;
+            padding: 2rem !important;
+            border: none !important;
+          }
+          .nav-links.open, #main-nav.open {
+            display: flex !important;
+          }
+          .nav-links li, #main-nav li {
+            list-style: none !important;
+            width: 100% !important;
+            text-align: center !important;
+          }
+          .nav-links a, #main-nav a {
+            color: #F5F0E8 !important;
+            font-size: 1.1rem !important;
+            letter-spacing: 0.15em !important;
+            opacity: 0.85 !important;
+            text-decoration: none !important;
+            display: block !important;
+            padding: 0.6rem 1rem !important;
+            border-bottom: 1px solid rgba(200,169,81,0.1) !important;
+            width: 100% !important;
+          }
+          .nav-links a:hover, #main-nav a:hover {
+            color: #C8A951 !important;
+            opacity: 1 !important;
+          }
+          .nav-links .nav-cta, #main-nav .nav-cta {
+            background: #C8A951 !important;
+            color: #1A1208 !important;
+            opacity: 1 !important;
+            padding: 0.8rem 2rem !important;
+            border: none !important;
+            margin-top: 1rem !important;
+            border-radius: 3px !important;
+            display: inline-block !important;
+            width: auto !important;
+          }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
     // Run dynamic initializations
     setTimeout(function() {
+      injectMobileStyles();
+      sanitizeWhatsAppLinks();
       configureFloatingBubble();
       swapContactCards();
+      updateNavbarSession();
     }, 120);
+
+    // Secondary cleanup to catch any slow-loading scripts
+    setTimeout(sanitizeWhatsAppLinks, 1000);
 
   });
 })();

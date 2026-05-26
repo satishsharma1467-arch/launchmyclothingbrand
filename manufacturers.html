@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -130,7 +130,36 @@
     .mob-menu a:last-child { border: none; }
     .mob-menu a:hover { color: var(--gold); opacity: 1; }
 
-    @media (max-width: 768px) {
+    
+    /* HIDE MOBILE NAV ELEMENTS ON DESKTOP BY DEFAULT */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--gold);
+    }
+    .nav-close {
+      display: none;
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--gold);
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+@media (max-width: 768px) {
       /* Sliding nav drawer styles */
       .nav-hamburger { display: flex !important; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; z-index: 100; }
       .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--gold); }
@@ -800,7 +829,7 @@
       <span>Pattern Making &amp; Manufacturing</span>
     </a>
     <ul class="nav-links" id="main-nav">
-      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">âœ•</button>
+      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">✕</button>
       <li><a href="/services.html">Services</a></li>
       <li><a href="/library.html">Patterns</a></li>
       <li><a href="/specsheets.html">Spec Sheets</a></li>
@@ -1076,5 +1105,6 @@
 
     loadManufacturers();
   </script>
+  <script src="/comm_guard.js"></script>
 </body>
 </html>

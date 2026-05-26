@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -113,7 +113,36 @@
   .cta:hover { background: var(--gold-light) !important; color: var(--ink) !important; }
 
   
-  @media(max-width:768px){
+  
+    /* HIDE MOBILE NAV ELEMENTS ON DESKTOP BY DEFAULT */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--gold);
+    }
+    .nav-close {
+      display: none;
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--gold);
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+@media(max-width:768px){
     .nav-hamburger { display: flex !important; }
     .nav-links {
       display: none !important;
@@ -534,7 +563,7 @@
     <span>Pattern Making &amp; Manufacturing</span>
   </a>
   <ul class="nav-links" id="main-nav">
-      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">âœ•</button>
+      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">✕</button>
       <li><a href="/services.html">Services</a></li>
       <li><a href="/library.html">Patterns</a></li>
       <li><a href="/specsheets.html">Spec Sheets</a></li>
@@ -799,7 +828,7 @@ async function checkAdmin() {
 
 function closeAdmin() { document.getElementById('adminOverlay').classList.remove('open'); }
 
-const planAmounts = { basic: 499, brand_builder: 999, pro_elite: 1599 };
+const planAmounts = { basic: 299, brand_builder: 999, pro_elite: 1999 };
 const planLabels = { basic: 'Basic', brand_builder: 'Brand Builder', pro_elite: 'Pro Elite' };
 
 async function loadUsers() {
@@ -891,6 +920,29 @@ async function confirmClear() {
     loadUsers();
   } else {
     alert('❌ purging failed. Database permissions might block this REST operation.');
+  }
+}
+
+// Session Check & Logout Option
+document.addEventListener('DOMContentLoaded', () => {
+  const session = JSON.parse(localStorage.getItem('lmcb_user') || 'null');
+  if (session) {
+    const welcomeBox = document.createElement('div');
+    welcomeBox.style.cssText = 'background:rgba(200,169,81,0.08); border:1px solid var(--border); padding:1.2rem; margin-bottom:1.5rem; text-align:center; font-size:0.8rem; color:var(--gold); border-radius:3px; line-height:1.6;';
+    welcomeBox.innerHTML = `You are currently logged in as <strong style="color:var(--cream);">${session.email}</strong>.<br/>
+      <a href="#" onclick="logoutUser(event)" style="color:var(--gold); text-decoration:underline; font-weight:500; margin-left:0.5rem; display:inline-block; margin-top:0.4rem;">Log Out Now &rarr;</a>`;
+    
+    const form = document.getElementById('loginForm');
+    if (form) form.prepend(welcomeBox);
+  }
+});
+
+function logoutUser(e) {
+  if (e) e.preventDefault();
+  if (confirm('Are you sure you want to log out?')) {
+    localStorage.removeItem('lmcb_user');
+    localStorage.removeItem('lmcb_current_plan');
+    window.location.reload();
   }
 }
 </script>

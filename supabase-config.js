@@ -82,7 +82,7 @@ const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';     // long string starting 
 const PLANS = {
   basic: {
     name: 'Basic',
-    price: 499,
+    price: 299,
     downloads: 4,
     features: ['4 Pattern downloads per month', 'Email support', 'Pattern library access']
   },
@@ -94,9 +94,9 @@ const PLANS = {
   },
   pro_elite: {
     name: 'Pro Elite',
-    price: 1599,
+    price: 1999,
     downloads: 15,
-    features: ['15 Pattern downloads per month', 'Complete manufacturer database', 'Direct phone support', 'Priority expert consultation', 'Custom pattern requests', 'Spec sheet access']
+    features: ['15 Pattern downloads per month', 'Complete manufacturer database', 'Direct phone support', 'Priority expert consultation', 'Custom pattern requests', 'Spec sheet access', 'Photo to Pattern: 11 Styles']
   }
 };
 

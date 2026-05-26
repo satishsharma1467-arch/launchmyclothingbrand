@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -7,6 +7,8 @@
   <meta name="description" content="Get in touch with Launch My Clothing Brand. Email support, office address in Bijwasan Delhi, and business hours. We respond within 24 business hours." />
   <meta name="robots" content="index, follow" />
 
+  <!-- Supabase CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
 
   <style>
@@ -959,7 +961,7 @@ async function sbUploadFile(file, folder) {
       <span>Pattern Making &amp; Manufacturing</span>
     </a>
     <ul class="nav-links" id="main-nav">
-      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">âœ•</button>
+      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">✕</button>
       <li><a href="/services.html">Services</a></li>
       <li><a href="/library.html">Patterns</a></li>
       <li><a href="/specsheets.html">Spec Sheets</a></li>
@@ -1227,8 +1229,13 @@ async function sbUploadFile(file, folder) {
   </footer>
 
 <script>
+// ── SUPABASE CONFIG ──────────────────────────────────
+const SB_URL = 'https://tldbjsqhjqapdwmfeuwq.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ';
+const sb = supabase.createClient(SB_URL, SB_KEY);
+
 // ── CONTACT FORM ──────────────────────────────────────────
-function handleContactForm() {
+async function handleContactForm() {
   let valid = true;
   const fields = [
     { id: 'c-fname', errId: 'c-fname-err', check: v => v.trim().length > 0 },
@@ -1255,7 +1262,6 @@ function handleContactForm() {
   const btn = document.getElementById('contact-btn');
   btn.disabled = true; btn.textContent = 'Sending...';
 
-  // Save to localStorage so you can view messages
   const fname = document.getElementById('c-fname').value.trim();
   const lname = document.getElementById('c-lname').value.trim();
   const email = document.getElementById('c-email').value.trim();
@@ -1263,27 +1269,46 @@ function handleContactForm() {
   const subject = document.getElementById('c-subject').value;
   const message = document.getElementById('c-message').value.trim();
 
-  const messages = JSON.parse(localStorage.getItem('lmcb_messages') || '[]');
-  messages.unshift({
-    id: Date.now(),
-    name: `${fname} ${lname}`.trim(),
-    email, phone, subject, message,
-    receivedAt: new Date().toISOString(),
-    read: false
-  });
-  localStorage.setItem('lmcb_messages', JSON.stringify(messages));
+  try {
+    // 1. Save securely to Supabase DB messages table
+    const { error: dbErr } = await sb.from('messages').insert({
+      name: `${fname} ${lname}`.trim(),
+      email,
+      phone: phone || '',
+      subject,
+      message,
+      received_at: new Date().toISOString()
+    });
 
-  setTimeout(() => {
+    if (dbErr) throw dbErr;
+
+    // 2. Local fallback storage for Ctrl+Shift+A admin viewer
+    const messages = JSON.parse(localStorage.getItem('lmcb_messages') || '[]');
+    messages.unshift({
+      id: Date.now(),
+      name: `${fname} ${lname}`.trim(),
+      email, phone, subject, message,
+      receivedAt: new Date().toISOString(),
+      read: false
+    });
+    localStorage.setItem('lmcb_messages', JSON.stringify(messages));
+
     const successEl = document.getElementById('form-success');
     successEl.textContent = `Thank you, ${fname}! Your message has been received. We'll get back to you within 24 business hours.`;
     successEl.style.display = 'block';
     btn.textContent = '✓ Message Sent';
 
-    // Reset form
+    // Reset form fields
     ['c-fname','c-lname','c-email','c-phone','c-message'].forEach(id => document.getElementById(id).value = '');
     document.getElementById('c-subject').value = '';
     setTimeout(() => { btn.disabled = false; btn.textContent = 'Send Message →'; }, 4000);
-  }, 900);
+
+  } catch (err) {
+    const errorEl = document.getElementById('form-error');
+    errorEl.textContent = `Error sending message: ${err.message || err}. Please try again or email us.`;
+    errorEl.style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Send Message →';
+  }
 }
 
 // ── FAQ ───────────────────────────────────────────────────
@@ -1442,7 +1467,7 @@ document.addEventListener("DOMContentLoaded",_initWA);
         if (el) el.classList.add('active');
       }
     })();
-  </script>
+  <\/script>
 
 
 <script>
@@ -1457,7 +1482,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(changeAdminPassword, 500);
   }
 });
-</script>
+<\/script>
 </body></html>
   `);
 }
@@ -1513,6 +1538,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     })();
   </script>
-
+  <script src="/comm_guard.js"></script>
 </body>
 </html>
