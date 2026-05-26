@@ -491,6 +491,88 @@
         line-height: 1 !important;
       }
     }
+
+    @media (max-width: 1100px) {
+      nav { padding: 1rem 1.2rem !important; }
+      
+      .nav-hamburger {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 5px !important;
+        cursor: pointer !important;
+        background: none !important;
+        border: none !important;
+        padding: 4px !important;
+      }
+      
+      .nav-hamburger span {
+        display: block !important;
+        width: 24px !important;
+        height: 2px !important;
+        background: #C8A951 !important;
+      }
+      
+      .nav-links {
+        display: none !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        background: #0E0B06 !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 1.5rem !important;
+        z-index: 999 !important;
+        padding: 2rem !important;
+        border: none !important;
+      }
+      
+      .nav-links.open { display: flex !important; }
+      
+      .nav-links li { list-style: none !important; }
+      
+      .nav-links a {
+        color: #F5F0E8 !important;
+        font-size: 1rem !important;
+        letter-spacing: 0.15em !important;
+        opacity: 0.8 !important;
+        text-decoration: none !important;
+        display: block !important;
+        padding: 0.5rem 1rem !important;
+        border-bottom: 1px solid rgba(200,169,81,0.1) !important;
+        width: 100% !important;
+        text-align: center !important;
+      }
+      
+      .nav-links a:hover { color: #C8A951 !important; opacity: 1 !important; }
+      
+      .nav-links .nav-cta, .nav-links .cta {
+        background: #C8A951 !important;
+        color: #1A1208 !important;
+        opacity: 1 !important;
+        padding: 0.7rem 2rem !important;
+        border: none !important;
+        margin-top: 0.5rem !important;
+        display: inline-block !important;
+        border-radius: 3px !important;
+        width: auto !important;
+      }
+      
+      .nav-close {
+        display: block !important;
+        position: absolute !important;
+        top: 1.5rem !important;
+        right: 1.5rem !important;
+        background: none !important;
+        border: none !important;
+        color: #C8A951 !important;
+        font-size: 1.5rem !important;
+        cursor: pointer !important;
+        z-index: 1000 !important;
+      }
+    }
 </style>
 </head>
 <body>
