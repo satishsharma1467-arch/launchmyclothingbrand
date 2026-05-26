@@ -257,6 +257,9 @@
         html {
           scrollbar-gutter: stable !important;
         }
+        nav {
+          padding: 1.3rem 4rem !important;
+        }
         @media (max-width: 768px) {
           /* Remove the mobile bottom navigation bars with icons entirely */
           .mobile-bottom-nav, .mobile-nav, .mob-nav, .mobile-bottom-bar, .wa-float {
