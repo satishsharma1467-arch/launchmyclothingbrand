@@ -521,11 +521,12 @@
         bottom: 0 !important;
         background: #0E0B06 !important;
         flex-direction: column !important;
-        justify-content: center !important;
+        justify-content: flex-start !important;
+        overflow-y: auto !important;
         align-items: center !important;
         gap: 1.5rem !important;
         z-index: 999 !important;
-        padding: 2rem !important;
+        padding: 5rem 2rem 2rem !important;
         border: none !important;
       }
       
@@ -584,14 +585,14 @@
       <span>Pattern Making &amp; Manufacturing</span>
     </a>
     <ul class="nav-links" id="main-nav">
-      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">&times;</button>
+      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">✕</button>
       <li><a href="/services.html">Services</a></li>
       <li><a href="/library.html">Patterns</a></li>
       <li><a href="/specsheets.html">Spec Sheets</a></li>
       <li><a href="/phototopattern.html" class="active">Photo to Pattern</a></li>
       <li><a href="/insights.html">Insights</a></li>
       <li><a href="/manufacturers.html">Manufacturers</a></li>
-      <li><a href="/subscribe.html" class="cta">Get Started</a></li>
+      <li><a href="/subscribe.html" class="nav-cta">Get Started</a></li>
     </ul>
     <button class="nav-hamburger" onclick="document.getElementById('main-nav').classList.add('open')" aria-label="Menu">
       <span></span><span></span><span></span>

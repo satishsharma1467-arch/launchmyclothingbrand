@@ -292,11 +292,12 @@
             right: 0 !important; bottom: 0 !important;
             background: #0E0B06 !important;
             flex-direction: column !important;
-            justify-content: center !important;
+            justify-content: flex-start !important;
+            overflow-y: auto !important;
             align-items: center !important;
-            gap: 1.8rem !important;
+            gap: 1.5rem !important;
             z-index: 999 !important;
-            padding: 2rem !important;
+            padding: 5rem 2rem 2rem !important;
             border: none !important;
           }
           .nav-links.open, #main-nav.open {
