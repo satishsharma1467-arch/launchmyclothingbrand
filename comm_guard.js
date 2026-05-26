@@ -284,6 +284,11 @@
         }
         @media (max-width: 1100px) {
           /* Force standard header styling and hamburger visibility */
+          nav {
+            padding: 1rem 1.2rem !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+          }
           .nav-hamburger {
             display: flex !important;
           }
