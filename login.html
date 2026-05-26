@@ -765,8 +765,8 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
       email: user.email,
       firstName: firstName,
       lastName: lastName,
-      plan: user.plan || 'free',
-      plan_status: user.plan && user.plan !== 'free' ? 'active' : 'free'
+      plan: user.payment_id ? (user.plan || 'free') : 'free',
+      plan_status: user.payment_id ? 'active' : 'free'
     }));
 
     showAlert('alertBox', 'Login successful! Redirecting...', 'success');
