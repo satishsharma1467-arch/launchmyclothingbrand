@@ -689,7 +689,7 @@
             <input type="file" id="cPhoto" accept="image/*" style="display:none;" onchange="previewImage(event)">
             <div class="upload-preview-wrap" id="previewWrap">
               <img src="" id="imgPreview" class="upload-preview" alt="Garment Preview">
-              <div style="font-size:0.6rem; color:var(--gold); margin-top:0.5rem; opacity:0.8;">✓ Photo successfully loaded. We will ask you to attach it in WhatsApp chat!</div>
+              <div style="font-size:0.6rem; color:var(--gold); margin-top:0.5rem; opacity:0.8;">✓ Photo loaded successfully. It will be uploaded securely with your specifications!</div>
             </div>
           </div>
         </div>
@@ -715,10 +715,10 @@
   <div class="overlay" id="successOverlay">
     <div class="modal">
       <div style="font-size:3.5rem;margin-bottom:1.5rem;text-shadow:0 0 20px rgba(76,175,80,0.3);">🎉</div>
-      <div style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:#C8A951;margin-bottom:1rem;font-weight:500;">Payment Verified</div>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;margin-bottom:1.2rem;line-height:1.25;color:#F5F0E8;">Request Processed Successfully!</h3>
-      <p style="font-size:0.8rem;opacity:0.6;line-height:1.8;margin-bottom:2rem;max-width:36ch;margin-left:auto;margin-right:auto;" id="successModalText">Your request has been successfully validated. Let's redirect to WhatsApp to send your specifications and design photo directly to Rahul!</p>
-      <button class="btn-submit" onclick="launchWhatsApp()">Open WhatsApp Chat Now →</button>
+      <div style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:#C8A951;margin-bottom:1rem;font-weight:500;">Submission Received</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;margin-bottom:1.2rem;line-height:1.25;color:#F5F0E8;">Request Submitted Successfully!</h3>
+      <p style="font-size:0.8rem;opacity:0.6;line-height:1.8;margin-bottom:2rem;max-width:36ch;margin-left:auto;margin-right:auto;" id="successModalText">Your design specifications and garment photo have been uploaded securely. Our expert sizing team will calculate your measurements and contact you directly on your WhatsApp mobile number within 24 hours.</p>
+      <button class="btn-submit" onclick="closeSuccessModal()">Great, Thank You! →</button>
     </div>
   </div>
 
@@ -947,6 +947,14 @@
     // ── SUBMIT FORM CONTROLLER ───────────────────────────
     async function submitForm() {
       const btn = document.getElementById('btnSubmit');
+      
+      // Enforce garment photo upload
+      const photoFile = document.getElementById('cPhoto').files[0];
+      if (!photoFile) {
+        alert('Please upload a design reference image first!');
+        return;
+      }
+
       btn.disabled = true;
       btn.innerHTML = '<span class="spinner"></span>Processing request...';
 
@@ -976,7 +984,7 @@
           modal: {
             ondismiss: function() {
               btn.disabled = false;
-              btn.textContent = `Pay ₹199 & Submit Request →`;
+              btn.textContent = currentCost === 0 ? `Submit Style (Free — Style #${stylesCount + 1}) →` : `Pay ₹199 & Submit Request →`;
             }
           }
         };
@@ -987,7 +995,7 @@
         } catch (e) {
           alert('Razorpay Checkout failed to initialize. Please try again.');
           btn.disabled = false;
-          btn.textContent = `Pay ₹199 & Submit Request →`;
+          btn.textContent = currentCost === 0 ? `Submit Style (Free — Style #${stylesCount + 1}) →` : `Pay ₹199 & Submit Request →`;
         }
       }
     }
@@ -1004,6 +1012,33 @@
       const cFit = document.getElementById('cFit').value;
       const cDesc = document.getElementById('cDesc').value.trim();
 
+      const btn = document.getElementById('btnSubmit');
+      if (btn) btn.innerHTML = '<span class="spinner"></span>Uploading image...';
+
+      let imageUrl = '';
+      const photoFile = document.getElementById('cPhoto').files[0];
+      if (photoFile) {
+        try {
+          const safeName = photoFile.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+          const storagePath = 'phototopattern/' + Date.now() + '_' + safeName;
+          const { data, error } = await sb.storage.from('files').upload(storagePath, photoFile, {
+            cacheControl: '3600',
+            upsert: true
+          });
+          if (error) throw error;
+
+          imageUrl = sb.storage.from('files').getPublicUrl(storagePath).data.publicUrl;
+        } catch (uploadErr) {
+          console.error("Storage upload failed:", uploadErr);
+          alert('Image upload failed: ' + uploadErr.message + '. Please try submitting again.');
+          if (btn) {
+            btn.disabled = false;
+            btn.textContent = currentCost === 0 ? `Submit Style (Free — Style #${stylesCount + 1}) →` : `Pay ₹199 & Submit Request →`;
+          }
+          return;
+        }
+      }
+
       const techSheetMessage = `
 === PHOTO-TO-PATTERN SPECIFICATION SHEET REQUEST ===
 🧑 Customer Name: ${cName}
@@ -1016,6 +1051,8 @@
 
 📝 Style Description & Details:
 ${cDesc}
+
+🖼 Design Reference Image: ${imageUrl || 'None uploaded'}
 
 === TRANSACTION DETAILS ===
 💳 Payment Method: ${method === 'pro_elite_quota' ? 'Pro Elite Plan Perk (Free Quota)' : 'Razorpay Gateway'}
@@ -1065,39 +1102,26 @@ ${cDesc}
         document.getElementById('successOverlay').classList.add('open');
       } catch (e) {
         console.error("Error processing database submissions:", e);
-        alert('Data saved locally. Let\'s open WhatsApp to forward your specifications to Rahul!');
-        document.getElementById('successOverlay').classList.add('open');
+        alert('An error occurred while saving your request in the database. Please try again.');
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = currentCost === 0 ? `Submit Style (Free — Style #${stylesCount + 1}) →` : `Pay ₹199 & Submit Request →`;
+        }
       }
     }
 
-    // ── REDIRECT TO OFFICIAL WHATSAPP CHAT ────────────────
-    function launchWhatsApp() {
-      const cName = document.getElementById('cName').value.trim();
-      const cCategory = document.getElementById('cCategory').value;
-      const cFabric = document.getElementById('cFabric').value.trim();
-      const cFit = document.getElementById('cFit').value;
-      const cPhone = document.getElementById('cPhone').value.trim();
-
-      const messageText = `Hi Rahul! I just completed a custom Photo-to-Pattern request:
-*Category*: ${cCategory}
-*Fabric*: ${cFabric}
-*Fit*: ${cFit}
-*Name*: ${cName}
-*Phone*: ${cPhone}
-*Ref ID*: ${lastPaymentId}
-
-Please calculate my custom sizing specification sheet. Attached is my garment reference photo!`;
-
-      const waUrl = `https://wa.me/918796158321?text=${encodeURIComponent(messageText)}`;
-      window.open(waUrl, '_blank');
-
+    // ── CLOSE SUCCESS SCREEN AND RESET FORM ────────────────
+    function closeSuccessModal() {
       // Close modal and reset form
       document.getElementById('successOverlay').classList.remove('open');
       document.getElementById('submissionForm').reset();
       document.getElementById('previewWrap').style.display = 'none';
 
       const btn = document.getElementById('btnSubmit');
-      btn.disabled = false;
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = currentCost === 0 ? `Submit Style (Free — Style #${stylesCount + 1}) →` : `Pay ₹199 & Submit Request →`;
+      }
       
       initSession(); // Reload session quota and reset badge
     }
