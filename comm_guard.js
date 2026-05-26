@@ -254,6 +254,9 @@
       const style = document.createElement('style');
       style.id = 'comm-mobile-styles';
       style.textContent = `
+        html {
+          scrollbar-gutter: stable !important;
+        }
         @media (max-width: 768px) {
           /* Remove the mobile bottom navigation bars with icons entirely */
           .mobile-bottom-nav, .mobile-nav, .mob-nav, .mobile-bottom-bar, .wa-float {
