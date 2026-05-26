@@ -35,10 +35,11 @@
     /* NAV */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 3rem; background: rgba(14,11,6,0.95); border-bottom: 1px solid var(--border); }
     .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.2em; text-decoration: none; color: var(--gold); display: flex; flex-direction: column; line-height: 1.2; }
+    .nav-logo:hover { color: var(--gold); }
     .nav-logo span { display: block; font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.45; margin-top: 0.15rem; color: var(--cream); font-weight: 300; }
     .nav-links { display: flex; gap: 1.2rem; list-style: none; align-items: center; }
     .nav-links a { color: var(--cream); text-decoration: none; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.6; transition: opacity 0.2s; }
-    .nav-links a:hover { opacity: 1; color: var(--gold); }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold); }
     .nav-cta { background: var(--gold) !important; color: var(--ink) !important; padding: 0.5rem 1rem !important; opacity: 1 !important; font-weight: 500 !important; }
     .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
     .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--gold); }

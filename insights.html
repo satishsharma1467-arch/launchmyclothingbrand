@@ -74,6 +74,9 @@
       display: flex;
       flex-direction: column;
     }
+    .nav-logo:hover {
+      color: var(--gold);
+    }
 
     .nav-logo span {
       display: block;
@@ -104,7 +107,7 @@
       transition: opacity 0.2s, color 0.2s;
     }
 
-    .nav-links a:hover { opacity: 1; color: var(--gold); }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold); }
 
     .nav-cta {
       background: var(--gold) !important;
@@ -735,25 +738,7 @@
       .admin-trigger { bottom: 75px; }
     }
 
-    /* WHATSAPP FLOAT */
-    .wa-float { position: fixed; bottom: 2rem; right: 2rem; z-index: 200; }
-    @media (max-width: 768px) { .wa-float { bottom: 75px; right: 1.2rem; } }
 
-    .wa-float a {
-      background: #25d366;
-      color: #fff;
-      padding: 0.7rem 1.2rem;
-      border-radius: 24px;
-      font-size: 0.78rem;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-      text-decoration: none;
-      transition: transform 0.2s;
-    }
-    .wa-float a:hover { transform: scale(1.05); }
 
     /* FOOTER */
     footer {
@@ -1017,11 +1002,7 @@
     </div>
   </div>
 
-  <div class="wa-float">
-    <a href="https://wa.me/918796158321?text=Hi%2C+I+have+a+question" target="_blank">
-      💬 WhatsApp Support
-    </a>
-  </div>
+
 
   <!-- MOBILE BOTTOM NAVIGATION -->
   <nav class="mobile-nav">

@@ -26,6 +26,9 @@
     display: flex;
     flex-direction: column;
   }
+  .nav-logo:hover {
+    color: var(--gold);
+  }
   .nav-logo span {
     display: block;
     font-family: 'DM Mono', monospace;
@@ -39,7 +42,7 @@
   }
   .nav-links{display:flex;gap:1.5rem;list-style:none;align-items:center;}
   .nav-links a{color:var(--muted);font-size:.85rem;transition:color .2s;}
-  .nav-links a:hover{color:var(--text);text-decoration:none;}
+  .nav-links a:hover, .nav-links a.active {color:var(--text);text-decoration:none;}
   .nav-links .cta{background:var(--gold);color:#000;padding:.4rem 1rem;border-radius:var(--radius);font-weight:500;font-size:.8rem;}
   .nav-links .cta:hover{background:var(--gold2);text-decoration:none;}
   
