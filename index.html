@@ -697,6 +697,284 @@
     .hero-left > *:nth-child(5) { animation-delay: 0.65s; }
     .hero-visual { opacity: 0; animation: fadeUp 1s ease 0.25s forwards; }
 
+    /* PAIN POINTS */
+    .pain-points {
+      background: var(--bg);
+      padding: 6rem 4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .pain-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 2.5rem 2rem;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    .pain-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+    }
+    .pain-card .pain-icon {
+      font-size: 2rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+    .pain-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 0.8rem;
+      color: var(--ink);
+    }
+    .pain-card p {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      opacity: 0.6;
+    }
+    .pain-summary-box {
+      margin-top: 3.5rem;
+      padding: 2.2rem;
+      background: rgba(200, 169, 81, 0.05);
+      border-left: 2px solid var(--gold);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      opacity: 0.85;
+      text-align: center;
+    }
+
+    /* AUDIENCE SECTION */
+    .audience-section {
+      background: var(--card-bg);
+      padding: 6rem 4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .audience-card {
+      background: #0E0B06;
+      border: 1px solid var(--border);
+      padding: 2.2rem 1.8rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .audience-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+    }
+    .audience-card .aud-badge {
+      font-size: 2.2rem;
+      margin-bottom: 1.2rem;
+      display: inline-block;
+    }
+    .audience-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 0.8rem;
+      color: var(--gold);
+    }
+    .audience-card p {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      opacity: 0.65;
+    }
+
+    /* NEW SERVICES GRID */
+    .services-grid-new {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.5rem;
+    }
+    .service-card-new {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 2.2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .service-card-new:hover {
+      border-color: var(--gold);
+      transform: translateY(-5px);
+    }
+    .icon-bubble {
+      width: 52px;
+      height: 52px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 1.2rem;
+      background: #0E0B06;
+      color: var(--gold);
+    }
+    .service-card-new h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      font-weight: 400;
+      margin-bottom: 0.8rem;
+      color: var(--ink);
+    }
+    .service-card-new .service-desc {
+      font-size: 0.82rem;
+      line-height: 1.65;
+      opacity: 0.6;
+      margin-bottom: 1.5rem;
+      min-height: 56px;
+    }
+    .service-card-img-wrap {
+      width: 100%;
+      aspect-ratio: 1/1.1;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(200,169,81,0.15);
+      background: #0E0B06;
+    }
+    .service-card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+      filter: saturate(0.85) contrast(1.02);
+    }
+    .service-card-new:hover .service-card-img-wrap img {
+      transform: scale(1.06);
+    }
+    .bullets-list-new {
+      list-style: none;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      text-align: left;
+      margin-top: auto;
+    }
+    .bullet-item-new {
+      font-size: 0.82rem;
+      line-height: 1.45;
+      opacity: 0.85;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+    }
+    .bullet-item-new::before {
+      content: '✔';
+      color: var(--gold);
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    /* OFFERINGS FOOTER BAR */
+    .offerings-footer-bar {
+      max-width: 1300px;
+      margin: 4rem auto 0;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 1.8rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      text-align: left;
+    }
+    .footer-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .footer-bar-icon-wrap {
+      width: 56px;
+      height: 56px;
+      background: #0E0B06;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      flex-shrink: 0;
+    }
+    .footer-bar-text h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+    }
+    .footer-bar-text p {
+      font-size: 0.85rem;
+      opacity: 0.6;
+      line-height: 1.45;
+    }
+    .footer-bar-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-shrink: 0;
+    }
+    .btn-gold-new {
+      background: var(--gold);
+      color: #0E0B06;
+      padding: 0.85rem 1.8rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.25s;
+    }
+    .btn-gold-new:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+    }
+    .btn-white-new {
+      background: var(--cream);
+      color: #0E0B06;
+      padding: 0.85rem 1.8rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: all 0.25s;
+    }
+    .btn-white-new:hover {
+      background: #ffffff;
+      transform: translateY(-2px);
+    }
+    .btn-white-new svg {
+      fill: #25D366;
+    }
+
     /* MOBILE */
     @media (max-width: 960px) {
       nav { padding: 1.2rem 1.5rem; }
@@ -863,6 +1141,27 @@
       
       /* ADMIN PANEL */
       #admin-overlay { padding: 0.5rem !important; }
+
+      /* NEW HOME OVERHAUL OVERRIDES */
+      .pain-points { padding: 4rem 1.2rem !important; }
+      .pain-grid { grid-template-columns: 1fr !important; gap: 1.5rem !important; margin-top: 2rem !important; }
+      .pain-card { padding: 2rem 1.5rem !important; }
+      .pain-summary-box { margin-top: 2.5rem !important; padding: 1.5rem !important; font-size: 0.95rem !important; }
+      .audience-section { padding: 4rem 1.2rem !important; }
+      .audience-grid { grid-template-columns: 1fr 1fr !important; gap: 1rem !important; margin-top: 2rem !important; }
+      .audience-card { padding: 1.5rem 1rem !important; }
+      .services-grid-new { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+      .service-card-new { padding: 2rem 1.2rem !important; }
+      .service-card-new .service-desc { min-height: auto !important; }
+      .service-card-img-wrap { aspect-ratio: 1.1/1 !important; }
+      .offerings-footer-bar { flex-direction: column !important; padding: 1.8rem 1.5rem !important; text-align: center !important; gap: 1.5rem !important; margin-top: 2.5rem !important; }
+      .footer-bar-left { flex-direction: column !important; gap: 1rem !important; align-items: center !important; }
+      .footer-bar-actions { flex-direction: column !important; width: 100% !important; gap: 0.8rem !important; }
+      .btn-gold-new, .btn-white-new { width: 100% !important; justify-content: center !important; padding: 0.95rem 1.5rem !important; }
+    }
+
+    @media (max-width: 560px) {
+      .audience-grid { grid-template-columns: 1fr !important; }
     }
     
     /* Extra small phones */
@@ -1142,12 +1441,12 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-left">
-      <div class="hero-eyebrow">Delhi NCR · Pan-India Coverage · 12+ Years</div>
-      <h1>Turn Your Vision Into<br/><em>Production Reality</em></h1>
-      <p class="hero-sub">Expert freelance pattern making and CAD services. Stop wasting money on bad samples. Get production-ready files and expert clothing brand startup consultation.</p>
+      <div class="hero-eyebrow">📍 Delhi NCR · Pan-India Coverage · 12+ Years Experience</div>
+      <h1>Launch Your Clothing Brand —<br/>From <em>Idea to Production</em></h1>
+      <p class="hero-sub"><strong>Pattern to Manufacturing. No Guesswork. No Costly Mistakes.</strong><br/><br/>We help you convert your clothing ideas into <strong>production-ready CAD patterns, spec sheets, and manufacturer-ready files</strong>—so you can launch with confidence.</p>
       <div class="hero-btns">
         <a href="/subscribe.html" class="btn-primary">Get Started Now</a>
-        <a href="/services.html" class="btn-outline">Explore Services</a>
+        <a href="/contact.html" class="btn-outline">Book Consultation</a>
       </div>
       <div class="hero-stats">
         <div>
@@ -1198,19 +1497,51 @@
     </div>
   </div>
 
+  <!-- PAIN POINTS -->
+  <section class="pain-points" id="pain-points">
+    <div class="services-header" style="max-width: 1100px; margin: 0 auto 3rem; text-align: center;">
+      <div class="section-label" style="justify-content: center;">⚠️ Stop Losing Money on Bad Samples</div>
+      <h2>Why Most New Brands <em>Struggle</em></h2>
+      <p class="section-sub" style="margin: 0 auto; max-width: 60ch;">Typical apparel startups waste up to 60% of their initial budget in the sample development phase before ever launching.</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <span class="pain-icon">❌</span>
+        <h3>Incorrect Patterns</h3>
+        <p>Paper or non-standard pattern templates lead to poor symmetry, wrong seams, and fabric wastage during cutting.</p>
+      </div>
+      <div class="pain-card">
+        <span class="pain-icon">📐</span>
+        <h3>Poor Fitting Samples</h3>
+        <p>Endless sample revisions with factories drain your timeline and launch capital because the baseline files were wrong.</p>
+      </div>
+      <div class="pain-card">
+        <span class="pain-icon">🏭</span>
+        <h3>Unreliable Manufacturers</h3>
+        <p>Difficulty connecting with professional, trusted production factories who offer startup-friendly minimum orders (MOQs).</p>
+      </div>
+    </div>
+    <div class="pain-summary-box">
+      👉 We eliminate these problems with <strong>accurate digital pattern making and real production support</strong>.
+    </div>
+  </section>
+
   <!-- TRUST / ABOUT -->
   <div class="trust-band">
     <div class="trust-inner">
       <div class="trust-left">
-        <div class="section-label">Trusted by Industry Leaders</div>
-        <h2>12+ Years of <em>Excellence</em><br/>in Pattern Making</h2>
-        <p class="section-sub">For over a decade, we have built lasting relationships with major apparel brands, boutique fashion houses, and large-scale manufacturers. Our commitment to precision, reliability, and quality has made us the preferred pattern making partner for industry leaders.</p>
-        <p class="section-sub" style="margin-top:1rem;">We specialize in converting visual ideas into industry-standard digital patterns. Our expertise in CAD software ensures that your designs translate perfectly from concept to production.</p>
+        <div class="section-label">💼 What You Get</div>
+        <h2>End-to-End <em>Support</em></h2>
+        <p class="section-sub">We provide everything you need to go from a simple fashion sketch to a finished, shelf-ready production batch. No guesswork. No costly mistakes.</p>
         <div class="trust-bullets">
-          <div class="trust-bullet">Production-ready DXF &amp; PDF files using advanced CAD software</div>
-          <div class="trust-bullet">Complete grading and fabric consumption calculations</div>
-          <div class="trust-bullet">Specialized support for clothing brand startups</div>
+          <div class="trust-bullet"><strong>Digital Pattern Making</strong> (CAD-based precision)</div>
+          <div class="trust-bullet"><strong>DXF &amp; PDF Files</strong> (Production Ready)</div>
+          <div class="trust-bullet"><strong>Grading</strong> for Multiple Sizes</div>
+          <div class="trust-bullet"><strong>Spec Sheets</strong> (Industry Standard)</div>
+          <div class="trust-bullet"><strong>Manufacturer Connections</strong> (Gurgaon &amp; NCR)</div>
+          <div class="trust-bullet"><strong>Brand Startup Consultation</strong></div>
         </div>
+        <p class="section-sub" style="margin-top:1.5rem; font-weight: bold; color: var(--gold);">👉 No trial &amp; error. Just a clear path to production.</p>
       </div>
       <div class="trust-right">
         <div class="trust-stat-box">
@@ -1233,80 +1564,190 @@
     </div>
   </div>
 
-  <!-- SERVICES -->
-  <section id="services">
-    <div class="services-header">
-      <div class="section-label">Core Offerings</div>
-      <h2>Everything You Need to<br/><em>Launch Your Brand</em></h2>
-      <p class="section-sub">Three focused services designed to take your clothing idea from sketch to production — without the guesswork.</p>
+  <!-- WHY TRUST US -->
+  <section class="pain-points" id="why-trust-us" style="background: var(--card-bg); border-top: 1px solid var(--border);">
+    <div class="services-header" style="max-width: 1100px; margin: 0 auto 3rem; text-align: center;">
+      <div class="section-label" style="justify-content: center;">🏆 Why Brands Trust Us</div>
+      <h2>12+ Years of <em>Real Industry Experience</em></h2>
+      <p class="section-sub" style="margin: 0 auto; max-width: 60ch;">We have partnered with apparel brands, boutique labels, and large-scale factories across India to build a seamless path to manufacturing.</p>
     </div>
-    <div class="services-grid">
-
-      <div class="service-card">
-        <div class="service-num">01</div>
-        <div class="service-icon">🎬</div>
-        <h3><a href="/insights.html" style="color:inherit;text-decoration:none;">Industry Insights</a></h3>
-        <p>Exclusive video tutorials on industry trends, brand development strategies, and expert tips to grow your clothing brand successfully.</p>
-        <div class="service-bullets">
-          <div class="service-bullet">Expert Video Tutorials</div>
-          <div class="service-bullet">Industry Trends</div>
-          <div class="service-bullet">Brand Development Tips</div>
-          <div class="service-bullet">Brand Builder &amp; Pro Elite</div>
-        </div>
+    <div class="pain-grid">
+      <div class="pain-card" style="background: #0E0B06;">
+        <span class="pain-icon" style="color: var(--gold); font-style: normal;">✔</span>
+        <h3>Production-Ready Accuracy</h3>
+        <p>We deliver professional, high-precision CAD pattern templates—not simplified trial templates—so your production run cuts perfectly the first time.</p>
       </div>
-
-      <div class="service-card">
-        <div class="service-num">02</div>
-        <div class="service-icon">📚</div>
-        <h3>Pattern Library</h3>
-        <p>Access pre-made designs to speed up your sampling process. Download production-ready patterns instantly with your subscription.</p>
-        <div class="service-bullets">
-          <div class="service-bullet">Ready-to-use Patterns</div>
-          <div class="service-bullet">Multiple Categories</div>
-          <div class="service-bullet">Instant Download</div>
-          <div class="service-bullet">Regular Updates</div>
-        </div>
+      <div class="pain-card" style="background: #0E0B06;">
+        <span class="pain-icon" style="color: var(--gold); font-style: normal;">✔</span>
+        <h3>Deep Factory Understanding</h3>
+        <p>Our background in industrial apparel manufacturing ensures that our design specs match standard assembly machinery and fabric behaviors.</p>
       </div>
-
-      <div class="service-card">
-        <div class="service-num">03</div>
-        <div class="service-icon">🏭</div>
-        <h3>Connect to Manufacturers</h3>
-        <p>We connect you with trusted manufacturers across Gurgaon. Whether you need small MOQs for a startup or large-scale production for established brands.</p>
-        <div class="service-bullets">
-          <div class="service-bullet">Verified Manufacturers</div>
-          <div class="service-bullet">Quality Assurance</div>
-          <div class="service-bullet">Flexible MOQs</div>
-          <div class="service-bullet">Direct Contact Access</div>
-        </div>
+      <div class="pain-card" style="background: #0E0B06;">
+        <span class="pain-icon" style="color: var(--gold); font-style: normal;">✔</span>
+        <h3>Practical Guidance</h3>
+        <p>We don't just hand off CAD digital patterns and leave. We guide you through selecting materials, fits, grading ranges, and factory operations.</p>
       </div>
+    </div>
+    <div class="pain-summary-box" style="background: rgba(200, 169, 81, 0.02);">
+      ⭐ Client Rated | NCR Based | Pan-India Service
+    </div>
+  </section>
 
-      <div class="service-card">
-        <div class="service-num">04</div>
-        <div class="service-icon">📋</div>
-        <h3><a href="/specsheets.html" style="color:inherit;text-decoration:none;">Spec Sheets</a></h3>
-        <p>Access professionally crafted specification sheets for Kids, Womens and Mens garment categories. Industry-proven dummy measurements used by top brands.</p>
-        <div class="service-bullets">
-          <div class="service-bullet">Kids 6M to 8Y Measurements</div>
-          <div class="service-bullet">Womens XS to XXL</div>
-          <div class="service-bullet">Mens Standard Sizes</div>
-          <div class="service-bullet">Production Ready PDF</div>
-        </div>
+  <!-- TARGET AUDIENCE -->
+  <section class="audience-section" id="audience-section">
+    <div class="services-header" style="max-width: 1100px; margin: 0 auto 3rem; text-align: center;">
+      <div class="section-label" style="justify-content: center;">🎯 Who This Is For</div>
+      <h2>Built for <em>Fashion Creators</em></h2>
+      <p class="section-sub" style="margin: 0 auto; max-width: 60ch;">Our services are designed to bridge the gap between creative design ideas and solid technical execution.</p>
+    </div>
+    <div class="audience-grid">
+      <div class="audience-card">
+        <span class="aud-badge">🚀</span>
+        <h3>First-Time Founders</h3>
+        <p>First-time founders starting a clothing brand who want to launch right the first time without expensive fitting mistakes.</p>
       </div>
+      <div class="audience-card">
+        <span class="aud-badge">👗</span>
+        <h3>Boutique Owners</h3>
+        <p>Boutique store owners scaling production from handmade to factory levels without losing fit consistency.</p>
+      </div>
+      <div class="audience-card">
+        <span class="aud-badge">📐</span>
+        <h3>Designers</h3>
+        <p>Apparel designers needing advanced technical pattern making, pattern adjustments, and professional CAD files.</p>
+      </div>
+      <div class="audience-card">
+        <span class="aud-badge">🎯</span>
+        <h3>Stuck in Between?</h3>
+        <p>Anyone currently stuck between having a raw design sketch and starting bulk clothing manufacturing.</p>
+      </div>
+    </div>
+  </section>
 
-      <div class="service-card">
-        <div class="service-num">05</div>
-        <div class="service-icon">📸</div>
+  <!-- SERVICES -->
+  <section id="services" style="padding: 6rem 2rem;">
+    <div class="services-header" style="max-width: 1100px; margin: 0 auto 4rem; text-align: center;">
+      <div class="section-label" style="justify-content: center;">🧩 Our Core Services</div>
+      <h2>Everything You Need to Take Your Clothing Idea<br/><em>From Concept to Production</em></h2>
+      <p class="section-sub" style="margin: 0 auto; max-width: 60ch;">Professional technical assets and industry integrations to help you launch without trial and error.</p>
+    </div>
+    
+    <div class="services-grid-new">
+
+      <!-- PHOTO TO PATTERN -->
+      <div class="service-card-new">
+        <a href="/phototopattern.html" style="text-decoration:none; display:flex; flex-direction:column; align-items:center;">
+          <div class="icon-bubble">📸</div>
+        </a>
         <h3><a href="/phototopattern.html" style="color:inherit;text-decoration:none;">Photo to Pattern</a></h3>
-        <p>Convert any garment design photo into custom-graded patterns and specification sheets. Submit your style photo and get perfect custom measurements delivered directly to your WhatsApp.</p>
-        <div class="service-bullets">
-          <div class="service-bullet">Custom Sizing Calculations</div>
-          <div class="service-bullet">8 Sizing Fit Options</div>
-          <div class="service-bullet">Direct WhatsApp Delivery</div>
-          <div class="service-bullet">Waived for Pro Elite</div>
-        </div>
+        <p class="service-desc">Turn any design image into accurate, production-ready patterns + spec sheets</p>
+        <a href="/phototopattern.html" style="display:block; width:100%; text-decoration:none;">
+          <div class="service-card-img-wrap">
+            <img src="photo_to_pattern.png" alt="Photo to Pattern before and after mockup" />
+          </div>
+        </a>
+        <ul class="bullets-list-new">
+          <li class="bullet-item-new">Multiple size options</li>
+          <li class="bullet-item-new">Production-ready patterns</li>
+          <li class="bullet-item-new">Delivered directly via WhatsApp</li>
+        </ul>
       </div>
 
+      <!-- SPEC SHEETS -->
+      <div class="service-card-new">
+        <a href="/specsheets.html" style="text-decoration:none; display:flex; flex-direction:column; align-items:center;">
+          <div class="icon-bubble">📋</div>
+        </a>
+        <h3><a href="/specsheets.html" style="color:inherit;text-decoration:none;">Spec Sheets</a></h3>
+        <p class="service-desc">Industry-standard measurement sheets for production</p>
+        <a href="/specsheets.html" style="display:block; width:100%; text-decoration:none;">
+          <div class="service-card-img-wrap">
+            <img src="garment_spec_sheets.png" alt="Garment Specification Sheet flat and table" />
+          </div>
+        </a>
+        <ul class="bullets-list-new">
+          <li class="bullet-item-new">Kids (6M – 8Y)</li>
+          <li class="bullet-item-new">Women (XS – XXL)</li>
+          <li class="bullet-item-new">Men (Standard Sizes)</li>
+          <li class="bullet-item-new">Ready-to-use, factory-friendly formats</li>
+        </ul>
+      </div>
+
+      <!-- PATTERN LIBRARY -->
+      <div class="service-card-new">
+        <a href="/library.html" style="text-decoration:none; display:flex; flex-direction:column; align-items:center;">
+          <div class="icon-bubble">📚</div>
+        </a>
+        <h3><a href="/library.html" style="color:inherit;text-decoration:none;">Pattern Library</a></h3>
+        <p class="service-desc">Pre-made designs to speed up your sampling process</p>
+        <a href="/library.html" style="display:block; width:100%; text-decoration:none;">
+          <div class="service-card-img-wrap">
+            <img src="digital_pattern_library.png" alt="Digital CAD pattern library interface" />
+          </div>
+        </a>
+        <ul class="bullets-list-new">
+          <li class="bullet-item-new">Instant access</li>
+          <li class="bullet-item-new">Multiple categories</li>
+          <li class="bullet-item-new">Regular updates</li>
+        </ul>
+      </div>
+
+      <!-- MANUFACTURER CONNECT -->
+      <div class="service-card-new">
+        <a href="/manufacturers.html" style="text-decoration:none; display:flex; flex-direction:column; align-items:center;">
+          <div class="icon-bubble">🏭</div>
+        </a>
+        <h3><a href="/manufacturers.html" style="color:inherit;text-decoration:none;">Manufacturer Connect</a></h3>
+        <p class="service-desc">Work with verified manufacturers in NCR</p>
+        <a href="/manufacturers.html" style="display:block; width:100%; text-decoration:none;">
+          <div class="service-card-img-wrap">
+            <img src="factory_manufacturer_connect.png" alt="Garment manufacturing workshop factory floor" />
+          </div>
+        </a>
+        <ul class="bullets-list-new">
+          <li class="bullet-item-new">Flexible MOQs</li>
+          <li class="bullet-item-new">Reliable vendors</li>
+          <li class="bullet-item-new">Direct connections</li>
+        </ul>
+      </div>
+
+      <!-- INDUSTRY INSIGHTS -->
+      <div class="service-card-new">
+        <a href="/insights.html" style="text-decoration:none; display:flex; flex-direction:column; align-items:center;">
+          <div class="icon-bubble">🎬</div>
+        </a>
+        <h3><a href="/insights.html" style="color:inherit;text-decoration:none;">Industry Insights</a></h3>
+        <p class="service-desc">Learn how to build and scale your brand</p>
+        <a href="/insights.html" style="display:block; width:100%; text-decoration:none;">
+          <div class="service-card-img-wrap">
+            <img src="apparel_industry_insights.png" alt="Apparel industry lessons and insights video masterclass" />
+          </div>
+        </a>
+        <ul class="bullets-list-new">
+          <li class="bullet-item-new">Practical video tutorials</li>
+          <li class="bullet-item-new">Brand-building strategies</li>
+          <li class="bullet-item-new">Real industry insights</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- START YOUR BRAND THE RIGHT WAY BOTTOM BAR -->
+    <div class="offerings-footer-bar">
+      <div class="footer-bar-left">
+        <div class="footer-bar-icon-wrap">🚀</div>
+        <div class="footer-bar-text">
+          <h4>Start Your Brand the Right Way</h4>
+          <p>Avoid costly mistakes and build your brand on a strong technical foundation.</p>
+        </div>
+      </div>
+      <div class="footer-bar-actions">
+        <a href="/subscribe.html" class="btn-gold-new">Get Started Now</a>
+        <a href="https://wa.me/918796158321?text=Hi!%20I%20need%20help%20with%20my%20clothing%20brand." target="_blank" rel="noopener" class="btn-white-new">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Talk on WhatsApp
+        </a>
+      </div>
     </div>
   </section>
 
@@ -1314,9 +1755,9 @@
   <section id="exclusions">
     <div class="exclusions-inner">
       <div class="exclusions-header">
-        <div class="section-label">What We Don't Offer</div>
+        <div class="section-label">🚫 What We Don’t Offer</div>
         <h2>Outside Our <em>Scope</em></h2>
-        <p class="section-sub">To maintain our expertise and deliver the best quality, we focus exclusively on standard apparel pattern making. The following specialized categories are outside our scope.</p>
+        <p class="section-sub">To maintain our expertise and deliver the highest quality, we focus exclusively on standard apparel pattern making. The following specialized categories are outside our scope.</p>
       </div>
       <div class="exclusions-grid">
         <div class="exclusion-card">
@@ -1346,9 +1787,13 @@
 
   <!-- CTA -->
   <div class="cta-band">
-    <h2>Start Your Brand Journey</h2>
-    <p>Tell us about your vision and let's create something amazing together.</p>
-    <a href="/subscribe.html" class="btn-dark">Get Started Now →</a>
+    <div class="section-label" style="justify-content: center; color: var(--ink-soft); opacity: 0.85; margin-bottom: 1.2rem;">🎁 Start Your Brand the Right Way</div>
+    <h2 style="color: var(--ink-soft); font-weight: 300; margin-bottom: 1rem;">Start Your Brand the Right Way</h2>
+    <p style="color: var(--ink-soft); opacity: 0.8; max-width: 50ch; margin: 0 auto 2.5rem; line-height: 1.8;">Avoid costly mistakes and build your clothing brand on the right technical foundation.</p>
+    <div style="display: flex; gap: 1.5rem; justify-content: center; align-items: center; flex-wrap: wrap;">
+      <a href="/subscribe.html" class="btn-dark">Get Started Now</a>
+      <a href="/contact.html" class="btn-outline" style="border-color: var(--ink-soft); color: var(--ink-soft);">Contact Us</a>
+    </div>
   </div>
 
   <!-- FOOTER -->
