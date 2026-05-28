@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Turn your fashion ideas into production-ready blueprints. No sample guesswork, no costly manufacturing mistakes. Get precision CAD patterns & Gurgaon factory networks.">
+  <title>Apparel Brand Launch Blueprints | Launch My Clothing Brand</title>
+  
+  <!-- Premium Luxury Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  
+  <style>
+    :root {
+      --gold: #C8A951;
+      --gold-light: #E8C96A;
+      --cream: #F5F0E8;
+      --ink: #1A1208;
+      --bg: #0E0B06;
+      --card-bg: #1C1609;
+      --border: rgba(200, 169, 81, 0.2);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Paper Noise Texture Overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.35;
+    }
+
+    /* NAV */
+    nav {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(14, 11, 6, 0.92);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+      text-decoration: none;
+      line-height: 1;
+    }
+
+    .logo span {
+      display: block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      color: var(--cream);
+      opacity: 0.5;
+      margin-top: 0.15rem;
+      text-transform: uppercase;
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 6rem 1.5rem 4rem 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(200, 169, 81, 0.05);
+      border: 1px solid var(--border);
+      color: var(--gold);
+      font-size: 0.62rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      padding: 0.4rem 1.2rem;
+      margin-bottom: 2rem;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 5vw, 4.2rem);
+      font-weight: 300;
+      line-height: 1.15;
+      margin-bottom: 2rem;
+      color: var(--cream);
+    }
+
+    .hero h1 em {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      opacity: 0.7;
+      max-width: 650px;
+      margin: 0 auto 3rem;
+      line-height: 1.8;
+      border-left: 2px solid var(--gold);
+      padding-left: 1.5rem;
+      text-align: left;
+    }
+
+    /* PERSUASIVE SECTIONS */
+    .section-wrap {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
+
+    .pitch-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      margin-bottom: 5rem;
+    }
+
+    .pitch-text h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1.25;
+      margin-bottom: 1.5rem;
+    }
+
+    .pitch-text p {
+      opacity: 0.75;
+      font-size: 0.88rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .sample-warning-box {
+      background: rgba(212, 71, 42, 0.05);
+      border: 1px solid rgba(212, 71, 42, 0.2);
+      padding: 1.5rem;
+      color: #F3A395;
+      font-size: 0.78rem;
+      line-height: 1.7;
+    }
+
+    /* CORE SERVICES GRID */
+    .services-title {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .services-title h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.6rem;
+      font-weight: 300;
+      color: var(--cream);
+    }
+
+    .services-title h2 em {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .core-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .core-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .core-card:hover {
+      border-color: var(--gold);
+      box-shadow: 0 10px 30px rgba(200, 169, 81, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .card-num {
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      color: var(--gold);
+      opacity: 0.15;
+    }
+
+    .core-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem;
+      color: var(--gold);
+      font-weight: 300;
+      margin-bottom: 1rem;
+    }
+
+    .core-card p {
+      opacity: 0.7;
+      font-size: 0.82rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .core-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .core-card ul li {
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--cream);
+    }
+
+    .core-card ul li::before {
+      content: '✓';
+      color: var(--gold);
+      font-weight: bold;
+    }
+
+    /* ACTION SECTION */
+    .cta-banner {
+      background: linear-gradient(rgba(28, 22, 9, 0.95), rgba(14, 11, 6, 0.98)), url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23C8A951' fill-opacity='0.02' d='M44,-62C58,-53,71,-40,78,-24C85,-8,86,11,80,27C74,43,62,56,48,65C34,74,17,79,-1,81C-19,82,-37,80,-51,71C-65,62,-74,47,-79,31C-84,15,-84,-2,-80,-18C-76,-34,-68,-49,-55,-58C-42,-67,-21,-70,-1,-69C19,-68,30,-71,44,-62Z' transform='translate%28100 100%29' /%3E%3C/svg%3E");
+      background-size: cover;
+      border: 1px solid var(--gold);
+      padding: 4.5rem 3rem;
+      text-align: center;
+      max-width: 800px;
+      margin: 4rem auto;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+
+    .cta-banner h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--cream);
+      margin-bottom: 1.2rem;
+    }
+
+    .cta-banner p {
+      opacity: 0.7;
+      font-size: 0.9rem;
+      max-width: 550px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.8;
+    }
+
+    /* Luxury Gold Gradient Button */
+    .btn-action {
+      display: inline-block;
+      background: linear-gradient(135deg, #E8C96A 0%, #C8A951 50%, #A68230 100%);
+      color: #0E0B06;
+      border: 1px solid rgba(232, 201, 106, 0.2);
+      box-shadow: 0 4px 20px rgba(200,169,81,0.25);
+      padding: 1.1rem 2.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(200,169,81,0.4);
+      filter: brightness(1.08);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 1.5rem;
+      text-align: center;
+      opacity: 0.4;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .pitch-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      .core-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .cta-banner {
+        padding: 3rem 1.5rem;
+      }
+      
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/index.html" class="logo">
+      Launch My Clothing Brand
+      <span>From Idea to Production</span>
+    </a>
+    <a href="/index.html" style="font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--border); padding: 0.4rem 1.1rem;">
+      Enter Main Site →
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge">Apparel Brand Launchpad</div>
+    <h1>90% of Clothing Brands Fail Before They Sell a Single Stitch. <br><em>Here is how you beat the odds.</em></h1>
+    <div class="hero-sub">
+      Most new fashion founders lose ₹2,00,000+ on bad manufacturer samples, incorrect dimensions, and unreliable factory middlemen. We replace the guesswork with precision digital CAD pattern files, tech spec charts, and direct vetted Gurgaon manufacturers.
+    </div>
+  </div>
+
+  <!-- PERSUASIVE PITCH -->
+  <div class="section-wrap" style="background: rgba(255,255,255,0.01); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="pitch-grid">
+      <div class="pitch-text">
+        <h2>Traditional Sampling is a Capital Leak.</h2>
+        <p>If you give a manufacturer a rough drawing or a copy of another garment, they will guess the dimensions. Every correction sample costs you ₹10,000+ and 3 weeks of time.</p>
+        <p><strong>The Solution:</strong> Start with digital CAD blueprints. When you send specialized DXF/PDF cutting files directly to the factory, they cut with 100% precision. No guessing. Perfect fitting samples on the first attempt.</p>
+      </div>
+      <div class="sample-warning-box">
+        ⚠️ <strong>Why Brands Struggle:</strong> Vague instructions translate into poor sizing. Traditional factories take advantage of new designers who don't have graded measurement spec sheets. With our master blueprints, you own the fit and dictate the production parameters.
+      </div>
+    </div>
+  </div>
+
+  <!-- CORE OFFERINGS -->
+  <div class="section-wrap">
+    <div class="services-title">
+      <h2>Our Core <em>Offerings</em></h2>
+      <p style="opacity: 0.5; font-size: 0.78rem; margin-top: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">Command Vetted Production Blueprints</p>
+    </div>
+
+    <div class="core-grid">
+      
+      <!-- 1. CAD Pattern Making -->
+      <div class="core-card">
+        <div class="card-num">01</div>
+        <h3>Digital CAD Pattern Making</h3>
+        <p>Convert sketches or mockups into production-ready DXF & PDF pattern files optimized for factory automated cutting machinery.</p>
+        <ul>
+          <li>Precision garment dimension blueprints</li>
+          <li>Optimized nest files for zero fabric waste</li>
+          <li>AutoCAD & DXF formats ready to cut</li>
+        </ul>
+      </div>
+
+      <!-- 2. Sizing Grading Sheets -->
+      <div class="core-card">
+        <div class="card-num">02</div>
+        <h3>Trial-Tested Graded Spec Sheets</h3>
+        <p>Command your brand's sizing. We create industry-standard measurement grading sheets spanning XS to XXL so your fits remain completely uniform.</p>
+        <ul>
+          <li>Detailed graded sizing calculation tables</li>
+          <li>Trial-and-tested standard parameters</li>
+          <li>Vetted for global fashion export markets</li>
+        </ul>
+      </div>
+
+      <!-- 3. Manufacturer Connections -->
+      <div class="core-card">
+        <div class="card-num">03</div>
+        <h3>Direct Vetted Factories</h3>
+        <p>Skip the brokers. We link you directly with Gurgaon and Delhi NCR's most reliable, vetted clothing manufacturers suited for your minimum order needs.</p>
+        <ul>
+          <li>NCR apparel manufacturing directory</li>
+          <li>Gurugram low-minimum specialized factories</li>
+          <li>Direct supplier contact details</li>
+        </ul>
+      </div>
+
+      <!-- 4. Photo to Pattern (React Portal) -->
+      <div class="core-card">
+        <div class="card-num">04</div>
+        <h3>Photo to Pattern (₹199 Portal)</h3>
+        <p>See a style online? Take a photo, upload it, specify your custom fit structure, and our expert sizing team calculates the exact specifications.</p>
+        <ul>
+          <li>Easy photo reference submission</li>
+          <li>Automatic calculation for flat ₹199</li>
+          <li>Full support for casual, streetwear, and dresses</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CONVERTING CTA BANNER -->
+  <div class="cta-banner">
+    <h2>Stop Guessing. Own Your Fits.</h2>
+    <p>Convert your creative vision into manufacturer-ready patterns, secure vetted factory connections, and go to market with complete technical confidence today.</p>
+    <a href="https://launchmyclothingbrand.com" class="btn-action">Access launchmyclothingbrand.com →</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 Launch My Clothing Brand. All rights reserved. <br>
+    Bijwasan, Delhi NCR — 110061 · launchmyclothingbrand.com
+  </footer>
+
+</body>
+</html>
