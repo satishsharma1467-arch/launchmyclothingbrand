@@ -626,7 +626,7 @@
     <p class="bottom-link">New here? <a href="/register.html" style="font-weight:500;">Create Account</a></p>
 
     <!-- Hidden admin trigger styled elegantly -->
-    <p style="text-align:center; margin-top:2.5rem; border-top: 1px dashed rgba(200,169,81,0.1); padding-top:1rem;">
+    <p style="text-align:center; margin-top:2.5rem; border-top: 1px dashed rgba(200,169,81,0.1); padding-top:1rem; display:none;">
       <a href="#" onclick="openAdminPrompt(event)" style="font-size:0.62rem; color:var(--gold); opacity:0.4; letter-spacing:0.1em; text-transform:uppercase;">⚙️ Developer Dashboard</a>
     </p>
   </div>
@@ -643,7 +643,7 @@
       <input type="email" id="forgotEmail" placeholder="you@example.com">
     </div>
     <div class="modal-btns">
-      <button class="btn btn-gold" style="flex:1" onclick="sendReset()">Send Recovery Email →</button>
+      <button class="btn btn-gold" style="flex:1" id="sendResetBtn" onclick="sendReset()">Send Recovery Email →</button>
       <button class="btn" style="background:rgba(255,255,255,0.05); color:var(--cream); border:1px solid var(--border); flex:0 0 auto; padding:0.8rem 1.2rem;" onclick="closeForgot()">Cancel</button>
     </div>
   </div>
@@ -795,13 +795,99 @@ function closeForgot() { document.getElementById('forgotOverlay').classList.remo
 
 async function sendReset() {
   const email = document.getElementById('forgotEmail').value.trim().toLowerCase();
-  if (!email) return;
-  await fetch(`${SB_URL}/rest/v1/users?email=eq.${encodeURIComponent(email)}`, {
-    method: 'PATCH',
-    headers: { 'Content-Type': 'application/json', 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` },
-    body: JSON.stringify({ reset_requested: true, reset_requested_at: new Date().toISOString() })
-  });
-  showAlert('forgotAlert', 'Reset request noted. We will contact you on WhatsApp/email within a few minutes.', 'success');
+  if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+    showAlert('forgotAlert', 'Please enter a valid email address.', 'error');
+    return;
+  }
+
+  const btn = document.getElementById('sendResetBtn');
+  const originalText = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Sending...';
+
+  try {
+    // 1. Check if user account exists
+    const r = await fetch(`${SB_URL}/rest/v1/users?email=eq.${encodeURIComponent(email)}&select=*`, {
+      headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` }
+    });
+    const users = await r.json();
+
+    if (!Array.isArray(users) || users.length === 0) {
+      showAlert('forgotAlert', 'No account found with this email address.', 'error');
+      btn.disabled = false;
+      btn.innerHTML = originalText;
+      return;
+    }
+
+    const user = users[0];
+
+    // 2. Log password reset request securely into Supabase DB messages table
+    const techSheetMessage = `
+=== PASSWORD RESET REQUEST ===
+🧑 Customer Name: ${user.name}
+📱 WhatsApp Mobile: ${user.phone || '—'}
+📧 Email Address: ${user.email}
+🏢 Brand Name: ${user.brand || '—'}
+⭐ Plan: ${user.plan || 'free'}
+
+User has requested a password reset. Please contact them or process their reset request.
+🗓 Requested On: ${new Date().toLocaleString('en-IN')}
+`;
+
+    const dbRes = await fetch(`${SB_URL}/rest/v1/messages`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SB_KEY,
+        'Authorization': `Bearer ${SB_KEY}`,
+        'Prefer': 'return=representation'
+      },
+      body: JSON.stringify({
+        name: user.name,
+        email: user.email,
+        phone: user.phone || '',
+        subject: `Password Reset Request: ${user.name}`,
+        message: techSheetMessage,
+        received_at: new Date().toISOString()
+      })
+    });
+
+    if (!dbRes.ok) {
+      const errJson = await dbRes.ok ? {} : await dbRes.json();
+      throw new Error(errJson.message || 'Database insert failed');
+    }
+
+    // 3. Local fallback storage for Ctrl+Shift+A admin messages viewer
+    const localMsgs = JSON.parse(localStorage.getItem('lmcb_messages') || '[]');
+    localMsgs.unshift({
+      id: Date.now(),
+      name: user.name,
+      email: user.email,
+      phone: user.phone || '',
+      subject: 'Password Reset Request',
+      message: techSheetMessage,
+      receivedAt: new Date().toISOString(),
+      read: false
+    });
+    localStorage.setItem('lmcb_messages', JSON.stringify(localMsgs));
+
+    showAlert('forgotAlert', 'Reset request noted. We will contact you on WhatsApp/email within a few minutes.', 'success');
+    document.getElementById('forgotEmail').value = '';
+    
+    setTimeout(() => {
+      closeForgot();
+      btn.disabled = false;
+      btn.innerHTML = originalText;
+      // Clear alert state for next open
+      document.getElementById('forgotAlert').className = 'alert';
+      document.getElementById('forgotAlert').style.display = 'none';
+    }, 3000);
+
+  } catch (err) {
+    showAlert('forgotAlert', 'Error requesting reset: ' + err.message, 'error');
+    btn.disabled = false;
+    btn.innerHTML = originalText;
+  }
 }
 
 // SECURED ADMIN LOGIN (NO CLEAR-TEXT CONSTANTS IN CLIENT FILE)

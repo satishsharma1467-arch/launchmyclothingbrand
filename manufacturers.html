@@ -25,7 +25,7 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 18px; }
+    html { scroll-behavior: smooth; font-size: 20px; }
 
     body {
       background: #0E0B06;
@@ -472,22 +472,8 @@
 
     /* ADMIN TRIGGER */
     .admin-trigger {
-      position: fixed;
-      bottom: 2rem;
-      left: 2rem;
-      z-index: 150;
-      background: rgba(200,169,81,0.15);
-      border: 1px solid var(--border);
-      color: var(--gold);
-      padding: 0.5rem 1rem;
-      border-radius: var(--radius);
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      cursor: pointer;
-      transition: background 0.2s;
+      display: none !important;
     }
-
-    .admin-trigger:hover { background: rgba(200,169,81,0.25); }
 
     /* MODALS */
     .overlay {
@@ -1344,6 +1330,18 @@
     // Run database loading on DOM Ready
     document.addEventListener('DOMContentLoaded', function() {
       loadManufacturers();
+      
+      // Open via URL param (?admin)
+      var params = new URLSearchParams(window.location.search);
+      if (params.has('admin')) openAdminPrompt();
+    });
+
+    // Keyboard shortcut Ctrl+Shift+A to open Admin
+    document.addEventListener('keydown', e => {
+      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') {
+        e.preventDefault();
+        openAdminPrompt();
+      }
     });
   </script>
 

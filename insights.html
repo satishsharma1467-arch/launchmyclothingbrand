@@ -493,22 +493,8 @@
 
     /* ADMIN TRIGGER */
     .admin-trigger {
-      position: fixed;
-      bottom: 2rem;
-      left: 2rem;
-      z-index: 150;
-      background: rgba(200,169,81,0.15);
-      border: 1px solid var(--border);
-      color: var(--gold);
-      padding: 0.5rem 1rem;
-      border-radius: var(--radius);
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      cursor: pointer;
-      transition: background 0.2s;
+      display: none !important;
     }
-
-    .admin-trigger:hover { background: rgba(200,169,81,0.25); }
 
     /* MODAL OVERLAYS */
     .overlay {
@@ -1417,6 +1403,18 @@
     // Run active session checking on page load
     document.addEventListener('DOMContentLoaded', function() {
       loadVideos();
+      
+      // Open via URL param (?admin)
+      var params = new URLSearchParams(window.location.search);
+      if (params.has('admin')) openAdminPrompt();
+    });
+
+    // Keyboard shortcut Ctrl+Shift+A to open Admin
+    document.addEventListener('keydown', e => {
+      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') {
+        e.preventDefault();
+        openAdminPrompt();
+      }
     });
   </script>
   <script src="/comm_guard.js"></script>
