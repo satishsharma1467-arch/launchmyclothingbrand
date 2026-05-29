@@ -27,9 +27,9 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
+    html { scroll-behavior: smooth; font-size: 18px; }
 
-    body { font-size: 16px; background: #0E0B06;
+    body { font-size: 1rem; background: #0E0B06;
       color: var(--cream);
       font-family: 'DM Mono', monospace;
       font-weight: 300;
@@ -84,7 +84,7 @@
       font-size: 0.62rem;
       letter-spacing: 0.18em;
       color: var(--cream);
-      opacity: 0.45;
+      opacity: 0.4;
       font-weight: 300;
       margin-top: 0.15rem;
       text-transform: uppercase;
@@ -103,7 +103,7 @@
       font-size: 0.72rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      opacity: 0.6;
+      opacity: 0.3;
       transition: opacity 0.2s, color 0.2s;
     }
 
@@ -155,7 +155,7 @@
 
     .hero p {
       color: var(--cream);
-      opacity: 0.6;
+      opacity: 0.3;
       font-size: 0.9rem;
       max-width: 600px;
       margin: 0 auto 2.5rem;
@@ -216,7 +216,10 @@
       background: rgba(255,255,255,0.06);
     }
 
-    .field select { background: #0E0B06; }
+    .field select, .field select option {
+      background: #0E0B06 !important;
+      color: var(--cream) !important;
+    }
     .field textarea { resize: vertical; min-height: 100px; }
 
     .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
@@ -320,7 +323,7 @@
       filter: brightness(1.08) !important;
     }
 
-    .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+    .btn-submit:disabled { opacity: 0.3; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
 
     .spinner {
       display: inline-block;
@@ -380,19 +383,19 @@
       color: var(--gold);
     }
 
-    .footer-brand p { font-size: 0.68rem; opacity: 0.35; line-height: 1.7; margin-top: 0.5rem; }
+    .footer-brand p { font-size: 0.68rem; opacity: 0.3; line-height: 1.7; margin-top: 0.5rem; }
     .footer-col h4 { font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); opacity: 0.7; margin-bottom: 1.2rem; }
     .footer-col ul { list-style: none; }
     .footer-col ul li { margin-bottom: 0.6rem; }
-    .footer-col ul li a { color: var(--cream); font-size: 0.72rem; opacity: 0.45; transition: opacity 0.2s; }
+    .footer-col ul li a { color: var(--cream); font-size: 0.72rem; opacity: 0.4; transition: opacity 0.2s; }
     .footer-col ul li a:hover { opacity: 0.8; color: var(--gold); }
-    .footer-bottom { border-top: 1px solid var(--border); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 1.5rem; display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 1rem; }
     .footer-copy { font-size: 0.62rem; opacity: 0.3; }
 
     @media (max-width: 768px) {
-      footer { padding: 3rem 1.2rem; }
+      footer { padding: 3rem 1.2rem; text-align: left; }
       .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .footer-bottom { flex-direction: column; text-align: center; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; text-align: left; }
     }
 
     
@@ -404,7 +407,7 @@
 
     @media (max-width: 768px) {
       
-      body { font-size: 16px; padding-bottom: 75px; }
+      body { font-size: 1rem; padding-bottom: 75px; }
     }
   
         /* ═══ MOBILE BOTTOM NAV BAR ══════════════════════════ */
@@ -412,7 +415,7 @@
     
     @media (max-width: 768px) {
       /* Add padding to body so content not hidden behind bottom nav */
-      body { font-size: 16px; padding-bottom: 70px !important; }
+      body { font-size: 1rem; padding-bottom: 70px !important; }
       
       
       
@@ -433,7 +436,7 @@
     
     @media (max-width: 768px) {
       /* Add padding to body so content not hidden behind bottom nav */
-      body { font-size: 16px; padding-bottom: 70px !important; }
+      body { font-size: 1rem; padding-bottom: 70px !important; }
       
       
       
@@ -581,6 +584,162 @@
         z-index: 1000 !important;
       }
     }
+
+    
+    /* ════════ Standardized Hero Typography and Textures ════════ */
+    body::before {
+      content: '' !important;
+      position: fixed !important;
+      inset: 0 !important;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E") !important;
+      pointer-events: none !important;
+      z-index: 999 !important;
+      opacity: 0.4 !important;
+    }
+
+    /* Equal Sizing across front page headers */
+    .hero h1, h1 {
+      font-family: 'Cormorant Garamond', serif !important;
+      font-size: clamp(2.5rem, 4vw, 4rem) !important;
+      font-weight: 300 !important;
+      line-height: 1.15 !important;
+      margin-bottom: 1.2rem !important;
+      letter-spacing: -0.01em !important;
+    }
+
+    .hero p, p.hero-desc {
+      font-family: 'DM Mono', monospace !important;
+      font-size: 0.9rem !important;
+      opacity: 0.65 !important;
+      line-height: 1.8 !important;
+      max-width: 600px !important;
+      margin: 0 auto 2.5rem !important;
+    }
+
+    /* ════════ Standardized Simplified Footer Styles ════════ */
+    body {
+      display: flex !important;
+      flex-direction: column !important;
+      min-height: 100vh !important;
+    }
+    
+    footer {
+      background: #090704 !important;
+      border-top: 1px solid var(--border) !important;
+      padding: 4rem 4rem 3rem !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+      margin-top: auto !important;
+      text-align: left !important;
+    }
+
+    .footer-grid {
+      display: grid !important;
+      grid-template-columns: 1.5fr 1fr !important;
+      gap: 3rem !important;
+      margin-bottom: 3.5rem !important;
+      max-width: 1200px !important;
+      margin-left: 0 !important;
+      margin-right: auto !important;
+    }
+
+    .footer-brand h3 {
+      font-family: 'Bebas Neue', sans-serif !important;
+      font-size: 1.5rem !important;
+      letter-spacing: 0.12em !important;
+      color: var(--gold) !important;
+      margin-bottom: 0.9rem !important;
+      line-height: 1.1 !important;
+      text-transform: uppercase !important;
+    }
+
+    .footer-brand p {
+      font-size: 0.82rem !important;
+      opacity: 0.7 !important;
+      line-height: 1.85 !important;
+      max-width: 35ch !important;
+      margin-bottom: 1.2rem !important;
+      color: var(--cream) !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    .footer-address, .footer-brand .addr { 
+      font-size: 0.88rem !important; 
+      opacity: 0.6 !important; 
+      line-height: 1.6 !important; 
+      color: var(--cream) !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    .footer-col h4 {
+      font-size: 0.88rem !important;
+      letter-spacing: 0.25em !important;
+      text-transform: uppercase !important;
+      color: var(--gold) !important;
+      margin-bottom: 1.2rem !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    .footer-col ul { 
+      list-style: none !important; 
+      display: flex !important; 
+      flex-direction: column !important; 
+      gap: 0.75rem !important; 
+      padding: 0 !important;
+    }
+
+    .footer-col ul a {
+      font-size: 0.82rem !important;
+      opacity: 0.65 !important;
+      text-decoration: none !important;
+      color: var(--cream) !important;
+      transition: opacity 0.2s, color 0.2s !important;
+      letter-spacing: 0.03em !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    .footer-col ul a:hover { 
+      opacity: 0.95 !important; 
+      color: var(--gold) !important; 
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border) !important;
+      padding-top: 2rem !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 0.5rem !important;
+      max-width: 1200px !important;
+      margin-left: 0 !important;
+      margin-right: auto !important;
+      text-align: left !important;
+    }
+
+    .footer-copy, .footer-bottom p { 
+      font-size: 0.88rem !important; 
+      opacity: 0.55 !important; 
+      letter-spacing: 0.05em !important; 
+      color: var(--cream) !important;
+      margin: 0 !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    @media (max-width: 768px) {
+      footer { padding: 3rem 1.2rem !important; text-align: left !important; }
+      .footer-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+      .footer-bottom { flex-direction: column !important; align-items: flex-start !important; text-align: left !important; }
+    }
+
+    /* Remove bottom padding and hide bottom navigation entirely */
+    body {
+      padding-bottom: 0 !important;
+    }
+    .mob-nav, .mobile-bottom-nav, .mobile-nav {
+      display: none !important;
+    }
+
+
 </style>
 </head>
 <body>
@@ -612,7 +771,7 @@
     <h1>Photo to <em>Pattern</em></h1>
     <p>Upload a photo of any custom garment design. Fill in the style details, fit structure, and fabric type. We will custom-calculate and provide your brand's perfect sizing specification charts.</p>
     <div style="max-width: 480px; margin: 2rem auto 0; border: 1px solid var(--border); overflow: hidden; background: #0E0B06; box-shadow: 0 15px 35px rgba(200,169,81,0.08);">
-      <img src="photo_to_pattern.png" alt="Photo to Pattern before and after mockup" style="width: 100%; height: auto; display: block; filter: saturate(0.85) contrast(1.02);" />
+      <img src="photo_to_pattern_main.png" alt="Photo to Pattern before and after mockup" style="width: 100%; height: auto; display: block; filter: saturate(0.85) contrast(1.02);" />
     </div>
   </div>
 
@@ -711,7 +870,7 @@
           <div class="summary-row"><span>Custom Photo-to-Pattern sizing measurement</span><span>₹199</span></div>
           <div class="summary-row"><span>Razorpay Cloud Processing</span><span>Included</span></div>
           <div class="summary-row total"><span>Total Amount</span><span>₹199 Only</span></div>
-          <div style="font-size:0.68rem; opacity:0.65; line-height:1.6; margin-top:0.8rem; border-top:1px dashed rgba(200,169,81,0.15); padding-top:0.6rem; text-align:left;">
+          <div style="font-size:0.68rem; opacity: 0.4; line-height:1.6; margin-top:0.8rem; border-top:1px dashed rgba(200,169,81,0.15); padding-top:0.6rem; text-align:left;">
             ⚠️ <strong>Exception Notice:</strong> Highly complex premium styles (such as heavy draping, genuine leather garments, swimwear, lingerie, structured outerwear, and corset-styled garments) are subject to specialized calculations and additional custom quote adjustments on WhatsApp.
           </div>
         </div>
@@ -728,75 +887,33 @@
       <div style="font-size:3.5rem;margin-bottom:1.5rem;text-shadow:0 0 20px rgba(76,175,80,0.3);">🎉</div>
       <div style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:#C8A951;margin-bottom:1rem;font-weight:500;">Submission Received</div>
       <h3 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;margin-bottom:1.2rem;line-height:1.25;color:#F5F0E8;">Request Submitted Successfully!</h3>
-      <p style="font-size:0.8rem;opacity:0.6;line-height:1.8;margin-bottom:2rem;max-width:36ch;margin-left:auto;margin-right:auto;" id="successModalText">Your design specifications and garment photo have been uploaded securely. Our expert sizing team will calculate your measurements and contact you directly on your WhatsApp mobile number within 24 hours.</p>
+      <p style="font-size:0.8rem;opacity: 0.3;line-height:1.8;margin-bottom:2rem;max-width:36ch;margin-left:auto;margin-right:auto;" id="successModalText">Your design specifications and garment photo have been uploaded securely. Our expert sizing team will calculate your measurements and contact you directly on your WhatsApp mobile number within 24 hours.</p>
       <button class="btn-submit" onclick="closeSuccessModal()">Great, Thank You! →</button>
     </div>
   </div>
 
   <!-- FOOTER -->
-  
-  <!-- MOBILE BOTTOM NAVIGATION -->
-  <nav class="mobile-bottom-nav">
-    <a href="/index.html" id="bn-home">
-      <span class="nav-icon">🏠</span>
-      <span>Home</span>
-    </a>
-    <a href="/services.html" id="bn-services">
-      <span class="nav-icon">📐</span>
-      <span>Services</span>
-    </a>
-    <a href="/manufacturers.html" id="bn-mfr">
-      <span class="nav-icon">🏭</span>
-      <span>Factories</span>
-    </a>
-    <a href="/specsheets.html" id="bn-spec">
-      <span class="nav-icon">📋</span>
-      <span>Spec</span>
-    </a>
-    <a href="/insights.html" id="bn-insights">
-      <span class="nav-icon">🎬</span>
-      <span>Insights</span>
-    </a>
-    <a href="/subscribe.html" id="bn-pricing">
-      <span class="nav-icon">⭐</span>
-      <span>Plans</span>
-    </a>
-  </nav>
-<footer>
+  <footer>
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="footer-brand-name">Launch My Clothing Brand</div>
-        <p>Expert digital pattern making and manufacturer data services for apparel brands and startups in India.</p>
+        <h3>Launch My Clothing Brand</h3>
+        <p>Professional digital pattern making and manufacturer data services for clothing brands in India.</p>
+        <div class="addr">Bijwasan, Delhi — 110061</div>
       </div>
       <div class="footer-col">
-        <h4>Services</h4>
+        <h4>Legal and Support</h4>
         <ul>
-          <li><a href="/services.html">Pattern Making</a></li>
-          <li><a href="/library.html">Pattern Library</a></li>
-          <li><a href="/specsheets.html">Spec Sheets</a></li>
-          <li><a href="/phototopattern.html">Photo to Pattern</a></li>
-          <li><a href="/services.html">Consultation</a></li>
+          <li><a href="mailto:hello.launchmyclothing@gmail.com">✉ hello.launchmyclothing@gmail.com</a></li>
+          <li><a href="/contact.html">📞 Contact Us</a></li>
+          <li><a href="/terms.html">📄 Terms of Service</a></li>
+          <li><a href="/privacy.html">📄 Privacy Policy</a></li>
         </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <ul>
-          <li><a href="/contact.html">Contact Us</a></li>
-          <li><a href="/subscribe.html">Pricing Plans</a></li>
-          <li><a href="/manufacturers.html">Factories</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Legal</h4>
-        <ul>
-          <li><a href="/terms.html">Terms of Service</a></li>
-          <li><a href="/privacy.html">Privacy Policy</a></li>
-        </ul>
+        <p style="font-size: 0.75rem; color: var(--muted); margin-top: 0.8rem; opacity: 0.6; line-height: 1.5;">Phone support available for premium members only.</p>
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-copy">© 2026 Launch My Clothing Brand. All rights reserved.</div>
-      <div class="footer-copy">launchmyclothingbrand.com · Bijwasan, Delhi 110061</div>
+      <p>© 2026 Launch My Clothing Brand. All Rights Reserved.</p>
+      <p>launchmyclothingbrand.com · Delhi 110061</p>
     </div>
   </footer>
 
@@ -876,7 +993,7 @@
                 <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: #F5F0E8; font-weight: 300;">Pro Elite Member Account</div>
               </div>
               <div style="text-align: right;">
-                <div style="font-size: 0.55rem; opacity: 0.6; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px;">Style Submissions</div>
+                <div style="font-size: 0.55rem; opacity: 0.3; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px;">Style Submissions</div>
                 <span style="font-family: 'DM Mono', monospace; font-size: 0.9rem; background: rgba(200,169,81,0.2); color: #C8A951; padding: 4px 10px; border-radius: 2px; font-weight: 500;">${stylesCount} of 11 Styles Used</span>
               </div>
             </div>
@@ -887,7 +1004,7 @@
             <div class="summary-row"><span>Custom Photo-to-Pattern sizing measurement</span><span>FREE</span></div>
             <div class="summary-row"><span>Style Quota Used</span><span>${stylesCount} of 11 used</span></div>
             <div class="summary-row total"><span>Total Amount</span><span>₹0 (Free)</span></div>
-            <div style="font-size: 0.68rem; opacity: 0.65; color: #4CAF50; line-height: 1.6; margin-top: 0.8rem; border-top: 1px dashed rgba(200,169,81,0.15); padding-top: 0.6rem;">
+            <div style="font-size: 0.68rem; opacity: 0.4; color: #4CAF50; line-height: 1.6; margin-top: 0.8rem; border-top: 1px dashed rgba(200,169,81,0.15); padding-top: 0.6rem;">
               ✓ Your Pro Elite plan includes 11 free custom patterns! This submission is free of charge.
             </div>
           `;
@@ -901,7 +1018,7 @@
                 <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: #F5F0E8; font-weight: 300;">Pro Elite Member Account</div>
               </div>
               <div style="text-align: right;">
-                <div style="font-size: 0.55rem; opacity: 0.6; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px;">Style Submissions</div>
+                <div style="font-size: 0.55rem; opacity: 0.3; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px;">Style Submissions</div>
                 <span style="font-family: 'DM Mono', monospace; font-size: 0.9rem; background: rgba(212,71,42,0.15); color: #D4472A; padding: 4px 10px; border-radius: 2px; font-weight: 500;">11 of 11 Free Styles Used</span>
               </div>
             </div>
@@ -912,7 +1029,7 @@
             <div class="summary-row"><span>Custom Photo-to-Pattern sizing measurement</span><span>₹199</span></div>
             <div class="summary-row"><span>Style Quota Exceeded</span><span>11 of 11 free used</span></div>
             <div class="summary-row total"><span>Total Amount</span><span>₹199 Only</span></div>
-            <div style="font-size: 0.68rem; opacity: 0.65; color: #C8A951; line-height: 1.6; margin-top: 0.8rem; border-top: 1px dashed rgba(200,169,81,0.15); padding-top: 0.6rem;">
+            <div style="font-size: 0.68rem; opacity: 0.4; color: #C8A951; line-height: 1.6; margin-top: 0.8rem; border-top: 1px dashed rgba(200,169,81,0.15); padding-top: 0.6rem;">
               ⚠️ You have used all 11 complimentary styles included in your Pro Elite plan. Additional styles are charged at the flat rate of ₹199 each.
             </div>
           `;

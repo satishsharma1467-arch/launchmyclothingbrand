@@ -25,7 +25,7 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
+    html { scroll-behavior: smooth; font-size: 18px; }
 
     body {
       background: #0E0B06;
@@ -84,7 +84,7 @@
       font-size: 0.62rem;
       letter-spacing: 0.18em;
       color: var(--cream);
-      opacity: 0.45;
+      opacity: 0.4;
       font-weight: 300;
       margin-top: 0.15rem;
       text-transform: uppercase;
@@ -103,7 +103,7 @@
       font-size: 0.72rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      opacity: 0.6;
+      opacity: 0.3;
       transition: opacity 0.2s, color 0.2s;
     }
 
@@ -228,7 +228,7 @@
 
     .hero p {
       color: var(--cream);
-      opacity: 0.6;
+      opacity: 0.3;
       font-size: 0.9rem;
       max-width: 600px;
       margin: 0 auto 2.5rem;
@@ -289,7 +289,7 @@
       background: transparent;
       border: 1px solid var(--border);
       color: var(--cream);
-      opacity: 0.6;
+      opacity: 0.3;
       padding: 0.4rem 1.2rem;
       border-radius: var(--radius);
       font-family: 'DM Mono', monospace;
@@ -434,7 +434,7 @@
       gap: 0.8rem;
       font-size: 0.65rem;
       color: var(--cream);
-      opacity: 0.45;
+      opacity: 0.4;
     }
 
     /* EMPTY STATE */
@@ -607,7 +607,7 @@
     }
 
     .btn-add:hover:not(:disabled) { background: var(--gold-light); }
-    .btn-add:disabled { opacity: 0.6; cursor: not-allowed; }
+    .btn-add:disabled { opacity: 0.3; cursor: not-allowed; }
 
     .existing-list {
       margin-top: 2rem;
@@ -764,7 +764,7 @@
 
     .footer-brand p {
       font-size: 0.68rem;
-      opacity: 0.35;
+      opacity: 0.3;
       line-height: 1.7;
       margin-top: 0.5rem;
     }
@@ -785,7 +785,7 @@
       color: var(--cream);
       text-decoration: none;
       font-size: 0.72rem;
-      opacity: 0.45;
+      opacity: 0.4;
       transition: opacity 0.2s;
     }
     .footer-col ul li a:hover { opacity: 0.8; color: var(--gold); }
@@ -803,9 +803,9 @@
     .footer-copy { font-size: 0.62rem; opacity: 0.3; }
 
     @media (max-width: 768px) {
-      footer { padding: 3rem 1.2rem; }
+      footer { padding: 3rem 1.2rem; text-align: left; }
       .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .footer-bottom { flex-direction: column; text-align: center; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; text-align: left; }
     }
   
     /* â•â•â• MOBILE HEADER & DRAWER OVERLAYS SOLID BLACK CONTRAST FIX â•â•â• */
@@ -838,6 +838,162 @@
       }
     }
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
+    
+    /* ════════ Standardized Hero Typography and Textures ════════ */
+    body::before {
+      content: '' !important;
+      position: fixed !important;
+      inset: 0 !important;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E") !important;
+      pointer-events: none !important;
+      z-index: 999 !important;
+      opacity: 0.4 !important;
+    }
+
+    /* Equal Sizing across front page headers */
+    .hero h1, h1 {
+      font-family: 'Cormorant Garamond', serif !important;
+      font-size: clamp(2.5rem, 4vw, 4rem) !important;
+      font-weight: 300 !important;
+      line-height: 1.15 !important;
+      margin-bottom: 1.2rem !important;
+      letter-spacing: -0.01em !important;
+    }
+
+    .hero p, p.hero-desc {
+      font-family: 'DM Mono', monospace !important;
+      font-size: 0.9rem !important;
+      opacity: 0.65 !important;
+      line-height: 1.8 !important;
+      max-width: 600px !important;
+      margin: 0 auto 2.5rem !important;
+    }
+
+    /* ════════ Standardized Simplified Footer Styles ════════ */
+    body {
+      display: flex !important;
+      flex-direction: column !important;
+      min-height: 100vh !important;
+    }
+    
+    footer {
+      background: #090704 !important;
+      border-top: 1px solid var(--border) !important;
+      padding: 4rem 4rem 3rem !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+      margin-top: auto !important;
+      text-align: left !important;
+    }
+
+    .footer-grid {
+      display: grid !important;
+      grid-template-columns: 1.5fr 1fr !important;
+      gap: 3rem !important;
+      margin-bottom: 3.5rem !important;
+      max-width: 1200px !important;
+      margin-left: 0 !important;
+      margin-right: auto !important;
+    }
+
+    .footer-brand h3 {
+      font-family: 'Bebas Neue', sans-serif !important;
+      font-size: 1.5rem !important;
+      letter-spacing: 0.12em !important;
+      color: var(--gold) !important;
+      margin-bottom: 0.9rem !important;
+      line-height: 1.1 !important;
+      text-transform: uppercase !important;
+    }
+
+    .footer-brand p {
+      font-size: 0.82rem !important;
+      opacity: 0.7 !important;
+      line-height: 1.85 !important;
+      max-width: 35ch !important;
+      margin-bottom: 1.2rem !important;
+      color: var(--cream) !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    .footer-address, .footer-brand .addr { 
+      font-size: 0.88rem !important; 
+      opacity: 0.6 !important; 
+      line-height: 1.6 !important; 
+      color: var(--cream) !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    .footer-col h4 {
+      font-size: 0.88rem !important;
+      letter-spacing: 0.25em !important;
+      text-transform: uppercase !important;
+      color: var(--gold) !important;
+      margin-bottom: 1.2rem !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    .footer-col ul { 
+      list-style: none !important; 
+      display: flex !important; 
+      flex-direction: column !important; 
+      gap: 0.75rem !important; 
+      padding: 0 !important;
+    }
+
+    .footer-col ul a {
+      font-size: 0.82rem !important;
+      opacity: 0.65 !important;
+      text-decoration: none !important;
+      color: var(--cream) !important;
+      transition: opacity 0.2s, color 0.2s !important;
+      letter-spacing: 0.03em !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    .footer-col ul a:hover { 
+      opacity: 0.95 !important; 
+      color: var(--gold) !important; 
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border) !important;
+      padding-top: 2rem !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 0.5rem !important;
+      max-width: 1200px !important;
+      margin-left: 0 !important;
+      margin-right: auto !important;
+      text-align: left !important;
+    }
+
+    .footer-copy, .footer-bottom p { 
+      font-size: 0.88rem !important; 
+      opacity: 0.55 !important; 
+      letter-spacing: 0.05em !important; 
+      color: var(--cream) !important;
+      margin: 0 !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    @media (max-width: 768px) {
+      footer { padding: 3rem 1.2rem !important; text-align: left !important; }
+      .footer-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+      .footer-bottom { flex-direction: column !important; align-items: flex-start !important; text-align: left !important; }
+    }
+
+    /* Remove bottom padding and hide bottom navigation entirely */
+    body {
+      padding-bottom: 0 !important;
+    }
+    .mob-nav, .mobile-bottom-nav, .mobile-nav {
+      display: none !important;
+    }
+
+
 </style>
 </head>
 <body>
@@ -876,7 +1032,7 @@
       <div class="hstat"><div class="hstat-num">New</div><div class="hstat-label">Added Regularly</div></div>
     </div>
     <div style="max-width: 540px; margin: 2.2rem auto 0; border: 1px solid var(--border); overflow: hidden; background: #0E0B06; box-shadow: 0 15px 35px rgba(200,169,81,0.08);">
-      <img src="apparel_industry_insights.png" alt="Apparel Industry Insights Video Course" style="width: 100%; height: auto; display: block; filter: saturate(0.85) contrast(1.02);" />
+      <img src="apparel_insights_main.png" alt="Apparel Industry Insights Video Course" style="width: 100%; height: auto; display: block; filter: saturate(0.85) contrast(1.02);" />
     </div>
   </div>
 
@@ -907,39 +1063,24 @@
   <footer>
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="footer-brand-name">Launch My Clothing Brand</div>
-        <p>Expert digital pattern making and manufacturer data services for apparel brands and startups in India.</p>
+        <h3>Launch My Clothing Brand</h3>
+        <p>Professional digital pattern making and manufacturer data services for clothing brands in India.</p>
+        <div class="addr">Bijwasan, Delhi — 110061</div>
       </div>
       <div class="footer-col">
-        <h4>Services</h4>
+        <h4>Legal and Support</h4>
         <ul>
-          <li><a href="/services.html">Pattern Making</a></li>
-          <li><a href="/library.html">Pattern Library</a></li>
-          <li><a href="/specsheets.html">Spec Sheets</a></li>
-      <li><a href="/phototopattern.html">Photo to Pattern</a></li>
-          <li><a href="/insights.html">Industry Insights</a></li>
-          <li><a href="/services.html">Consultation</a></li>
+          <li><a href="mailto:hello.launchmyclothing@gmail.com">✉ hello.launchmyclothing@gmail.com</a></li>
+          <li><a href="/contact.html">📞 Contact Us</a></li>
+          <li><a href="/terms.html">📄 Terms of Service</a></li>
+          <li><a href="/privacy.html">📄 Privacy Policy</a></li>
         </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <ul>
-          <li><a href="/contact.html">Contact Us</a></li>
-          <li><a href="/subscribe.html">Pricing Plans</a></li>
-          <li><a href="/manufacturers.html">Factories</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Legal</h4>
-        <ul>
-          <li><a href="/terms.html">Terms of Service</a></li>
-          <li><a href="/privacy.html">Privacy Policy</a></li>
-        </ul>
+        <p style="font-size: 0.75rem; color: var(--muted); margin-top: 0.8rem; opacity: 0.6; line-height: 1.5;">Phone support available for premium members only.</p>
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-copy">© 2026 Launch My Clothing Brand. All rights reserved.</div>
-      <div class="footer-copy">launchmyclothingbrand.com · Bijwasan, Delhi 110061</div>
+      <p>© 2026 Launch My Clothing Brand. All Rights Reserved.</p>
+      <p>launchmyclothingbrand.com · Delhi 110061</p>
     </div>
   </footer>
 
@@ -999,7 +1140,7 @@
       <button class="btn-add" id="addBtn" onclick="addVideo()">Add Video →</button>
       <div class="existing-list">
         <h3>Current Insights</h3>
-        <div id="existingList"><p style="font-size:0.75rem;opacity:0.5;">Loading...</p></div>
+        <div id="existingList"><p style="font-size:0.75rem;opacity: 0.5;">Loading...</p></div>
       </div>
     </div>
   </div>
@@ -1007,265 +1148,276 @@
 
 
   <!-- MOBILE BOTTOM NAVIGATION -->
-  <nav class="mobile-nav">
-    <a href="/index.html"><span class="nav-icon">🏠</span><span>Home</span></a>
-    <a href="/services.html"><span class="nav-icon">📐</span><span>Services</span></a>
-    <a href="/manufacturers.html"><span class="nav-icon">🏭</span><span>Factories</span></a>
-    <a href="/specsheets.html"><span class="nav-icon">📋</span><span>Spec</span></a>
-    <a href="/insights.html" class="active"><span class="nav-icon">🎬</span><span>Insights</span></a>
-    <a href="/subscribe.html"><span class="nav-icon">⭐</span><span>Plans</span></a>
-  </nav>
-
+      
   <script>
-    const SB_URL  = 'https://tldbjsqhjqapdwmfeuwq.supabase.co';
-    const SB_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ';
+    // ── SUPABASE CONFIG ──────────────────────────────────
+    const SB_URL = 'https://tldbjsqhjqapdwmfeuwq.supabase.co';
+    const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ';
     const sb = supabase.createClient(SB_URL, SB_KEY);
 
-    // Read subscriber state from session / localStorage
     const session = JSON.parse(localStorage.getItem('lmcb_user') || 'null');
     const plan = localStorage.getItem('lmcb_current_plan') || (session ? session.plan : 'free');
     const planStatus = session ? session.plan_status : 'free';
     const isPaid = planStatus === 'active' && ['brand_builder', 'pro_elite'].includes(plan);
+    
+    let videosList = [];
+    let activeFilter = 'all';
 
-    // Premium video locking modal
-    function handleLockedVideo(title) {
+    // ── DATABASE OPERATIONS & VIDEO SEEDING ────────────────
+    async function loadVideos() {
+      const { data, error } = await sb.from('videos').select('*').order('created_at', { ascending: true });
+      if (error) {
+        document.getElementById('videosGrid').innerHTML = '<div class="empty-state">Failed to load industry insights.</div>';
+        return;
+      }
+      
+      videosList = data || [];
+      
+      // Auto-seed table if currently empty
+      if (videosList.length === 0) {
+        const defaultVideos = [
+          {
+            title: "How to Launch a Clothing Brand in India (Step-by-Step)",
+            youtube_url: "https://www.youtube.com/watch?v=co0iGqfTQDQ",
+            category: "Brand Development",
+            duration: "18:45",
+            description: "A complete guide covering sourcing, pattern making, sample creation, manufacturing, and marketing strategy to start a successful apparel line in India.",
+            is_premium: false
+          },
+          {
+            title: "How to Read Garment Spec Sheets & Tech Packs",
+            youtube_url: "https://www.youtube.com/watch?v=FqG_81F4B9Y",
+            category: "Pattern Making",
+            duration: "12:15",
+            description: "Learn how to read measurement spec sheets, tech packs, and grade sizes accurately to avoid production errors with Indian manufacturers.",
+            is_premium: true
+          },
+          {
+            title: "Apparel Sourcing & Factory Selection Secrets",
+            youtube_url: "https://www.youtube.com/watch?v=R9Z2Lg9lTf0",
+            category: "Manufacturing",
+            duration: "14:30",
+            description: "Inside advice on finding the right clothing manufacturers in Delhi, Tirupur, and Mumbai. How to negotiate MOQs and verify sample quality.",
+            is_premium: true
+          }
+        ];
+        
+        const { data: seeded, error: seedErr } = await sb.from('videos').insert(defaultVideos).select();
+        if (!seedErr && seeded) {
+          videosList = seeded;
+        }
+      }
+      
+      buildFilterBar();
+      renderCards();
+    }
+
+    function buildFilterBar() {
+      const categories = ['all', ...new Set(videosList.map(v => v.category))];
+      const bar = document.getElementById('filtersBar');
+      bar.innerHTML = '<span style="font-size:0.85rem; color:var(--gold); opacity:0.9; margin-right:0.5rem; text-transform:uppercase; letter-spacing:0.1em; font-weight:500;">Filter:</span>' +
+        categories.map(cat => {
+          const activeClass = cat === activeFilter ? 'active' : '';
+          return `<button class="filter-btn ${activeClass}" onclick="filterVideos('${cat}', this)">${cat}</button>`;
+        }).join('');
+      bar.style.display = 'flex';
+    }
+
+    function filterVideos(cat, btn) {
+      activeFilter = cat;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderCards();
+    }
+
+    function getYoutubeId(url) {
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      const match = url.match(regExp);
+      return (match && match[2].length === 11) ? match[2] : null;
+    }
+
+    function renderCards() {
+      const grid = document.getElementById('videosGrid');
+      const filtered = activeFilter === 'all' ? videosList : videosList.filter(v => v.category === activeFilter);
+      
+      document.getElementById('totalCount').textContent = videosList.length;
+      
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div class="empty-state"><div class="empty-icon">🎬</div><p>No videos found in this category.</p></div>';
+        return;
+      }
+      
+      grid.innerHTML = filtered.map(v => {
+        const yid = getYoutubeId(v.youtube_url) || 'co0iGqfTQDQ';
+        const thumbUrl = `https://img.youtube.com/vi/${yid}/mqdefault.jpg`;
+        const isLocked = v.is_premium && !isPaid;
+        
+        const lockBadge = v.is_premium ? `<span class="exist-item-badge" style="background:rgba(200,169,81,0.1); color:var(--gold); border:1px solid var(--border); padding:2px 6px; font-size:0.55rem; letter-spacing:0.05em; font-weight:500; border-radius:2px; vertical-align:middle; margin-left:6px; display:inline-block;">🔒 PREMIUM</span>` : '';
+        
+        return `
+          <div class="video-card">
+            <div class="video-thumb" id="thumb-${v.id}" onclick="playVideo('${v.id}', '${yid}', ${isLocked})">
+              <img src="${thumbUrl}" alt="${v.title}">
+              <div class="play-btn">
+                <div class="play-circle">${isLocked ? '🔒' : '▶'}</div>
+              </div>
+            </div>
+            <div class="video-embed" id="embed-${v.id}"></div>
+            <div class="card-body">
+              <div class="card-cat">${v.category} ${lockBadge}</div>
+              <div class="card-title">${v.title}</div>
+              <div class="card-desc">${v.description || ''}</div>
+              <div class="card-meta">
+                <span>⏱ ${v.duration || '00:00'}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function playVideo(id, yid, isLocked) {
+      if (isLocked) {
+        showCommLockModal('insights');
+        return;
+      }
+      const thumb = document.getElementById(`thumb-${id}`);
+      const embed = document.getElementById(`embed-${id}`);
+      
+      thumb.style.display = 'none';
+      embed.innerHTML = `<iframe src="https://www.youtube.com/embed/${yid}?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+      embed.style.display = 'block';
+    }
+
+    function showCommLockModal(type) {
       const overlay = document.createElement('div');
-      overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:9999;display:flex;align-items:center;justify-content:center;font-family:\'DM Mono\',monospace;color:#F5F0E8;padding:2rem;backdrop-filter:blur(14px);';
+      overlay.style.cssText = 'position:fixed;inset:0;background:rgba(14,11,6,0.96);z-index:99999;display:flex;align-items:center;justify-content:center;font-family:\'DM Mono\',monospace;color:#F5F0E8;padding:2rem;backdrop-filter:blur(14px);animation:fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);';
+      
       overlay.innerHTML = `
-        <div style="background:#1C1609;border:1px solid rgba(200,169,81,0.4);padding:3rem 2rem;max-width:480px;width:100%;text-align:center;position:relative;box-shadow:0 15px 40px rgba(200,169,81,0.25);">
-          <button onclick="this.parentElement.parentElement.remove()" style="position:absolute;top:1rem;right:1.2rem;background:none;border:none;color:#F5F0E8;font-size:1.5rem;cursor:pointer;opacity:0.5;">✕</button>
-          <div style="font-size:3rem;margin-bottom:1rem;">🔒</div>
-          <div style="font-size:1rem;letter-spacing:0.25em;text-transform:uppercase;color:#C8A951;margin-bottom:0.8rem;">Exclusive Content</div>
-          <h3 style="font-family:Cormorant Garamond,serif;font-size:1.8rem;font-weight:300;margin-bottom:1rem;line-height:1.2;">${title}</h3>
-          <p style="font-size:0.9rem;opacity:0.6;line-height:1.7;margin-bottom:2rem;max-width:36ch;margin-left:auto;margin-right:auto;">This expert AI-generated tutorial and garment strategy video is reserved for premium members only.</p>
-          <a href="/subscribe.html" class="btn-primary" style="display:inline-block;background:linear-gradient(135deg, #E8C96A 0%, #C8A951 50%, #A68230 100%) !important;color:#0E0B06 !important;padding:0.8rem 2rem;text-decoration:none;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;box-shadow:0 4px 15px rgba(200,169,81,0.15);border:none;">Unlock with Premium Plan →</a>
+        <div style="background:#1C1609;border:1px solid rgba(200,169,81,0.35);padding:3.5rem 2.5rem;max-width:500px;width:100%;text-align:center;position:relative;box-shadow:0 25px 60px rgba(200,169,81,0.2);animation:slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);border-radius:3px;">
+          <button onclick="this.parentElement.parentElement.remove()" style="position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:#F5F0E8;font-size:1.8rem;cursor:pointer;opacity:0.5;transition:opacity 0.2s, transform 0.2s;" onmouseover="this.style.opacity=1;this.style.transform='scale(1.1)'" onmouseout="this.style.opacity=0.5;this.style.transform='scale(1)'">&times;</button>
+          <div style="font-size:3.5rem;margin-bottom:1.5rem;text-shadow:0 0 20px rgba(200,169,81,0.3);">🔒</div>
+          <div style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:#C8A951;margin-bottom:1rem;font-weight:500;">Premium Sourcing Exclusive</div>
+          <h3 style="font-family:\'Cormorant Garamond\',serif;font-size:2.2rem;font-weight:300;margin-bottom:1.2rem;line-height:1.25;color:#F5F0E8;">Premium Video Locked</h3>
+          <p style="font-size:0.8rem;opacity:0.6;line-height:1.8;margin-bottom:2.5rem;max-width:38ch;margin-left:auto;margin-right:auto;">This expert strategy video tutorial is reserved exclusively for our Brand Builder and Pro Elite members.</p>
+          <a href="/subscribe.html" style="display:inline-block;background:linear-gradient(135deg, #E8C96A 0%, #C8A951 50%, #A68230 100%) !important;color:#0E0B06 !important;padding:0.95rem 2.4rem;text-decoration:none;font-weight:600;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;box-shadow:0 6px 20px rgba(200,169,81,0.25);border:1px solid rgba(232, 201, 106, 0.2);transition:all 0.4s cubic-bezier(0.16, 1, 0.3, 1);" onmouseover="this.style.transform=\'translateY(-2px)\';this.style.boxShadow=\'0 10px 30px rgba(200,169,81,0.45)\';this.style.filter=\'brightness(1.08)\'" onmouseout="this.style.transform=\'translateY(0)\';this.style.boxShadow=\'0 6px 20px rgba(200,169,81,0.25)\';this.style.filter=\'brightness(1)\'">Unlock All Premium Sourcing Perks →</a>
         </div>
       `;
       document.body.appendChild(overlay);
     }
 
-    const DEFAULT_VIDEOS = [
-      {
-        id: 'def-vid-1',
-        title: 'AI-Generated Tech Packs & Garment Strategy || premium',
-        youtube_url: 'https://www.youtube.com/watch?v=y3mBfWv8q98',
-        category: 'Brand Development',
-        duration: '15:45',
-        description: 'Learn how to use AI prompt frameworks to generate highly accurate tech packs and fit specification sheets for manufacturer submittals in minutes.',
-        is_active: true
-      },
-      {
-        id: 'def-vid-2',
-        title: 'Pattern Grading & Digitization Mastery || premium',
-        youtube_url: 'https://www.youtube.com/watch?v=F_f8N4h4bSg',
-        category: 'Pattern Making',
-        duration: '22:10',
-        description: 'Step-by-step masterclass on digitizing manual paper patterns and grading them across standard sizes XS through XXL using professional CAD software.',
-        is_active: true
-      },
-      {
-        id: 'def-vid-3',
-        title: 'Garment Sourcing & Manufacturing in India',
-        youtube_url: 'https://www.youtube.com/watch?v=jW2x1D14FhI',
-        category: 'Manufacturing',
-        duration: '10:30',
-        description: 'Essential guide to finding, vetting, and negotiating contract terms with apparel factories in Delhi, Tirupur, and Mumbai hubs.',
-        is_active: true
-      }
-    ];
-
-    function openAdminPrompt(){ document.getElementById('promptOverlay').classList.add('open'); }
-    function closeOverlay(id){ document.getElementById(id).classList.remove('open'); }
-    function showAlert(id,msg,type){ const el=document.getElementById(id); el.textContent=msg; el.className='alert-sm show '+type; setTimeout(()=>el.className='alert-sm',4000); }
-
-    // SECURED PASSWORD VERIFICATION
-    async function checkAdminPw(){
-      const enteredPw = document.getElementById('adminPwInput').value;
-      if (!enteredPw) { showAlert('promptAlert', 'Please enter a password.', 'error'); return; }
+    // ── ADMIN EDITOR OPERATIONS ───────────────────────────
+    function openAdminPrompt() {
+      document.getElementById('promptOverlay').classList.add('open');
+      document.getElementById('promptAlert').style.display = 'none';
+      document.getElementById('adminPwInput').value = '';
+      setTimeout(() => document.getElementById('adminPwInput').focus(), 120);
+    }
+    
+    function closeOverlay(id) {
+      document.getElementById(id).classList.remove('open');
+    }
+    
+    async function checkAdminPw() {
+      const pw = document.getElementById('adminPwInput').value.trim();
+      const alertBox = document.getElementById('promptAlert');
       
-      const { data, error } = await sb.from('site_settings').select('id').eq('id', 'main').eq('lmcb_admin_pw', enteredPw).single();
+      if (!pw) return;
       
+      const { data, error } = await sb.from('site_settings').select('id').eq('id', 'main').eq('lmcb_admin_pw', pw).single();
       if (error || !data) {
-        showAlert('promptAlert', 'Incorrect password. Try again.', 'error');
-        document.getElementById('adminPwInput').value = '';
-        document.getElementById('adminPwInput').focus();
+        alertBox.textContent = '❌ Invalid admin password.';
+        alertBox.className = 'alert-sm error show';
       } else {
         closeOverlay('promptOverlay');
         document.getElementById('adminOverlay').classList.add('open');
-        loadExisting();
+        document.getElementById('adminAlert').style.display = 'none';
+        renderAdminList();
       }
     }
 
-    // extract YouTube video ID from any YT URL format
-    function getYTId(url){
-      const m = url.match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([a-zA-Z0-9_-]{11})/);
-      return m ? m[1] : null;
+    function renderAdminList() {
+      const container = document.getElementById('existingList');
+      container.innerHTML = videosList.map(v => `
+        <div class="exist-item">
+          <span class="exist-item-name">${v.title}</span>
+          <span style="font-size:0.6rem; opacity:0.5; margin-left:0.5rem;">${v.category}</span>
+          <button class="exist-item-del" onclick="deleteVideo('${v.id}')">✕</button>
+        </div>
+      `).join('');
     }
-
-    let allVideos = [], allCategories = new Set();
-
-    async function loadVideos(){
-      const { data, error } = await sb.from('videos').select('*').eq('is_active',true).order('created_at',{ascending:false});
-      const grid = document.getElementById('videosGrid');
-      if (error){ grid.innerHTML='<div class="empty-state"><div class="empty-icon">❌</div><p>Failed to load insights.</p></div>'; return; }
+    
+    async function addVideo() {
+      const title = document.getElementById('aTitle').value.trim();
+      const url = document.getElementById('aUrl').value.trim();
+      const category = document.getElementById('aCategory').value;
+      const duration = document.getElementById('aDuration').value.trim();
+      const description = document.getElementById('aDesc').value.trim();
+      const isPremium = document.getElementById('aIsPremium').checked;
       
-      let dbVideos = data || [];
+      const alertBox = document.getElementById('adminAlert');
+      const btn = document.getElementById('addBtn');
       
-      // Bulletproof merge: Always display defaults plus any database insights
-      const dbTitles = dbVideos.map(v => v.title);
-      const missingDefaults = DEFAULT_VIDEOS.filter(d => !dbTitles.includes(d.title));
-      let rawVideos = [...dbVideos, ...missingDefaults];
-
-      // Parse premium tag from title
-      allVideos = rawVideos.map(v => {
-        const isPremium = v.title.includes(' || premium');
-        return {
-          ...v,
-          is_premium: isPremium,
-          title: isPremium ? v.title.replace(/\s*\|\|\s*premium$/, '') : v.title
-        };
-      });
-
-      document.getElementById('totalCount').textContent = allVideos.length;
-
-      if(!allVideos.length){
-        grid.innerHTML='<div class="empty-state"><div class="empty-icon">🎬</div><p>No video insights available. Check back soon!</p></div>';
+      if (!title || !url) {
+        alertBox.textContent = '❌ Please fill in all required fields.';
+        alertBox.className = 'alert-sm error show';
         return;
       }
-
-      // clear existing filter buttons to avoid duplication
-      const bar = document.getElementById('filtersBar');
-      bar.innerHTML = '<span style="font-size:0.72rem; color:var(--gold); opacity:0.7; margin-right:0.5rem; text-transform:uppercase; letter-spacing:0.1em;">Filter:</span>';
       
-      const allBtn = document.createElement('button');
-      allBtn.className = 'filter-btn active';
-      allBtn.textContent = 'All';
-      allBtn.onclick = () => filterVideos('all', allBtn);
-      bar.appendChild(allBtn);
-
-      allCategories.clear();
-      allVideos.forEach(v => {
-        if(v.category) allCategories.add(v.category);
-      });
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span>Adding video...';
       
-      bar.style.display='flex';
-      allCategories.forEach(cat => {
-        const btn = document.createElement('button');
-        btn.className='filter-btn'; btn.textContent=cat;
-        btn.onclick=()=>filterVideos(cat,btn);
-        bar.appendChild(btn);
-      });
-
-      renderVideos(allVideos);
-    }
-
-    function renderVideos(videos){
-      const grid = document.getElementById('videosGrid');
-      if(!videos.length){ grid.innerHTML='<div class="empty-state"><div class="empty-icon">📭</div><p>No insights found in this category.</p></div>'; return; }
-      grid.innerHTML = videos.map(v => {
-        const ytId = getYTId(v.youtube_url);
-        const thumb = ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : '';
+      const newVideo = {
+        title,
+        youtube_url: url,
+        category,
+        duration: duration || '00:00',
+        description,
+        is_premium: isPremium,
+        created_at: new Date().toISOString()
+      };
+      
+      const { error } = await sb.from('videos').insert(newVideo);
+      
+      if (error) {
+        alertBox.textContent = '❌ Error adding video: ' + error.message;
+        alertBox.className = 'alert-sm error show';
+        btn.disabled = false;
+        btn.textContent = 'Add Video →';
+      } else {
+        alertBox.textContent = '✅ Video added successfully!';
+        alertBox.className = 'alert-sm success show';
         
-        // Checked lock logic: If premium and user is not paid, trigger lock overlay
-        const clickAction = (v.is_premium && !isPaid)
-          ? `handleLockedVideo('${v.title.replace(/'/g, "\\'")}')`
-          : `playVideo('${v.id}','${ytId}')`;
-          
-        const badgeContent = v.is_premium
-          ? (isPaid ? `<span style="color:var(--gold);font-weight:500;">👑 Premium Tutorial</span>` : `<span style="opacity:0.65;color:var(--gold)">🔒 Premium Only</span>`)
-          : `<span>🆓 Free Access</span>`;
-          
-        const playIcon = (v.is_premium && !isPaid) ? '🔒' : '▶';
-
-        return `
-        <div class="video-card">
-          <div class="video-thumb" id="thumb-${v.id}" onclick="${clickAction}">
-            ${thumb ? `<img src="${thumb}" alt="${v.title}" loading="lazy">` : '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2rem">🎬</div>'}
-            <div class="play-btn"><div class="play-circle">${playIcon}</div></div>
-          </div>
-          <div class="video-embed" id="embed-${v.id}">
-            <iframe src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
-          </div>
-          <div class="card-body">
-            <div class="card-cat">${v.category || 'General'}</div>
-            <div class="card-title">${v.title}</div>
-            ${v.description ? `<div class="card-desc">${v.description}</div>` : ''}
-            <div class="card-meta">
-              ${v.duration ? `<span>⏱ ${v.duration}</span>` : ''}
-              <span>${badgeContent}</span>
-            </div>
-          </div>
-        </div>`;
-      }).join('');
-    }
-
-    function playVideo(id, ytId){
-      if(!ytId) return;
-      document.getElementById('thumb-'+id).style.display='none';
-      const embed = document.getElementById('embed-'+id);
-      embed.style.display='block';
-      embed.querySelector('iframe').src=`https://www.youtube.com/embed/${ytId}?autoplay=1`;
-    }
-
-    function filterVideos(cat, btn){
-      document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-      renderVideos(cat==='all' ? allVideos : allVideos.filter(v=>v.category===cat));
-    }
-
-    async function addVideo(){
-      const url   = document.getElementById('aUrl').value.trim();
-      let title   = document.getElementById('aTitle').value.trim();
-      const cat   = document.getElementById('aCategory').value;
-      const dur   = document.getElementById('aDuration').value.trim();
-      const desc  = document.getElementById('aDesc').value.trim();
-      const isPrem = document.getElementById('aIsPremium').checked;
-      
-      if(!url||!title){ showAlert('adminAlert','YouTube URL and title are required.','error'); return; }
-      if(!getYTId(url)){ showAlert('adminAlert','Invalid YouTube URL format.','error'); return; }
-      
-      if (isPrem) {
-        title = title + ' || premium';
-      }
-      
-      const btn=document.getElementById('addBtn');
-      btn.disabled=true; btn.innerHTML='<span class="spinner"></span>Saving...';
-      const { error } = await sb.from('videos').insert({ youtube_url:url, title, category:cat, duration:dur, description:desc });
-      if(error){ showAlert('adminAlert','❌ '+error.message,'error'); }
-      else {
-        showAlert('adminAlert','✅ Video added successfully!','success');
-        document.getElementById('aUrl').value=''; document.getElementById('aTitle').value='';
-        document.getElementById('aDuration').value=''; document.getElementById('aDesc').value='';
+        document.getElementById('aTitle').value = '';
+        document.getElementById('aUrl').value = '';
+        document.getElementById('aDuration').value = '';
+        document.getElementById('aDesc').value = '';
         document.getElementById('aIsPremium').checked = false;
-        loadVideos(); loadExisting();
+        
+        btn.disabled = false;
+        btn.textContent = 'Add Video →';
+        
+        await loadVideos();
+        renderAdminList();
       }
-      btn.disabled=false; btn.textContent='Add Video →';
+    }
+    
+    async function deleteVideo(id) {
+      if (!confirm('Are you sure you want to delete this video?')) return;
+      
+      const { error } = await sb.from('videos').delete().eq('id', id);
+      if (error) {
+        alert('Error deleting video: ' + error.message);
+      } else {
+        await loadVideos();
+        renderAdminList();
+      }
     }
 
-    async function loadExisting(){
-      const { data } = await sb.from('videos').select('id,title,category').order('created_at',{ascending:false});
-      const list=document.getElementById('existingList');
-      if(!data||!data.length){ list.innerHTML='<p style="font-size:0.75rem;opacity:0.5;">No videos yet.</p>'; return; }
-      list.innerHTML=data.map(v=> {
-        const isPremium = v.title.includes(' || premium');
-        const displayTitle = isPremium ? v.title.replace(/\s*\|\|\s*premium$/, '') : v.title;
-        const premiumBadge = isPremium ? ' <span style="color:var(--gold);font-size:0.6rem;margin-left:5px;">🔒 Premium</span>' : '';
-        return `
-        <div class="exist-item">
-          <span class="exist-item-name">${displayTitle}${premiumBadge}</span>
-          <span class="exist-item-badge">${v.category}</span>
-          <button class="exist-item-del" onclick="deleteVideo('${v.id}')">🗑</button>
-        </div>`;
-      }).join('');
-    }
-
-    async function deleteVideo(id){
-      if(!confirm('Are you sure you want to remove this insight video?')) return;
-      await sb.from('videos').delete().eq('id',id);
-      loadVideos(); loadExisting();
-    }
-
-    loadVideos();
+    // Run active session checking on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      loadVideos();
+    });
   </script>
   <script src="/comm_guard.js"></script>
 </body>

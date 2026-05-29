@@ -24,7 +24,7 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
+    html { scroll-behavior: smooth; font-size: 18px; }
 
     body {
       background: #0E0B06;
@@ -83,7 +83,7 @@
       font-size: 0.62rem;
       letter-spacing: 0.18em;
       color: var(--cream);
-      opacity: 0.45;
+      opacity: 0.4;
       font-weight: 300;
       margin-top: 0.15rem;
       text-transform: uppercase;
@@ -102,7 +102,7 @@
       font-size: 0.72rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      opacity: 0.6;
+      opacity: 0.3;
       transition: opacity 0.2s, color 0.2s;
     }
 
@@ -207,24 +207,36 @@
     .lock-banner-left { display: flex; align-items: center; gap: 1.2rem; }
     .lock-icon { font-size: 1.8rem; }
     .lock-banner-text h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 300; color: var(--gold); margin-bottom: 0.2rem; }
-    .lock-banner-text p { font-size: 0.75rem; opacity: 0.6; }
+    .lock-banner-text p { font-size: 0.75rem; opacity: 0.55; }
     .btn-gold { background: var(--gold); color: var(--ink); padding: 0.75rem 2rem; font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; text-decoration: none; white-space: nowrap; display: inline-block; }
 
     /* STATS BAR */
     .stats-bar { display: flex; border-bottom: 1px solid var(--border); }
     .stat-cell { flex: 1; padding: 1.5rem 2rem; border-right: 1px solid var(--border); }
     .stat-cell:last-child { border-right: none; }
-    .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--gold); line-height: 1; }
-    .stat-label { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.4; margin-top: 0.3rem; }
+    .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 3.2rem; color: var(--gold); line-height: 1; }
+    .stat-label { font-size: 0.95rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.7; margin-top: 0.4rem; font-weight: 500; }
 
     /* FILTER BAR */
     .filter-bar { padding: 2rem 4rem 1rem; display: flex; gap: 0.8rem; flex-wrap: wrap; align-items: center; }
-    .filter-label { font-size: 0.72rem; color: var(--gold); opacity: 0.7; margin-right: 0.5rem; text-transform: uppercase; letter-spacing: 0.1em; }
-    .filter-btn { background: transparent; border: 1px solid var(--border); color: var(--cream); opacity: 0.6; padding: 0.4rem 1.2rem; border-radius: var(--radius); font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.05em; cursor: pointer; transition: all 0.2s; }
+    .filter-label { font-size: 1.05rem; color: var(--gold); opacity: 0.9; margin-right: 0.5rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; }
+    .filter-btn { background: transparent; border: 1px solid var(--border); color: var(--cream); opacity: 0.65; padding: 0.4rem 1.2rem; border-radius: var(--radius); font-family: 'DM Mono', monospace; font-size: 1.05rem; letter-spacing: 0.05em; cursor: pointer; transition: all 0.2s; font-weight: 500; }
     .filter-btn:hover, .filter-btn.active { background: rgba(200,169,81,0.1); border-color: var(--gold); color: var(--gold); opacity: 1; }
 
     /* LIBRARY SECTION */
     .library-section { padding: 2rem 4rem 5rem; }
+    #section-label-text {
+      font-size: 1.15rem !important;
+      letter-spacing: 0.3em !important;
+      text-transform: uppercase !important;
+      opacity: 0.8 !important;
+      font-weight: 600 !important;
+      color: var(--gold) !important;
+      margin-bottom: 2.5rem !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 1rem !important;
+    }
     .pattern-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
     
     .pattern-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: border-color 0.2s, transform 0.2s; }
@@ -235,44 +247,44 @@
     
     .pattern-lock-overlay { position: absolute; inset: 0; background: rgba(14,11,6,0.7); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; opacity: 0; transition: opacity 0.2s; }
     .pattern-card:hover .pattern-lock-overlay { opacity: 1; }
-    .pattern-lock-icon { font-size: 1.5rem; }
-    .pattern-lock-text { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+    .pattern-lock-icon { font-size: 1.8rem; }
+    .pattern-lock-text { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
     
     .pattern-body { padding: 1.5rem; display: flex; flex-direction: column; flex: 1; }
     .pattern-meta { display: flex; gap: 0.6rem; margin-bottom: 0.6rem; }
-    .meta-tag { font-size: 0.52rem; letter-spacing: 0.1rem; text-transform: uppercase; opacity: 0.5; }
+    .meta-tag { font-size: 0.8rem; letter-spacing: 0.1rem; text-transform: uppercase; opacity: 0.55; }
     .meta-tag.format { color: var(--gold); opacity: 1; font-weight: 500; }
     
-    .pattern-name { font-size: 0.88rem; font-weight: 500; line-height: 1.4; margin-bottom: 0.6rem; color: var(--cream); }
-    .pattern-desc { font-size: 0.72rem; opacity: 0.5; line-height: 1.6; margin-bottom: 1.25rem; flex: 1; }
+    .pattern-name { font-size: 1.0rem; font-weight: 500; line-height: 1.4; margin-bottom: 0.6rem; color: var(--cream); }
+    .pattern-desc { font-size: 0.9rem; opacity: 0.55; line-height: 1.6; margin-bottom: 1.25rem; flex: 1; }
     
     .pattern-file-info { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin-bottom: 1.25rem; }
     .file-info-cell { background: #0E0B06; padding: 0.5rem 0.6rem; text-align: center; }
-    .file-info-label { font-size: 0.48rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); opacity: 0.6; margin-bottom: 0.15rem; }
-    .file-info-val { font-size: 0.68rem; font-weight: 500; }
+    .file-info-label { font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); opacity: 0.55; margin-bottom: 0.15rem; }
+    .file-info-val { font-size: 0.9rem; font-weight: 500; }
     
-    .pattern-download-locked { text-align: center; padding: 0.75rem; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.35; border: 1px solid var(--border); }
-    .pattern-download-btn { display: block; background: var(--gold); color: var(--ink); text-align: center; padding: 0.8rem; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; text-decoration: none; transition: background 0.2s; margin-top: 0.8rem; font-family: 'DM Mono', monospace; }
+    .pattern-download-locked { text-align: center; padding: 0.75rem; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.6; border: 1px solid var(--border); }
+    .pattern-download-btn { display: block; background: var(--gold); color: var(--ink); text-align: center; padding: 0.8rem; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; text-decoration: none; transition: background 0.2s; margin-top: 0.8rem; font-family: 'DM Mono', monospace; }
     .pattern-download-btn:hover { background: var(--gold-light); }
 
     /* CTA BAND */
     .cta-band { background: var(--gold); padding: 5rem 4rem; text-align: center; }
     .cta-band h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem,3.5vw,3.5rem); font-weight: 300; color: var(--ink); margin-bottom: 1rem; }
-    .cta-band p { font-size: 0.85rem; color: var(--ink); opacity: 0.7; margin-bottom: 2rem; }
+    .cta-band p { font-size: 0.85rem; color: var(--ink); opacity: 0.75; margin-bottom: 2rem; }
     .btn-dark { background: var(--ink); color: var(--gold); padding: 1rem 2.5rem; font-family: 'DM Mono', monospace; font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; text-decoration: none; display: inline-block; }
 
     /* FOOTER */
     footer { background: #090704; border-top: 1px solid var(--border); padding: 4rem; }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
     .footer-brand-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 300; margin-bottom: 0.5rem; color: var(--gold); }
-    .footer-brand p { font-size: 0.68rem; opacity: 0.35; line-height: 1.7; margin-top: 0.5rem; }
+    .footer-brand p { font-size: 0.68rem; opacity: 0.45; line-height: 1.7; margin-top: 0.5rem; }
     .footer-col h4 { font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); opacity: 0.7; margin-bottom: 1.2rem; }
     .footer-col ul { list-style: none; }
     .footer-col ul li { margin-bottom: 0.6rem; }
-    .footer-col ul li a { color: var(--cream); text-decoration: none; font-size: 0.72rem; opacity: 0.45; transition: opacity 0.2s; }
-    .footer-col ul li a:hover { opacity: 0.8; color: var(--gold); }
-    .footer-bottom { border-top: 1px solid var(--border); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; }
-    .footer-copy { font-size: 0.62rem; opacity: 0.3; }
+    .footer-col ul li a { color: var(--cream); text-decoration: none; font-size: 0.72rem; opacity: 0.42; transition: opacity 0.2s; }
+    .footer-col ul li a:hover { opacity: 0.9; color: var(--gold); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 1.5rem; display: flex; flex-direction: column; align-items: flex-start; text-align: left; }
+    .footer-copy { font-size: 0.62rem; opacity: 0.35; }
 
     /* ADMIN FAB */
     .admin-fab { position: fixed; bottom: 2rem; left: 2rem; width: 44px; height: 44px; background: rgba(200,169,81,0.15); border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.1rem; z-index: 400; transition: background 0.2s; }
@@ -289,7 +301,7 @@
     .admin-input:focus { border-color: var(--gold); }
     .admin-select { width: 100%; background: #0E0B06; border: 1px solid var(--border); color: var(--cream); padding: 0.75rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.82rem; outline: none; margin-bottom: 0.8rem; }
     .admin-btn { background: var(--gold); color: var(--ink); border: none; padding: 0.75rem 1.8rem; font-family: 'DM Mono', monospace; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; cursor: pointer; }
-    .admin-btn-outline { background: transparent; border: 1px solid var(--border); color: var(--cream); padding: 0.6rem 1.2rem; font-family: 'DM Mono', monospace; font-size: 0.75rem; cursor: pointer; opacity: 0.6; }
+    .admin-btn-outline { background: transparent; border: 1px solid var(--border); color: var(--cream); padding: 0.6rem 1.2rem; font-family: 'DM Mono', monospace; font-size: 0.75rem; cursor: pointer; opacity: 0.3; }
     .admin-btn-outline:hover { opacity: 1; border-color: var(--gold); color: var(--gold); }
     .admin-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.5; margin-bottom: 0.4rem; display: block; }
     .admin-section-title { font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); opacity: 0.7; margin: 1.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
@@ -363,6 +375,162 @@
       }
     }
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
+    
+    /* ════════ Standardized Hero Typography and Textures ════════ */
+    body::before {
+      content: '' !important;
+      position: fixed !important;
+      inset: 0 !important;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E") !important;
+      pointer-events: none !important;
+      z-index: 999 !important;
+      opacity: 0.4 !important;
+    }
+
+    /* Equal Sizing across front page headers */
+    .hero h1, h1 {
+      font-family: 'Cormorant Garamond', serif !important;
+      font-size: clamp(2.5rem, 4vw, 4rem) !important;
+      font-weight: 300 !important;
+      line-height: 1.15 !important;
+      margin-bottom: 1.2rem !important;
+      letter-spacing: -0.01em !important;
+    }
+
+    .hero p, p.hero-desc {
+      font-family: 'DM Mono', monospace !important;
+      font-size: 0.9rem !important;
+      opacity: 0.65 !important;
+      line-height: 1.8 !important;
+      max-width: 600px !important;
+      margin: 0 auto 2.5rem !important;
+    }
+
+    /* ════════ Standardized Simplified Footer Styles ════════ */
+    body {
+      display: flex !important;
+      flex-direction: column !important;
+      min-height: 100vh !important;
+    }
+    
+    footer {
+      background: #090704 !important;
+      border-top: 1px solid var(--border) !important;
+      padding: 4rem 4rem 3rem !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+      margin-top: auto !important;
+      text-align: left !important;
+    }
+
+    .footer-grid {
+      display: grid !important;
+      grid-template-columns: 1.5fr 1fr !important;
+      gap: 3rem !important;
+      margin-bottom: 3.5rem !important;
+      max-width: 1200px !important;
+      margin-left: 0 !important;
+      margin-right: auto !important;
+    }
+
+    .footer-brand h3 {
+      font-family: 'Bebas Neue', sans-serif !important;
+      font-size: 1.5rem !important;
+      letter-spacing: 0.12em !important;
+      color: var(--gold) !important;
+      margin-bottom: 0.9rem !important;
+      line-height: 1.1 !important;
+      text-transform: uppercase !important;
+    }
+
+    .footer-brand p {
+      font-size: 0.82rem !important;
+      opacity: 0.7 !important;
+      line-height: 1.85 !important;
+      max-width: 35ch !important;
+      margin-bottom: 1.2rem !important;
+      color: var(--cream) !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    .footer-address, .footer-brand .addr { 
+      font-size: 0.88rem !important; 
+      opacity: 0.6 !important; 
+      line-height: 1.6 !important; 
+      color: var(--cream) !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    .footer-col h4 {
+      font-size: 0.88rem !important;
+      letter-spacing: 0.25em !important;
+      text-transform: uppercase !important;
+      color: var(--gold) !important;
+      margin-bottom: 1.2rem !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    .footer-col ul { 
+      list-style: none !important; 
+      display: flex !important; 
+      flex-direction: column !important; 
+      gap: 0.75rem !important; 
+      padding: 0 !important;
+    }
+
+    .footer-col ul a {
+      font-size: 0.82rem !important;
+      opacity: 0.65 !important;
+      text-decoration: none !important;
+      color: var(--cream) !important;
+      transition: opacity 0.2s, color 0.2s !important;
+      letter-spacing: 0.03em !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    .footer-col ul a:hover { 
+      opacity: 0.95 !important; 
+      color: var(--gold) !important; 
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border) !important;
+      padding-top: 2rem !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 0.5rem !important;
+      max-width: 1200px !important;
+      margin-left: 0 !important;
+      margin-right: auto !important;
+      text-align: left !important;
+    }
+
+    .footer-copy, .footer-bottom p { 
+      font-size: 0.88rem !important; 
+      opacity: 0.55 !important; 
+      letter-spacing: 0.05em !important; 
+      color: var(--cream) !important;
+      margin: 0 !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    @media (max-width: 768px) {
+      footer { padding: 3rem 1.2rem !important; text-align: left !important; }
+      .footer-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+      .footer-bottom { flex-direction: column !important; align-items: flex-start !important; text-align: left !important; }
+    }
+
+    /* Remove bottom padding and hide bottom navigation entirely */
+    body {
+      padding-bottom: 0 !important;
+    }
+    .mob-nav, .mobile-bottom-nav, .mobile-nav {
+      display: none !important;
+    }
+
+
 </style>
 </head>
 <body>
@@ -454,39 +622,24 @@
   <footer>
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="footer-brand-name">Launch My Clothing Brand</div>
-        <p>Expert digital pattern making and manufacturer data services for apparel brands and startups in India.</p>
+        <h3>Launch My Clothing Brand</h3>
+        <p>Professional digital pattern making and manufacturer data services for clothing brands in India.</p>
+        <div class="addr">Bijwasan, Delhi — 110061</div>
       </div>
       <div class="footer-col">
-        <h4>Services</h4>
+        <h4>Legal and Support</h4>
         <ul>
-          <li><a href="/services.html">Pattern Making</a></li>
-          <li><a href="/library.html">Pattern Library</a></li>
-          <li><a href="/specsheets.html">Spec Sheets</a></li>
-      <li><a href="/phototopattern.html">Photo to Pattern</a></li>
-          <li><a href="/insights.html">Insights</a></li>
-          <li><a href="/services.html">Consultation</a></li>
+          <li><a href="mailto:hello.launchmyclothing@gmail.com">✉ hello.launchmyclothing@gmail.com</a></li>
+          <li><a href="/contact.html">📞 Contact Us</a></li>
+          <li><a href="/terms.html">📄 Terms of Service</a></li>
+          <li><a href="/privacy.html">📄 Privacy Policy</a></li>
         </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <ul>
-          <li><a href="/contact.html">Contact Us</a></li>
-          <li><a href="/subscribe.html">Pricing Plans</a></li>
-          <li><a href="/manufacturers.html">Factories</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Legal</h4>
-        <ul>
-          <li><a href="/terms.html">Terms of Service</a></li>
-          <li><a href="/privacy.html">Privacy Policy</a></li>
-        </ul>
+        <p style="font-size: 0.75rem; color: var(--muted); margin-top: 0.8rem; opacity: 0.6; line-height: 1.5;">Phone support available for premium members only.</p>
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-copy">© 2026 Launch My Clothing Brand. All rights reserved.</div>
-      <div class="footer-copy">launchmyclothingbrand.com · Bijwasan, Delhi 110061</div>
+      <p>© 2026 Launch My Clothing Brand. All Rights Reserved.</p>
+      <p>launchmyclothingbrand.com · Delhi 110061</p>
     </div>
   </footer>
 
@@ -542,7 +695,7 @@
           📷 Choose Image
           <input type="file" id="new-pimage" accept="image/*" style="display:none;" onchange="previewNewImage(event)" />
         </label>
-        <span id="new-pimage-name" style="font-size:0.75rem; opacity:0.4; margin-left:0.5rem;"></span>
+        <span id="new-pimage-name" style="font-size:0.75rem; opacity: 0.4; margin-left:0.5rem;"></span>
         <div id="new-pimage-preview" style="margin-bottom:0.8rem; display:none;">
           <img id="new-pimage-thumb" style="height:60px; object-fit:cover; border:1px solid var(--border);" />
         </div>
@@ -553,7 +706,7 @@
           📁 Choose Pattern File
           <input type="file" id="new-pfile" accept=".pdf,.dxf,.zip,.xlsx" style="display:none;" onchange="handlePatternFile(event)" multiple />
         </label>
-        <span id="new-pfile-name" style="font-size:0.75rem; opacity:0.5; margin-left:0.5rem;"></span>
+        <span id="new-pfile-name" style="font-size:0.75rem; opacity: 0.5; margin-left:0.5rem;"></span>
         <div id="new-pfile-status" style="font-size:0.72rem; color:var(--gold); margin:0.4rem 0 0.8rem; display:none;"></div>
 
         <div style="display:flex; gap:0.8rem; margin-top:1.2rem; flex-wrap:wrap;">
@@ -581,14 +734,7 @@
   </svg>
 
   <!-- MOBILE BOTTOM NAVIGATION -->
-  <nav class="mobile-nav">
-    <a href="/index.html"><span class="nav-icon">🏠</span><span>Home</span></a>
-    <a href="/services.html"><span class="nav-icon">📐</span><span>Services</span></a>
-    <a href="/manufacturers.html"><span class="nav-icon">🏭</span><span>Factories</span></a>
-    <a href="/specsheets.html"><span class="nav-icon">📋</span><span>Spec</span></a>
-    <a href="/insights.html"><span class="nav-icon">🎬</span><span>Insights</span></a>
-    <a href="/subscribe.html"><span class="nav-icon">⭐</span><span>Plans</span></a>
-  </nav>
+      
 
   <!-- JSZip CDN for in-browser zipping of multiple file uploads -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
@@ -683,9 +829,9 @@
 
       if (filtered.length === 0) {
         grid.innerHTML = `<div style="grid-column:1/-1;padding:5rem 2rem;text-align:center;border:1px dashed var(--border);background:rgba(200,169,81,0.02);border-radius:3px;font-family:'DM Mono',monospace;">
-          <div style="font-size:1.8rem;margin-bottom:0.8rem;opacity:0.6;">📦</div>
+          <div style="font-size:1.8rem;margin-bottom:0.8rem;opacity: 0.3;">📦</div>
           <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--gold);margin-bottom:0.4rem;">Collection Coming Soon</div>
-          <p style="font-size:0.78rem;opacity:0.5;max-width:320px;margin:0 auto;line-height:1.6;">Our premium print-ready patterns are currently being curated. Check back soon for regular new uploads!</p>
+          <p style="font-size:0.78rem;opacity: 0.5;max-width:320px;margin:0 auto;line-height:1.6;">Our premium print-ready patterns are currently being curated. Check back soon for regular new uploads!</p>
         </div>`;
         return;
       }

@@ -74,7 +74,7 @@
     .nav-links a {
       color: var(--cream); text-decoration: none;
       font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
-      opacity: 0.6; transition: opacity 0.2s, color 0.2s; white-space: nowrap;
+      opacity: 0.3; transition: opacity 0.2s, color 0.2s; white-space: nowrap;
     }
 
     .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold); }
@@ -136,7 +136,7 @@
     .page-hero h1 em { font-style: italic; color: var(--gold); }
 
     .page-hero p {
-      font-size: 1.26rem; opacity: 0.55; line-height: 1.85;
+      font-size: 1.26rem; opacity: 0.5; line-height: 1.85;
       max-width: 54ch; letter-spacing: 0.02em;
     }
 
@@ -194,7 +194,7 @@
     }
 
     .contact-card-sub {
-      font-size: 1.26rem; opacity: 0.45; margin-bottom: 0.6rem; line-height: 1.6;
+      font-size: 1.26rem; opacity: 0.4; margin-bottom: 0.6rem; line-height: 1.6;
     }
 
     .contact-card-value {
@@ -236,7 +236,7 @@
 
     .hours-row:last-child { border-bottom: none; }
 
-    .hours-day { opacity: 0.6; }
+    .hours-day { opacity: 0.3; }
     .hours-time { color: var(--gold); opacity: 0.9; }
     .hours-closed { opacity: 0.3; }
 
@@ -267,12 +267,12 @@
       font-size: 2.5rem; font-weight: 300; margin-bottom: 0.5rem; line-height: 1.1;
     }
 
-    .form-sub { font-size: 1.26rem; opacity: 0.45; margin-bottom: 2.5rem; line-height: 1.7; }
+    .form-sub { font-size: 1.26rem; opacity: 0.4; margin-bottom: 2.5rem; line-height: 1.7; }
 
     .form-group { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.1rem; }
 
     .form-group label {
-      font-size: 1.26rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.6;
+      font-size: 1.26rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.3;
     }
 
     .form-group input,
@@ -351,7 +351,7 @@
     }
 
     .map-note {
-      font-size: 1.26rem; opacity: 0.35; margin-top: 0.8rem; line-height: 1.6;
+      font-size: 1.26rem; opacity: 0.3; margin-top: 0.8rem; line-height: 1.6;
     }
 
     /* FAQ STRIP */
@@ -380,7 +380,7 @@
     .faq-question {
       padding: 1.2rem 0;
       display: flex; justify-content: space-between; align-items: center; gap: 1rem;
-      font-size: 0.96rem; line-height: 1.6; opacity: 0.75; transition: opacity 0.2s;
+      font-size: 0.96rem; line-height: 1.6; opacity: 0.5; transition: opacity 0.2s;
     }
 
     .faq-question:hover { opacity: 1; }
@@ -427,20 +427,20 @@
       letter-spacing: 0.12em; color: var(--gold); margin-bottom: 0.9rem; line-height: 1.1;
     }
 
-    .footer-brand p { font-size: 1.08rem; opacity: 0.45; line-height: 1.85; max-width: 32ch; margin-bottom: 1.2rem; }
-    .footer-address { font-size: 1.26rem; opacity: 0.35; }
+    .footer-brand p { font-size: 1.08rem; opacity: 0.4; line-height: 1.85; max-width: 32ch; margin-bottom: 1.2rem; }
+    .footer-address { font-size: 1.26rem; opacity: 0.3; }
 
     .footer-col h4 { font-size: 1.26rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
 
     .footer-col ul a {
-      font-size: 1.08rem; opacity: 0.42; text-decoration: none;
+      font-size: 1.08rem; opacity: 0.4; text-decoration: none;
       color: var(--ink); transition: opacity 0.2s, color 0.2s;
     }
 
     .footer-col ul a:hover { opacity: 0.9; color: var(--gold); }
 
-    .footer-email { font-size: 1.26rem; color: var(--gold); opacity: 0.65; text-decoration: none; display: block; margin-bottom: 0.8rem; }
+    .footer-email { font-size: 1.26rem; color: var(--gold); opacity: 0.4; text-decoration: none; display: block; margin-bottom: 0.8rem; }
     .footer-note { font-size: 1.26rem; opacity: 0.3; line-height: 1.6; margin-top: 0.5rem; }
 
     .footer-bottom {
@@ -603,8 +603,8 @@
       .btn-dark { width: 100% !important; text-align: center !important; }
       
       /* FOOTER */
-      footer { padding: 3rem 1.2rem 2rem !important; }
-      .footer-bottom { flex-direction: column !important; text-align: center !important; gap: 0.5rem !important; }
+      footer { padding: 3rem 1.2rem 2rem !important; text-align: left !important; }
+      .footer-bottom { flex-direction: column !important; align-items: flex-start !important; text-align: left !important; gap: 0.5rem !important; }
       
       /* PLAN CARDS */
       .plan-card.popular { margin: 0 !important; }
@@ -1207,39 +1207,24 @@ async function sbUploadFile(file, folder) {
   <footer>
     <div class="footer-grid">
       <div class="footer-brand">
-        <h3>Launch My<br/>Clothing Brand</h3>
+        <h3>Launch My Clothing Brand</h3>
         <p>Professional digital pattern making and manufacturer data services for clothing brands in India.</p>
-        <div class="footer-address">Bijwasan, Delhi — 110061</div>
+        <div class="addr">Bijwasan, Delhi — 110061</div>
       </div>
       <div class="footer-col">
-        <h4>Services</h4>
+        <h4>Legal and Support</h4>
         <ul>
-          <li><a href="/services.html">Pattern Making</a></li>
-          <li><a href="/library.html">Pattern Library</a></li>
-          <li><a href="/specsheets.html">Spec Sheets</a></li>
-      <li><a href="/phototopattern.html">Photo to Pattern</a></li>
-          <li><a href="/insights.html">Industry Insights</a></li>
+          <li><a href="mailto:hello.launchmyclothing@gmail.com">✉ hello.launchmyclothing@gmail.com</a></li>
+          <li><a href="/contact.html">📞 Contact Us</a></li>
+          <li><a href="/terms.html">📄 Terms of Service</a></li>
+          <li><a href="/privacy.html">📄 Privacy Policy</a></li>
         </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Legal &amp; Support</h4>
-        <ul>
-          <li><a href="/contact.html">Contact Us</a></li>
-          <li><a href="/terms.html">Terms of Service</a></li>
-          <li><a href="/privacy.html">Privacy Policy</a></li>
-          <li><a href="/subscribe.html">Pricing</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Connect</h4>
-        <a href="mailto:hello.launchmyclothing@gmail.com" class="footer-email">✉ hello.launchmyclothing@gmail.com</a>
-        <p class="footer-note">Follow us on social media for updates, tips, and industry insights.</p>
-        <p class="footer-note">Phone support available for Pro Elite members only.</p>
+        <p style="font-size: 0.75rem; color: var(--muted); margin-top: 0.8rem; opacity: 0.6; line-height: 1.5;">Phone support available for premium members only.</p>
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-copy">© 2026 Launch My Clothing Brand. All Rights Reserved.</div>
-      <div class="footer-copy">launchmyclothingbrand.com · Bijwasan, Delhi 110061</div>
+      <p>© 2026 Launch My Clothing Brand. All Rights Reserved.</p>
+      <p>launchmyclothingbrand.com · Delhi 110061</p>
     </div>
   </footer>
 
@@ -1354,10 +1339,10 @@ function showMessages() {
       body { background:#0E0B06; color:#F5F0E8; font-family:'DM Mono',monospace; font-size:13px; padding:2rem; }
       h1 { font-family:serif; font-weight:300; color:#C8A951; margin-bottom:1.5rem; font-size:1.8rem; }
       .msg { border:1px solid rgba(200,169,81,0.2); padding:1.5rem; margin-bottom:1rem; }
-      .msg-meta { font-size:11px; opacity:0.45; margin-bottom:0.8rem; }
+      .msg-meta { font-size:11px; opacity: 0.4; margin-bottom:0.8rem; }
       .msg-subject { color:#C8A951; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.5rem; }
-      .msg-body { opacity:0.75; line-height:1.7; }
-      .msg-contact { font-size:11px; opacity:0.5; margin-top:0.6rem; }
+      .msg-body { opacity: 0.5; line-height:1.7; }
+      .msg-contact { font-size:11px; opacity: 0.5; margin-top:0.6rem; }
       .export-btn { background:#C8A951; color:#F5F0E8; border:none; padding:0.6rem 1.5rem; cursor:pointer; font-family:monospace; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:1.5rem; }
     
     /* â•â•â• MOBILE HEADER & DRAWER OVERLAYS SOLID BLACK CONTRAST FIX â•â•â• */
@@ -1390,6 +1375,162 @@ function showMessages() {
       }
     }
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
+    
+    /* ════════ Standardized Hero Typography and Textures ════════ */
+    body::before {
+      content: '' !important;
+      position: fixed !important;
+      inset: 0 !important;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E") !important;
+      pointer-events: none !important;
+      z-index: 999 !important;
+      opacity: 0.4 !important;
+    }
+
+    /* Equal Sizing across front page headers */
+    .hero h1, h1 {
+      font-family: 'Cormorant Garamond', serif !important;
+      font-size: clamp(2.5rem, 4vw, 4rem) !important;
+      font-weight: 300 !important;
+      line-height: 1.15 !important;
+      margin-bottom: 1.2rem !important;
+      letter-spacing: -0.01em !important;
+    }
+
+    .hero p, p.hero-desc {
+      font-family: 'DM Mono', monospace !important;
+      font-size: 0.9rem !important;
+      opacity: 0.65 !important;
+      line-height: 1.8 !important;
+      max-width: 600px !important;
+      margin: 0 auto 2.5rem !important;
+    }
+
+    /* ════════ Standardized Simplified Footer Styles ════════ */
+    body {
+      display: flex !important;
+      flex-direction: column !important;
+      min-height: 100vh !important;
+    }
+    
+    footer {
+      background: #090704 !important;
+      border-top: 1px solid var(--border) !important;
+      padding: 4rem 4rem 3rem !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+      margin-top: auto !important;
+      text-align: left !important;
+    }
+
+    .footer-grid {
+      display: grid !important;
+      grid-template-columns: 1.5fr 1fr !important;
+      gap: 3rem !important;
+      margin-bottom: 3.5rem !important;
+      max-width: 1200px !important;
+      margin-left: 0 !important;
+      margin-right: auto !important;
+    }
+
+    .footer-brand h3 {
+      font-family: 'Bebas Neue', sans-serif !important;
+      font-size: 1.5rem !important;
+      letter-spacing: 0.12em !important;
+      color: var(--gold) !important;
+      margin-bottom: 0.9rem !important;
+      line-height: 1.1 !important;
+      text-transform: uppercase !important;
+    }
+
+    .footer-brand p {
+      font-size: 0.82rem !important;
+      opacity: 0.7 !important;
+      line-height: 1.85 !important;
+      max-width: 35ch !important;
+      margin-bottom: 1.2rem !important;
+      color: var(--cream) !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    .footer-address, .footer-brand .addr { 
+      font-size: 0.88rem !important; 
+      opacity: 0.6 !important; 
+      line-height: 1.6 !important; 
+      color: var(--cream) !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    .footer-col h4 {
+      font-size: 0.88rem !important;
+      letter-spacing: 0.25em !important;
+      text-transform: uppercase !important;
+      color: var(--gold) !important;
+      margin-bottom: 1.2rem !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    .footer-col ul { 
+      list-style: none !important; 
+      display: flex !important; 
+      flex-direction: column !important; 
+      gap: 0.75rem !important; 
+      padding: 0 !important;
+    }
+
+    .footer-col ul a {
+      font-size: 0.82rem !important;
+      opacity: 0.65 !important;
+      text-decoration: none !important;
+      color: var(--cream) !important;
+      transition: opacity 0.2s, color 0.2s !important;
+      letter-spacing: 0.03em !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    .footer-col ul a:hover { 
+      opacity: 0.95 !important; 
+      color: var(--gold) !important; 
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border) !important;
+      padding-top: 2rem !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 0.5rem !important;
+      max-width: 1200px !important;
+      margin-left: 0 !important;
+      margin-right: auto !important;
+      text-align: left !important;
+    }
+
+    .footer-copy, .footer-bottom p { 
+      font-size: 0.88rem !important; 
+      opacity: 0.55 !important; 
+      letter-spacing: 0.05em !important; 
+      color: var(--cream) !important;
+      margin: 0 !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    @media (max-width: 768px) {
+      footer { padding: 3rem 1.2rem !important; text-align: left !important; }
+      .footer-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+      .footer-bottom { flex-direction: column !important; align-items: flex-start !important; text-align: left !important; }
+    }
+
+    /* Remove bottom padding and hide bottom navigation entirely */
+    body {
+      padding-bottom: 0 !important;
+    }
+    .mob-nav, .mobile-bottom-nav, .mobile-nav {
+      display: none !important;
+    }
+
+
 </style></head><body>
     <h1>Contact Messages (${messages.length})</h1>
     <button class="export-btn" onclick="exportMsgs()">⬇ Export CSV</button>
@@ -1419,7 +1560,7 @@ function showMessages() {
   <div id="wa-tooltip" style="display:none;background:#1C1609;border:1px solid rgba(200,169,81,0.3);padding:1rem 1.4rem;font-family:DM Mono,monospace;font-size:1.08rem;color:#F5F0E8;max-width:240px;line-height:1.7;position:relative;">
     <div style="font-size:1.26rem;letter-spacing:0.2em;text-transform:uppercase;color:#C8A951;margin-bottom:0.4rem;">WhatsApp Support</div>
     Chat with us directly for quick support.
-    <button onclick="document.getElementById('wa-tooltip').style.display='none'" style="position:absolute;top:0.5rem;right:0.7rem;background:none;border:none;color:#F5F0E8;opacity:0.4;cursor:pointer;">✕</button>
+    <button onclick="document.getElementById('wa-tooltip').style.display='none'" style="position:absolute;top:0.5rem;right:0.7rem;background:none;border:none;color:#F5F0E8;opacity: 0.4;cursor:pointer;">✕</button>
   </div>
   <a id="wa-link" href="#" target="_blank" rel="noopener" style="width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.35);transition:transform 0.2s;text-decoration:none;" onmouseover="this.style.transform='scale(1.1)';document.getElementById('wa-tooltip').style.display='block'" onmouseout="this.style.transform='scale(1)'">
     <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -1435,124 +1576,11 @@ document.addEventListener("DOMContentLoaded",_initWA);
 <\/script>
 
   <!-- MOBILE BOTTOM NAVIGATION -->
-  <nav class="mobile-bottom-nav">
-    <a href="/index.html" id="bn-home">
-      <span class="nav-icon">🏠</span>
-      <span>Home</span>
-    </a>
-    <a href="/services.html" id="bn-services">
-      <span class="nav-icon">📐</span>
-      <span>Services</span>
-    </a>
-    <a href="/manufacturers.html" id="bn-mfr">
-      <span class="nav-icon">🏭</span>
-      <span>Factories</span>
-    </a>
-    <a href="/specsheets.html" id="bn-spec">
-      <span class="nav-icon">📋</span>
-      <span>Spec</span>
-    </a>
-    <a href="/insights.html" id="bn-insights">
-      <span class="nav-icon">🎬</span>
-      <span>Insights</span>
-    </a>
-    <a href="/subscribe.html" id="bn-pricing">
-      <span class="nav-icon">⭐</span>
-      <span>Plans</span>
-    </a>
-  </nav>
-  <script>
-    // Highlight active bottom nav item
-    (function() {
-      var path = window.location.pathname;
-      var map = {
-        'index': 'bn-home',
-        'services': 'bn-services', 
-        'manufacturers': 'bn-mfr',
-        'specsheets': 'bn-spec',
-        'insights': 'bn-insights',
-        'subscribe': 'bn-pricing',
-        'library': 'bn-services',
-        'contact': 'bn-home',
-      };
-      var page = path.replace(/.*\//, '').replace('.html', '') || 'index';
-      var activeId = map[page];
-      if (activeId) {
-        var el = document.getElementById(activeId);
-        if (el) el.classList.add('active');
-      }
-    })();
-  <\/script>
-
-
-<script>
-// Open admin via URL: add ?admin to any page URL
-// Change password via URL: add ?password to any page URL
-document.addEventListener('DOMContentLoaded', function() {
-  var params = new URLSearchParams(window.location.search);
-  if (params.has('admin') && typeof openAdmin === 'function') {
-    openAdmin();
-  }
-  if (params.has('password') && typeof changeAdminPassword === 'function') {
-    setTimeout(changeAdminPassword, 500);
-  }
-});
-<\/script>
-</body></html>
-  `);
-}
-</script>
+      
 
 
   <!-- MOBILE BOTTOM NAVIGATION -->
-  <nav class="mobile-bottom-nav">
-    <a href="/index.html" id="bn-home">
-      <span class="nav-icon">🏠</span>
-      <span>Home</span>
-    </a>
-    <a href="/services.html" id="bn-services">
-      <span class="nav-icon">📐</span>
-      <span>Services</span>
-    </a>
-    <a href="/manufacturers.html" id="bn-mfr">
-      <span class="nav-icon">🏭</span>
-      <span>Factories</span>
-    </a>
-    <a href="/specsheets.html" id="bn-spec">
-      <span class="nav-icon">📋</span>
-      <span>Spec</span>
-    </a>
-    <a href="/insights.html" id="bn-insights">
-      <span class="nav-icon">🎬</span>
-      <span>Insights</span>
-    </a>
-    <a href="/subscribe.html" id="bn-pricing">
-      <span class="nav-icon">⭐</span>
-      <span>Plans</span>
-    </a>
-  </nav>
-  <script>
-    // Highlight active bottom nav item
-    (function() {
-      var path = window.location.pathname;
-      var map = {
-        'index': 'bn-home',
-        'services': 'bn-services', 
-        'manufacturers': 'bn-mfr',
-        'specsheets': 'bn-spec',
-        'insights': 'bn-insights',
-        'subscribe': 'bn-pricing',
-        'library': 'bn-services',
-        'contact': 'bn-home',
-      };
-      var page = path.replace(/.*\//, '').replace('.html', '') || 'index';
-      var activeId = map[page];
-      if (activeId) {
-        var el = document.getElementById(activeId);
-        if (el) el.classList.add('active');
-      }
-    })();
-  </script>
+      
   <script src="/comm_guard.js"></script>
 </body>
 </html>
