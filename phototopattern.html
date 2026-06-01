@@ -1259,6 +1259,14 @@ ${cDesc}
       initSession();
     });
 
+    // Keyboard shortcut Ctrl+Shift+A to redirect to Admin Data dashboard
+    document.addEventListener('keydown', e => {
+      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') {
+        e.preventDefault();
+        window.location.href = '/admin-data.html';
+      }
+    });
+
     // Highlight active bottom nav item
     (function() {
       var path = window.location.pathname;
