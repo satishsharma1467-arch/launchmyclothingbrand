@@ -170,14 +170,18 @@ const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 function getAdminPw() { return 'SATISH@146780'; }
 
 function login() {
-  const pw = document.getElementById('pw').value;
-  if (pw !== getAdminPw()) {
-    document.getElementById('pwErr').style.display = 'block';
-    document.getElementById('pw').value = '';
-    return;
+  try {
+    const pw = document.getElementById('pw').value;
+    if (pw !== getAdminPw()) {
+      document.getElementById('pwErr').style.display = 'block';
+      document.getElementById('pw').value = '';
+      return;
+    }
+    document.getElementById('loginBox').style.display = 'none';
+    document.getElementById('panel').style.display = 'block';
+  } catch (err) {
+    console.error("Error in login:", err);
   }
-  document.getElementById('loginBox').style.display = 'none';
-  document.getElementById('panel').style.display = 'block';
 }
 
 function switchTab(tab) {

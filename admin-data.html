@@ -128,27 +128,74 @@ tr:hover td{background:rgba(255,255,255,0.02)}
 </div>
 
 <script>
-function getAdminPw() { return localStorage.getItem('lmcb_admin_pw') || 'SATISH@146780'; }
-function getUsers() { return JSON.parse(localStorage.getItem('lmcb_users') || '[]'); }
-function getMessages() { return JSON.parse(localStorage.getItem('lmcb_messages') || '[]'); }
+function getAdminPw() { return 'SATISH@146780'; }
+
+function getUsers() {
+  try {
+    const raw = localStorage.getItem('lmcb_users');
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (e) {
+    console.error("Error reading users from localStorage:", e);
+    return [];
+  }
+}
+
+function getMessages() {
+  try {
+    const raw = localStorage.getItem('lmcb_messages');
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (e) {
+    console.error("Error reading messages from localStorage:", e);
+    return [];
+  }
+}
 
 function login() {
-  const pw = document.getElementById('pw').value;
-  if (pw !== getAdminPw()) {
-    document.getElementById('pwErr').style.display = 'block';
-    document.getElementById('pw').value = '';
-    return;
+  try {
+    const pw = document.getElementById('pw').value;
+    if (pw !== getAdminPw()) {
+      document.getElementById('pwErr').style.display = 'block';
+      document.getElementById('pw').value = '';
+      return;
+    }
+    document.getElementById('loginBox').style.display = 'none';
+    document.getElementById('panel').style.display = 'block';
+    
+    // Defensive renders
+    try {
+      renderTable(getUsers());
+    } catch (err) {
+      console.error("Failed rendering users table on login:", err);
+    }
+    
+    try {
+      renderMessages();
+    } catch (err) {
+      console.error("Failed rendering messages on login:", err);
+    }
+    
+    try {
+      updateStats();
+    } catch (err) {
+      console.error("Failed updating stats on login:", err);
+    }
+  } catch (globalErr) {
+    console.error("Fatal error during login:", globalErr);
+    alert("Unlock failed due to a browser execution error. Please check the Developer Console.");
   }
-  document.getElementById('loginBox').style.display = 'none';
-  document.getElementById('panel').style.display = 'block';
-  renderTable(getUsers());
-  renderMessages();
-  updateStats();
 }
 
 function formatDate(iso) {
   if (!iso) return '—';
-  return new Date(iso).toLocaleString('en-IN', {day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  try {
+    return new Date(iso).toLocaleString('en-IN', {day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  } catch (e) {
+    return '—';
+  }
 }
 
 function planBadge(plan) {
@@ -162,53 +209,127 @@ function planBadge(plan) {
 }
 
 function updateStats() {
-  const users = getUsers();
-  const today = new Date().toISOString().split('T')[0];
-  const paid = users.filter(u => u.plan && u.plan !== 'free');
-  const revenue = users.reduce((sum, u) => sum + (u.planAmount || 0), 0);
-  document.getElementById('s-total').textContent = users.length;
-  document.getElementById('s-paid').textContent = paid.length;
-  document.getElementById('s-today').textContent = users.filter(u => (u.registeredAt||'').startsWith(today)).length;
-  document.getElementById('s-revenue').textContent = '₹' + revenue.toLocaleString('en-IN');
+  try {
+    const users = getUsers();
+    const today = new Date().toISOString().split('T')[0];
+    const paid = users.filter(u => u && u.plan && u.plan !== 'free');
+    const revenue = users.reduce((sum, u) => {
+      const amt = u ? Number(u.planAmount) : 0;
+      return sum + (isNaN(amt) ? 0 : amt);
+    }, 0);
+    
+    const totalEl = document.getElementById('s-total');
+    if (totalEl) totalEl.textContent = users.length;
+    
+    const paidEl = document.getElementById('s-paid');
+    if (paidEl) paidEl.textContent = paid.length;
+    
+    const todayEl = document.getElementById('s-today');
+    if (todayEl) {
+      todayEl.textContent = users.filter(u => u && typeof u.registeredAt === 'string' && u.registeredAt.startsWith(today)).length;
+    }
+    
+    const revEl = document.getElementById('s-revenue');
+    if (revEl) revEl.textContent = '₹' + revenue.toLocaleString('en-IN');
+  } catch (err) {
+    console.error("Error in updateStats:", err);
+  }
 }
 
 function renderTable(users) {
-  const tbody = document.getElementById('tbody');
-  const empty = document.getElementById('empty');
-  document.getElementById('user-count').textContent = users.length + ' users';
-  if (!users.length) { tbody.innerHTML = ''; empty.style.display = 'block'; return; }
-  empty.style.display = 'none';
-  tbody.innerHTML = users.map((u,i) => `
-    <tr>
-      <td style="opacity:0.4">${i+1}</td>
-      <td><strong>${u.name||'—'}</strong></td>
-      <td style="color:#C8A951">${u.email}</td>
-      <td>${u.phone||'—'}</td>
-      <td>${planBadge(u.plan)}</td>
-      <td>${u.planAmount ? '₹'+u.planAmount.toLocaleString('en-IN') : '—'}</td>
-      <td style="font-size:0.65rem;opacity:0.6">${u.paymentId ? u.paymentId.slice(0,14)+'...' : '—'}</td>
-      <td style="font-size:0.68rem">${formatDate(u.registeredAt)}</td>
-      <td style="font-size:0.68rem">${formatDate(u.lastLogin)}</td>
-      <td><button onclick="removeUser('${u.email}')" style="background:transparent;border:1px solid rgba(212,71,42,0.3);color:#D4472A;padding:0.3rem 0.6rem;font-family:'Courier New',monospace;font-size:0.6rem;cursor:pointer">Remove</button></td>
-    </tr>`).join('');
+  try {
+    const tbody = document.getElementById('tbody');
+    const empty = document.getElementById('empty');
+    if (!tbody) return;
+    
+    const validUsers = Array.isArray(users) ? users.filter(u => u && typeof u === 'object') : [];
+    const countEl = document.getElementById('user-count');
+    if (countEl) countEl.textContent = validUsers.length + ' users';
+    
+    if (!validUsers.length) {
+      tbody.innerHTML = '';
+      if (empty) empty.style.display = 'block';
+      return;
+    }
+    if (empty) empty.style.display = 'none';
+    
+    tbody.innerHTML = validUsers.map((u, i) => {
+      const name = u.name || '—';
+      const email = u.email || '—';
+      const phone = u.phone || '—';
+      const plan = u.plan || 'free';
+      const amount = typeof u.planAmount === 'number' ? '₹' + u.planAmount.toLocaleString('en-IN') : (u.planAmount || '—');
+      const paymentId = typeof u.paymentId === 'string' ? (u.paymentId.length > 14 ? u.paymentId.slice(0, 14) + '...' : u.paymentId) : '—';
+      
+      let registered = '—';
+      try { registered = formatDate(u.registeredAt); } catch(dErr) {}
+      
+      let lastLogin = '—';
+      try { lastLogin = formatDate(u.lastLogin); } catch(dErr) {}
+      
+      return `
+        <tr>
+          <td style="opacity:0.4">${i+1}</td>
+          <td><strong>${name}</strong></td>
+          <td style="color:#C8A951">${email}</td>
+          <td>${phone}</td>
+          <td>${planBadge(plan)}</td>
+          <td>${amount}</td>
+          <td style="font-size:0.65rem;opacity:0.6">${paymentId}</td>
+          <td style="font-size:0.68rem">${registered}</td>
+          <td style="font-size:0.68rem">${lastLogin}</td>
+          <td><button onclick="removeUser('${email}')" style="background:transparent;border:1px solid rgba(212,71,42,0.3);color:#D4472A;padding:0.3rem 0.6rem;font-family:'Courier New',monospace;font-size:0.6rem;cursor:pointer">Remove</button></td>
+        </tr>`;
+    }).join('');
+  } catch (err) {
+    console.error("Error in renderTable:", err);
+  }
 }
 
 function renderMessages() {
-  const msgs = getMessages();
-  const tbody = document.getElementById('msg-tbody');
-  const empty = document.getElementById('msg-empty');
-  if (!msgs.length) { tbody.innerHTML = ''; empty.style.display = 'block'; return; }
-  empty.style.display = 'none';
-  tbody.innerHTML = msgs.map((m,i) => `
-    <tr>
-      <td style="opacity:0.4">${i+1}</td>
-      <td>${m.name||'—'}</td>
-      <td style="color:#C8A951">${m.email}</td>
-      <td>${m.phone||'—'}</td>
-      <td>${m.subject||'—'}</td>
-      <td style="max-width:200px;font-size:0.68rem;opacity:0.7">${(m.message||'').slice(0,80)}${m.message&&m.message.length>80?'...':''}</td>
-      <td style="font-size:0.68rem">${formatDate(m.receivedAt)}</td>
-    </tr>`).join('');
+  try {
+    const msgs = getMessages();
+    const tbody = document.getElementById('msg-tbody');
+    const empty = document.getElementById('msg-empty');
+    if (!tbody) return;
+    
+    const validMsgs = Array.isArray(msgs) ? msgs.filter(m => m && typeof m === 'object') : [];
+    if (!validMsgs.length) {
+      tbody.innerHTML = '';
+      if (empty) empty.style.display = 'block';
+      return;
+    }
+    if (empty) empty.style.display = 'none';
+    
+    tbody.innerHTML = validMsgs.map((m, i) => {
+      const name = m.name || '—';
+      const email = m.email || '—';
+      const phone = m.phone || '—';
+      const subject = m.subject || '—';
+      
+      let msgText = '';
+      try {
+        const rawMsg = m.message || '';
+        msgText = typeof rawMsg === 'string' ? (rawMsg.length > 80 ? rawMsg.slice(0, 80) + '...' : rawMsg) : String(rawMsg);
+      } catch (mErr) {}
+      
+      let received = '—';
+      try { received = formatDate(m.receivedAt); } catch(dErr) {}
+      
+      return `
+        <tr>
+          <td style="opacity:0.4">${i+1}</td>
+          <td>${name}</td>
+          <td style="color:#C8A951">${email}</td>
+          <td>${phone}</td>
+          <td>${subject}</td>
+          <td style="max-width:200px;font-size:0.68rem;opacity:0.7">${msgText}</td>
+          <td style="font-size:0.68rem">${received}</td>
+        </tr>`;
+    }).join('');
+  } catch (err) {
+    console.error("Error in renderMessages:", err);
+  }
 }
 
 function searchUsers(q) {
