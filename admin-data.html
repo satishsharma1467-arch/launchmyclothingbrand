@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Admin Data — LMCB</title>
 <meta name="robots" content="noindex,nofollow"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:#0E0B06;color:#F5F0E8;font-family:'Courier New',monospace;padding:2rem;min-height:100vh}
@@ -37,16 +38,41 @@ tr:hover td{background:rgba(255,255,255,0.02)}
 .plan-basic{background:#2196F3}
 .plan-free{background:#555}
 .empty{padding:3rem;text-align:center;opacity:0.35;font-size:0.85rem}
-.search{background:rgba(255,255,255,0.05);border:1px solid rgba(200,169,81,0.3);color:#F5F0E8;padding:0.6rem 1rem;font-family:'Courier New',monospace;font-size:0.8rem;outline:none;width:250px}
+.search{background:rgba(255,255,255,0.05);border:1px solid rgba(200,169,81,0.3);color:#F5F0E8;padding:0.6rem 1rem;font-family:'Courier New',monospace;font-size:0.8rem;outline:none;width:280px}
 .search:focus{border-color:#C8A951}
 .toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:1rem}
-.section-title{color:#C8A951;font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:0.8rem}
+.section-title{color:#C8A951;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:0.8rem;margin-top:2.5rem;border-bottom:1px dashed rgba(200,169,81,0.25);padding-bottom:0.3rem;}
+.p2p-thumb {
+  width: 45px;
+  height: 58px;
+  object-fit: cover;
+  border: 1px solid rgba(200,169,81,0.35);
+  border-radius: 2px;
+  cursor: zoom-in;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.p2p-thumb:hover {
+  transform: scale(1.15);
+  border-color: #C8A951;
+}
+.specs-desc {
+  max-width: 250px;
+  font-size: 0.65rem;
+  opacity: 0.85;
+  white-space: normal;
+  word-break: break-word;
+  max-height: 85px;
+  overflow-y: auto;
+  font-family: 'DM Mono', monospace;
+  line-height: 1.4;
+}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
-<h1>🔐 LMCB Admin Data</h1>
-<div class="sub">launchmyclothingbrand.com — User & Payment Data Viewer</div>
+<h1>🔐 LMCB Admin Operations</h1>
+<div class="sub">launchmyclothingbrand.com — Live Supabase Database Operations Dashboard</div>
 
 <!-- LOGIN -->
 <div class="login-box" id="loginBox">
@@ -64,19 +90,19 @@ tr:hover td{background:rgba(255,255,255,0.02)}
     <div class="stat"><div class="stat-num" id="s-total">0</div><div class="stat-label">Total Users</div></div>
     <div class="stat"><div class="stat-num" id="s-paid">0</div><div class="stat-label">Paid Users</div></div>
     <div class="stat"><div class="stat-num" id="s-today">0</div><div class="stat-label">Joined Today</div></div>
-    <div class="stat"><div class="stat-num" id="s-revenue">₹0</div><div class="stat-label">Total Revenue</div></div>
+    <div class="stat"><div class="stat-num" id="s-revenue">₹0</div><div class="stat-label">Monthly Revenue</div></div>
   </div>
 
   <!-- Actions -->
   <div class="actions">
     <button class="action-btn" onclick="exportCSV()">⬇ Export CSV</button>
-    <button class="action-btn" onclick="renderTable(getUsers())">↺ Refresh</button>
-    <button class="action-btn danger" onclick="clearAll()">🗑 Clear All Data</button>
+    <button class="action-btn" onclick="loadLiveDashboardData()">↺ Refresh Live DB</button>
+    <button class="action-btn danger" onclick="clearAll()">🗑 Clear All Records</button>
     <button class="action-btn" onclick="document.getElementById('loginBox').style.display='block';document.getElementById('panel').style.display='none'">🔒 Lock</button>
   </div>
 
   <!-- Users Table -->
-  <div class="section-title">Registered Users & Payments</div>
+  <div class="section-title">Registered Brand Accounts</div>
   <div class="toolbar">
     <input type="text" class="search" placeholder="Search by name, email or plan..." oninput="searchUsers(this.value)"/>
     <span id="user-count" style="font-size:0.72rem;opacity:0.5;"></span>
@@ -87,74 +113,85 @@ tr:hover td{background:rgba(255,255,255,0.02)}
       <thead>
         <tr>
           <th>#</th>
-          <th>Name</th>
+          <th>Brand Owner</th>
           <th>Email</th>
           <th>Phone</th>
+          <th>Brand Name</th>
           <th>Plan</th>
-          <th>Amount</th>
-          <th>Payment ID</th>
+          <th>Status</th>
           <th>Registered</th>
-          <th>Last Login</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody id="tbody"></tbody>
     </table>
-    <div class="empty" id="empty" style="display:none">No users yet. Users appear here after they register.</div>
+    <div class="empty" id="empty" style="display:none">No users registered yet.</div>
   </div>
 
-  <!-- Messages -->
-  <div style="margin-top:2rem">
-    <div class="section-title">Contact Form Messages</div>
-    <div style="overflow-x:auto">
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Subject</th>
-            <th>Message</th>
-            <th>Received</th>
-          </tr>
-        </thead>
-        <tbody id="msg-tbody"></tbody>
-      </table>
-      <div class="empty" id="msg-empty" style="display:none">No messages yet.</div>
-    </div>
+  <!-- Photo-to-Pattern Submissions -->
+  <div class="section-title">🎨 Photo-to-Pattern Sizing Design Submissions</div>
+  <div style="overflow-x:auto">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Garment Image</th>
+          <th>Customer Info</th>
+          <th>Sizing Requested</th>
+          <th>Garment Details & Description</th>
+          <th>Payment Status</th>
+          <th>Received On</th>
+          <th>Operations</th>
+        </tr>
+      </thead>
+      <tbody id="p2p-tbody"></tbody>
+    </table>
+    <div class="empty" id="p2p-empty" style="display:none">No sizing requests submitted yet.</div>
+  </div>
+
+  <!-- General Messages -->
+  <div class="section-title">General Contact & Reset Messages</div>
+  <div style="overflow-x:auto">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Subject</th>
+          <th>Message</th>
+          <th>Received</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="msg-tbody"></tbody>
+    </table>
+    <div class="empty" id="msg-empty" style="display:none">No messages yet.</div>
   </div>
 
 </div>
 
 <script>
+// Supabase Client Details matching main website configuration
+const SB_URL = 'https://tldbjsqhjqapdwmfeuwq.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsZGJqc3FoanFhcGR3bWZldXdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjIzMzAsImV4cCI6MjA5Mzc5ODMzMH0.NjkXKsqgQf7eo8Z1PQtZxFmQNUA8nH-lF-0eEepugPQ';
+const sb = supabase.createClient(SB_URL, SB_KEY);
+
+let liveUsers = [];
+let liveMessages = [];
+
 function getAdminPw() { return 'SATISH@146780'; }
 
-function getUsers() {
-  try {
-    const raw = localStorage.getItem('lmcb_users');
-    if (!raw) return [];
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
-  } catch (e) {
-    console.error("Error reading users from localStorage:", e);
-    return [];
-  }
+// Offline LocalStorage Fallbacks in case database connection fails
+function getLocalUsers() {
+  try { return JSON.parse(localStorage.getItem('lmcb_users') || '[]'); } catch(e) { return []; }
+}
+function getLocalMessages() {
+  try { return JSON.parse(localStorage.getItem('lmcb_messages') || '[]'); } catch(e) { return []; }
 }
 
-function getMessages() {
-  try {
-    const raw = localStorage.getItem('lmcb_messages');
-    if (!raw) return [];
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
-  } catch (e) {
-    console.error("Error reading messages from localStorage:", e);
-    return [];
-  }
-}
-
-function login() {
+async function login() {
   try {
     const pw = document.getElementById('pw').value;
     if (pw !== getAdminPw()) {
@@ -165,28 +202,39 @@ function login() {
     document.getElementById('loginBox').style.display = 'none';
     document.getElementById('panel').style.display = 'block';
     
-    // Defensive renders
-    try {
-      renderTable(getUsers());
-    } catch (err) {
-      console.error("Failed rendering users table on login:", err);
-    }
-    
-    try {
-      renderMessages();
-    } catch (err) {
-      console.error("Failed rendering messages on login:", err);
-    }
-    
-    try {
-      updateStats();
-    } catch (err) {
-      console.error("Failed updating stats on login:", err);
-    }
-  } catch (globalErr) {
-    console.error("Fatal error during login:", globalErr);
-    alert("Unlock failed due to a browser execution error. Please check the Developer Console.");
+    await loadLiveDashboardData();
+  } catch (err) {
+    console.error("Login fatal error:", err);
+    alert("Unlock failed. Please verify connection and retry.");
   }
+}
+
+async function loadLiveDashboardData() {
+  const panel = document.getElementById('panel');
+  if (panel.style.display === 'none' || panel.style.display === '') return;
+
+  try {
+    // 1. Fetch live accounts from Supabase users
+    const { data: users, error: uErr } = await sb.from('users').select('*').order('created_at', { ascending: false });
+    if (uErr) throw uErr;
+    liveUsers = users || [];
+  } catch (err) {
+    console.warn("Could not query live Supabase users. Falling back to local cache:", err);
+    liveUsers = getLocalUsers();
+  }
+
+  try {
+    // 2. Fetch live submissions from Supabase messages
+    const { data: messages, error: mErr } = await sb.from('messages').select('*').order('received_at', { ascending: false });
+    if (mErr) throw mErr;
+    liveMessages = messages || [];
+  } catch (err) {
+    console.warn("Could not query live Supabase messages. Falling back to local cache:", err);
+    liveMessages = getLocalMessages();
+  }
+
+  renderTables();
+  updateStats();
 }
 
 function formatDate(iso) {
@@ -208,64 +256,113 @@ function planBadge(plan) {
   return `<span class="badge ${cls}">${label}</span>`;
 }
 
+const planAmounts = { basic: 299, brand_builder: 999, pro_elite: 1999 };
+
 function updateStats() {
   try {
-    const users = getUsers();
-    const today = new Date().toISOString().split('T')[0];
-    const paid = users.filter(u => u && u.plan && u.plan !== 'free');
-    const revenue = users.reduce((sum, u) => {
-      const amt = u ? Number(u.planAmount) : 0;
-      return sum + (isNaN(amt) ? 0 : amt);
+    const today = new Date().toDateString();
+    const paid = liveUsers.filter(u => u && u.plan && u.plan !== 'free');
+    const revenue = liveUsers.reduce((sum, u) => {
+      if (!u || u.plan === 'free') return sum;
+      return sum + (planAmounts[u.plan] || 0);
     }, 0);
     
-    const totalEl = document.getElementById('s-total');
-    if (totalEl) totalEl.textContent = users.length;
+    document.getElementById('s-total').textContent = liveUsers.length;
+    document.getElementById('s-paid').textContent = paid.length;
     
-    const paidEl = document.getElementById('s-paid');
-    if (paidEl) paidEl.textContent = paid.length;
+    const todayJoined = liveUsers.filter(u => {
+      const uDate = u.created_at || u.registeredAt;
+      return uDate && new Date(uDate).toDateString() === today;
+    }).length;
+    document.getElementById('s-today').textContent = todayJoined;
     
-    const todayEl = document.getElementById('s-today');
-    if (todayEl) {
-      todayEl.textContent = users.filter(u => u && typeof u.registeredAt === 'string' && u.registeredAt.startsWith(today)).length;
-    }
-    
-    const revEl = document.getElementById('s-revenue');
-    if (revEl) revEl.textContent = '₹' + revenue.toLocaleString('en-IN');
+    document.getElementById('s-revenue').textContent = '₹' + revenue.toLocaleString('en-IN');
   } catch (err) {
     console.error("Error in updateStats:", err);
   }
 }
 
-function renderTable(users) {
+// ── PHOTO-TO-PATTERN REGEX PARSING ROUTINES ───────────────────
+function extractField(msg, label) {
+  if (!msg) return '';
+  const match = msg.match(new RegExp(label + '\\s*(.*)', 'i'));
+  return match ? match[1].trim() : '';
+}
+
+function parseSubmission(m) {
+  const msg = m.message || '';
+  const isP2P = msg.includes('=== PHOTO-TO-PATTERN') || (m.subject && m.subject.includes('Photo-to-Pattern'));
+  
+  if (!isP2P) return null;
+  
+  const category = extractField(msg, 'Garment Category:') || '—';
+  const fabric = extractField(msg, 'Fabric Type:') || '—';
+  const fit = extractField(msg, 'Fit Structure:') || '—';
+  const descStart = msg.indexOf('Style Description & Details:');
+  const imgStart = msg.indexOf('Design Reference Image:');
+  const transStart = msg.indexOf('=== TRANSACTION DETAILS ===');
+  
+  let desc = '—';
+  if (descStart !== -1) {
+    const end = imgStart !== -1 ? imgStart : (transStart !== -1 ? transStart : msg.length);
+    desc = msg.substring(descStart + 28, end).trim();
+  }
+  
+  let imageUrl = '';
+  if (imgStart !== -1) {
+    const end = transStart !== -1 ? transStart : msg.length;
+    const rawImg = msg.substring(imgStart + 23, end).trim();
+    const urlMatch = rawImg.match(/(https?:\/\/\S+)/);
+    imageUrl = urlMatch ? urlMatch[1] : '';
+  }
+  
+  const paymentId = extractField(msg, 'Payment Reference ID:') || '—';
+  const isPaid = msg.includes('Payment Reference ID:') && !paymentId.startsWith('pending');
+  
+  return {
+    id: m.id,
+    name: m.name || extractField(msg, 'Customer Name:') || '—',
+    brand: extractField(msg, 'Brand Name:') || '—',
+    phone: m.phone || extractField(msg, 'WhatsApp Mobile:') || '—',
+    category,
+    fabric,
+    fit,
+    desc,
+    imageUrl,
+    paymentId,
+    isPaid,
+    receivedAt: m.received_at || m.created_at || m.receivedAt
+  };
+}
+
+function renderTables() {
+  renderUsersTable(liveUsers);
+  renderMessagesTables(liveMessages);
+}
+
+function renderUsersTable(users) {
   try {
     const tbody = document.getElementById('tbody');
     const empty = document.getElementById('empty');
     if (!tbody) return;
     
-    const validUsers = Array.isArray(users) ? users.filter(u => u && typeof u === 'object') : [];
-    const countEl = document.getElementById('user-count');
-    if (countEl) countEl.textContent = validUsers.length + ' users';
+    document.getElementById('user-count').textContent = users.length + ' accounts';
     
-    if (!validUsers.length) {
+    if (!users.length) {
       tbody.innerHTML = '';
       if (empty) empty.style.display = 'block';
       return;
     }
     if (empty) empty.style.display = 'none';
     
-    tbody.innerHTML = validUsers.map((u, i) => {
-      const name = u.name || '—';
+    tbody.innerHTML = users.map((u, i) => {
+      const name = u.name || `${u.first_name || ''} ${u.last_name || ''}`.trim() || '—';
       const email = u.email || '—';
       const phone = u.phone || '—';
-      const plan = u.plan || 'free';
-      const amount = typeof u.planAmount === 'number' ? '₹' + u.planAmount.toLocaleString('en-IN') : (u.planAmount || '—');
-      const paymentId = typeof u.paymentId === 'string' ? (u.paymentId.length > 14 ? u.paymentId.slice(0, 14) + '...' : u.paymentId) : '—';
-      
-      let registered = '—';
-      try { registered = formatDate(u.registeredAt); } catch(dErr) {}
-      
-      let lastLogin = '—';
-      try { lastLogin = formatDate(u.lastLogin); } catch(dErr) {}
+      const brand = u.brand || u.brand_name || '—';
+      const plan = u.plan || u.plan_selected || 'free';
+      const status = u.payment_id || u.plan_status === 'active' ? 'Active' : 'Free';
+      const date = u.created_at || u.registeredAt || '';
       
       return `
         <tr>
@@ -273,107 +370,227 @@ function renderTable(users) {
           <td><strong>${name}</strong></td>
           <td style="color:#C8A951">${email}</td>
           <td>${phone}</td>
+          <td>${brand}</td>
           <td>${planBadge(plan)}</td>
-          <td>${amount}</td>
-          <td style="font-size:0.65rem;opacity:0.6">${paymentId}</td>
-          <td style="font-size:0.68rem">${registered}</td>
-          <td style="font-size:0.68rem">${lastLogin}</td>
+          <td><span class="badge ${status === 'Active' ? 'plan-brand' : 'plan-free'}">${status}</span></td>
+          <td style="font-size:0.68rem">${formatDate(date)}</td>
           <td><button onclick="removeUser('${email}')" style="background:transparent;border:1px solid rgba(212,71,42,0.3);color:#D4472A;padding:0.3rem 0.6rem;font-family:'Courier New',monospace;font-size:0.6rem;cursor:pointer">Remove</button></td>
         </tr>`;
     }).join('');
   } catch (err) {
-    console.error("Error in renderTable:", err);
+    console.error("Error in renderUsersTable:", err);
   }
 }
 
-function renderMessages() {
+function renderMessagesTables(messages) {
   try {
-    const msgs = getMessages();
-    const tbody = document.getElementById('msg-tbody');
-    const empty = document.getElementById('msg-empty');
-    if (!tbody) return;
+    const p2pTbody = document.getElementById('p2p-tbody');
+    const p2pEmpty = document.getElementById('p2p-empty');
+    const msgTbody = document.getElementById('msg-tbody');
+    const msgEmpty = document.getElementById('msg-empty');
     
-    const validMsgs = Array.isArray(msgs) ? msgs.filter(m => m && typeof m === 'object') : [];
-    if (!validMsgs.length) {
-      tbody.innerHTML = '';
-      if (empty) empty.style.display = 'block';
-      return;
+    if (!p2pTbody || !msgTbody) return;
+
+    const p2pItems = [];
+    const generalItems = [];
+
+    messages.forEach(m => {
+      if (!m) return;
+      const parsed = parseSubmission(m);
+      if (parsed) {
+        p2pItems.push({ raw: m, parsed });
+      } else {
+        generalItems.push(m);
+      }
+    });
+
+    // 1. Render Photo-to-Pattern Submissions
+    if (!p2pItems.length) {
+      p2pTbody.innerHTML = '';
+      if (p2pEmpty) p2pEmpty.style.display = 'block';
+    } else {
+      if (p2pEmpty) p2pEmpty.style.display = 'none';
+      p2pTbody.innerHTML = p2pItems.map((item, i) => {
+        const p = item.parsed;
+        const raw = item.raw;
+        const rawPhone = p.phone.replace(/[^0-9]/g, '');
+        
+        return `
+          <tr>
+            <td style="opacity:0.4">${i+1}</td>
+            <td style="text-align:center;">
+              ${p.imageUrl ? `<a href="${p.imageUrl}" target="_blank"><img src="${p.imageUrl}" class="p2p-thumb" alt="Design Reference"/></a>` : '—'}
+            </td>
+            <td>
+              <strong>${p.name}</strong><br/>
+              <span style="font-size:0.62rem;opacity:0.55;">Brand: ${p.brand}</span><br/>
+              <span style="font-size:0.62rem;color:#C8A951;">WA: ${p.phone}</span>
+            </td>
+            <td>
+              <span style="color:#C8A951;font-weight:bold;">${p.category}</span><br/>
+              <span style="font-size:0.62rem;opacity:0.8;">Fit: ${p.fit}</span><br/>
+              <span style="font-size:0.62rem;opacity:0.6;">Fabric: ${p.fabric}</span>
+            </td>
+            <td>
+              <div class="specs-desc">${p.desc}</div>
+            </td>
+            <td>
+              <span class="badge ${p.isPaid ? 'plan-brand' : 'plan-free'}" style="font-size:0.55rem;padding:2px 6px;">
+                ${p.isPaid ? '✓ Paid' : '⏳ Pending'}
+              </span><br/>
+              <span style="font-size:0.58rem;opacity:0.45;font-family:monospace;">ID: ${p.paymentId.substring(0, 14)}...</span>
+            </td>
+            <td style="font-size:0.68rem">${formatDate(p.receivedAt)}</td>
+            <td>
+              <div style="display:flex;flex-direction:column;gap:5px;">
+                <a href="https://wa.me/${rawPhone}?text=${encodeURIComponent('Hi ' + p.name + ', I received your design. Sizing calculations are in progress!')}" 
+                   target="_blank" 
+                   style="display:inline-block;text-align:center;background:#4CAF50;color:#fff;border:none;padding:4px 8px;font-family:'Courier New',monospace;font-size:0.58rem;cursor:pointer;text-decoration:none;font-weight:bold;">
+                  💬 WhatsApp
+                </a>
+                <button onclick="removeMessage('${raw.id}')" style="background:transparent;border:1px solid rgba(212,71,42,0.3);color:#D4472A;padding:4px 8px;font-family:'Courier New',monospace;font-size:0.58rem;cursor:pointer;">
+                  🗑 Delete
+                </button>
+              </div>
+            </td>
+          </tr>`;
+      }).join('');
     }
-    if (empty) empty.style.display = 'none';
-    
-    tbody.innerHTML = validMsgs.map((m, i) => {
-      const name = m.name || '—';
-      const email = m.email || '—';
-      const phone = m.phone || '—';
-      const subject = m.subject || '—';
-      
-      let msgText = '';
-      try {
-        const rawMsg = m.message || '';
-        msgText = typeof rawMsg === 'string' ? (rawMsg.length > 80 ? rawMsg.slice(0, 80) + '...' : rawMsg) : String(rawMsg);
-      } catch (mErr) {}
-      
-      let received = '—';
-      try { received = formatDate(m.receivedAt); } catch(dErr) {}
-      
-      return `
-        <tr>
-          <td style="opacity:0.4">${i+1}</td>
-          <td>${name}</td>
-          <td style="color:#C8A951">${email}</td>
-          <td>${phone}</td>
-          <td>${subject}</td>
-          <td style="max-width:200px;font-size:0.68rem;opacity:0.7">${msgText}</td>
-          <td style="font-size:0.68rem">${received}</td>
-        </tr>`;
-    }).join('');
+
+    // 2. Render General Messages
+    if (!generalItems.length) {
+      msgTbody.innerHTML = '';
+      if (msgEmpty) msgEmpty.style.display = 'block';
+    } else {
+      if (msgEmpty) msgEmpty.style.display = 'none';
+      msgTbody.innerHTML = generalItems.map((m, i) => {
+        const name = m.name || '—';
+        const email = m.email || '—';
+        const phone = m.phone || '—';
+        const subject = m.subject || '—';
+        
+        let msgText = '';
+        try {
+          const rawMsg = m.message || '';
+          msgText = typeof rawMsg === 'string' ? (rawMsg.length > 85 ? rawMsg.slice(0, 85) + '...' : rawMsg) : String(rawMsg);
+        } catch (mErr) {}
+        
+        const date = m.received_at || m.created_at || m.receivedAt;
+        
+        return `
+          <tr>
+            <td style="opacity:0.4">${i+1}</td>
+            <td>${name}</td>
+            <td style="color:#C8A951">${email}</td>
+            <td>${phone}</td>
+            <td style="font-weight:500;color:#C8A951;">${subject}</td>
+            <td style="max-width:250px;font-size:0.68rem;opacity:0.75;white-space:normal;word-break:break-word;">${msgText}</td>
+            <td style="font-size:0.68rem">${formatDate(date)}</td>
+            <td><button onclick="removeMessage('${m.id}')" style="background:transparent;border:1px solid rgba(212,71,42,0.3);color:#D4472A;padding:0.3rem 0.6rem;font-family:'Courier New',monospace;font-size:0.6rem;cursor:pointer">Delete</button></td>
+          </tr>`;
+      }).join('');
+    }
   } catch (err) {
-    console.error("Error in renderMessages:", err);
+    console.error("Error in renderMessagesTables:", err);
   }
 }
 
-function searchUsers(q) {
-  const users = getUsers();
-  const filtered = q ? users.filter(u =>
-    (u.email||'').toLowerCase().includes(q.toLowerCase()) ||
-    (u.name||'').toLowerCase().includes(q.toLowerCase()) ||
-    (u.plan||'').toLowerCase().includes(q.toLowerCase())
-  ) : users;
-  renderTable(filtered);
+async function searchUsers(q) {
+  if (!q) {
+    renderUsersTable(liveUsers);
+    return;
+  }
+  const term = q.toLowerCase();
+  const filtered = liveUsers.filter(u => {
+    const name = (u.name || `${u.first_name || ''} ${u.last_name || ''}`).toLowerCase();
+    const email = (u.email || '').toLowerCase();
+    const brand = (u.brand || u.brand_name || '').toLowerCase();
+    const plan = (u.plan || u.plan_selected || '').toLowerCase();
+    return name.includes(term) || email.includes(term) || brand.includes(term) || plan.includes(term);
+  });
+  renderUsersTable(filtered);
 }
 
-function removeUser(email) {
-  if (!confirm('Remove user: ' + email + '?')) return;
-  const users = getUsers().filter(u => u.email !== email);
-  localStorage.setItem('lmcb_users', JSON.stringify(users));
-  renderTable(users);
-  updateStats();
+async function removeUser(email) {
+  if (!confirm('Remove user: ' + email + ' from database? This is permanent!')) return;
+  try {
+    // Delete in Supabase live database
+    const { error } = await sb.from('users').delete().eq('email', email);
+    if (error) throw error;
+    
+    // Success alert and reload
+    await loadLiveDashboardData();
+  } catch(e) {
+    console.error("Failed to delete user:", e);
+    // Local fallback delete
+    const local = getLocalUsers().filter(u => u.email !== email);
+    localStorage.setItem('lmcb_users', JSON.stringify(local));
+    liveUsers = local;
+    renderTables();
+    updateStats();
+  }
 }
 
-function clearAll() {
-  if (!confirm('Delete ALL user data? This cannot be undone!')) return;
-  if (!confirm('Are you absolutely sure?')) return;
-  localStorage.removeItem('lmcb_users');
-  localStorage.removeItem('lmcb_messages');
-  renderTable([]);
-  renderMessages();
-  updateStats();
+async function removeMessage(id) {
+  if (!confirm('Delete this submission record from database? This is permanent!')) return;
+  try {
+    // Delete in Supabase live database
+    const { error } = await sb.from('messages').delete().eq('id', id);
+    if (error) throw error;
+    
+    await loadLiveDashboardData();
+  } catch(e) {
+    console.error("Failed to delete submission:", e);
+    // Local fallback delete
+    const local = getLocalMessages().filter(m => String(m.id) !== String(id));
+    localStorage.setItem('lmcb_messages', JSON.stringify(local));
+    liveMessages = local;
+    renderTables();
+  }
+}
+
+async function clearAll() {
+  if (!confirm('CRITICAL WARNING!\n\nAre you sure you want to delete ALL records (users and messages) from Supabase? This action is permanent.')) return;
+  if (!confirm('Authorize database wipe: Are you absolutely sure?')) return;
+  
+  try {
+    const { error: err1 } = await sb.from('users').delete().neq('email', '');
+    const { error: err2 } = await sb.from('messages').delete().neq('email', '');
+    if (err1 || err2) throw (err1 || err2);
+    
+    alert("Database successfully wiped.");
+    await loadLiveDashboardData();
+  } catch (e) {
+    console.error("Failed to clear Supabase database:", e);
+    // Local fallback purge
+    localStorage.removeItem('lmcb_users');
+    localStorage.removeItem('lmcb_messages');
+    liveUsers = [];
+    liveMessages = [];
+    renderTables();
+    updateStats();
+  }
 }
 
 function exportCSV() {
-  const users = getUsers();
-  if (!users.length) { alert('No users to export.'); return; }
-  const header = ['#','Name','Email','Phone','Plan','Amount','Payment ID','Registered','Last Login'];
-  const rows = users.map((u,i) => [
-    i+1, u.name||'', u.email, u.phone||'', u.plan||'free',
-    u.planAmount||0, u.paymentId||'',
-    u.registeredAt ? new Date(u.registeredAt).toLocaleString('en-IN') : '',
-    u.lastLogin ? new Date(u.lastLogin).toLocaleString('en-IN') : ''
-  ]);
+  if (!liveUsers.length) { alert('No users to export.'); return; }
+  const header = ['#','Name','Email','Phone','Brand Name','Plan','Status','Registered Date'];
+  const rows = liveUsers.map((u,i) => {
+    const name = u.name || `${u.first_name || ''} ${u.last_name || ''}`.trim() || '';
+    const email = u.email || '';
+    const phone = u.phone || '';
+    const brand = u.brand || u.brand_name || '';
+    const plan = u.plan || u.plan_selected || 'free';
+    const status = u.payment_id || u.plan_status === 'active' ? 'Active' : 'Free';
+    const date = u.created_at || u.registeredAt ? new Date(u.created_at || u.registeredAt).toLocaleString('en-IN') : '';
+    
+    return [i+1, name, email, phone, brand, plan, status, date];
+  });
+  
   const csv = [header,...rows].map(r=>r.map(c=>'"'+c+'"').join(',')).join('\n');
   const a = document.createElement('a');
   a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
-  a.download = 'lmcb_users_' + new Date().toISOString().split('T')[0] + '.csv';
+  a.download = 'lmcb_live_database_' + new Date().toISOString().split('T')[0] + '.csv';
   a.click();
 }
 
