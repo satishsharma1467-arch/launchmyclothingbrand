@@ -729,10 +729,10 @@ document.getElementById('regForm').addEventListener('submit', async function(e) 
       id: user.id, email, firstName, lastName, plan, plan_status: 'pending'
     }));
 
-    showAlert('Account created! Redirecting to payment...', 'success');
+    showAlert('Account created! Redirecting to homepage...', 'success');
 
     setTimeout(() => {
-      window.location.href = `/subscribe.html?plan=${plan}&amount=${amounts[plan]}&uid=${user.id}&name=${encodeURIComponent(firstName + ' ' + lastName)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`;
+      window.location.href = '/index.html';
     }, 1200);
 
   } catch (err) {

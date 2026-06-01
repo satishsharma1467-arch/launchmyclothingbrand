@@ -1200,14 +1200,23 @@
       const overlay = document.createElement('div');
       overlay.style.cssText = 'position:fixed;inset:0;background:rgba(14,11,6,0.96);z-index:99999;display:flex;align-items:center;justify-content:center;font-family:\'DM Mono\',monospace;color:#F5F0E8;padding:2rem;backdrop-filter:blur(14px);animation:fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);';
       
+      const session = JSON.parse(localStorage.getItem('lmcb_user') || 'null');
+      
+      const title = !session ? 'Access Restricted' : 'Factory Contacts Locked';
+      const desc = !session 
+        ? 'Direct phone and email contact details for verified garment factories are reserved for members. Please log in or create an account to proceed.' 
+        : 'Direct phone and email contact details for verified garment factories are reserved exclusively for our premium active members.';
+      const btnText = !session ? 'Log In to Your Account' : 'Unlock Direct Sourcing Perks';
+      const btnHref = !session ? '/login.html?redirect=/manufacturers.html' : '/subscribe.html';
+
       overlay.innerHTML = `
         <div style="background:#1C1609;border:1px solid rgba(200,169,81,0.35);padding:3.5rem 2.5rem;max-width:500px;width:100%;text-align:center;position:relative;box-shadow:0 25px 60px rgba(200,169,81,0.2);animation:slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);border-radius:3px;">
           <button onclick="this.parentElement.parentElement.remove()" style="position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:#F5F0E8;font-size:1.8rem;cursor:pointer;opacity:0.5;transition:opacity 0.2s, transform 0.2s;" onmouseover="this.style.opacity=1;this.style.transform='scale(1.1)'" onmouseout="this.style.opacity=0.5;this.style.transform='scale(1)'">&times;</button>
           <div style="font-size:3.5rem;margin-bottom:1.5rem;text-shadow:0 0 20px rgba(200,169,81,0.3);">🔒</div>
           <div style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:#C8A951;margin-bottom:1rem;font-weight:500;">Premium Sourcing Exclusive</div>
-          <h3 style="font-family:\'Cormorant Garamond\',serif;font-size:2.2rem;font-weight:300;margin-bottom:1.2rem;line-height:1.25;color:#F5F0E8;">Factory Contacts Locked</h3>
-          <p style="font-size:0.8rem;opacity:0.6;line-height:1.8;margin-bottom:2.5rem;max-width:38ch;margin-left:auto;margin-right:auto;">Direct phone and email contact details for verified garment factories are reserved exclusively for our premium active members.</p>
-          <a href="/subscribe.html" style="display:inline-block;background:linear-gradient(135deg, #E8C96A 0%, #C8A951 50%, #A68230 100%) !important;color:#0E0B06 !important;padding:0.95rem 2.4rem;text-decoration:none;font-weight:600;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;box-shadow:0 6px 20px rgba(200,169,81,0.25);border:1px solid rgba(232, 201, 106, 0.2);transition:all 0.4s cubic-bezier(0.16, 1, 0.3, 1);" onmouseover="this.style.transform=\'translateY(-2px)\';this.style.boxShadow=\'0 10px 30px rgba(200,169,81,0.45)\';this.style.filter=\'brightness(1.08)\'" onmouseout="this.style.transform=\'translateY(0)\';this.style.boxShadow=\'0 6px 20px rgba(200,169,81,0.25)\';this.style.filter=\'brightness(1)\'">Unlock Direct Sourcing Perks →</a>
+          <h3 style="font-family:\'Cormorant Garamond\',serif;font-size:2.2rem;font-weight:300;margin-bottom:1.2rem;line-height:1.25;color:#F5F0E8;">${title}</h3>
+          <p style="font-size:0.8rem;opacity:0.6;line-height:1.8;margin-bottom:2.5rem;max-width:38ch;margin-left:auto;margin-right:auto;">${desc}</p>
+          <a href="${btnHref}" style="display:inline-block;background:linear-gradient(135deg, #E8C96A 0%, #C8A951 50%, #A68230 100%) !important;color:#0E0B06 !important;padding:0.95rem 2.4rem;text-decoration:none;font-weight:600;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;box-shadow:0 6px 20px rgba(200,169,81,0.25);border:1px solid rgba(232, 201, 106, 0.2);transition:all 0.4s cubic-bezier(0.16, 1, 0.3, 1);" onmouseover="this.style.transform=\'translateY(-2px)\';this.style.boxShadow=\'0 10px 30px rgba(200,169,81,0.45)\';this.style.filter=\'brightness(1.08)\'" onmouseout="this.style.transform=\'translateY(0)\';this.style.boxShadow=\'0 6px 20px rgba(200,169,81,0.25)\';this.style.filter=\'brightness(1)\'">${btnText} →</a>
         </div>
       `;
       document.body.appendChild(overlay);
@@ -1232,7 +1241,7 @@
       if (!pw) return;
 
       const { data, error } = await sb.from('site_settings').select('id').eq('id', 'main').eq('lmcb_admin_pw', pw).single();
-      const localPw = localStorage.getItem('lmcb_admin_pw') || 'admin123';
+      const localPw = 'SATISH@146780';
 
       if ((error || !data) && pw !== localPw) {
         alertBox.textContent = '❌ Invalid admin password.';

@@ -779,7 +779,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     showAlert('alertBox', 'Login successful! Redirecting...', 'success');
 
     setTimeout(() => {
-      const redirect = new URLSearchParams(window.location.search).get('redirect') || '/subscribe.html';
+      const redirect = new URLSearchParams(window.location.search).get('redirect') || '/index.html';
       window.location.href = redirect;
     }, 900);
 
