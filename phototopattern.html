@@ -1201,7 +1201,8 @@ ${cDesc}
           status: 'paid',
           created_at: new Date().toISOString()
         };
-        await sb.from('orders').insert(orderData);
+        const { error: orderErr } = await sb.from('orders').insert(orderData);
+        if (orderErr) throw orderErr;
 
         // 2. Log tech sheet spec data in the messages table
         const messageData = {
@@ -1210,9 +1211,10 @@ ${cDesc}
           phone: cPhone,
           subject: `Photo-to-Pattern Style Request: ${cCategory} (${cBrand || 'Custom'})`,
           message: techSheetMessage,
-          created_at: new Date().toISOString()
+          received_at: new Date().toISOString()
         };
-        await sb.from('messages').insert(messageData);
+        const { error: msgErr } = await sb.from('messages').insert(messageData);
+        if (msgErr) throw msgErr;
 
         // 3. Local storage integration for admin panel syncing
         const localMsgs = JSON.parse(localStorage.getItem('lmcb_messages') || '[]');
