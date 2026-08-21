@@ -1,0 +1,1801 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manual Secure Pattern Library Test | Launch My Clothing Brand</title>
+  <meta name="description"
+    content="Access production-ready DXF and PDF patterns for clothing brand startups. Instantly download print-ready files." />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Bebas+Neue&display=swap"
+    rel="stylesheet" />
+
+  <style>
+    :root {
+      --gold: #C8A951;
+      --gold-light: #E8C96A;
+      --cream: #F5F0E8;
+      --ink: #1A1208;
+      --ink-soft: #3D2E10;
+      --bg: #0E0B06;
+      --card-bg: #1C1609;
+      --border: rgba(200, 169, 81, 0.2);
+      --red: #D4472A;
+      --green: #4CAF50;
+      --radius: 3px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 18px;
+    }
+
+    body {
+      background: #0E0B06;
+      color: var(--cream);
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      overflow-x: hidden;
+      min-height: 100vh;
+      padding-bottom: 80px;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
+    }
+
+    a {
+      color: var(--gold);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    a:hover {
+      color: var(--gold-light);
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.2rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      background: rgba(14, 11, 6, 0.95);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-decoration: none;
+      line-height: 1.2;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .nav-logo:hover {
+      color: var(--gold);
+    }
+
+    .nav-logo span {
+      display: block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      color: var(--cream);
+      opacity: 0.4;
+      font-weight: 300;
+      margin-top: 0.15rem;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.3;
+      transition: opacity 0.2s, color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      opacity: 1;
+      color: var(--gold);
+    }
+
+    .nav-cta {
+      background: var(--gold) !important;
+      color: var(--ink) !important;
+      padding: 0.5rem 1rem !important;
+      opacity: 1 !important;
+      font-weight: 500 !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--gold-light) !important;
+      color: var(--ink) !important;
+    }
+
+
+
+    .mob-menu a {
+      color: var(--cream);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(200, 169, 81, 0.1);
+      opacity: 0.8;
+    }
+
+    .mob-menu a:last-child {
+      border: none;
+    }
+
+    .mob-menu a:hover {
+      color: var(--gold);
+      opacity: 1;
+    }
+
+
+    /* HIDE MOBILE NAV ELEMENTS ON DESKTOP BY DEFAULT */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--gold);
+    }
+
+    .nav-close {
+      display: none;
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--gold);
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+
+      /* Sliding nav drawer styles */
+      .nav-hamburger {
+        display: flex !important;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 4px;
+        z-index: 100;
+      }
+
+      .nav-hamburger span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: var(--gold);
+      }
+
+      .nav-links {
+        display: none !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        background: #0E0B06 !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 1.5rem !important;
+        z-index: 999 !important;
+        padding: 2rem !important;
+      }
+
+      .nav-links.open {
+        display: flex !important;
+      }
+
+      .nav-links a {
+        font-size: 1rem !important;
+        letter-spacing: 0.15em !important;
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(200, 169, 81, 0.1);
+      }
+
+      .nav-links .nav-cta {
+        background: var(--gold) !important;
+        color: var(--ink) !important;
+        width: auto !important;
+        padding: 0.6rem 2rem !important;
+        border-bottom: none !important;
+        margin-top: 0.5rem;
+      }
+
+      .nav-close {
+        display: block !important;
+        position: absolute !important;
+        top: 1.5rem !important;
+        right: 1.5rem !important;
+        background: none !important;
+        border: none !important;
+        color: var(--gold) !important;
+        font-size: 1.5rem !important;
+        cursor: pointer !important;
+        z-index: 1000 !important;
+      }
+
+      .nav-hamburger span {
+        background: var(--gold) !important;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      nav {
+        padding: 1rem 1.2rem;
+      }
+    }
+
+    /* PAGE HERO */
+    .page-hero {
+      padding: 8rem 4rem 4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section-label::before {
+      content: '';
+      width: 2rem;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.5;
+    }
+
+    .page-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .page-hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .page-hero p {
+      font-size: 0.9rem;
+      opacity: 0.6;
+      max-width: 600px;
+      line-height: 1.8;
+    }
+
+    /* LOCK BANNER */
+    .lock-banner {
+      background: rgba(200, 169, 81, 0.06);
+      border: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .lock-banner-left {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .lock-icon {
+      font-size: 1.8rem;
+    }
+
+    .lock-banner-text h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 300;
+      color: var(--gold);
+      margin-bottom: 0.2rem;
+    }
+
+    .lock-banner-text p {
+      font-size: 0.75rem;
+      opacity: 0.55;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: var(--ink);
+      padding: 0.75rem 2rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      text-decoration: none;
+      white-space: nowrap;
+      display: inline-block;
+    }
+
+    /* STATS BAR */
+    .stats-bar {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stat-cell {
+      flex: 1;
+      padding: 1.5rem 2rem;
+      border-right: 1px solid var(--border);
+    }
+
+    .stat-cell:last-child {
+      border-right: none;
+    }
+
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.2rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.95rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-top: 0.4rem;
+      font-weight: 500;
+    }
+
+    /* FILTER BAR */
+    .filter-bar {
+      padding: 2rem 4rem 1.5rem;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .filter-label {
+      font-size: 0.95rem;
+      color: var(--gold);
+      opacity: 0.9;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: 600;
+    }
+
+    .filter-buttons {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--cream);
+      opacity: 0.65;
+      padding: 0.4rem 1.2rem;
+      border-radius: var(--radius);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      font-weight: 500;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: rgba(200, 169, 81, 0.1);
+      border-color: var(--gold);
+      color: var(--gold);
+      opacity: 1;
+      transform: translateY(-1px);
+    }
+
+    /* LIBRARY SECTION */
+    .library-section {
+      padding: 2rem 4rem 5rem;
+    }
+
+    #section-label-text {
+      font-size: 1.15rem !important;
+      letter-spacing: 0.3em !important;
+      text-transform: uppercase !important;
+      opacity: 0.8 !important;
+      font-weight: 600 !important;
+      color: var(--gold) !important;
+      margin-bottom: 2.5rem !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 1rem !important;
+    }
+
+    .pattern-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .pattern-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .pattern-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .pattern-preview {
+      position: relative;
+      aspect-ratio: 4/3;
+      background: #0E0B06;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .pattern-svg {
+      width: 45%;
+      height: 45%;
+      opacity: 0.8;
+    }
+
+    .pattern-lock-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(14, 11, 6, 0.7);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .pattern-card:hover .pattern-lock-overlay {
+      opacity: 1;
+    }
+
+    .pattern-lock-icon {
+      font-size: 1.8rem;
+    }
+
+    .pattern-lock-text {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .pattern-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .pattern-meta {
+      display: flex;
+      gap: 0.6rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .meta-tag {
+      font-size: 0.8rem;
+      letter-spacing: 0.1rem;
+      text-transform: uppercase;
+      opacity: 0.55;
+    }
+
+    .meta-tag.format {
+      color: var(--gold);
+      opacity: 1;
+      font-weight: 500;
+    }
+
+    .pattern-name {
+      font-size: 1.0rem;
+      font-weight: 500;
+      line-height: 1.4;
+      margin-bottom: 0.6rem;
+      color: var(--cream);
+    }
+
+    .pattern-desc {
+      font-size: 0.9rem;
+      opacity: 0.55;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+      flex: 1;
+    }
+
+    .pattern-file-info {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin-bottom: 1.25rem;
+    }
+
+    .file-info-cell {
+      background: #0E0B06;
+      padding: 0.5rem 0.6rem;
+      text-align: center;
+    }
+
+    .file-info-label {
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.55;
+      margin-bottom: 0.15rem;
+    }
+
+    .file-info-val {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .pattern-download-locked {
+      text-align: center;
+      padding: 0.75rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      border: 1px solid var(--border);
+    }
+
+    .pattern-download-btn {
+      display: block;
+      background: var(--gold);
+      color: var(--ink);
+      text-align: center;
+      padding: 0.8rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s;
+      margin-top: 0.8rem;
+      font-family: 'DM Mono', monospace;
+    }
+
+    .pattern-download-btn:hover {
+      background: var(--gold-light);
+    }
+
+    /* CTA BAND */
+    .cta-band {
+      background: var(--gold);
+      padding: 5rem 4rem;
+      text-align: center;
+    }
+
+    .cta-band h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3.5rem);
+      font-weight: 300;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+
+    .cta-band p {
+      font-size: 0.85rem;
+      color: var(--ink);
+      opacity: 0.75;
+      margin-bottom: 2rem;
+    }
+
+    .btn-dark {
+      background: var(--ink);
+      color: var(--gold);
+      padding: 1rem 2.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #090704;
+      border-top: 1px solid var(--border);
+      padding: 4rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 300;
+      margin-bottom: 0.5rem;
+      color: var(--gold);
+    }
+
+    .footer-brand p {
+      font-size: 0.68rem;
+      opacity: 0.45;
+      line-height: 1.7;
+      margin-top: 0.5rem;
+    }
+
+    .footer-col h4 {
+      font-size: 0.55rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-col ul li a {
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.72rem;
+      opacity: 0.42;
+      transition: opacity 0.2s;
+    }
+
+    .footer-col ul li a:hover {
+      opacity: 0.9;
+      color: var(--gold);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .footer-copy {
+      font-size: 0.62rem;
+      opacity: 0.35;
+    }
+
+    /* ADMIN FAB */
+    .admin-fab {
+      display: none !important;
+    }
+
+    /* ADMIN OVERLAY */
+    #admin-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.92);
+      z-index: 9000;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 2rem;
+      overflow-y: auto;
+    }
+
+    .admin-panel {
+      background: #110d05;
+      border: 1px solid rgba(200, 169, 81, 0.3);
+      max-width: 720px;
+      width: 100%;
+      padding: 2.5rem;
+      margin: auto;
+    }
+
+    .admin-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .admin-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--gold);
+    }
+
+    .admin-close {
+      background: transparent;
+      border: none;
+      color: var(--cream);
+      font-size: 1.2rem;
+      cursor: pointer;
+      opacity: 0.5;
+    }
+
+    .admin-close:hover {
+      opacity: 1;
+    }
+
+    .admin-input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--cream);
+      padding: 0.75rem 1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.82rem;
+      outline: none;
+      margin-bottom: 0.8rem;
+    }
+
+    .admin-input:focus {
+      border-color: var(--gold);
+    }
+
+    .admin-select {
+      width: 100%;
+      background: #0E0B06;
+      border: 1px solid var(--border);
+      color: var(--cream);
+      padding: 0.75rem 1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.82rem;
+      outline: none;
+      margin-bottom: 0.8rem;
+    }
+
+    .admin-btn {
+      background: var(--gold);
+      color: var(--ink);
+      border: none;
+      padding: 0.75rem 1.8rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .admin-btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--cream);
+      padding: 0.6rem 1.2rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      cursor: pointer;
+      opacity: 0.3;
+    }
+
+    .admin-btn-outline:hover {
+      opacity: 1;
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .admin-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.5;
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+
+    .admin-section-title {
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+      margin: 1.5rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .editor-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.9rem 1rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(200, 169, 81, 0.1);
+      margin-bottom: 0.4rem;
+    }
+
+    .editor-thumb {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+      background: #0E0B06;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-size: 1.2rem;
+      opacity: 0.4;
+      position: relative;
+    }
+
+    .editor-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .editor-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .editor-name {
+      font-size: 0.82rem;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .editor-meta {
+      font-size: 0.65rem;
+      opacity: 0.4;
+      margin-top: 0.2rem;
+    }
+
+    .editor-actions {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .editor-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--gold);
+      padding: 0.3rem 0.6rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      cursor: pointer;
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .editor-btn:hover {
+      background: var(--gold);
+      color: var(--ink);
+    }
+
+    .editor-btn-file {
+      background: rgba(200, 169, 81, 0.1);
+      border: 1px solid rgba(200, 169, 81, 0.4);
+      color: var(--gold);
+      padding: 0.3rem 0.6rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      cursor: pointer;
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+
+    .editor-btn-del {
+      border-color: rgba(212, 71, 42, 0.3);
+      color: #D4472A;
+    }
+
+    .editor-btn-del:hover {
+      background: #D4472A;
+      color: #fff;
+    }
+
+    .pw-err {
+      display: none;
+      color: #f44336;
+      font-size: 0.72rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+
+    /* MOBILE NAVIGATION */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 62px;
+      background: #0E0B06;
+      border-top: 1px solid var(--border);
+      z-index: 500;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .mobile-nav a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      text-decoration: none;
+      color: var(--cream);
+      opacity: 0.5;
+      font-size: 0.52rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      flex: 1;
+      text-align: center;
+      padding: 8px 4px;
+    }
+
+    .mobile-nav a.active,
+    .mobile-nav a:hover {
+      opacity: 1;
+      color: var(--gold);
+    }
+
+    .mobile-nav .nav-icon {
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 768px) {
+      .mobile-nav {
+        display: flex;
+      }
+
+      body {
+        padding-bottom: 75px;
+      }
+
+      .admin-fab {
+        bottom: 75px;
+      }
+
+      .filter-bar {
+        padding: 1.5rem 1.2rem 0.5rem;
+      }
+
+      .library-section {
+        padding: 1rem 1.2rem 4rem;
+      }
+    }
+
+    /* â•â•â• MOBILE HEADER & DRAWER OVERLAYS SOLID BLACK CONTRAST FIX â•â•â• */
+    @media (max-width: 1100px) {
+      nav {
+        background: #0E0B06 !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+      }
+
+      #main-nav {
+        background: #0E0B06 !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        background: #0E0B06 !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border-bottom: 1px solid rgba(200, 169, 81, 0.25) !important;
+      }
+
+      .nav-links {
+        background: #0E0B06 !important;
+      }
+
+      .mobile-bottom-nav,
+      .mobile-nav {
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200, 169, 81, 0.25) !important;
+      }
+
+      .mobile-bottom-nav a,
+      .mobile-nav a {
+        background: #0E0B06 !important;
+      }
+    }
+
+    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
+
+    /* ════════ Standardized Hero Typography and Textures ════════ */
+    body::before {
+      content: '' !important;
+      position: fixed !important;
+      inset: 0 !important;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E") !important;
+      pointer-events: none !important;
+      z-index: 999 !important;
+      opacity: 0.4 !important;
+    }
+
+    /* Equal Sizing across front page headers */
+    .hero h1,
+    h1 {
+      font-family: 'Cormorant Garamond', serif !important;
+      font-size: clamp(2.5rem, 4vw, 4rem) !important;
+      font-weight: 300 !important;
+      line-height: 1.15 !important;
+      margin-bottom: 1.2rem !important;
+      letter-spacing: -0.01em !important;
+    }
+
+    .hero p,
+    p.hero-desc {
+      font-family: 'DM Mono', monospace !important;
+      font-size: 0.9rem !important;
+      opacity: 0.65 !important;
+      line-height: 1.8 !important;
+      max-width: 600px !important;
+      margin: 0 auto 2.5rem !important;
+    }
+
+    /* ════════ Standardized Simplified Footer Styles ════════ */
+    body {
+      display: flex !important;
+      flex-direction: column !important;
+      min-height: 100vh !important;
+    }
+
+    footer {
+      background: #090704 !important;
+      border-top: 1px solid var(--border) !important;
+      padding: 4rem 4rem 3rem !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+      margin-top: auto !important;
+      text-align: left !important;
+    }
+
+    .footer-grid {
+      display: grid !important;
+      grid-template-columns: 1.5fr 1fr !important;
+      gap: 3rem !important;
+      margin-bottom: 3.5rem !important;
+      max-width: 1200px !important;
+      margin-left: 0 !important;
+      margin-right: auto !important;
+    }
+
+    .footer-brand h3 {
+      font-family: 'Bebas Neue', sans-serif !important;
+      font-size: 1.5rem !important;
+      letter-spacing: 0.12em !important;
+      color: var(--gold) !important;
+      margin-bottom: 0.9rem !important;
+      line-height: 1.1 !important;
+      text-transform: uppercase !important;
+    }
+
+    .footer-brand p {
+      font-size: 0.82rem !important;
+      opacity: 0.7 !important;
+      line-height: 1.85 !important;
+      max-width: 35ch !important;
+      margin-bottom: 1.2rem !important;
+      color: var(--cream) !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    .footer-address,
+    .footer-brand .addr {
+      font-size: 0.88rem !important;
+      opacity: 0.6 !important;
+      line-height: 1.6 !important;
+      color: var(--cream) !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    .footer-col h4 {
+      font-size: 0.88rem !important;
+      letter-spacing: 0.25em !important;
+      text-transform: uppercase !important;
+      color: var(--gold) !important;
+      margin-bottom: 1.2rem !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    .footer-col ul {
+      list-style: none !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 0.75rem !important;
+      padding: 0 !important;
+    }
+
+    .footer-col ul a {
+      font-size: 0.82rem !important;
+      opacity: 0.65 !important;
+      text-decoration: none !important;
+      color: var(--cream) !important;
+      transition: opacity 0.2s, color 0.2s !important;
+      letter-spacing: 0.03em !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    .footer-col ul a:hover {
+      opacity: 0.95 !important;
+      color: var(--gold) !important;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border) !important;
+      padding-top: 2rem !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 0.5rem !important;
+      max-width: 1200px !important;
+      margin-left: 0 !important;
+      margin-right: auto !important;
+      text-align: left !important;
+    }
+
+    .footer-copy,
+    .footer-bottom p {
+      font-size: 0.88rem !important;
+      opacity: 0.55 !important;
+      letter-spacing: 0.05em !important;
+      color: var(--cream) !important;
+      margin: 0 !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    @media (max-width: 768px) {
+      footer {
+        padding: 3rem 1.2rem !important;
+        text-align: left !important;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+      }
+
+      .footer-bottom {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+      }
+    }
+
+    /* Remove bottom padding and hide bottom navigation entirely */
+    body {
+      padding-bottom: 0 !important;
+    }
+
+    .mob-nav,
+    .mobile-bottom-nav,
+    .mobile-nav {
+      display: none !important;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <!-- NAV -->
+  <nav>
+    <a href="/index.html" class="nav-logo">
+      Launch My Clothing Brand
+      <span>Pattern to Manufacturing</span>
+    </a>
+    <ul class="nav-links" id="main-nav">
+      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">✕</button>
+      <li><a href="/services.html">Services</a></li>
+      <li><a href="/library-test.html" class="active">Patterns</a></li>
+      <li><a href="/specsheets.html">Spec Sheets</a></li>
+      <li><a href="/phototopattern.html">Photo to Pattern</a></li>
+      <li><a href="/insights.html">Insights</a></li>
+      <li><a href="/manufacturers.html">Manufacturers</a></li>
+      <li><a href="/subscribe.html" class="nav-cta">Get Started</a></li>
+    </ul>
+    <button class="nav-hamburger" onclick="document.getElementById('main-nav').classList.add('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="section-label">Pattern Library</div>
+    <h1>Production-Ready <em>Patterns</em></h1>
+    <p>Browse production-ready garment designs. Paid members can download one ZIP package containing the design image, DXF pattern and RUL grading file.</p>
+    <div class="lock-banner">
+      <div class="lock-banner-left">
+        <div class="lock-icon">🔒</div>
+        <div class="lock-banner-text">
+          <h4 id="library-access-title">Subscription Required</h4>
+          <p id="library-access-copy">Browse every design freely. Active members can securely download the complete ZIP package.</p>
+        </div>
+      </div>
+      <a href="/subscribe.html" class="btn-gold">View Plans →</a>
+    </div>
+    <div id="secure-access-status" style="margin-top:1rem;padding:1rem 1.2rem;border:1px solid rgba(200,169,81,0.2);background:rgba(200,169,81,0.035);font-size:.72rem;line-height:1.7;display:none;"></div>
+    <div id="manual-zip-note" style="margin-top:.7rem;font-size:.68rem;opacity:.62;line-height:1.6;">Each paid download contains one ZIP file: design image + DXF + RUL grading file.</div>
+  </div>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat-cell">
+      <div class="stat-num" id="total-count">—</div>
+      <div class="stat-label">Patterns Listed</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">DXF</div>
+      <div class="stat-label">Industry Standard CAD</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">🔒</div>
+      <div class="stat-label">Premium Downloads</div>
+    </div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <span class="filter-label">Category:</span>
+    <div class="filter-buttons">
+      <button class="filter-btn category-btn active" onclick="filterCategory('all', this)">All</button>
+      <button class="filter-btn category-btn" onclick="filterCategory('Men', this)">Men</button>
+      <button class="filter-btn category-btn" onclick="filterCategory('Women', this)">Women</button>
+      <button class="filter-btn category-btn" onclick="filterCategory('Kids', this)">Kids</button>
+      <button class="filter-btn category-btn" onclick="filterCategory('Maternity', this)">Maternity</button>
+    </div>
+  </div>
+
+  <!-- PATTERN LIBRARY -->
+  <section class="library-section">
+    <div class="section-label" id="section-label-text">All Patterns</div>
+    <div class="pattern-grid" id="pattern-grid">
+      <div class="empty-state">⏳ Loading pattern library database...</div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-band">
+    <h2>Unlock the Full Library</h2>
+    <p>Get instant access to all patterns — DXF, PDF, and ZIP bundles — with a premium subscription. New patterns added
+      regularly.</p>
+    <a href="/subscribe.html" class="btn-dark">View Plans →</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Launch My Clothing Brand</h3>
+        <p>Professional digital pattern making and manufacturer data services for clothing brands in India.</p>
+        <div class="addr">Bijwasan, Delhi — 110061</div>
+      </div>
+      <div class="footer-col">
+        <h4>Legal and Support</h4>
+        <ul>
+          <li><a href="mailto:hello.launchmyclothing@gmail.com">✉ hello.launchmyclothing@gmail.com</a></li>
+          <li><a href="/contact.html">📞 Contact Us</a></li>
+          <li><a href="/terms.html">📄 Terms of Service</a></li>
+          <li><a href="/privacy.html">📄 Privacy Policy</a></li>
+        </ul>
+        <p style="font-size: 0.75rem; color: var(--muted); margin-top: 0.8rem; opacity: 0.6; line-height: 1.5;">Phone
+          support available for premium members only.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Launch My Clothing Brand. All Rights Reserved.</p>
+      <p>launchmyclothingbrand.com · Delhi 110061</p>
+    </div>
+  </footer>
+
+  <!-- Admin editor intentionally removed from secure test page. -->
+
+  <!-- SVG pattern icons (reused in cards) -->
+  <svg style="display:none">
+    <symbol id="icon-tshirt" viewBox="0 0 80 80">
+      <path d="M10 20 L25 10 L40 18 L55 10 L70 20 L58 30 L58 70 L22 70 L22 30 Z" stroke="currentColor" stroke-width="2"
+        fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+    <symbol id="icon-hoodie" viewBox="0 0 80 80">
+      <path d="M12 22 L28 8 L40 16 L52 8 L68 22 L56 34 L56 70 L24 70 L24 34 Z" stroke="currentColor" stroke-width="2"
+        fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M32 16 Q40 24 48 16" stroke="currentColor" stroke-width="2" fill="none" />
+      <rect x="34" y="22" width="12" height="8" rx="2" stroke="currentColor" stroke-width="1.5" fill="none" />
+    </symbol>
+    <symbol id="icon-jeans" viewBox="0 0 80 80">
+      <path d="M20 10 L60 10 L65 45 L48 72 L40 55 L32 72 L15 45 Z" stroke="currentColor" stroke-width="2" fill="none"
+        stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M20 10 L25 28 M60 10 L55 28" stroke="currentColor" stroke-width="1.5" fill="none" />
+    </symbol>
+  </svg>
+
+  <!-- MOBILE BOTTOM NAVIGATION -->
+
+
+  <!-- JSZip CDN for in-browser zipping of multiple file uploads -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <!-- Supabase SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    // ── SECURE LIBRARY TEST ───────────────────────────────
+    // Use the SAME current Supabase publishable key that works in login-test.html.
+    const SUPABASE_URL = 'https://tldbjsqhjqapdwmfeuwq.supabase.co';
+    const SUPABASE_KEY = 'PASTE_YOUR_CURRENT_SB_PUBLISHABLE_KEY_HERE';
+    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+      auth: {
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: true
+      }
+    });
+
+    let authSession = null;
+    let entitlement = {
+      active: false,
+      planKey: null,
+      planName: null,
+      patternAccess: false,
+      used: 0,
+      limit: 0,
+      remaining: 0,
+      periodEnd: null
+    };
+
+    let patternsList = [];
+    let activeCategory = 'all';
+
+    function getNormalizedCategory(dbCategory, patternName) {
+      const cat = (dbCategory || '').toLowerCase().trim();
+      const name = (patternName || '').toLowerCase();
+
+      if (cat.includes('maternity') || name.includes('maternity')) return 'Maternity';
+      if (cat.includes('girl') || cat.includes('boy') || cat.includes('kid') || cat.includes('child') ||
+          name.includes('girl') || name.includes('boy') || name.includes('kid') || name.includes('child')) return 'Kids';
+      if (cat.includes('women') || cat.includes('lady') || cat.includes('ladies') ||
+          name.includes('women') || name.includes('lady') || name.includes('ladies')) return 'Women';
+      if (cat.includes('men') || cat.includes('man') || cat.includes('gent') ||
+          name.includes('men') || name.includes('man') || name.includes('gent')) return 'Men';
+
+      return 'Men';
+    }
+
+    function formatResetDate(value) {
+      if (!value) return '';
+      try {
+        return new Date(value).toLocaleDateString('en-IN', {
+          day: '2-digit',
+          month: 'short',
+          year: 'numeric'
+        });
+      } catch (_) {
+        return '';
+      }
+    }
+
+    function renderAccessStatus() {
+      const box = document.getElementById('secure-access-status');
+      const title = document.getElementById('library-access-title');
+      const copy = document.getElementById('library-access-copy');
+
+      box.style.display = 'block';
+
+      if (!authSession) {
+        title.textContent = 'Log In to Download';
+        copy.textContent = 'Everyone can browse the full pattern catalogue. Log in to check your subscription and download allowance.';
+        box.innerHTML = `🔐 <strong>Secure access:</strong> You are browsing as a guest. Pattern files remain private.`;
+        return;
+      }
+
+      if (!entitlement.active || !entitlement.patternAccess) {
+        title.textContent = 'Subscription Required';
+        copy.textContent = 'Your account is logged in, but an active pattern-download plan is required.';
+        box.innerHTML = `👤 Logged in as <strong>${authSession.user.email || 'member'}</strong> · No active pattern-download entitlement.`;
+        return;
+      }
+
+      title.textContent = `${entitlement.planName || entitlement.planKey} Access Active`;
+      copy.textContent = 'Your complete pattern packages are protected by Supabase Auth and short-lived signed URLs.';
+
+      const reset = formatResetDate(entitlement.periodEnd);
+      box.innerHTML =
+        `✅ <strong>${entitlement.planName || entitlement.planKey}</strong> · ` +
+        `Downloads used: <strong>${entitlement.used} / ${entitlement.limit}</strong> · ` +
+        `Remaining: <strong>${entitlement.remaining}</strong>` +
+        (reset ? ` · Resets: <strong>${reset}</strong>` : '');
+    }
+
+    async function loadEntitlement() {
+      const { data: sessionData, error: sessionError } = await sb.auth.getSession();
+      if (sessionError) console.warn('Session check failed:', sessionError);
+
+      authSession = sessionData?.session || null;
+
+      entitlement = {
+        active: false,
+        planKey: null,
+        planName: null,
+        patternAccess: false,
+        used: 0,
+        limit: 0,
+        remaining: 0,
+        periodEnd: null
+      };
+
+      if (!authSession) {
+        renderAccessStatus();
+        return;
+      }
+
+      const userId = authSession.user.id;
+
+      const { data: sub, error: subError } = await sb
+        .from('subscriptions')
+        .select('id,plan_key,status,current_period_start,current_period_end')
+        .eq('user_id', userId)
+        .eq('status', 'active')
+        .maybeSingle();
+
+      if (subError) {
+        console.warn('Subscription lookup failed:', subError);
+        renderAccessStatus();
+        return;
+      }
+
+      if (!sub) {
+        renderAccessStatus();
+        return;
+      }
+
+      const { data: plan, error: planError } = await sb
+        .from('plans')
+        .select('key,name,monthly_download_limit,pattern_access')
+        .eq('key', sub.plan_key)
+        .maybeSingle();
+
+      if (planError || !plan) {
+        console.warn('Plan lookup failed:', planError);
+        renderAccessStatus();
+        return;
+      }
+
+      const now = new Date();
+      const fallbackStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
+      const fallbackEnd = new Date(now.getFullYear(), now.getMonth() + 1, 1).toISOString();
+      const periodStart = sub.current_period_start || fallbackStart;
+      const periodEnd = sub.current_period_end || fallbackEnd;
+
+      const { count, error: countError } = await sb
+        .from('downloads')
+        .select('id', { count: 'exact', head: true })
+        .eq('user_id', userId)
+        .gte('downloaded_at', periodStart)
+        .lt('downloaded_at', periodEnd);
+
+      if (countError) console.warn('Download count lookup failed:', countError);
+
+      const used = count || 0;
+      const limit = plan.monthly_download_limit || 0;
+
+      entitlement = {
+        active: true,
+        planKey: sub.plan_key,
+        planName: plan.name,
+        patternAccess: !!plan.pattern_access,
+        used,
+        limit,
+        remaining: Math.max(0, limit - used),
+        periodEnd
+      };
+
+      renderAccessStatus();
+    }
+
+    async function loadPatterns() {
+      // IMPORTANT: fetch only safe catalogue fields.
+      // file_url and storage_path are intentionally NOT returned to the browser.
+      const { data, error } = await sb
+        .from('patterns')
+        .select('id,name,description,category,format,file_size,image_url,is_active')
+        .eq('is_active', true)
+        .order('created_at', { ascending: true });
+
+      if (error) {
+        console.error('Pattern catalogue load failed:', error);
+        patternsList = [];
+      } else {
+        patternsList = data || [];
+      }
+
+      renderCards();
+    }
+
+    function renderCards() {
+      const grid = document.getElementById('pattern-grid');
+
+      const filtered = patternsList.filter(p => {
+        const normalizedCat = getNormalizedCategory(p.category, p.name);
+        return activeCategory === 'all' || normalizedCat === activeCategory;
+      });
+
+      document.getElementById('total-count').textContent = patternsList.length + '+';
+
+      const labelText = activeCategory === 'all' ? 'All Pattern Packages' : `${activeCategory} Pattern Packages`;
+      document.getElementById('section-label-text').textContent = labelText;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div style="grid-column:1/-1;padding:5rem 2rem;text-align:center;border:1px dashed var(--border);background:rgba(200,169,81,0.02);border-radius:3px;font-family:'DM Mono',monospace;">
+          <div style="font-size:1.8rem;margin-bottom:0.8rem;opacity:0.3;">📦</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--gold);margin-bottom:0.4rem;">Collection Coming Soon</div>
+          <p style="font-size:0.78rem;opacity:0.5;max-width:320px;margin:0 auto;line-height:1.6;">Our premium print-ready patterns are currently being curated.</p>
+        </div>`;
+        return;
+      }
+
+      const iconList = ['icon-tshirt', 'icon-hoodie', 'icon-jeans'];
+      const FORMAT_EMOJIS = { DXF: '📐', PDF: '📄', ZIP: '📦' };
+
+      grid.innerHTML = filtered.map((p, i) => {
+        const formatEmoji = FORMAT_EMOJIS[p.format] || '📁';
+        const iconId = iconList[i % iconList.length];
+
+        const previewContent = p.image_url
+          ? `<img src="${p.image_url}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.8) contrast(1.05);" />`
+          : `<svg class="pattern-svg" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><use href="#${iconId}" color="#C8A951"/></svg>
+             <div style="position:absolute;bottom:0.8rem;left:50%;transform:translateX(-50%);font-size:0.55rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(200,169,81,0.4);white-space:nowrap;">Image Coming Soon</div>`;
+
+        let downloadBlock = '';
+        let lockOverlay = '';
+
+        if (!authSession) {
+          downloadBlock = `<button class="pattern-download-btn" type="button" onclick="window.location.href='/login-test.html?redirect=/library-test.html'" style="width:100%;border:none;cursor:pointer;">🔒 &nbsp; Log In to Download</button>`;
+          lockOverlay = `<div class="pattern-lock-overlay" onclick="window.location.href='/login-test.html?redirect=/library-test.html'" style="cursor:pointer;">
+              <div class="pattern-lock-icon">🔒</div>
+              <div class="pattern-lock-text">Log In to Unlock</div>
+            </div>`;
+        } else if (!entitlement.active || !entitlement.patternAccess) {
+          downloadBlock = `<button class="pattern-download-btn" type="button" onclick="window.location.href='/subscribe.html'" style="width:100%;border:none;cursor:pointer;">🔒 &nbsp; Subscribe to Download</button>`;
+          lockOverlay = `<div class="pattern-lock-overlay" onclick="window.location.href='/subscribe.html'" style="cursor:pointer;">
+              <div class="pattern-lock-icon">🔒</div>
+              <div class="pattern-lock-text">Subscription Required</div>
+            </div>`;
+        } else if (entitlement.remaining <= 0) {
+          downloadBlock = `<div class="pattern-download-locked">Monthly Download Limit Reached</div>`;
+        } else {
+          downloadBlock = `<button class="pattern-download-btn" type="button" data-pattern-id="${p.id}" onclick="securePatternDownload('${p.id}', this)" style="width:100%;border:none;cursor:pointer;">⬇ &nbsp; Download Image + DXF + RUL</button>`;
+        }
+
+        const normalizedCategoryDisplay = getNormalizedCategory(p.category, p.name);
+
+        return `
+        <div class="pattern-card">
+          <div class="pattern-preview">
+            ${previewContent}
+            ${lockOverlay}
+          </div>
+          <div class="pattern-body">
+            <div class="pattern-meta">
+              <span class="meta-tag format">📦 COMPLETE PACKAGE</span>
+              <span class="meta-tag">${normalizedCategoryDisplay}</span>
+            </div>
+            <div class="pattern-name">${p.name}</div>
+            <div class="pattern-desc">${p.description || ''}</div>
+            <div class="pattern-file-info">
+              <div class="file-info-cell"><div class="file-info-label">Package</div><div class="file-info-val">ZIP</div></div>
+              <div class="file-info-cell"><div class="file-info-label">Size</div><div class="file-info-val">${p.file_size || 'N/A'}</div></div>
+              <div class="file-info-cell"><div class="file-info-label">Category</div><div class="file-info-val">${normalizedCategoryDisplay}</div></div>
+            </div>
+            ${downloadBlock}
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    async function securePatternDownload(patternId, button) {
+      if (!authSession) {
+        window.location.href = '/login-test.html?redirect=/library-test.html';
+        return;
+      }
+
+      if (!entitlement.active || !entitlement.patternAccess) {
+        window.location.href = '/subscribe.html';
+        return;
+      }
+
+      const originalText = button.textContent;
+      button.disabled = true;
+      button.textContent = 'Preparing Secure Download...';
+
+      try {
+        // Refresh the Auth session immediately before requesting a protected file.
+        const { data: refreshed } = await sb.auth.getSession();
+        const currentSession = refreshed?.session;
+        if (!currentSession) throw new Error('Your login session has expired. Please log in again.');
+
+        const response = await fetch(
+          `${SUPABASE_URL}/functions/v1/create-download`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${currentSession.access_token}`
+            },
+            body: JSON.stringify({
+              resource_type: 'pattern',
+              resource_id: patternId
+            })
+          }
+        );
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          if (response.status === 429) {
+            entitlement.used = result.used ?? entitlement.limit;
+            entitlement.remaining = 0;
+            renderAccessStatus();
+            renderCards();
+            throw new Error('Your monthly download limit has been reached.');
+          }
+
+          if (response.status === 404) {
+            throw new Error('This ZIP package is not attached yet. Please try another pattern.');
+          }
+
+          throw new Error(result.error || result.details || 'Secure download request failed.');
+        }
+
+        entitlement.used = result.used;
+        entitlement.limit = result.limit;
+        entitlement.remaining = result.remaining;
+        renderAccessStatus();
+
+        // The Edge Function returns a ~90-second signed URL from the PRIVATE bucket.
+        const a = document.createElement('a');
+        a.href = result.url;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+
+        // Re-render buttons so the remaining quota is reflected immediately.
+        renderCards();
+
+      } catch (err) {
+        console.error('Secure download error:', err);
+        alert(err?.message || 'Unable to prepare the secure download.');
+        button.disabled = false;
+        button.textContent = originalText;
+      }
+    }
+
+    function filterCategory(category, btn) {
+      activeCategory = category;
+      document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderCards();
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      await loadEntitlement();
+      await loadPatterns();
+    });
+
+    sb.auth.onAuthStateChange(async () => {
+      await loadEntitlement();
+      renderCards();
+    });
+  </script>
+</body>
+
+</html>
