@@ -684,7 +684,11 @@ function closeForgot(){document.getElementById('forgotOverlay').classList.remove
 async function sendReset(){
   const email=document.getElementById('forgotEmail').value.trim().toLowerCase();if(!email||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){showAlert('forgotAlert','Please enter a valid email address.','error');return;}
   const btn=document.getElementById('sendResetBtn'),originalText=btn.innerHTML;btn.disabled=true;btn.innerHTML='<span class="spinner"></span>Sending...';
-  try{const redirectTo=window.location.origin+'/reset-password.html';const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo});if(error)throw error;showAlert('forgotAlert','If an Auth account exists for this email, a secure reset link has been sent. Please check your inbox and spam folder.','success');document.getElementById('forgotEmail').value='';}catch(err){showAlert('forgotAlert','Unable to send the reset email right now. Please try again.','error');}finally{btn.disabled=false;btn.innerHTML=originalText;}
+  try{const redirectTo=window.location.origin+'/reset-password.html';const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo});if(error)throw error;showAlert('forgotAlert','If an Auth account exists for this email, a secure reset link has been sent. Please check your inbox and spam folder.','success');document.getElementById('forgotEmail').value='';}catch(err){console.error('Password reset error:', err);
+  showAlert(
+    'forgotAlert',
+    'Reset error: ' + (err?.message || 'Unknown error'),
+    'error');}finally{btn.disabled=false;btn.innerHTML=originalText;}
 }
 async function logoutUser(e){if(e)e.preventDefault();await sb.auth.signOut();localStorage.removeItem('lmcb_user');localStorage.removeItem('lmcb_current_plan');window.location.reload();}
 document.addEventListener('DOMContentLoaded',async()=>{
