@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Submit a garment reference image with fit, fabric and construction details to receive professional measurement guidance for pattern and fit development.">
+  <title>Photo to Pattern | Launch My Clothing Brand</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  
+  <style>
+    :root {
+      --gold: #C8A951;
+      --gold-light: #E8C96A;
+      --cream: #F5F0E8;
+      --ink: #1A1208;
+      --ink-soft: #3D2E10;
+      --bg: #0E0B06;
+      --card-bg: #1C1609;
+      --border: rgba(200,169,81,0.2);
+      --red: #D4472A;
+      --green: #4CAF50;
+      --radius: 3px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 18px; }
+
+    body { font-size: 1rem; background: #0E0B06;
+      color: var(--cream);
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      overflow-x: hidden;
+      min-height: 100vh;
+      padding-bottom: 80px; }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
+    }
+
+    a { color: var(--gold); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--gold-light); }
+
+        /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.3rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      background: rgba(14,11,6,0.92);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-decoration: none;
+      line-height: 1.2;
+      display: flex;
+      flex-direction: column;
+    }
+    .nav-logo:hover {
+      color: var(--gold);
+    }
+
+    .nav-logo span {
+      display: block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      color: var(--cream);
+      opacity: 0.4;
+      font-weight: 300;
+      margin-top: 0.15rem;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.3;
+      transition: opacity 0.2s, color 0.2s;
+    }
+
+    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold); }
+
+    .nav-cta {
+      background: var(--gold) !important;
+      color: var(--ink) !important;
+      padding: 0.6rem 1.4rem !important;
+      opacity: 1 !important;
+      font-weight: 500 !important;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--gold-light) !important; color: var(--ink) !important; }
+
+    .nav-close { display: none; }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 8rem 4rem 3rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(200,169,81,0.06);
+      border: 1px solid var(--border);
+      color: var(--gold);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero h1 em { color: var(--gold); font-style: italic; }
+
+    .hero p {
+      color: var(--cream);
+      opacity: 0.3;
+      font-size: 0.9rem;
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.8;
+    }
+
+    /* CONTAINER & FORM */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+
+    .form-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 3rem;
+      box-shadow: 0 15px 45px rgba(200,169,81,0.05);
+      border-radius: 3px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 300;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      border-bottom: 1px dashed rgba(200,169,81,0.2);
+      padding-bottom: 0.5rem;
+    }
+
+    .field { margin-bottom: 1.5rem; }
+
+    .field label {
+      display: block;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.8;
+      margin-bottom: 0.5rem;
+    }
+
+    .field input, .field select, .field textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      padding: 0.8rem 1rem;
+      color: var(--cream);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.85rem;
+      outline: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .field input:focus, .field select:focus, .field textarea:focus {
+      border-color: var(--gold);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .field select, .field select option {
+      background: #0E0B06 !important;
+      color: var(--cream) !important;
+    }
+    .field textarea { resize: vertical; min-height: 100px; }
+
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    
+    /* HIDE MOBILE NAV ELEMENTS ON DESKTOP BY DEFAULT */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--gold);
+    }
+    .nav-close {
+      display: none;
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--gold);
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+@media (max-width: 600px) { .field-row { grid-template-columns: 1fr; } }
+
+    /* IMAGE UPLOAD BOX */
+    .upload-zone {
+      border: 1px dashed rgba(200,169,81,0.4);
+      background: rgba(200,169,81,0.02);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .upload-zone:hover {
+      background: rgba(200,169,81,0.06);
+      border-color: var(--gold);
+    }
+
+    .upload-icon { font-size: 2.2rem; margin-bottom: 0.8rem; }
+    .upload-text { font-size: 0.78rem; opacity: 0.7; line-height: 1.6; }
+    .upload-preview-wrap { display: none; margin-top: 1rem; position: relative; }
+    .upload-preview { max-height: 180px; max-width: 100%; border: 1px solid var(--border); object-fit: contain; }
+
+    /* PAYMENT TICKET INFO */
+    .tier-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      border-radius: 20px;
+    }
+    .tier-free { background: rgba(76,175,80,0.1); border: 1px solid rgba(76,175,80,0.25); color: var(--green); }
+    .tier-premium { background: rgba(200,169,81,0.1); border: 1px solid var(--border); color: var(--gold); }
+
+    .payment-summary {
+      background: rgba(200,169,81,0.03);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border-radius: 3px;
+    }
+
+    .summary-row { display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 0.5rem; }
+    .summary-row.total { font-weight: 500; color: var(--gold); border-top: 1px dashed rgba(200,169,81,0.2); padding-top: 0.8rem; margin-top: 0.8rem; }
+
+    /* BUTTONS */
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, #E8C96A 0%, #C8A951 50%, #A68230 100%) !important;
+      color: #0E0B06 !important;
+      border: 1px solid rgba(232, 201, 106, 0.2) !important;
+      box-shadow: 0 4px 15px rgba(200,169,81,0.15) !important;
+      padding: 1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 8px 25px rgba(200,169,81,0.3) !important;
+      filter: brightness(1.08) !important;
+    }
+
+    .btn-submit:disabled { opacity: 0.3; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+
+    .spinner {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(0,0,0,0.3);
+      border-top-color: var(--ink);
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* OVERLAYS */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.96);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      backdrop-filter: blur(14px);
+    }
+    .overlay.open { display: flex; }
+
+    .modal {
+      background: #1C1609;
+      border: 1px solid rgba(200,169,81,0.35);
+      padding: 3.5rem 2.5rem;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(200,169,81,0.2);
+    }
+
+    /* FOOTER & MOBILE NAV */
+    footer {
+      background: #090704;
+      border-top: 1px solid var(--border);
+      padding: 4rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 300;
+      color: var(--gold);
+    }
+
+    .footer-brand p { font-size: 0.68rem; opacity: 0.3; line-height: 1.7; margin-top: 0.5rem; }
+    .footer-col h4 { font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); opacity: 0.7; margin-bottom: 1.2rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.6rem; }
+    .footer-col ul li a { color: var(--cream); font-size: 0.72rem; opacity: 0.4; transition: opacity 0.2s; }
+    .footer-col ul li a:hover { opacity: 0.8; color: var(--gold); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 1.5rem; display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 1rem; }
+    .footer-copy { font-size: 0.62rem; opacity: 0.3; }
+
+    @media (max-width: 768px) {
+      footer { padding: 3rem 1.2rem; text-align: left; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; text-align: left; }
+    }
+
+    
+
+    
+
+    .mobile-nav a:hover, .mobile-nav a.active { opacity: 1; color: var(--gold); }
+    
+
+    @media (max-width: 768px) {
+      
+      body { font-size: 1rem; padding-bottom: 75px; }
+    }
+  
+        /* ═══ MOBILE BOTTOM NAV BAR ══════════════════════════ */
+    
+    
+    @media (max-width: 768px) {
+      /* Add padding to body so content not hidden behind bottom nav */
+      body { font-size: 1rem; padding-bottom: 70px !important; }
+      
+      
+      
+      
+      
+      .mobile-bottom-nav a:hover,
+      .mobile-bottom-nav a.active {
+        opacity: 1 !important;
+        color: #C8A951 !important;
+      }
+      
+      
+      
+      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
+      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
+    }
+    
+    
+    @media (max-width: 768px) {
+      /* Add padding to body so content not hidden behind bottom nav */
+      body { font-size: 1rem; padding-bottom: 70px !important; }
+      
+      
+      
+      
+      
+      .mobile-bottom-nav a:hover,
+      .mobile-bottom-nav a.active {
+        opacity: 1 !important;
+        color: #C8A951 !important;
+      }
+      
+      
+      
+      /* Hide WhatsApp button on mobile to avoid overlap with bottom nav */
+      #wa-bubble { bottom: 75px !important; right: 1rem !important; }
+    }
+
+    .mobile-bottom-nav {
+      display: none;
+    }
+    @media (max-width: 768px) {
+      .mobile-bottom-nav {
+        display: flex !important;
+        position: fixed !important;
+        bottom: 0 !important; left: 0 !important; right: 0 !important;
+        height: 62px !important;
+        background: #0E0B06 !important;
+        border-top: 1px solid rgba(200,169,81,0.25) !important;
+        z-index: 500 !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        padding: 0 !important;
+      }
+      .mobile-bottom-nav a {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 3px !important;
+        text-decoration: none !important;
+        color: #F5F0E8 !important;
+        opacity: 0.5 !important;
+        font-family: 'DM Mono', monospace !important;
+        font-size: 0.52rem !important;
+        letter-spacing: 0.08em !important;
+        text-transform: uppercase !important;
+        padding: 8px 4px !important;
+        flex: 1 !important;
+        text-align: center !important;
+        transition: opacity 0.2s, color 0.2s !important;
+      }
+      .mobile-bottom-nav a:hover,
+      .mobile-bottom-nav a.active {
+        opacity: 1 !important;
+        color: #C8A951 !important;
+      }
+      .mobile-bottom-nav .nav-icon {
+        font-size: 1.2rem !important;
+        line-height: 1 !important;
+      }
+    }
+
+    @media (max-width: 1100px) {
+      nav {
+        padding: 1rem 1.2rem !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+      }
+      
+      .nav-hamburger {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 5px !important;
+        cursor: pointer !important;
+        background: none !important;
+        border: none !important;
+        padding: 4px !important;
+      }
+      
+      .nav-hamburger span {
+        display: block !important;
+        width: 24px !important;
+        height: 2px !important;
+        background: #C8A951 !important;
+      }
+      
+      .nav-links {
+        display: none !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        background: #0E0B06 !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        overflow-y: auto !important;
+        align-items: center !important;
+        gap: 1.5rem !important;
+        z-index: 999 !important;
+        padding: 5rem 2rem 2rem !important;
+        border: none !important;
+      }
+      
+      .nav-links.open { display: flex !important; }
+      
+      .nav-links li { list-style: none !important; }
+      
+      .nav-links a {
+        color: #F5F0E8 !important;
+        font-size: 1rem !important;
+        letter-spacing: 0.15em !important;
+        opacity: 0.8 !important;
+        text-decoration: none !important;
+        display: block !important;
+        padding: 0.5rem 1rem !important;
+        border-bottom: 1px solid rgba(200,169,81,0.1) !important;
+        width: 100% !important;
+        text-align: center !important;
+      }
+      
+      .nav-links a:hover { color: #C8A951 !important; opacity: 1 !important; }
+      
+      .nav-links .nav-cta, .nav-links .cta {
+        background: #C8A951 !important;
+        color: #1A1208 !important;
+        opacity: 1 !important;
+        padding: 0.7rem 2rem !important;
+        border: none !important;
+        margin-top: 0.5rem !important;
+        display: inline-block !important;
+        border-radius: 3px !important;
+        width: auto !important;
+      }
+      
+      .nav-close {
+        display: block !important;
+        position: absolute !important;
+        top: 1.5rem !important;
+        right: 1.5rem !important;
+        background: none !important;
+        border: none !important;
+        color: #C8A951 !important;
+        font-size: 1.5rem !important;
+        cursor: pointer !important;
+        z-index: 1000 !important;
+      }
+    }
+
+    
+    /* ════════ Standardized Hero Typography and Textures ════════ */
+    body::before {
+      content: '' !important;
+      position: fixed !important;
+      inset: 0 !important;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E") !important;
+      pointer-events: none !important;
+      z-index: 999 !important;
+      opacity: 0.4 !important;
+    }
+
+    /* Equal Sizing across front page headers */
+    .hero h1, h1 {
+      font-family: 'Cormorant Garamond', serif !important;
+      font-size: clamp(2.5rem, 4vw, 4rem) !important;
+      font-weight: 300 !important;
+      line-height: 1.15 !important;
+      margin-bottom: 1.2rem !important;
+      letter-spacing: -0.01em !important;
+    }
+
+    .hero p, p.hero-desc {
+      font-family: 'DM Mono', monospace !important;
+      font-size: 0.9rem !important;
+      opacity: 0.65 !important;
+      line-height: 1.8 !important;
+      max-width: 600px !important;
+      margin: 0 auto 2.5rem !important;
+    }
+
+    /* ════════ Standardized Simplified Footer Styles ════════ */
+    body {
+      display: flex !important;
+      flex-direction: column !important;
+      min-height: 100vh !important;
+    }
+    
+    footer {
+      background: #090704 !important;
+      border-top: 1px solid var(--border) !important;
+      padding: 4rem 4rem 3rem !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+      margin-top: auto !important;
+      text-align: left !important;
+    }
+
+    .footer-grid {
+      display: grid !important;
+      grid-template-columns: 1.5fr 1fr !important;
+      gap: 3rem !important;
+      margin-bottom: 3.5rem !important;
+      max-width: 1200px !important;
+      margin-left: 0 !important;
+      margin-right: auto !important;
+    }
+
+    .footer-brand h3 {
+      font-family: 'Bebas Neue', sans-serif !important;
+      font-size: 1.5rem !important;
+      letter-spacing: 0.12em !important;
+      color: var(--gold) !important;
+      margin-bottom: 0.9rem !important;
+      line-height: 1.1 !important;
+      text-transform: uppercase !important;
+    }
+
+    .footer-brand p {
+      font-size: 0.82rem !important;
+      opacity: 0.7 !important;
+      line-height: 1.85 !important;
+      max-width: 35ch !important;
+      margin-bottom: 1.2rem !important;
+      color: var(--cream) !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    .footer-address, .footer-brand .addr { 
+      font-size: 0.88rem !important; 
+      opacity: 0.6 !important; 
+      line-height: 1.6 !important; 
+      color: var(--cream) !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    .footer-col h4 {
+      font-size: 0.88rem !important;
+      letter-spacing: 0.25em !important;
+      text-transform: uppercase !important;
+      color: var(--gold) !important;
+      margin-bottom: 1.2rem !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    .footer-col ul { 
+      list-style: none !important; 
+      display: flex !important; 
+      flex-direction: column !important; 
+      gap: 0.75rem !important; 
+      padding: 0 !important;
+    }
+
+    .footer-col ul a {
+      font-size: 0.82rem !important;
+      opacity: 0.65 !important;
+      text-decoration: none !important;
+      color: var(--cream) !important;
+      transition: opacity 0.2s, color 0.2s !important;
+      letter-spacing: 0.03em !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    .footer-col ul a:hover { 
+      opacity: 0.95 !important; 
+      color: var(--gold) !important; 
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border) !important;
+      padding-top: 2rem !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 0.5rem !important;
+      max-width: 1200px !important;
+      margin-left: 0 !important;
+      margin-right: auto !important;
+      text-align: left !important;
+    }
+
+    .footer-copy, .footer-bottom p { 
+      font-size: 0.88rem !important; 
+      opacity: 0.55 !important; 
+      letter-spacing: 0.05em !important; 
+      color: var(--cream) !important;
+      margin: 0 !important;
+      font-family: 'DM Mono', monospace !important;
+    }
+
+    @media (max-width: 768px) {
+      footer { padding: 3rem 1.2rem !important; text-align: left !important; }
+      .footer-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+      .footer-bottom { flex-direction: column !important; align-items: flex-start !important; text-align: left !important; }
+    }
+
+    /* Remove bottom padding and hide bottom navigation entirely */
+    body {
+      padding-bottom: 0 !important;
+    }
+    .mob-nav, .mobile-bottom-nav, .mobile-nav {
+      display: none !important;
+    }
+
+
+</style>
+
+<style id="photo-pattern-mobile-hardening">
+@media (max-width: 768px) {
+  html,body{width:100%;max-width:100%;overflow-x:hidden!important}
+  nav{padding-left:1rem!important;padding-right:1rem!important}
+  .nav-logo{max-width:calc(100vw - 72px)!important;min-width:0!important}
+  #main-nav.nav-links{width:min(88vw,360px)!important;max-width:100%!important;overflow-y:auto!important;padding-bottom:2rem!important}
+  #main-nav.nav-links li,#main-nav.nav-links li a{width:100%!important;box-sizing:border-box!important}
+  #main-nav.nav-links li a{display:block!important;min-height:44px}
+  .field-row{grid-template-columns:1fr!important}
+  .form-card,.submission-card,.payment-summary,.upload-zone{width:100%!important;max-width:100%!important;min-width:0!important}
+  input,select,textarea{font-size:16px!important;max-width:100%!important}
+  .btn-submit{min-height:48px!important;width:100%!important}
+  .upload-preview{max-width:100%!important;height:auto!important}
+  .footer-grid{grid-template-columns:1fr!important}
+}
+</style>
+
+
+<style id="ptp-clarity-styles">
+.ptp-guide{max-width:1100px;margin:0 auto 2rem;padding:0 1rem}
+.ptp-guide-head{text-align:center;max-width:760px;margin:0 auto 1.6rem}
+.ptp-guide-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.9rem,3vw,2.7rem);font-weight:300;margin:.5rem 0 .8rem}
+.ptp-guide-head h2 em{color:var(--gold)}
+.ptp-guide-head p{font-size:.75rem;line-height:1.85;opacity:.68}
+.ptp-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--border)}
+.ptp-step{background:var(--card-bg);padding:1.25rem;min-width:0}
+.ptp-step-num{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
+.ptp-step h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;margin-bottom:.5rem}
+.ptp-step p{font-size:.66rem;line-height:1.7;opacity:.62}
+.ptp-receive{margin-top:1rem;border:1px solid rgba(200,169,81,.25);background:rgba(200,169,81,.045);padding:1rem 1.15rem;font-size:.7rem;line-height:1.8}
+.ptp-receive strong{color:var(--gold)}
+@media(max-width:900px){.ptp-steps{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.ptp-steps{grid-template-columns:1fr}.ptp-guide{padding:0 .2rem}}
+</style>
+
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/index.html" class="nav-logo">
+      Launch My Clothing Brand
+      <span>Pattern to Manufacturing</span>
+    </a>
+    <ul class="nav-links" id="main-nav">
+      <button class="nav-close" onclick="document.getElementById('main-nav').classList.remove('open')">✕</button>
+      <li><a href="/services.html">Services</a></li>
+      <li><a href="/library.html">Patterns</a></li>
+      <li><a href="/specsheets.html">Spec Sheets</a></li>
+      <li><a href="/phototopattern.html" class="active">Photo to Pattern</a></li>
+      <li><a href="/insights.html">Insights</a></li>
+      <li><a href="/manufacturers.html">Manufacturers</a></li>
+      <li><a href="/login.html" id="accountNavLink">Log In</a></li>
+      <li><a href="/subscribe.html" class="nav-cta">Get Started</a></li>
+    </ul>
+    <button class="nav-hamburger" onclick="document.getElementById('main-nav').classList.add('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag">Custom Measurement Service</div>
+    <h1>Photo to <em>Pattern</em></h1>
+    <p>Upload a garment reference image and provide the intended fit, fabric and construction details. We review the information and prepare professional measurement guidance to support pattern development and fit evaluation.</p>
+    <div style="max-width: 480px; margin: 2rem auto 0; border: 1px solid var(--border); overflow: hidden; background: #0E0B06; box-shadow: 0 15px 35px rgba(200,169,81,0.08);">
+      <img src="photo_to_pattern_main.png" alt="Photo to Pattern before and after mockup" style="width: 100%; height: auto; display: block; filter: saturate(0.85) contrast(1.02);" />
+    </div>
+  </div>
+
+
+  <!-- PHOTO TO PATTERN CLARITY GUIDE -->
+  <section class="ptp-guide">
+    <div class="ptp-guide-head">
+      <div class="section-title" style="margin-bottom:.4rem;">How This Service Works</div>
+      <h2>From Reference Image to <em>Better Measurement Decisions</em></h2>
+      <p>This service is designed for brand owners and sampling teams who have a visual garment reference but need technical measurement guidance before developing or correcting the pattern.</p>
+    </div>
+
+    <div class="ptp-steps">
+      <article class="ptp-step">
+        <div class="ptp-step-num">Step 01</div>
+        <h3>Upload the Design</h3>
+        <p>Provide a clear garment reference image so the intended style and construction can be understood.</p>
+      </article>
+      <article class="ptp-step">
+        <div class="ptp-step-num">Step 02</div>
+        <h3>Explain the Fit</h3>
+        <p>Tell us the garment category, fabric, intended fit and important details such as pockets, ribbing or special cuts.</p>
+      </article>
+      <article class="ptp-step">
+        <div class="ptp-step-num">Step 03</div>
+        <h3>Technical Review</h3>
+        <p>Your submitted details are reviewed to prepare professional measurement guidance for fit and pattern development.</p>
+      </article>
+      <article class="ptp-step">
+        <div class="ptp-step-num">Step 04</div>
+        <h3>Use It for Sampling</h3>
+        <p>Use the guidance with your pattern master or CAD team to develop, review or correct the style before production.</p>
+      </article>
+    </div>
+
+    <div class="ptp-receive">
+      <strong>What you receive:</strong> measurement guidance based on the submitted image and technical details. This is a professional development service, not an automatic AI-generated production pattern. Complex or highly specialized garments may require a separate custom review or quote.
+    </div>
+  </section>
+
+  <!-- MAIN CONTAINER -->
+  <div class="container">
+    <div class="form-card">
+      
+      <h2 class="section-title">🎨 Custom Design Submission</h2>
+      
+      <!-- User State Check Badge -->
+      <div id="tierBadgeArea"></div>
+      
+      <form id="submissionForm" onsubmit="event.preventDefault(); submitForm();">
+        
+        <!-- Step 1: Contact Details -->
+        <div class="field-row">
+          <div class="field">
+            <label for="cName">Your Name *</label>
+            <input type="text" id="cName" placeholder="e.g. Rahul Sharma" required>
+          </div>
+          <div class="field">
+            <label for="cBrand">Brand Name (Optional)</label>
+            <input type="text" id="cBrand" placeholder="e.g. Noir Apparel">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="cPhone">Mobile / WhatsApp Number * (For request follow-up)</label>
+          <input type="tel" id="cPhone" placeholder="e.g. +91 87961 58321" required>
+        </div>
+
+        <!-- Step 2: Design Technical Specifications -->
+        <h2 class="section-title" style="margin-top: 2.5rem;">🧵 Technical specifications</h2>
+
+        <div style="background:rgba(212,71,42,0.06); border:1px solid rgba(212,71,42,0.25); padding:1rem 1.25rem; font-size:0.7rem; color:var(--red); line-height:1.6; margin-bottom:1.5rem; letter-spacing:0.02em;">
+          ⚠️ <strong>Strict Sizing Exclusions:</strong> To prevent measurement misinterpretations, we do NOT accept requests for genuine leather garments, heavy draping styles, swimwear, or lingerie. Please ensure your submission is for standard casual wear, streetwear, denim, or regular dress styles.
+        </div>
+
+        <div class="field">
+          <label for="cCategory">Garment Category *</label>
+          <select id="cCategory" required>
+            <option value="T-Shirt">T-Shirt (Crewneck / Oversized)</option>
+            <option value="Hoodie">Hoodie / Sweatshirt</option>
+            <option value="Jacket">Jacket / Outerwear</option>
+            <option value="Pants">Pants / Cargo / Denim</option>
+            <option value="Dress">Dress / Womens Gown</option>
+            <option value="Custom">Other Custom Design Style</option>
+          </select>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="cFabric">Fabric Type *</label>
+            <input type="text" id="cFabric" placeholder="e.g. 240 GSM Knitted Cotton / Heavy Denim" required>
+          </div>
+          <div class="field">
+            <label for="cFit">Body Fit Structure *</label>
+            <select id="cFit" required>
+              <option value="Oversized / Drop Shoulder Fit">Oversized / Drop Shoulder Fit</option>
+              <option value="Boxy Streetwear Fit">Boxy Streetwear Fit</option>
+              <option value="Relaxed / Casual Fit">Relaxed / Casual Fit</option>
+              <option value="Regular / Standard Fit">Regular / Standard Fit</option>
+              <option value="Slim Fit / Athletic Tailored">Slim Fit / Athletic Tailored</option>
+              <option value="Cropped Fit">Cropped Fit</option>
+              <option value="Skinny / Form-Fitting">Skinny / Form-Fitting</option>
+              <option value="Custom Fit (Detailed in Description Below)">Custom Fit (Detailed in Description Below)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="cDesc">Style Description & Details * (pockets, ribbing, special cuts)</label>
+          <textarea id="cDesc" placeholder="Describe the style. e.g. Hoodie with high collar neck, thick ribbing, double-layered hood, kangaroo pockets..." required></textarea>
+        </div>
+
+        <!-- Step 3: Local Design Photo Preview -->
+        <h2 class="section-title" style="margin-top: 2.5rem;">📸 Design Reference Image</h2>
+        <div class="field">
+          <div class="upload-zone" onclick="document.getElementById('cPhoto').click();">
+            <div class="upload-icon">🖼</div>
+            <div class="upload-text">
+              <strong>Click to upload design image</strong><br>
+              Supports JPG, PNG, WEBP.
+            </div>
+            <input type="file" id="cPhoto" accept="image/*" style="display:none;" onchange="previewImage(event)">
+            <div class="upload-preview-wrap" id="previewWrap">
+              <img src="" id="imgPreview" class="upload-preview" alt="Garment Preview">
+              <div style="font-size:0.6rem; color:var(--gold); margin-top:0.5rem; opacity:0.8;">✓ Photo loaded successfully. It will be uploaded securely with your specifications!</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4: Checkout Pricing Summary -->
+        <div id="paymentSummaryArea" class="payment-summary">
+          <div class="tier-badge tier-premium">Flat Rate Single Request Add-on</div>
+          <div class="summary-row"><span>Photo-to-Pattern measurement guidance</span><span>₹199</span></div>
+          <div class="summary-row"><span>Razorpay Cloud Processing</span><span>Included</span></div>
+          <div class="summary-row total"><span>Total Amount</span><span>₹199 Only</span></div>
+          <div style="font-size:0.68rem; opacity: 0.4; line-height:1.6; margin-top:0.8rem; border-top:1px dashed rgba(200,169,81,0.15); padding-top:0.6rem; text-align:left;">
+            ⚠️ <strong>Exception Notice:</strong> Highly complex premium styles (such as heavy draping, genuine leather garments, swimwear, lingerie, structured outerwear, and corset-styled garments) are subject to specialized calculations and additional custom quote adjustments on WhatsApp.
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn-submit" id="btnSubmit">Pay ₹199 &amp; Submit Request →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- SUCCESS MODAL -->
+  <div class="overlay" id="successOverlay">
+    <div class="modal">
+      <div style="font-size:3.5rem;margin-bottom:1.5rem;text-shadow:0 0 20px rgba(76,175,80,0.3);">🎉</div>
+      <div style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:#C8A951;margin-bottom:1rem;font-weight:500;">Submission Received</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;margin-bottom:1.2rem;line-height:1.25;color:#F5F0E8;">Request Submitted Successfully!</h3>
+      <p style="font-size:0.8rem;opacity: 0.3;line-height:1.8;margin-bottom:2rem;max-width:36ch;margin-left:auto;margin-right:auto;" id="successModalText">Your design specifications and garment photo have been received securely. Our team can review the request and contact you using the mobile number you provided.</p>
+      <button class="btn-submit" onclick="closeSuccessModal()">Great, Thank You! →</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Launch My Clothing Brand</h3>
+        <p>Professional digital pattern making and manufacturer data services for clothing brands in India.</p>
+        <div class="addr">Bijwasan, Delhi — 110061</div>
+      </div>
+      <div class="footer-col">
+        <h4>Legal and Support</h4>
+        <ul>
+          <li><a href="mailto:launchmyclothingbrand@gmail.com">✉ launchmyclothingbrand@gmail.com</a></li>
+          <li><a href="/contact.html">📞 Contact Us</a></li>
+          <li><a href="/terms.html">📄 Terms of Service</a></li>
+          <li><a href="/privacy.html">📄 Privacy Policy</a></li>
+        </ul>
+        <p style="font-size: 0.75rem; color: var(--muted); margin-top: 0.8rem; opacity: 0.6; line-height: 1.5;">Phone support available for premium members only.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Launch My Clothing Brand. All Rights Reserved.</p>
+      <p>launchmyclothingbrand.com · Delhi 110061</p>
+    </div>
+  </footer>
+
+      <!-- MOBILE BOTTOM NAVIGATION -->
+  
+  
+
+  <script>
+    const SB_URL = 'https://tldbjsqhjqapdwmfeuwq.supabase.co';
+    const SB_KEY = 'sb_publishable_24w5TpkTFGBCQIlFzVzUrg_-0rJm_ZZ';
+
+    const sb = supabase.createClient(SB_URL, SB_KEY, {
+      auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+    });
+
+    let authSession = null;
+    let userPlan = 'free';
+    let userPlanStatus = 'inactive';
+    let stylesCount = 0;
+    let currentCost = 199;
+
+    async function initSession() {
+      const { data: { session }, error } = await sb.auth.getSession();
+      if (error) console.warn('Photo-to-Pattern session check failed:', error);
+
+      authSession = session || null;
+      userPlan = 'free';
+      userPlanStatus = 'inactive';
+      stylesCount = 0;
+
+      const accountLink = document.getElementById('accountNavLink');
+
+      if (!authSession?.user) {
+        if (accountLink) {
+          accountLink.textContent = 'Log In';
+          accountLink.href = '/login.html?redirect=/phototopattern.html';
+        }
+        renderTierControls();
+        return;
+      }
+
+      if (accountLink) {
+        accountLink.textContent = 'My Account';
+        accountLink.href = '/login.html';
+        accountLink.title = authSession.user.email || 'My Account';
+      }
+
+      const { data: sub, error: subErr } = await sb
+        .from('subscriptions')
+        .select('plan_key,status')
+        .eq('user_id', authSession.user.id)
+        .eq('status', 'active')
+        .maybeSingle();
+
+      if (!subErr && sub) {
+        userPlan = sub.plan_key || 'free';
+        userPlanStatus = 'active';
+      }
+
+      const { count, error: countErr } = await sb
+        .from('photo_pattern_requests')
+        .select('id', { count: 'exact', head: true })
+        .eq('user_id', authSession.user.id)
+        .eq('access_method', 'pro_elite_quota');
+
+      if (!countErr) stylesCount = count || 0;
+
+      // Prefill from Auth metadata when available.
+      const meta = authSession.user.user_metadata || {};
+      const name = meta.name || [meta.first_name, meta.last_name].filter(Boolean).join(' ');
+      if (name && !document.getElementById('cName').value) document.getElementById('cName').value = name;
+      if (meta.phone && !document.getElementById('cPhone').value) document.getElementById('cPhone').value = meta.phone;
+      if (meta.brand && !document.getElementById('cBrand').value) document.getElementById('cBrand').value = meta.brand;
+
+      renderTierControls();
+    }
+
+    function renderTierControls() {
+      const badgeArea = document.getElementById('tierBadgeArea');
+      const summaryArea = document.getElementById('paymentSummaryArea');
+      const submitBtn = document.getElementById('btnSubmit');
+
+      const isProElite = userPlan === 'pro_elite' && userPlanStatus === 'active';
+
+      if (isProElite && stylesCount < 11) {
+        currentCost = 0;
+        badgeArea.innerHTML = `
+          <div style="background:rgba(200,169,81,.08);border:1px solid #C8A951;padding:1.2rem;margin-bottom:2rem;border-radius:3px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+            <div>
+              <div style="font-size:.55rem;color:#C8A951;letter-spacing:.2em;text-transform:uppercase;font-weight:500;margin-bottom:4px;">✨ Premium Status Verified</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#F5F0E8;font-weight:300;">Pro Elite Member Account</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:.55rem;opacity:.4;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;">Style Submissions</div>
+              <span style="font-size:.9rem;background:rgba(200,169,81,.2);color:#C8A951;padding:4px 10px;">${stylesCount} of 11 Used</span>
+            </div>
+          </div>`;
+        summaryArea.innerHTML = `
+          <div class="tier-badge tier-free">Pro Elite Complimentary Style</div>
+          <div class="summary-row"><span>Photo-to-Pattern measurement guidance</span><span>FREE</span></div>
+          <div class="summary-row"><span>Style Quota Used</span><span>${stylesCount} of 11</span></div>
+          <div class="summary-row total"><span>Total Amount</span><span>₹0</span></div>`;
+        submitBtn.textContent = `Submit Style (Free — Style #${stylesCount + 1}) →`;
+      } else {
+        currentCost = 199;
+        const label = authSession
+          ? (isProElite ? 'Pro Elite — complimentary quota completed' : 'Single Request')
+          : 'Login Required for Secure Submission';
+
+        badgeArea.innerHTML = `
+          <div style="background:rgba(255,255,255,.02);border:1px solid rgba(200,169,81,.15);padding:1.2rem;margin-bottom:2rem;border-radius:3px;">
+            <div style="font-size:.55rem;color:#C8A951;letter-spacing:.2em;text-transform:uppercase;font-weight:500;margin-bottom:4px;">👤 Account Status</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:#F5F0E8;font-weight:300;">${label}</div>
+            ${!authSession ? `<div style="margin-top:.6rem;font-size:.7rem;opacity:.65;">Please log in first so your payment, image and request stay attached to your account.</div>` : ''}
+          </div>`;
+        summaryArea.innerHTML = `
+          <div class="tier-badge tier-premium">Flat Rate Single Request</div>
+          <div class="summary-row"><span>Photo-to-Pattern measurement guidance</span><span>₹199</span></div>
+          <div class="summary-row"><span>Secure Razorpay checkout</span><span>Included</span></div>
+          <div class="summary-row total"><span>Total Amount</span><span>₹199 Only</span></div>`;
+        submitBtn.textContent = authSession ? 'Pay ₹199 & Submit Request →' : 'Log In to Continue →';
+      }
+    }
+
+    function previewImage(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const allowed = ['image/jpeg','image/png','image/webp'];
+      if (!allowed.includes(file.type)) {
+        event.target.value = '';
+        alert('Please upload JPG, PNG or WEBP only.');
+        return;
+      }
+      if (file.size > 8 * 1024 * 1024) {
+        event.target.value = '';
+        alert('Image must be 8 MB or smaller.');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = e => {
+        document.getElementById('imgPreview').src = e.target.result;
+        document.getElementById('previewWrap').style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function validateSubmissionFields() {
+      const required = ['cName','cPhone','cCategory','cFabric','cFit','cDesc'];
+      for (const id of required) {
+        const el = document.getElementById(id);
+        if (!el || !String(el.value || '').trim()) {
+          el?.focus();
+          alert('Please complete all required details before submitting.');
+          return false;
+        }
+      }
+
+      const photo = document.getElementById('cPhoto').files[0];
+      if (!photo) {
+        alert('Please upload a design reference image first.');
+        return false;
+      }
+      return true;
+    }
+
+    async function uploadPrivateImage() {
+      const file = document.getElementById('cPhoto').files[0];
+      const ext = (file.name.split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g,'');
+      const path = `photo-to-pattern/${authSession.user.id}/${crypto.randomUUID()}.${ext}`;
+
+      const { error } = await sb.storage
+        .from('premium-files')
+        .upload(path, file, { cacheControl: '3600', upsert: false, contentType: file.type });
+
+      if (error) throw new Error('Image upload failed: ' + error.message);
+      return path;
+    }
+
+    function collectRequestDetails() {
+      return {
+        customer_name: document.getElementById('cName').value.trim(),
+        brand_name: document.getElementById('cBrand').value.trim(),
+        phone: document.getElementById('cPhone').value.trim(),
+        category: document.getElementById('cCategory').value,
+        fabric: document.getElementById('cFabric').value.trim(),
+        fit: document.getElementById('cFit').value,
+        description: document.getElementById('cDesc').value.trim()
+      };
+    }
+
+    async function callFunction(name, body) {
+      const { data: { session } } = await sb.auth.getSession();
+      if (!session) throw new Error('Your login session has expired. Please log in again.');
+
+      const res = await fetch(`${SB_URL}/functions/v1/${name}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SB_KEY,
+          'Authorization': `Bearer ${session.access_token}`
+        },
+        body: JSON.stringify(body)
+      });
+
+      const result = await res.json();
+      if (!res.ok) throw new Error(result.error || result.details || 'Request failed.');
+      return result;
+    }
+
+    async function submitForm() {
+      const btn = document.getElementById('btnSubmit');
+
+      if (!authSession?.user) {
+        window.location.href = '/login.html?redirect=/phototopattern.html';
+        return;
+      }
+
+      if (!validateSubmissionFields()) return;
+
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span>Preparing request...';
+
+      try {
+        if (currentCost === 0) {
+          const storagePath = await uploadPrivateImage();
+          await callFunction('photo-pattern-submit', {
+            mode: 'pro_elite_quota',
+            storage_path: storagePath,
+            details: collectRequestDetails()
+          });
+          showSuccess();
+          return;
+        }
+
+        const order = await callFunction('photo-pattern-order', {});
+
+        const options = {
+          key: order.key_id,
+          amount: order.amount,
+          currency: order.currency,
+          order_id: order.order_id,
+          name: 'Launch My Clothing Brand',
+          description: 'Photo to Pattern — Measurement Request',
+          prefill: {
+            name: document.getElementById('cName').value.trim(),
+            contact: document.getElementById('cPhone').value.trim(),
+            email: authSession.user.email || ''
+          },
+          theme: { color: '#C8A951' },
+          handler: async function(response) {
+            try {
+              btn.innerHTML = '<span class="spinner"></span>Verifying payment & uploading...';
+              const storagePath = await uploadPrivateImage();
+
+              await callFunction('photo-pattern-submit', {
+                mode: 'razorpay',
+                storage_path: storagePath,
+                details: collectRequestDetails(),
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature
+              });
+
+              showSuccess();
+            } catch (err) {
+              console.error('Paid request completion error:', err);
+              alert(err.message || 'Payment succeeded but request completion failed. Please contact support with your Razorpay payment ID.');
+              btn.disabled = false;
+              btn.textContent = 'Pay ₹199 & Submit Request →';
+            }
+          },
+          modal: {
+            ondismiss: function() {
+              btn.disabled = false;
+              btn.textContent = 'Pay ₹199 & Submit Request →';
+            }
+          }
+        };
+
+        new Razorpay(options).open();
+
+      } catch (err) {
+        console.error('Photo-to-Pattern submit error:', err);
+        alert(err.message || 'Unable to process your request.');
+        btn.disabled = false;
+        btn.textContent = currentCost === 0
+          ? `Submit Style (Free — Style #${stylesCount + 1}) →`
+          : 'Pay ₹199 & Submit Request →';
+      }
+    }
+
+    function showSuccess() {
+      document.getElementById('successOverlay').classList.add('open');
+      const btn = document.getElementById('btnSubmit');
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = currentCost === 0
+          ? `Submit Style (Free — Style #${Math.min(stylesCount + 2, 11)}) →`
+          : 'Pay ₹199 & Submit Request →';
+      }
+    }
+
+    function closeSuccessModal() {
+      document.getElementById('successOverlay').classList.remove('open');
+      document.getElementById('submissionForm').reset();
+      document.getElementById('previewWrap').style.display = 'none';
+      initSession();
+    }
+
+    document.addEventListener('DOMContentLoaded', initSession);
+    sb.auth.onAuthStateChange(() => initSession());
+  </script>
+</body>
+</html>
